@@ -340,6 +340,80 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1512450205
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1512450207}
+  - component: {fileID: 1512450206}
+  m_Layer: 0
+  m_Name: Witch
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1512450206
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1512450205}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4feff7ba81aada2428e3ed14f8e11b54, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Fighter
+  Name: Witch
+  Spellcraft: 9
+  Melee: 1
+  Psychic: 6
+  Speed: 2
+  Strength: 1
+  Intelligence: 6
+  DamageResistance: 0
+  Mana: 180
+  MaxMana: 180
+  Health: 100
+  Level: 10
+  Team: 2
+  ControlType: 1
+  FightingStyle: 3
+  AI: {fileID: 11400000, guid: a63555b92f11f0f42a9184aa4c97ab4c, type: 2}
+  ID: 2
+  Images: {fileID: 0}
+  Weapon: {fileID: 0}
+  Natures: 
+  Traits: 
+  OffensiveMoves:
+  - {fileID: 11400000, guid: d5c261949d4dbe740a33d1e39b3ff7e8, type: 2}
+  - {fileID: 11400000, guid: 3a9d010988cade8489beef962a949ca9, type: 2}
+  DefensiveMoves: []
+  CloneMoves: []
+  MedicalMoves: []
+  PowerUpMoves: []
+  SubMoves: []
+  SummonMoves: []
+--- !u!4 &1512450207
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1512450205}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1789790780
 GameObject:
   m_ObjectHideFlags: 0
@@ -369,29 +443,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4feff7ba81aada2428e3ed14f8e11b54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Fighter
-  Name: 
+  Name: Knight
   Spellcraft: 0
-  Melee: 0
+  Melee: 9
   Psychic: 0
-  Speed: 0
-  Strength: 0
-  Intelligence: 0
-  DamageResistance: 0
-  Mana: 0
-  MaxMana: 0
-  Health: 0
-  Level: 0
-  Team: 0
-  ControlType: 0
-  FightingStyle: 0
-  AI: {fileID: 0}
-  ID: 0
+  Speed: 6
+  Strength: 8
+  Intelligence: 3
+  DamageResistance: 0.15
+  Mana: 80
+  MaxMana: 80
+  Health: 100
+  Level: 10
+  Team: 1
+  ControlType: 1
+  FightingStyle: 1
+  AI: {fileID: 11400000, guid: 56eb54d9b48509c4db48b26ccde66167, type: 2}
+  ID: 1
   Images: {fileID: 0}
   Weapon: {fileID: 0}
   Natures: 
   Traits: 
-  OffensiveMoves: []
-  DefensiveMoves: []
+  OffensiveMoves:
+  - {fileID: 11400000, guid: 2f66cb10b6a2ce9479d11d6622188c78, type: 2}
+  - {fileID: 11400000, guid: d4524c7d97981474f90d29d5ec441f1e, type: 2}
+  DefensiveMoves:
+  - {fileID: 11400000, guid: bbd7e58b208d1bf4d8b396e2191ee439, type: 2}
   CloneMoves: []
   MedicalMoves: []
   PowerUpMoves: []
@@ -444,8 +521,10 @@ MonoBehaviour:
   DebugLevel: 1
   NarutoMode: 0
   Teams: 2
-  Team1: []
-  Team2: []
+  Team1:
+  - {fileID: 1789790781}
+  Team2:
+  - {fileID: 1512450206}
   Team3: []
 --- !u!4 &2112688911
 Transform:
@@ -470,3 +549,4 @@ SceneRoots:
   - {fileID: 619394802}
   - {fileID: 2112688911}
   - {fileID: 1789790782}
+  - {fileID: 1512450207}

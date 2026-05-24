@@ -1,0 +1,93 @@
+Round 1
+
+Knight  vs  Witch
+
+Knight   Overall: 7.29  Health: 100  Mana: 80  Health Co = 1
+
+Witch   Overall: 8.01  Health: 100  Mana: 180  Health Co = 1
+
+###################################################################
+###################################################################
+
+Knight uses Straight Punch against Witch!
+It hits Witch and does 13 damage!
+Witch uses Fireball against Knight!
+Knight blocks it with Knight Shield!
+
+
+Round 2
+
+Knight  vs  Witch
+
+Knight   Overall: 7.29  Health: 100  Mana: 80  Health Co = 1
+
+Witch   Overall: 7.65  Health: 87  Mana: 140  Health Co = 1
+
+###################################################################
+###################################################################
+
+Knight uses Slash against Witch!
+It hits Witch and does 36 damage!
+Witch uses Magic Missile against Knight!
+Knight blocks it with Knight Shield!
+
+
+Round 3
+
+Knight  vs  Witch
+
+Knight   Overall: 7.29  Health: 100  Mana: 80  Health Co = 1
+
+Witch   Overall: 7.54464  Health: 51  Mana: 130  Health Co = 0.744
+
+###################################################################
+###################################################################
+
+Knight uses Slash against Witch!
+It hits Witch and does 35 damage!
+Witch uses Fireball against Knight!
+Knight blocks it with Knight Shield!
+
+
+Round 4
+
+Knight  vs  Witch
+
+Knight   Overall: 7.29  Health: 100  Mana: 80  Health Co = 1
+
+Witch   Overall: 7.16224  Health: 16  Mana: 90  Health Co = 0.3706667
+
+###################################################################
+###################################################################
+
+Knight uses Straight Punch against Witch!
+It hits Witch and does 13 damage!
+Witch uses Fireball against Knight!
+Knight partially blocks it with Knight Shield and it does 14 damage!
+
+
+Round 5
+
+Knight  vs  Witch
+
+Knight   Overall: 7.29  Health: 86  Mana: 80  Health Co = 1
+
+Witch   Overall: 6.79392  Health: 3  Mana: 50  Health Co = 0.232
+
+###################################################################
+###################################################################
+
+Knight uses Straight Punch against Witch!
+It hits Witch and does 14 damage!
+Witch is defeated!
+
+###################################################################
+###################################################################
+
+The fight is over!
+Team 1 wins!
+Number of rounds: 5
+Surviving fighters:
+
+Knight  Health: 86  Mana: 80
+
