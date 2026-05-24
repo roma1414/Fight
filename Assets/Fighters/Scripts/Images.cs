@@ -1,0 +1,8 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Images : MonoBehaviour
+{
+    protected short tester;
+}
