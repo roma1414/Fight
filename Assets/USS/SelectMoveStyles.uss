@@ -1,15 +1,21 @@
-.TestButton {
-    color: rgb(255, 0, 0);
-    width: 16%;
-    height: 16%;
+.MoveTypeTab {
+    color: rgb(192, 192, 192);
+    width: auto;
+    height: 100%;
     font-size: 28px;
-    background-color: rgb(169, 169, 169);
+    background-color: rgb(51, 51, 51);
+    flex-direction: row;
+    align-self: center;
+    flex-grow: 1;
+    -unity-font-definition: url("project://database/Assets/UI%20Toolkit/UnityThemes/UnityDefaultRuntimeTheme.tss?fileID=2230732570650464555&guid=2a3a3245871df48ce9b75fd43169618f&type=3#NotInter-Regular");
+    -unity-font-style: bold;
 }
 
 #Background {
 }
 
-.TestButton:hover {
-    background-color: rgb(220, 220, 220);
-    transition-duration: 0.15s;
+
+
+.MoveTypeTab:hover {
+    background-color: rgb(77, 77, 77);
 }
