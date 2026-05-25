@@ -24,9 +24,9 @@ public class AI : ScriptableObject
     public const int    MIN_MANA_TO_STILL_PROTECT_TEAMMATE_UNABLE_TO_MOVE = 18;
     public const int    POWER_UP_MANA = 60;
     public const int    POWER_UP_HEALTH = 80;
-    public const float  POWER_UP_OVR_DIFF = .5f; // Use PowerUp if maxEnemyOvr is within this amount.
+    public const float  POWER_UP_OVR_DIFF = .5f; // Use PowerUp if difference from maxEnemyOvr is this or greater.
     public const int    PROTECT_CHANCE_WHEN_TEAMMATE_CANNOT_MOVE = 85; // 85%
-    public const int    PROTECT_CHANCE_WHEN_TEAMMATE_IS_NEAR_DEATH = 50;
+    public const int    PROTECT_CHANCE_WHEN_TEAMMATE_IS_NEAR_DEATH = 50; // 50%
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

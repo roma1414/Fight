@@ -10,7 +10,7 @@ Witch   Overall: 8.01  Health: 100  Mana: 180  Health Co = 1
 ###################################################################
 
 Knight uses Slash against Witch!
-It hits Witch and does 38 damage!
+It hits Witch and does 42 damage!
 Witch uses Fireball against Knight!
 Knight blocks it with Knight Shield!
 
@@ -21,13 +21,13 @@ Knight  vs  Witch
 
 Knight   Overall: 7.29  Health: 100  Mana: 80  Health Co = 1
 
-Witch   Overall: 7.64168  Health: 62  Mana: 140  Health Co = 0.8613333
+Witch   Overall: 7.63912  Health: 58  Mana: 140  Health Co = 0.8186666
 
 ###################################################################
 ###################################################################
 
 Knight uses Straight Punch against Witch!
-It hits Witch and does 17 damage!
+It hits Witch and does 15 damage!
 Witch uses Magic Missile against Knight!
 Knight blocks it with Knight Shield!
 
@@ -38,13 +38,13 @@ Knight  vs  Witch
 
 Knight   Overall: 7.29  Health: 100  Mana: 80  Health Co = 1
 
-Witch   Overall: 7.5408  Health: 45  Mana: 130  Health Co = 0.68
+Witch   Overall: 7.53952  Health: 43  Mana: 130  Health Co = 0.6586667
 
 ###################################################################
 ###################################################################
 
 Knight uses Slash against Witch!
-It hits Witch and does 37 damage!
+It hits Witch and does 34 damage!
 Witch uses Magic Missile against Knight!
 Knight blocks it with Knight Shield!
 
@@ -55,13 +55,13 @@ Knight  vs  Witch
 
 Knight   Overall: 7.29  Health: 100  Mana: 80  Health Co = 1
 
-Witch   Overall: 7.42712  Health: 8  Mana: 120  Health Co = 0.2853333
+Witch   Overall: 7.42776  Health: 9  Mana: 120  Health Co = 0.296
 
 ###################################################################
 ###################################################################
 
 Knight uses Straight Punch against Witch!
-It hits Witch and does 19 damage!
+It hits Witch and does 13 damage!
 Witch is defeated!
 
 ###################################################################

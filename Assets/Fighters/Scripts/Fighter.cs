@@ -522,7 +522,7 @@ public class Fighter : MonoBehaviour
     public float GetSpellcraft() { return Spellcraft + GetTotalAttributeBonus(Enums.Attribute.Spellcraft); }
     public float GetNinTaiDefenseSkill(float randomAdd) { return GetMelee() * GetHealthCo() + randomAdd; }
 
-    public List<OffensiveMove> GetOffensiveMoves() 
+    public List<OffensiveMove> GetOffensiveMoves()
     {
         List<OffensiveMove> offensiveMoves = new List<OffensiveMove>(OffensiveMoves.Count + BonusOffensiveMoves.Count);
         offensiveMoves.AddRange(OffensiveMoves);
