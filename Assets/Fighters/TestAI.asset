@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c717ec4fe48500a4cb13774b559e8a09, type: 3}
+  m_Name: TestAI
+  m_EditorClassIdentifier: Assembly-CSharp::AI
+  SpellFraction: 0
+  MeleeFraction: 0
+  PsychicFraction: 0
+  CloneFraction: 0
+  MedicalFraction: 0
+  NinTaiFraction: 0
+  ProjectileFraction: 0
+  SubFraction: 0
+  SummonFraction: 0
+  CustomAI: 0
+  ID: 0
