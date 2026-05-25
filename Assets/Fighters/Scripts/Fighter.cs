@@ -528,7 +528,7 @@ public class Fighter : MonoBehaviour
         offensiveMoves.AddRange(OffensiveMoves);
         offensiveMoves.AddRange(BonusOffensiveMoves);
 
-        return offensiveMoves; 
+        return offensiveMoves;
     }
 
     public float GetOverallRating()
