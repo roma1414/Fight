@@ -17,24 +17,12 @@ public class Fighter : MonoBehaviour
     [SerializeField] protected List<Enums.Nature>   Natures;
     [SerializeField] protected List<Enums.Trait>    Traits;
 
-    [SerializeField] protected List<OffensiveMove>  OffensiveMoves;
-    [SerializeField] protected List<DefensiveMove>  DefensiveMoves;
-    [SerializeField] protected List<CloneMove>      CloneMoves;
-    [SerializeField] protected List<MedicalMove>    MedicalMoves;
-    [SerializeField] protected List<PowerUpMove>    PowerUpMoves;
-    [SerializeField] protected List<SubMove>        SubMoves;
-    [SerializeField] protected List<SummonMove>     SummonMoves;
+    [SerializeField] protected List<Move>           Moves;
 
     protected List<AttributeBonus>                  AttributeBonuses;
     protected List<Enums.Nature>                    BonusNatures;
     protected List<Enums.Trait>                     BonusTraits;
-    protected List<OffensiveMove>                   BonusOffensiveMoves;
-    protected List<DefensiveMove>                   BonusDefensiveMoves;
-    protected List<CloneMove>                       BonusCloneMoves;
-    protected List<MedicalMove>                     BonusMedicalMoves;
-    protected List<PowerUpMove>                     BonusPowerUpMoves;
-    protected List<SubMove>                         BonusSubMoves;
-    protected List<SummonMove>                      BonusSummonMoves;
+    protected List<Move>                            BonusMoves;
 
     protected List<PowerUp>                         PowerUps;      // Active PowerUps.
     protected List<Status>                          Statuses;
@@ -56,7 +44,7 @@ public class Fighter : MonoBehaviour
     //public static bool operator ==(Fighter a, Fighter b) { return (a.GetInstanceID() == b.GetInstanceID()); }
     //public static bool operator !=(Fighter a, Fighter b) { return (a.GetInstanceID() != b.GetInstanceID()); }
 
-    public void AddBonusData(BonusData bonusData, float movePower, Enums.BonusSource source, Clothing clothing, Potion potion, PowerUpMove powerUpMove, Weapon weapon, int endingRoundNumber)
+    public void AddBonusData(BonusData bonusData, float movePower, Enums.BonusSource source, Clothing clothing, Potion potion, Move powerUpMove, Weapon weapon, int endingRoundNumber)
     {
         if (bonusData.GetHealth() != 0)
         {
@@ -162,23 +150,10 @@ public class Fighter : MonoBehaviour
 
         AddBonusNatures(bonusData.GetNatures());
         AddBonusTraits(bonusData.GetTraits());
-
-        AddBonusMoves(bonusData.GetCloneMoves());
-        AddBonusMoves(bonusData.GetDefensiveMoves());
-        AddBonusMoves(bonusData.GetOffensiveMoves());
-        AddBonusMoves(bonusData.GetOffensiveMoves());
-        AddBonusMoves(bonusData.GetPowerUpMoves());
-        AddBonusMoves(bonusData.GetSubMoves());
-        AddBonusMoves(bonusData.GetSummonMoves());
+        AddBonusMoves(bonusData.GetMoves());
     }
 
-    public void AddBonusMoves(CloneMove[] cloneMoves) { BonusCloneMoves.AddRange(cloneMoves); }
-    public void AddBonusMoves(DefensiveMove[] defensiveMoves) { BonusDefensiveMoves.AddRange(defensiveMoves); }
-    public void AddBonusMoves(MedicalMove[] medicalMoves) { BonusMedicalMoves.AddRange(medicalMoves); }
-    public void AddBonusMoves(OffensiveMove[] offensiveMoves) { BonusOffensiveMoves.AddRange(offensiveMoves); }
-    public void AddBonusMoves(PowerUpMove[] powerUpMoves) { BonusPowerUpMoves.AddRange(powerUpMoves); }
-    public void AddBonusMoves(SubMove[] subMoves) { BonusSubMoves.AddRange(subMoves); }
-    public void AddBonusMoves(SummonMove[] summonMoves) { BonusSummonMoves.AddRange(summonMoves); }
+    public void AddBonusMoves(Move[] moves) { BonusMoves.AddRange(moves); }
     public void AddBonusNatures(Enums.Nature[] natures) { BonusNatures.AddRange(natures); }
     public void AddBonusTraits(Enums.Trait[] traits) { BonusTraits.AddRange(traits); }
     public void AddMana(int amount) { Mana += amount; }
@@ -188,59 +163,11 @@ public class Fighter : MonoBehaviour
         Health = Mathf.Min(100, Health);
     }
 
-    public void AddMove(CloneMove move)
+    public void AddMove(Move move)
     {
         if (CheckIfOwnMove(move) == false)
         {
-            CloneMoves.Add(move);
-        }
-    }
-
-    public void AddMove(DefensiveMove move)
-    {
-        if (CheckIfOwnMove(move) == false)
-        {
-            DefensiveMoves.Add(move);
-        }
-    }
-
-    public void AddMove(MedicalMove move)
-    {
-        if (CheckIfOwnMove(move) == false)
-        {
-            MedicalMoves.Add(move);
-        }
-    }
-
-    public void AddMove(OffensiveMove move)
-    {
-        if (CheckIfOwnMove(move) == false)
-        {
-            OffensiveMoves.Add(move);
-        }
-    }
-
-    public void AddMove(PowerUpMove move)
-    {
-        if (CheckIfOwnMove(move) == false)
-        {
-            PowerUpMoves.Add(move);
-        }
-    }
-
-    public void AddMove(SubMove move)
-    {
-        if (CheckIfOwnMove(move) == false)
-        {
-            SubMoves.Add(move);
-        }
-    }
-
-    public void AddMove(SummonMove move)
-    {
-        if (CheckIfOwnMove(move) == false)
-        {
-            SummonMoves.Add(move);
+            Moves.Add(move);
         }
     }
 
@@ -371,13 +298,7 @@ public class Fighter : MonoBehaviour
     public bool CheckIfMissingXMana(int x) { return (MaxMana - Mana) >= x; }
     public bool CheckIfMissingXHealth(int x) { return GetHealth() <= (100 - x); }
     public bool CheckIfNearDefeat() { return (CheckIfHealthIsLow() == true || (CheckIfManaIsLow() == true && GetFightingStyle() != Enums.FightingStyle.Melee)); }
-    public bool CheckIfOwnMove(CloneMove move) { return CloneMoves.Contains(move); }
-    public bool CheckIfOwnMove(DefensiveMove move) { return DefensiveMoves.Contains(move); }
-    public bool CheckIfOwnMove(MedicalMove move) { return MedicalMoves.Contains(move); }
-    public bool CheckIfOwnMove(OffensiveMove move) { return OffensiveMoves.Contains(move); }
-    public bool CheckIfOwnMove(PowerUpMove move) { return PowerUpMoves.Contains(move); }
-    public bool CheckIfOwnMove(SubMove move) { return SubMoves.Contains(move); }
-    public bool CheckIfOwnMove(SummonMove move) { return SummonMoves.Contains(move); }
+    public bool CheckIfOwnMove(Move move) { return Moves.Contains(move); }
     public bool CheckIfSubbed() { return Subs.Count > 0; }
     public bool CheckIfWeakened() { return GetHealthCo() <= WEAKENED_HEALTH_CO; }
 
@@ -477,24 +398,21 @@ public class Fighter : MonoBehaviour
         return ((float)mana / 100.0f) * 5f;
     }
 
-    public List<CloneMove> GetCloneMoves() 
-    {
-        List<CloneMove> cloneMoves = new List<CloneMove>(CloneMoves.Count + BonusCloneMoves.Count);
-        cloneMoves.AddRange(CloneMoves);
-        cloneMoves.AddRange(BonusCloneMoves);
-
-        return cloneMoves;
-    }
-
     public Enums.ControlType GetControlType() { return ControlType; }
     public float GetDamageCo() { return Mathf.Max(1 - GetDamageResistance(), MIN_DAMAGE_RESISTANCE_CO); }
     public float GetDamageResistance() { return DamageResistance + GetTotalAttributeBonus(Enums.Attribute.DamageResistance); }
 
-    public List<DefensiveMove> GetDefensiveMoves() 
+    // This is currently not used. Avoid moves need to be added to the getdefensivemove logic.
+    public List<Move> GetDefensiveMoves() 
     {
-        List<DefensiveMove> defensiveMoves = new List<DefensiveMove>(DefensiveMoves.Count + BonusDefensiveMoves.Count);
-        defensiveMoves.AddRange(DefensiveMoves);
-        defensiveMoves.AddRange(BonusDefensiveMoves);
+        List<Move> defensiveMoves = new List<Move>();
+        foreach (Move move in Moves)
+        {
+            if (move.GetMoveType() == Enums.MoveType.Defensive || move.GetMoveType() == Enums.MoveType.Avoid)
+            {
+                defensiveMoves.Add(move);
+            }
+        }
 
         return defensiveMoves;
     }
@@ -508,28 +426,24 @@ public class Fighter : MonoBehaviour
     public int GetMaxMana() { return MaxMana + (int)(GetTotalAttributeBonus(Enums.Attribute.Mana) + 0.5f); } // .5 is for rounding
     public float GetMaxManaRating() { return GetManaRating(MaxMana); }
 
-    public List<MedicalMove> GetMedicalMoves()
+    public List<Move> GetMoves(Enums.MoveType moveType)
     {
-        List<MedicalMove> medicalMoves = new List<MedicalMove>(MedicalMoves.Count + BonusMedicalMoves.Count);
-        medicalMoves.AddRange(MedicalMoves);
-        medicalMoves.AddRange(BonusMedicalMoves);
+        List<Move> moves = new List<Move>();
+        foreach (Move move in Moves)
+        {
+            if (move.GetMoveType() == moveType)
+            {
+                moves.Add(move);
+            }
+        }
 
-        return medicalMoves;
+        return moves;
     }
 
     public string GetName() { return Name; }
     public List<Enums.Nature> GetNatures() { return Natures; }
     public float GetSpellcraft() { return Spellcraft + GetTotalAttributeBonus(Enums.Attribute.Spellcraft); }
     public float GetNinTaiDefenseSkill(float randomAdd) { return GetMelee() * GetHealthCo() + randomAdd; }
-
-    public List<OffensiveMove> GetOffensiveMoves()
-    {
-        List<OffensiveMove> offensiveMoves = new List<OffensiveMove>(OffensiveMoves.Count + BonusOffensiveMoves.Count);
-        offensiveMoves.AddRange(OffensiveMoves);
-        offensiveMoves.AddRange(BonusOffensiveMoves);
-
-        return offensiveMoves;
-    }
 
     public float GetOverallRating()
     {
@@ -558,15 +472,6 @@ public class Fighter : MonoBehaviour
         }
 
         return overall;
-    }
-
-    public List<PowerUpMove> GetPowerUpMoves()
-    {
-        List<PowerUpMove> powerUpMoves = new List<PowerUpMove>(PowerUpMoves.Count + BonusPowerUpMoves.Count);
-        powerUpMoves.AddRange(PowerUpMoves);
-        powerUpMoves.AddRange(BonusPowerUpMoves);
-
-        return powerUpMoves;
     }
 
     public List<PowerUp> GetPowerUps() { return PowerUps; }
@@ -625,24 +530,6 @@ public class Fighter : MonoBehaviour
         return sub;
     }
 
-    public List<SubMove> GetSubMoves()
-    {
-        List<SubMove> subMoves = new List<SubMove>(SubMoves.Count + BonusSubMoves.Count);
-        subMoves.AddRange(SubMoves);
-        subMoves.AddRange(BonusSubMoves);
-
-        return subMoves;
-    }
-
-    public List<SummonMove> GetSummonMoves()
-    {
-        List<SummonMove> summonMoves = new List<SummonMove>(SummonMoves.Count + BonusSummonMoves.Count);
-        summonMoves.AddRange(SummonMoves);
-        summonMoves.AddRange(BonusSummonMoves);
-
-        return summonMoves;
-    }
-
     public float GetMelee() { return Melee + GetTotalAttributeBonus(Enums.Attribute.Melee); }
     public float GetMeleeDefenseSkill(float randomAdd) { return (GetMelee() + GetStrength()) * 0.5f * GetHealthCo() + randomAdd; }
     public int GetTeam() { return Team; }
@@ -671,13 +558,7 @@ public class Fighter : MonoBehaviour
         AttributeBonuses = new List<AttributeBonus>();
         BonusNatures = new List<Enums.Nature>();
         BonusTraits = new List<Enums.Trait>();
-        BonusOffensiveMoves = new List<OffensiveMove>();
-        BonusDefensiveMoves = new List<DefensiveMove>();
-        BonusCloneMoves = new List<CloneMove>();
-        BonusMedicalMoves = new List<MedicalMove>();
-        BonusPowerUpMoves = new List<PowerUpMove>();
-        BonusSubMoves = new List<SubMove>();
-        BonusSummonMoves = new List<SummonMove>();
+        BonusMoves = new List<Move>();
 
         PowerUps = new List<PowerUp>();
         Statuses = new List<Status>();
@@ -685,7 +566,7 @@ public class Fighter : MonoBehaviour
         UsedMoves = new List<UsedMove>();
     }
 
-    public void RemoveBonusData(BonusData bonusData, Enums.BonusSource source, Clothing clothing, Potion potion, PowerUpMove powerUpMove, Weapon weapon)
+    public void RemoveBonusData(BonusData bonusData, Enums.BonusSource source, Clothing clothing, Potion potion, Move powerUpMove, Weapon weapon)
     {
         int index = 0;
         while (index < AttributeBonuses.Count)
@@ -736,146 +617,19 @@ public class Fighter : MonoBehaviour
 
         RemoveBonusNatures(bonusData.GetNatures());
         RemoveBonusTraits(bonusData.GetTraits());
-
-        RemoveBonusMoves(bonusData.GetCloneMoves());
-        RemoveBonusMoves(bonusData.GetDefensiveMoves());
-        RemoveBonusMoves(bonusData.GetMedicalMoves());
-        RemoveBonusMoves(bonusData.GetOffensiveMoves());
-        RemoveBonusMoves(bonusData.GetPowerUpMoves());
-        RemoveBonusMoves(bonusData.GetSubMoves());
-        RemoveBonusMoves(bonusData.GetSummonMoves());
+        RemoveBonusMoves(bonusData.GetMoves());
     }
 
-    public void RemoveBonusMoves(CloneMove[] cloneMoves)
+    public void RemoveBonusMoves(Move[] moves)
     {
-        foreach (CloneMove cloneMoveToRemove in cloneMoves)
+        foreach (Move moveToRemove in moves)
         {
             int index = 0;
-            while (index < BonusCloneMoves.Count)
+            while (index < BonusMoves.Count)
             {
-                if (BonusCloneMoves[index] == cloneMoveToRemove)
+                if (BonusMoves[index] == moveToRemove)
                 {
-                    BonusCloneMoves.RemoveAt(index);
-                    break;
-                }
-                else
-                {
-                    index++;
-                }
-            }
-        }
-    }
-
-    public void RemoveBonusMoves(DefensiveMove[] defensiveMoves)
-    {
-        foreach (DefensiveMove defensiveMoveToRemove in defensiveMoves)
-        {
-            int index = 0;
-            while (index < BonusDefensiveMoves.Count)
-            {
-                if (BonusDefensiveMoves[index] == defensiveMoveToRemove)
-                {
-                    BonusDefensiveMoves.RemoveAt(index);
-                    break;
-                }
-                else
-                {
-                    index++;
-                }
-            }
-        }
-    }
-
-    public void RemoveBonusMoves(MedicalMove[] medicalMoves)
-    {
-        foreach (MedicalMove medicalMoveToRemove in medicalMoves)
-        {
-            int index = 0;
-            while (index < BonusMedicalMoves.Count)
-            {
-                if (BonusMedicalMoves[index] == medicalMoveToRemove)
-                {
-                    BonusMedicalMoves.RemoveAt(index);
-                    break;
-                }
-                else
-                {
-                    index++;
-                }
-            }
-        }
-    }
-
-    public void RemoveBonusMoves(OffensiveMove[] offensiveMoves)
-    {
-        foreach (OffensiveMove offensiveMoveToRemove in offensiveMoves)
-        {
-            int index = 0;
-            while (index < BonusOffensiveMoves.Count)
-            {
-                if (BonusOffensiveMoves[index] == offensiveMoveToRemove)
-                {
-                    BonusOffensiveMoves.RemoveAt(index);
-                    break;
-                }
-                else
-                {
-                    index++;
-                }
-            }
-        }
-    }
-
-    public void RemoveBonusMoves(PowerUpMove[] powerUpMoves)
-    {
-        foreach (PowerUpMove powerUpMoveToRemove in powerUpMoves)
-        {
-            int index = 0;
-            while (index < BonusPowerUpMoves.Count)
-            {
-                if (BonusPowerUpMoves[index] == powerUpMoveToRemove)
-                {
-                    BonusPowerUpMoves.RemoveAt(index);
-                    break;
-                }
-                else
-                {
-                    index++;
-                }
-            }
-        }
-    }
-
-    public void RemoveBonusMoves(SubMove[] subMoves)
-    {
-        foreach (SubMove subMoveToRemove in subMoves)
-        {
-            int index = 0;
-            while (index < BonusSubMoves.Count)
-            {
-                if (BonusSubMoves[index] == subMoveToRemove)
-                {
-                    BonusSubMoves.RemoveAt(index);
-                    break;
-                }
-                else
-                {
-                    index++;
-                }
-            }
-        }
-    }
-
-    public void RemoveBonusMoves(SummonMove[] summonMoves)
-    {
-        foreach (SummonMove summonMoveToRemove in summonMoves)
-        {
-            int index = 0;
-            while (index < BonusSummonMoves.Count)
-            {
-                if (BonusSummonMoves[index] == summonMoveToRemove)
-                {
-                    BonusSummonMoves.RemoveAt(index);
+                    BonusMoves.RemoveAt(index);
                     break;
                 }
                 else
@@ -976,7 +730,7 @@ public class Fighter : MonoBehaviour
     public void RemoveSubstitution() { Subs.Clear(); }
     public void RemoveTrait(Enums.Trait trait) { Traits.Remove(trait); }
 
-    public void SetAttributeBonusSource(AttributeBonus attributeBonus, Enums.BonusSource source, Clothing clothing, Potion potion, PowerUpMove powerUpMove, Weapon weapon)
+    public void SetAttributeBonusSource(AttributeBonus attributeBonus, Enums.BonusSource source, Clothing clothing, Potion potion, Move powerUpMove, Weapon weapon)
     {
         attributeBonus.SetSource(source);
 

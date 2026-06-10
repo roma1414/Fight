@@ -4,42 +4,27 @@ using UnityEngine;
 
 public class MoveEvent
 {
-    protected List<CloneMove>       CloneMoves;
     protected float                 EffectiveMoveEventCastingSpeed = 0f;
-    protected List<MedicalMove>     MedicalMoves;
     protected Enums.MoveType        MoveType;
     protected List<Fighter>         Fighters;
-    protected List<OffensiveMove>   OffensiveMoves;
-    protected List<PowerUpMove>     PowerUpMoves;
+    protected List<Move>            Moves;
     protected List<float>           RandomAdds;
-    protected List<SubMove>         SubMoves;
     protected List<Fighter>         Targets;
     protected int                   TargetTeam;
     protected Enums.TargetType      TargetType;
-    protected List<SummonMove>      SummonMoves;
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     public MoveEvent()
     {
-        CloneMoves = new List<CloneMove>();
-        MedicalMoves = new List<MedicalMove>();
         MoveType = Enums.MoveType.Skip;
         Fighters = new List<Fighter>();
-        OffensiveMoves = new List<OffensiveMove>();
-        PowerUpMoves = new List<PowerUpMove>();
+        Moves = new List<Move>();
         RandomAdds = new List<float>();
-        SubMoves = new List<SubMove>();
         Targets = new List<Fighter>();
-        SummonMoves = new List<SummonMove>();
     }
 
-    public void AddMove(CloneMove cloneMove) { CloneMoves.Add(cloneMove); }
-    public void AddMove(MedicalMove medicalMove) { MedicalMoves.Add(medicalMove); }
-    public void AddMove(OffensiveMove offensiveMove) { OffensiveMoves.Add(offensiveMove); }
-    public void AddMove(PowerUpMove powerUpMove) { PowerUpMoves.Add(powerUpMove); }
-    public void AddMove(SubMove subMove) { SubMoves.Add(subMove); }
-    public void AddMove(SummonMove summonMove) { SummonMoves.Add(summonMove); }
+    public void AddMove(Move move) { Moves.Add(move); }
     public void AddFighter(Fighter fighter) { Fighters.Add(fighter); }
     public void AddRandomAdd(float randomAdd) { RandomAdds.Add(randomAdd); }
     public void AddTarget(Fighter target) { Targets.Add(target); }
@@ -56,8 +41,6 @@ public class MoveEvent
         return true;
     }
 
-    public List<CloneMove> GetCloneMoves() { return CloneMoves; }
-
     public float GetEffectiveMoveEventCastingSpeed() 
     {
         if (EffectiveMoveEventCastingSpeed == 0f) // If EffectiveMoveEventSpeed has not been set
@@ -67,46 +50,9 @@ public class MoveEvent
         return EffectiveMoveEventCastingSpeed; 
     }
 
-    public List<MedicalMove> GetMedicalMoves() { return MedicalMoves; }
     //public static float GetMeleeMoveCastingSpeed(Fighter fighter, Move move, float randomAdd) { return (.5f * fighter.GetSpeed() * fighter.GetHealthCo() + .5f * fighter.GetCastingSpeed(move) + randomAdd); }
     public Enums.MoveType GetMoveType() { return MoveType; }
-
-    public List<Move> GetMoves()
-    {
-        List<Move> moves;
-        
-        switch (MoveType)
-        {
-            case Enums.MoveType.Melee:
-            case Enums.MoveType.Spell:
-            case Enums.MoveType.Psychic:
-            case Enums.MoveType.NinTai:
-            case Enums.MoveType.Projectile:
-                moves = new List<Move>(OffensiveMoves);
-                break;
-            case Enums.MoveType.PowerUp:
-                moves = new List<Move>(PowerUpMoves);
-                break;
-            case Enums.MoveType.Medical:
-                moves = new List<Move>(MedicalMoves);
-                break;
-            case Enums.MoveType.Substitution:
-                moves = new List<Move>(SubMoves);
-                break;
-            case Enums.MoveType.Clone:
-                moves = new List<Move>(CloneMoves);
-                break;
-            case Enums.MoveType.Summon:
-                moves = new List<Move>(SummonMoves);
-                break;
-            default:
-                Debug.LogError("Error! Unexpected move type [" + MoveType + "] in MoveEvent.GetMoves!");
-                moves = new List<Move>();
-                break;
-        }
-
-        return moves;
-    }
+    public List<Move> GetMoves() { return Moves; }
 
     public float GetMoveEventCastingSpeed()
     {
@@ -134,7 +80,6 @@ public class MoveEvent
             Fighter fighter = Fighters[index];
             Move move = moves[index];
             float randomAdd = RandomAdds[index];
-
             float moveSpeed = fighter.GetCastingSpeed(move, randomAdd);
 
             if (moveSpeed < minMoveSpeed)
@@ -147,11 +92,7 @@ public class MoveEvent
     }
 
     public List<Fighter> GetFighters() { return Fighters; }
-    public List<OffensiveMove> GetOffensiveMoves() { return OffensiveMoves; }
-    public List<PowerUpMove> GetPowerUpMoves() { return PowerUpMoves; }
     public List<float> GetRandomAdds() { return RandomAdds; }
-    public List<SubMove> GetSubMoves() { return SubMoves; }
-    public List<SummonMove> GetSummonMoves() { return SummonMoves; }
     public List<Fighter> GetTargets() { return Targets; }
     public int GetTargetTeam() { return TargetTeam; }
     public Enums.TargetType GetTargetType() { return TargetType; }

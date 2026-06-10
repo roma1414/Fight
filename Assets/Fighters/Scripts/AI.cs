@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -36,6 +37,16 @@ public class AI : ScriptableObject
     {
         bool result = false;
         
+        foreach (Move move in fighter.GetMoves(moveType))
+        {
+            if (CheckIfCanPerformMove(fight, fighter, move) == true)
+            {
+                result = true;
+                break;
+            }
+        }
+
+        /*
         switch (moveType)
         {
             case Enums.MoveType.Melee:
@@ -44,7 +55,7 @@ public class AI : ScriptableObject
             case Enums.MoveType.NinTai:
             case Enums.MoveType.Projectile:
                 {
-                    foreach (OffensiveMove offensiveMove in fighter.GetOffensiveMoves())
+                    foreach (Move offensiveMove in fighter.GetMoves(Enums.MoveType.Offensive))
                     {
                         if (offensiveMove.GetMoveType() == moveType && CheckIfCanPerformMove(fight, fighter, offensiveMove) == true)
                         {
@@ -56,7 +67,7 @@ public class AI : ScriptableObject
                 }
             case Enums.MoveType.PowerUp:
                 {
-                    foreach (PowerUpMove powerUpMove in fighter.GetPowerUpMoves())
+                    foreach (Move powerUpMove in fighter.GetMoves(Enums.MoveType.PowerUp))
                     {
                         if (CheckIfCanPerformMove(fight, fighter, powerUpMove) == true)
                         {
@@ -68,7 +79,7 @@ public class AI : ScriptableObject
                 }
             case Enums.MoveType.Medical:
                 {
-                    foreach (MedicalMove medicalMove in fighter.GetMedicalMoves())
+                    foreach (Move medicalMove in fighter.GetMoves(Enums.MoveType.Medical))
                     {
                         if (CheckIfCanPerformMove(fight, fighter, medicalMove) == true)
                         {
@@ -80,7 +91,7 @@ public class AI : ScriptableObject
                 }
             case Enums.MoveType.Substitution:
                 {
-                    foreach (SubMove submove in fighter.GetSubMoves())
+                    foreach (Move submove in fighter.GetMoves(Enums.MoveType.Substitution))
                     {
                         if (CheckIfCanPerformMove(fight, fighter, submove) == true)
                         {
@@ -92,7 +103,7 @@ public class AI : ScriptableObject
                 }
             case Enums.MoveType.Clone:
                 {
-                    foreach (CloneMove cloneMove in fighter.GetCloneMoves())
+                    foreach (Move cloneMove in fighter.GetMoves(Enums.MoveType.Clone))
                     {
                         if (CheckIfCanPerformMove(fight, fighter, cloneMove) == true)
                         {
@@ -104,7 +115,7 @@ public class AI : ScriptableObject
                 }
             case Enums.MoveType.Summon:
                 {
-                    foreach (SummonMove summonMove in fighter.GetSummonMoves())
+                    foreach (Move summonMove in fighter.GetMoves(Enums.MoveType.Summon))
                     {
                         if (CheckIfCanPerformMove(fight, fighter, summonMove) == true)
                         {
@@ -120,7 +131,7 @@ public class AI : ScriptableObject
                     result = false;
                     break;
                 }
-        }
+        }*/
 
         return result;
     }
@@ -354,7 +365,7 @@ public class AI : ScriptableObject
 
     public virtual bool CheckIfShouldPowerUp(Fight fight, Fighter fighter)
     {
-        List<PowerUpMove> possiblePowerUpMoves = new List<PowerUpMove>();
+        List<Move> possiblePowerUpMoves = new List<Move>();
         List<Fighter> enemies = GetEnemies(fight, fighter);
         float maxEnemyOverall = 0f;
 
@@ -367,7 +378,7 @@ public class AI : ScriptableObject
             }
         }
 
-        foreach (PowerUpMove powerUpMove in fighter.GetPowerUpMoves())
+        foreach (Move powerUpMove in fighter.GetMoves(Enums.MoveType.PowerUp))
         {
             if (CheckIfCanPerformMove(fight, fighter, powerUpMove) == true)
             {
@@ -396,7 +407,7 @@ public class AI : ScriptableObject
         bool thereIsATeammateUnableToMove = teammatesUnableToMove.Count > 0;
         bool thereIsATeammateNearDefeat = teammatesNearDefeat.Count > 0;
 
-        int randomNumber = Random.Range(0, 100);
+        int randomNumber = UnityEngine.Random.Range(0, 100);
 
         if (thereIsATeammateUnableToMove &&
             thereIsAnEnemyWhoCanMove &&
@@ -406,7 +417,7 @@ public class AI : ScriptableObject
             int possibleProtectors = 1 + teammates.Count - teammatesUnableToMove.Count;
             int percentChance = 100 / possibleProtectors;
 
-            if (randomNumber < percentChance && Random.Range(0, 100) < PROTECT_CHANCE_WHEN_TEAMMATE_CANNOT_MOVE) // 15 percent of the time a fighter will attack instead of protecting their teammate unable to move.
+            if (randomNumber < percentChance && UnityEngine.Random.Range(0, 100) < PROTECT_CHANCE_WHEN_TEAMMATE_CANNOT_MOVE) // 15 percent of the time a fighter will attack instead of protecting their teammate unable to move.
             {
                 return true;
             }
@@ -434,9 +445,9 @@ public class AI : ScriptableObject
         moveEvent.AddTarget(fighter);
         moveEvent.AddRandomAdd(Fight.RandomAdd());
 
-        List<CloneMove> possibleCloneMoves = new List<CloneMove>();
+        List<Move> possibleCloneMoves = new List<Move>();
 
-        foreach (CloneMove cloneMove in fighter.GetCloneMoves())
+        foreach (Move cloneMove in fighter.GetMoves(Enums.MoveType.Clone))
         {
             if (CheckIfCanPerformMove(fight, fighter, cloneMove) == true)
             {
@@ -444,7 +455,7 @@ public class AI : ScriptableObject
             }
         }
 
-        List<CloneMove> weightedPossibleCloneMoves = GetWeightedListOfCloneMoves(fight, fighter, possibleCloneMoves);
+        List<Move> weightedPossibleCloneMoves = GetWeightedListOfMoves(fight, fighter, possibleCloneMoves, Enums.MoveType.Clone);
 
         if (weightedPossibleCloneMoves.Count < 1)
         {
@@ -452,7 +463,7 @@ public class AI : ScriptableObject
             return GetSkipMoveEvent(fighter);
         }
 
-        int choice = Random.Range(0, weightedPossibleCloneMoves.Count);
+        int choice = UnityEngine.Random.Range(0, weightedPossibleCloneMoves.Count);
         moveEvent.AddMove(weightedPossibleCloneMoves[choice]);
 
         return moveEvent;
@@ -598,11 +609,11 @@ public class AI : ScriptableObject
         moveEvent.AddFighter(fighter);
         moveEvent.AddRandomAdd(Fight.RandomAdd());
 
-        List<MedicalMove> teamHealthMoves = new List<MedicalMove>();
-        List<MedicalMove> teamManaMoves = new List<MedicalMove>();
-        List<MedicalMove> selfHealthMoves = new List<MedicalMove>();
-        List<MedicalMove> oneTeamMemberHealthMoves = new List<MedicalMove>();
-        List<MedicalMove> oneTeamMemberManaMoves = new List<MedicalMove>();
+        List<Move> teamHealthMoves = new List<Move>();
+        List<Move> teamManaMoves = new List<Move>();
+        List<Move> selfHealthMoves = new List<Move>();
+        List<Move> oneTeamMemberHealthMoves = new List<Move>();
+        List<Move> oneTeamMemberManaMoves = new List<Move>();
 
         GetPossibleMedicalMovesByType(fight, fighter, teamHealthMoves, teamManaMoves, selfHealthMoves, oneTeamMemberHealthMoves, oneTeamMemberManaMoves);
 
@@ -617,9 +628,9 @@ public class AI : ScriptableObject
         // Check to see if we should heal our team
         if (teamHealthMoves.Count > 0 && teamMembersMissingSomeHealth.Count >= 3)
         {
-            List<MedicalMove> weightedTeamHealthMoves = GetWeightedListOfMedicalMoves(fight, fighter, teamHealthMoves);
-            int choice = Random.Range(0, weightedTeamHealthMoves.Count);
-            MedicalMove medicalMove = weightedTeamHealthMoves[choice];
+            List<Move> weightedTeamHealthMoves = GetWeightedListOfMoves(fight, fighter, teamHealthMoves, Enums.MoveType.Medical);
+            int choice = UnityEngine.Random.Range(0, weightedTeamHealthMoves.Count);
+            Move medicalMove = weightedTeamHealthMoves[choice];
 
             moveEvent.AddMove(medicalMove);
             moveEvent.SetTargetType(Enums.TargetType.Team);
@@ -633,9 +644,9 @@ public class AI : ScriptableObject
         // Check to see if we should restore mana for our team (checking for low mana)
         if (teamManaMoves.Count > 0 && teammatesWithLowMana.Count >= 2)
         {
-            List<MedicalMove> weightedTeamManaMoves = GetWeightedListOfMedicalMoves(fight, fighter, teamManaMoves);
-            int choice = Random.Range(0, weightedTeamManaMoves.Count);
-            MedicalMove medicalMove = weightedTeamManaMoves[choice];
+            List<Move> weightedTeamManaMoves = GetWeightedListOfMoves(fight, fighter, teamManaMoves, Enums.MoveType.Medical);
+            int choice = UnityEngine.Random.Range(0, weightedTeamManaMoves.Count);
+            Move medicalMove = weightedTeamManaMoves[choice];
 
             moveEvent.AddMove(medicalMove);
             moveEvent.SetTargetType(Enums.TargetType.Team);
@@ -647,9 +658,9 @@ public class AI : ScriptableObject
         // Check to see if we should heal self
         if (selfHealthMoves.Count > 0 && fighter.CheckIfMissingXHealth(50) == true)
         {
-            List<MedicalMove> weightedSelfHealthMoves = GetWeightedListOfMedicalMoves(fight, fighter, selfHealthMoves);
-            int choice = Random.Range(0, weightedSelfHealthMoves.Count);
-            MedicalMove medicalMove = weightedSelfHealthMoves[choice];
+            List<Move> weightedSelfHealthMoves = GetWeightedListOfMoves(fight, fighter, selfHealthMoves, Enums.MoveType.Medical);
+            int choice = UnityEngine.Random.Range(0, weightedSelfHealthMoves.Count);
+            Move medicalMove = weightedSelfHealthMoves[choice];
 
             moveEvent.AddMove(medicalMove);
             moveEvent.AddTarget(fighter);
@@ -668,12 +679,12 @@ public class AI : ScriptableObject
         // Check to see if we should heal one team member
         if (oneTeamMemberHealthMoves.Count > 0 && teamMembersMissingHealth.Count > 0)
         {
-            List<MedicalMove> weightedOneTeamMemberHealthMoves = GetWeightedListOfMedicalMoves(fight, fighter, oneTeamMemberHealthMoves);
-            int choice = Random.Range(0, weightedOneTeamMemberHealthMoves.Count);
-            MedicalMove medicalMove = weightedOneTeamMemberHealthMoves[choice];
+            List<Move> weightedOneTeamMemberHealthMoves = GetWeightedListOfMoves(fight, fighter, oneTeamMemberHealthMoves, Enums.MoveType.Medical);
+            int choice = UnityEngine.Random.Range(0, weightedOneTeamMemberHealthMoves.Count);
+            Move medicalMove = weightedOneTeamMemberHealthMoves[choice];
 
             List<Fighter> weightedTargetList = GetWeightedListOfMedicalTargets(fight, fighter, medicalMove, teamMembersMissingHealth);
-            choice = Random.Range(0, weightedTargetList.Count);
+            choice = UnityEngine.Random.Range(0, weightedTargetList.Count);
             Fighter target = weightedTargetList[choice];
 
             moveEvent.AddMove(medicalMove);
@@ -688,12 +699,12 @@ public class AI : ScriptableObject
         // Check to see if we should restore a teammate's mana
         if (oneTeamMemberManaMoves.Count > 0 && teammatesMissingMana.Count > 0)
         {
-            List<MedicalMove> weightedOneTeamMemberManaMoves = GetWeightedListOfMedicalMoves(fight, fighter, oneTeamMemberHealthMoves);
-            int choice = Random.Range(0, weightedOneTeamMemberManaMoves.Count);
-            MedicalMove medicalMove = weightedOneTeamMemberManaMoves[choice];
+            List<Move> weightedOneTeamMemberManaMoves = GetWeightedListOfMoves(fight, fighter, oneTeamMemberHealthMoves, Enums.MoveType.Medical);
+            int choice = UnityEngine.Random.Range(0, weightedOneTeamMemberManaMoves.Count);
+            Move medicalMove = weightedOneTeamMemberManaMoves[choice];
 
             List<Fighter> weightedTargetList = GetWeightedListOfMedicalTargets(fight, fighter, medicalMove, teammatesMissingMana);
-            choice = Random.Range(0, weightedTargetList.Count);
+            choice = UnityEngine.Random.Range(0, weightedTargetList.Count);
             Fighter target = weightedTargetList[choice];
 
             moveEvent.AddMove(medicalMove);
@@ -827,7 +838,7 @@ public class AI : ScriptableObject
             medicalUpper = currentUpper;
         }
 
-        float randomNumber = Random.Range(0f, currentUpper);
+        float randomNumber = UnityEngine.Random.Range(0f, currentUpper);
 
         if (spellLower <= randomNumber && randomNumber <= spellUpper)
         {
@@ -876,7 +887,7 @@ public class AI : ScriptableObject
         moveEvent.AddFighter(fighter);
         moveEvent.AddRandomAdd(Fight.RandomAdd());
 
-        OffensiveMove offensiveMove = GetOffensiveMoveOfType(fight, fighter, moveType);
+        Move offensiveMove = GetOffensiveMoveOfType(fight, fighter, moveType);
         moveEvent.AddMove(offensiveMove);
 
         Enums.TargetType targetType = offensiveMove.GetTargetType();
@@ -906,12 +917,12 @@ public class AI : ScriptableObject
         return moveEvent;
     }
 
-    public OffensiveMove GetOffensiveMoveOfType(Fight fight, Fighter fighter, Enums.MoveType moveType)
+    public Move GetOffensiveMoveOfType(Fight fight, Fighter fighter, Enums.MoveType moveType)
     {
-        List<OffensiveMove> possibleMoves = new List<OffensiveMove>();
-        List<OffensiveMove> weightedPossibleMoves = new List<OffensiveMove>();
+        List<Move> possibleMoves = new List<Move>();
+        List<Move> weightedPossibleMoves = new List<Move>();
 
-        foreach (OffensiveMove offensiveMove in fighter.GetOffensiveMoves())
+        foreach (Move offensiveMove in fighter.GetMoves(moveType))
         {
             if (offensiveMove.GetMoveType() == moveType && CheckIfCanPerformMove(fight, fighter, offensiveMove) == true)
             {
@@ -919,7 +930,7 @@ public class AI : ScriptableObject
             }
         }
 
-        weightedPossibleMoves = GetWeightedListOfOffensiveMoves(fight, fighter, possibleMoves, moveType);
+        weightedPossibleMoves = GetWeightedListOfMoves(fight, fighter, possibleMoves, moveType);
         int weightedPossibleMovesCount = weightedPossibleMoves.Count;
 
         if (weightedPossibleMovesCount < 1)
@@ -928,12 +939,12 @@ public class AI : ScriptableObject
             return null;
         }
 
-        int choice = Random.Range(0, weightedPossibleMovesCount);
+        int choice = UnityEngine.Random.Range(0, weightedPossibleMovesCount);
 
         return weightedPossibleMoves[choice];
     }
 
-    public void GetPossibleMedicalMovesByType(Fight fight, Fighter fighter, List<MedicalMove> teamHealthMoves, List<MedicalMove> teamManaMoves, List<MedicalMove> selfHealthMoves, List<MedicalMove> oneTeamMemberHealthMoves, List<MedicalMove> oneTeamMemberManaMoves)
+    public void GetPossibleMedicalMovesByType(Fight fight, Fighter fighter, List<Move> teamHealthMoves, List<Move> teamManaMoves, List<Move> selfHealthMoves, List<Move> oneTeamMemberHealthMoves, List<Move> oneTeamMemberManaMoves)
     {
         teamHealthMoves.Clear();
         teamManaMoves.Clear();
@@ -941,7 +952,7 @@ public class AI : ScriptableObject
         oneTeamMemberHealthMoves.Clear();
         oneTeamMemberManaMoves.Clear();
 
-        foreach (MedicalMove medicalMove in fighter.GetMedicalMoves())
+        foreach (Move medicalMove in fighter.GetMoves(Enums.MoveType.Medical))
         {
             if (CheckIfCanPerformMove(fight, fighter, medicalMove) == true)
             {
@@ -989,8 +1000,8 @@ public class AI : ScriptableObject
 
     public virtual MoveEvent GetPowerUpMoveEvent(Fight fight, Fighter fighter)
     {
-        List<PowerUpMove> possiblePowerUpMoves = new List<PowerUpMove>();
-        foreach (PowerUpMove possiblePowerUpMove in fighter.GetPowerUpMoves())
+        List<Move> possiblePowerUpMoves = new List<Move>();
+        foreach (Move possiblePowerUpMove in fighter.GetMoves(Enums.MoveType.PowerUp))
         {
             //if (fighter.CheckIfCapableOfMove(possiblePowerUpMove) == true && CheckIfMoveHasRemainingUses(fighter, possiblePowerUpMove) == true)
             if (fighter.GetAI().CheckIfCanPerformMove(fight, fighter, possiblePowerUpMove) == true)
@@ -1006,7 +1017,7 @@ public class AI : ScriptableObject
         }
 
         possiblePowerUpMoves.Sort((left, right) => left.GetLevel().CompareTo(right.GetLevel()));    // Sort by level in ascending order.
-        PowerUpMove powerUpMove = possiblePowerUpMoves[0];                                          // Fighter will use power ups in order of increasing level.
+        Move powerUpMove = possiblePowerUpMoves[0]; // Fighter will use power ups in order of increasing level.
 
         MoveEvent moveEvent = new MoveEvent();
         moveEvent.SetMoveType(Enums.MoveType.PowerUp);
@@ -1033,7 +1044,7 @@ public class AI : ScriptableObject
 
         if (teammatesInNeed.Count > 0)  // Teammates near death or unable to move. There could be copies of teammates if someone is in both lists.
         {
-            int index = Random.Range(0, teammatesInNeed.Count);
+            int index = UnityEngine.Random.Range(0, teammatesInNeed.Count);
             moveEvent.AddTarget(teammatesInNeed[index]);
 
             return moveEvent;
@@ -1053,7 +1064,7 @@ public class AI : ScriptableObject
 
         if (teammatesInNeed.Count > 0)                  // Teammates with a significantly lower overall rating.
         {
-            int index = Random.Range(0, teammatesInNeed.Count);
+            int index = UnityEngine.Random.Range(0, teammatesInNeed.Count);
             moveEvent.AddTarget(teammatesInNeed[index]);
 
             return moveEvent;
@@ -1063,7 +1074,7 @@ public class AI : ScriptableObject
         
         if (teammatesWeakened.Count > 0)                // Teammates weakened.
         {
-            int index = Random.Range(0, teammatesWeakened.Count);
+            int index = UnityEngine.Random.Range(0, teammatesWeakened.Count);
             moveEvent.AddTarget(teammatesWeakened[index]);
 
             return moveEvent;
@@ -1071,7 +1082,7 @@ public class AI : ScriptableObject
 
         if (teammates.Count > 0)                        // Teammates in general.
         {            
-            int index = Random.Range(0, teammates.Count);
+            int index = UnityEngine.Random.Range(0, teammates.Count);
             moveEvent.AddTarget(teammates[index]);
 
             return moveEvent;
@@ -1123,9 +1134,9 @@ public class AI : ScriptableObject
         moveEvent.AddTarget(fighter);
         moveEvent.AddRandomAdd(Fight.RandomAdd());
 
-        List<SubMove> possibleSubMoves = new List<SubMove>();
+        List<Move> possibleSubMoves = new List<Move>();
 
-        foreach (SubMove subMove in fighter.GetSubMoves())
+        foreach (Move subMove in fighter.GetMoves(Enums.MoveType.Substitution))
         {
             if (CheckIfCanPerformMove(fight, fighter, subMove) == true)
             {
@@ -1133,7 +1144,7 @@ public class AI : ScriptableObject
             }
         }
 
-        List<SubMove> weightedPossibleSubMoves = GetWeightedListOfSubMoves(fight, fighter, possibleSubMoves);
+        List<Move> weightedPossibleSubMoves = GetWeightedListOfMoves(fight, fighter, possibleSubMoves, Enums.MoveType.Substitution);
 
         if (weightedPossibleSubMoves.Count < 1)
         {
@@ -1141,7 +1152,7 @@ public class AI : ScriptableObject
             return GetSkipMoveEvent(fighter);
         }    
 
-        int choice = Random.Range(0, weightedPossibleSubMoves.Count);
+        int choice = UnityEngine.Random.Range(0, weightedPossibleSubMoves.Count);
         moveEvent.AddMove(weightedPossibleSubMoves[choice]);
 
         return moveEvent;
@@ -1156,9 +1167,9 @@ public class AI : ScriptableObject
         moveEvent.AddTarget(fighter);
         moveEvent.AddRandomAdd(Fight.RandomAdd());
 
-        List<SummonMove> possibleSummonMoves = new List<SummonMove>();
+        List<Move> possibleSummonMoves = new List<Move>();
 
-        foreach (SummonMove summonMove in fighter.GetSummonMoves())
+        foreach (Move summonMove in fighter.GetMoves(Enums.MoveType.Summon))
         {
             if (CheckIfCanPerformMove(fight, fighter, summonMove) == true)
             {
@@ -1166,7 +1177,7 @@ public class AI : ScriptableObject
             }
         }
 
-        List<SummonMove> weightedPossibleSummonMoves = GetWeightedListOfSummonMoves(fight, fighter, possibleSummonMoves);
+        List<Move> weightedPossibleSummonMoves = GetWeightedListOfMoves(fight, fighter, possibleSummonMoves, Enums.MoveType.Summon);
 
         if (weightedPossibleSummonMoves.Count < 1)
         {
@@ -1174,13 +1185,13 @@ public class AI : ScriptableObject
             return GetSkipMoveEvent(fighter);
         }
 
-        int choice = Random.Range(0, weightedPossibleSummonMoves.Count);
+        int choice = UnityEngine.Random.Range(0, weightedPossibleSummonMoves.Count);
         moveEvent.AddMove(weightedPossibleSummonMoves[choice]);
 
         return moveEvent;
     }
 
-    public Fighter GetTarget(Fight fight, Fighter fighter, OffensiveMove offensiveMove)
+    public Fighter GetTarget(Fight fight, Fighter fighter, Move offensiveMove)
     {
         Enums.TargetType targetType = offensiveMove.GetTargetType();
 
@@ -1207,7 +1218,7 @@ public class AI : ScriptableObject
             }
 
             List<Fighter> weightedEnemiesWithStatuses = GetWeightedListOfOffensiveTargets(fight, fighter, offensiveMove, enemiesWithStatuses);
-            choice = Random.Range(0, weightedEnemiesWithStatuses.Count);    // Returning random enemy that has all required statuses
+            choice = UnityEngine.Random.Range(0, weightedEnemiesWithStatuses.Count);    // Returning random enemy that has all required statuses
 
             return weightedEnemiesWithStatuses[choice];
         }
@@ -1229,41 +1240,41 @@ public class AI : ScriptableObject
             if (enemiesFreeOfPsychic.Count > 1)
             {
                 List<Fighter> weightedEnemiesFreeOfPsychic = GetWeightedListOfOffensiveTargets(fight, fighter, offensiveMove, enemiesFreeOfPsychic);
-                choice = Random.Range(0, weightedEnemiesFreeOfPsychic.Count);  // Returning random enemy that is not under psychic control
+                choice = UnityEngine.Random.Range(0, weightedEnemiesFreeOfPsychic.Count);  // Returning random enemy that is not under psychic control
 
                 return weightedEnemiesFreeOfPsychic[choice];
             }
         }
 
         List<Fighter> enemiesUnableToMove = GetEnemiesUnableToMove(fight, fighter);
-        int randomNumber = Random.Range(0, 100);
+        int randomNumber = UnityEngine.Random.Range(0, 100);
 
         if (enemiesUnableToMove.Count > 1 && randomNumber < 67)     // 67% of the time they'll go for an enemy unable to move
         {
             List<Fighter> weightedEnemiesUnableToMove = GetWeightedListOfOffensiveTargets(fight, fighter, offensiveMove, enemiesUnableToMove);
-            choice = Random.Range(0, weightedEnemiesUnableToMove.Count);    // Returning random enemy that is unable to move
+            choice = UnityEngine.Random.Range(0, weightedEnemiesUnableToMove.Count);    // Returning random enemy that is unable to move
 
             return weightedEnemiesUnableToMove[choice];
         }
 
         List<Fighter> enemiesNearDeath = GetEnemiesNearDefeat(fight, fighter);
-        randomNumber = Random.Range(0, 100);
+        randomNumber = UnityEngine.Random.Range(0, 100);
 
         if (enemiesNearDeath.Count > 1 && randomNumber < 67)     // 67% of the time they'll go for an enemy close to death
         {
             List<Fighter> weightedEnemiesCloseToDeath = GetWeightedListOfOffensiveTargets(fight, fighter, offensiveMove, enemiesNearDeath);
-            choice = Random.Range(0, weightedEnemiesCloseToDeath.Count);    // Returning random enemy that is close to death
+            choice = UnityEngine.Random.Range(0, weightedEnemiesCloseToDeath.Count);    // Returning random enemy that is close to death
 
             return weightedEnemiesCloseToDeath[choice];
         }
 
         List<Fighter> weightedEnemies = GetWeightedListOfOffensiveTargets(fight, fighter, offensiveMove, enemies);
-        choice = Random.Range(0, weightedEnemies.Count);    // Returning random enemy
+        choice = UnityEngine.Random.Range(0, weightedEnemies.Count);    // Returning random enemy
 
         return weightedEnemies[choice];
     }
 
-    public int GetTargetTeam(Fight fight, Fighter fighter, OffensiveMove offensiveMove)
+    public int GetTargetTeam(Fight fight, Fighter fighter, Move offensiveMove)
     {
         int team = fighter.GetTeam();
         List<int> possibleTeams = new List<int>();
@@ -1276,7 +1287,7 @@ public class AI : ScriptableObject
             }
         }
 
-        int choice = Random.Range(0, possibleTeams.Count);
+        int choice = UnityEngine.Random.Range(0, possibleTeams.Count);
 
         return possibleTeams[choice];
     }
@@ -1514,7 +1525,7 @@ public class AI : ScriptableObject
         return 1;
     }
 
-    public int GetWeightForMedicalTarget(Fight fight, Fighter fighter, Fighter target, MedicalMove medicalMove)
+    public int GetWeightForMedicalTarget(Fight fight, Fighter fighter, Fighter target, Move medicalMove)
     {
         switch (medicalMove.GetHealType())
         {
@@ -1571,7 +1582,7 @@ public class AI : ScriptableObject
         return 1;
     }
 
-    public int GetWeightForOffensiveTarget(Fight fight, Fighter fighter, Fighter target, OffensiveMove offensiveMove)
+    public int GetWeightForOffensiveTarget(Fight fight, Fighter fighter, Fighter target, Move offensiveMove)
     {
         if (offensiveMove.GetMoveType() == Enums.MoveType.Psychic)
         {
@@ -1613,61 +1624,25 @@ public class AI : ScriptableObject
         return 1;
     }
 
-    public List<CloneMove> GetWeightedListOfCloneMoves(Fight fight, Fighter fighter, List<CloneMove> cloneMoves)
+    public List<Move> GetWeightedListOfMoves(Fight fight, Fighter fighter, List<Move> possibleMoves, Enums.MoveType moveType)
     {
-        List<CloneMove> weightedCloneMoves = new List<CloneMove>();
+        List<Move> weightedMoves = new List<Move>();
 
-        foreach (CloneMove cloneMove in cloneMoves)
+        foreach (Move move in possibleMoves)
         {
-            int weight = GetWeightForMove(fight, fighter, cloneMove, Enums.MoveType.Clone);
-            weightedCloneMoves.AddRange(Enumerable.Repeat(cloneMove, weight));
+            int weight = GetWeightForMove(fight, fighter, move, moveType);
+            weightedMoves.AddRange(Enumerable.Repeat(move, weight));
         }
 
-        if (weightedCloneMoves.Count < 1)
+        if (weightedMoves.Count < 1)
         {
-            Debug.LogError("Error! Empty weighted clone move list in AI.GetWeightedListOfCloneMoves!");
+            Debug.LogError("Error! Empty weighted move list in AI.GetWeightedListOfMoves!");
         }
 
-        return weightedCloneMoves;
+        return weightedMoves;
     }
 
-    public List<MedicalMove> GetWeightedListOfMedicalMoves(Fight fight, Fighter fighter, List<MedicalMove> medicalMoves)
-    {
-        List<MedicalMove> weightedMedicalMoves = new List<MedicalMove>();
-
-        foreach (MedicalMove medicalMove in medicalMoves)
-        {
-            int weight = GetWeightForMove(fight, fighter, medicalMove, Enums.MoveType.Medical);
-            weightedMedicalMoves.AddRange(Enumerable.Repeat(medicalMove, weight));
-        }
-
-        if (weightedMedicalMoves.Count < 1)
-        {
-            Debug.LogError("Error! Empty weighted medical move list in AI.GetWeightedListOfMedicalMoves!");
-        }
-
-        return weightedMedicalMoves;
-    }
-
-    public List<OffensiveMove> GetWeightedListOfOffensiveMoves(Fight fight, Fighter fighter, List<OffensiveMove> offensiveMoves, Enums.MoveType moveType)
-    {
-        List<OffensiveMove> weightedOffensiveMoves = new List<OffensiveMove>();
-
-        foreach (OffensiveMove offensiveMove in offensiveMoves)
-        {
-            int weight = GetWeightForMove(fight, fighter, offensiveMove, moveType);
-            weightedOffensiveMoves.AddRange(Enumerable.Repeat(offensiveMove, weight));
-        }
-
-        if (weightedOffensiveMoves.Count < 1)
-        {
-            Debug.LogError("Error! Empty weighted offensive move list in AI.GetWeightedListOfOffensiveMoves!");
-        }
-
-        return weightedOffensiveMoves;
-    }
-
-    public List<Fighter> GetWeightedListOfMedicalTargets(Fight fight, Fighter fighter, MedicalMove medicalMove, List<Fighter> targets)
+    public List<Fighter> GetWeightedListOfMedicalTargets(Fight fight, Fighter fighter, Move medicalMove, List<Fighter> targets)
     {
         List<Fighter> weightedTargets = new List<Fighter>();
 
@@ -1685,7 +1660,7 @@ public class AI : ScriptableObject
         return weightedTargets;
     }
 
-    public List<Fighter> GetWeightedListOfOffensiveTargets(Fight fight, Fighter fighter, OffensiveMove offensiveMove, List<Fighter> targets)
+    public List<Fighter> GetWeightedListOfOffensiveTargets(Fight fight, Fighter fighter, Move offensiveMove, List<Fighter> targets)
     {
         List<Fighter> weightedTargets = new List<Fighter>();
 
@@ -1701,41 +1676,5 @@ public class AI : ScriptableObject
         }
 
         return weightedTargets;
-    }
-
-    public List<SubMove> GetWeightedListOfSubMoves(Fight fight, Fighter fighter, List<SubMove> subMoves)
-    {
-        List<SubMove> weightedSubMoves = new List<SubMove>();
-
-        foreach (SubMove subMove in subMoves)
-        {
-            int weight = GetWeightForMove(fight, fighter, subMove, Enums.MoveType.Substitution);
-            weightedSubMoves.AddRange(Enumerable.Repeat(subMove, weight));
-        }
-
-        if (weightedSubMoves.Count < 1)
-        {
-            Debug.LogError("Error! Empty weighted medical move list in AI.GetWeightedListOfMedicalMoves!");
-        }
-
-        return weightedSubMoves;
-    }
-
-    public List<SummonMove> GetWeightedListOfSummonMoves(Fight fight, Fighter fighter, List<SummonMove> summonMoves)
-    {
-        List<SummonMove> weightedSummonMoves = new List<SummonMove>();
-
-        foreach (SummonMove summonMove in summonMoves)
-        {
-            int weight = GetWeightForMove(fight, fighter, summonMove, Enums.MoveType.Summon);
-            weightedSummonMoves.AddRange(Enumerable.Repeat(summonMove, weight));
-        }
-
-        if (weightedSummonMoves.Count < 1)
-        {
-            Debug.LogError("Error! Empty weighted summon move list in AI.GetWeightedListOfSummonMoves!");
-        }
-
-        return weightedSummonMoves;
     }
 }

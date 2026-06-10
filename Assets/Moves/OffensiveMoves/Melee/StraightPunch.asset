@@ -9,27 +9,41 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 312e6fcea2df64e4abd8afb2db19cb7d, type: 3}
+  m_Script: {fileID: 11500000, guid: f22992ffeb079114cabf4a66b094a39c, type: 3}
   m_Name: StraightPunch
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier: Assembly-CSharp::Move
   Name: Straight Punch
-  Level: 1
-  Chakra: 1
-  RoundsToCast: 1
+  Level: 2
+  Mana: 0
+  RoundsToCast: 0
   UsesPerFight: 0
-  SealSpeed: 10
-  ID: 1
-  TargetRequiresStatuses: 0
+  CastingSpeed: 10
+  ID: 0
   Occular: 0
+  UseMeleSkill: 0
   RequiredTargetStatuses: 
   TargetType: 0
   MoveType: 0
   Natures: 
   MoveAnimations: {fileID: 0}
-  Damage: 9
+  Number: 0
+  CloneStrength: 0
+  UsesPerRound: 0
+  MaxLevelAvoided: 0
+  WorksAgaintsMelee: 0
+  WorksAgainstRanged: 0
+  Absorbing: 0
+  OccularSuccess: 0
+  TouchFail: 0
+  HealthAmount: 0
+  ManaRestoreAmount: 0
+  HealType: 0
+  Damage: 10
   Duration: 0
   Accuracy: 0
   Absorbed: 0
   TouchSuccess: 0
   DamageType: 0
   StatusTypes: 
+  BonusData: {fileID: 0}
+  Summons: []

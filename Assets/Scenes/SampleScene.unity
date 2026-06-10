@@ -390,15 +390,9 @@ MonoBehaviour:
   Weapon: {fileID: 0}
   Natures: 
   Traits: 
-  OffensiveMoves:
+  Moves:
   - {fileID: 11400000, guid: d5c261949d4dbe740a33d1e39b3ff7e8, type: 2}
   - {fileID: 11400000, guid: 3a9d010988cade8489beef962a949ca9, type: 2}
-  DefensiveMoves: []
-  CloneMoves: []
-  MedicalMoves: []
-  PowerUpMoves: []
-  SubMoves: []
-  SummonMoves: []
 --- !u!4 &1512450207
 Transform:
   m_ObjectHideFlags: 0
@@ -447,7 +441,7 @@ MonoBehaviour:
   Spellcraft: 0
   Melee: 9
   Psychic: 0
-  Speed: 6
+  Speed: 5
   Strength: 8
   Intelligence: 3
   DamageResistance: 0.15
@@ -464,16 +458,9 @@ MonoBehaviour:
   Weapon: {fileID: 0}
   Natures: 
   Traits: 
-  OffensiveMoves:
-  - {fileID: 11400000, guid: 2f66cb10b6a2ce9479d11d6622188c78, type: 2}
+  Moves:
+  - {fileID: 11400000, guid: 5e2a6cc19aa20486d9724a52e244134d, type: 2}
   - {fileID: 11400000, guid: d4524c7d97981474f90d29d5ec441f1e, type: 2}
-  DefensiveMoves:
-  - {fileID: 11400000, guid: bbd7e58b208d1bf4d8b396e2191ee439, type: 2}
-  CloneMoves: []
-  MedicalMoves: []
-  PowerUpMoves: []
-  SubMoves: []
-  SummonMoves: []
 --- !u!4 &1789790782
 Transform:
   m_ObjectHideFlags: 0

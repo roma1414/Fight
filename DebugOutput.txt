@@ -2,75 +2,43 @@ Round 1
 
 Knight  vs  Witch
 
-Knight   Overall: 7.29  Health: 100  Mana: 80  Health Co = 1
+Knight   Overall: 7.05  Health: 100  Mana: 80  Health Co = 1
 
 Witch   Overall: 8.01  Health: 100  Mana: 180  Health Co = 1
 
 ###################################################################
 ###################################################################
 
-Knight uses Slash against Witch!
-It hits Witch and does 42 damage!
+Knight uses Straight Punch against Witch!
+It hits Witch and does 18 damage!
 Witch uses Fireball against Knight!
-Knight blocks it with Knight Shield!
+It hits Knight and does 58 damage!
 
 
 Round 2
 
 Knight  vs  Witch
 
-Knight   Overall: 7.29  Health: 100  Mana: 80  Health Co = 1
+Knight   Overall: 4.71272  Health: 42  Mana: 80  Health Co = 0.648
 
-Witch   Overall: 7.63912  Health: 58  Mana: 140  Health Co = 0.8186666
-
-###################################################################
-###################################################################
-
-Knight uses Straight Punch against Witch!
-It hits Witch and does 15 damage!
-Witch uses Magic Missile against Knight!
-Knight blocks it with Knight Shield!
-
-
-Round 3
-
-Knight  vs  Witch
-
-Knight   Overall: 7.29  Health: 100  Mana: 80  Health Co = 1
-
-Witch   Overall: 7.53952  Health: 43  Mana: 130  Health Co = 0.6586667
-
-###################################################################
-###################################################################
-
-Knight uses Slash against Witch!
-It hits Witch and does 34 damage!
-Witch uses Magic Missile against Knight!
-Knight blocks it with Knight Shield!
-
-
-Round 4
-
-Knight  vs  Witch
-
-Knight   Overall: 7.29  Health: 100  Mana: 80  Health Co = 1
-
-Witch   Overall: 7.42776  Health: 9  Mana: 120  Health Co = 0.296
+Witch   Overall: 7.785  Health: 82  Mana: 155  Health Co = 1
 
 ###################################################################
 ###################################################################
 
 Knight uses Straight Punch against Witch!
-It hits Witch and does 13 damage!
-Witch is defeated!
+It hits Witch and does 14 damage!
+Witch uses Fireball against Knight!
+It hits Knight and does 53 damage!
+Knight is defeated!
 
 ###################################################################
 ###################################################################
 
 The fight is over!
-Team 1 wins!
-Number of rounds: 4
+Team 2 wins!
+Number of rounds: 2
 Surviving fighters:
 
-Knight  Health: 100  Mana: 80
+Witch  Health: 68  Mana: 130
 

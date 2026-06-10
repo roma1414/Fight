@@ -65,6 +65,7 @@ public class Fight : MonoBehaviour
                 fighter.RemoveHealth(healthBonus);
                 mWriter.WriteLine(fighter.GetName() + " is damaged " + healthBonus + " health!");
                 //mWriter.WriteLine(fighter.GetName() + " is damaged " + Mathf.Abs(attributeBonus.GetAmount()) + " health by " + powerUp.GetPowerUpMove().GetName() + "!");
+                RemoveDefeatedFighters();
             }
         }
     }
@@ -110,7 +111,7 @@ public class Fight : MonoBehaviour
         }
     }
 
-    public int AttackDamage(Fighter target, List<Fighter> attackers, List<OffensiveMove> offensiveMoves, List<float> randomAdds)
+    public int AttackDamage(Fighter target, List<Fighter> attackers, List<Move> offensiveMoves, List<float> randomAdds)
     {
         float totalDamage = 0.0f;
         int attackersCount = attackers.Count;
@@ -118,7 +119,7 @@ public class Fight : MonoBehaviour
         for (int index = 0; index < attackersCount; ++index) // Get the damage from each individual move.
         {
             Fighter attacker = attackers[index];
-            OffensiveMove offensiveMove = offensiveMoves[index];
+            Move offensiveMove = offensiveMoves[index];
             float randomAdd = randomAdds[index];
             float damage = 0.0f;
 
@@ -172,7 +173,7 @@ public class Fight : MonoBehaviour
     }
 
     // AttackerSpeed applies to Melee/NinTai attacks. This differs from MoveEvent.GetMeleeMoveSpeed in that it includes subBonus and accuracy.
-    public float AttackerSpeed(Fighter attacker, OffensiveMove offensiveMove, float randomAdd, float subBonus)
+    public float AttackerSpeed(Fighter attacker, Move offensiveMove, float randomAdd, float subBonus)
     {
         return attacker.GetSpeed() * attacker.GetHealthCo() + subBonus + offensiveMove.GetAccuracy() + randomAdd;
     }
@@ -190,9 +191,9 @@ public class Fight : MonoBehaviour
         for (int index = 0; index < NumberOfAttackers; index++)
         {
             Fighter fighter = MoveEvent.GetFighters()[index];
-            OffensiveMove jutsu = MoveEvent.GetOffensiveMoves()[index];
+            Move move = MoveEvent.GetMoves()[index];
             float randomAdd = MoveEvent.GetRandomAdds()[index];
-            float speed = AttackerSpeed(fighter, jutsu, randomAdd, subBonus);
+            float speed = AttackerSpeed(fighter, move, randomAdd, subBonus);
             speeds.Add(speed);
         }
 
@@ -215,7 +216,7 @@ public class Fight : MonoBehaviour
         return SumList(strengths);
     }
 
-    public float AttackerMeleeSkill(Fighter attacker, OffensiveMove offensiveMove, float randomAdd, float subBonus)
+    public float AttackerMeleeSkill(Fighter attacker, Move offensiveMove, float randomAdd, float subBonus)
     {
         float attackerSkill = ((1.0f / 3.0f) * attacker.GetMelee() + (1.0f / 3.0f) * attacker.GetStrength()) * attacker.GetHealthCo() + (1.0f / 3.0f) * offensiveMove.GetLevel() + 0.5f * subBonus + randomAdd;
 
@@ -227,7 +228,7 @@ public class Fight : MonoBehaviour
         return attackerSkill;
     }
 
-    public float AttackersMeleeSkill(List<Fighter> attackers, List<OffensiveMove> offensiveMoves, List<float> randomAdds, float subBonus)
+    public float AttackersMeleeSkill(List<Fighter> attackers, List<Move> offensiveMoves, List<float> randomAdds, float subBonus)
     {
         List<float> skills = new List<float>();
         int NumberOfAttackers = attackers.Count;
@@ -239,7 +240,7 @@ public class Fight : MonoBehaviour
         for (int index = 0; index < NumberOfAttackers; index++)
         {
             Fighter fighter = attackers[index];
-            OffensiveMove jutsu = offensiveMoves[index];
+            Move jutsu = offensiveMoves[index];
             float randomAdd = randomAdds[index];
             float attackerSkill = AttackerMeleeSkill(fighter, jutsu, randomAdd, subBonus);
             skills.Add(attackerSkill);
@@ -394,12 +395,9 @@ public class Fight : MonoBehaviour
 
             if (Fighters.Contains(fighter) == true && fighter.GetAI().CheckIfCanPerformMove(this, fighter, move)) // Fighter is alive and move has targets.
             {
-                Enums.TargetType targetType = moveEvent.GetTargetType();
-
-                if (targetType == Enums.TargetType.OneEnemy && fighter.CheckCombineAttacks() == true && moveEvent.GetOffensiveMoves().Count > 0)
+                if (moveEvent.GetTargetType() == Enums.TargetType.OneEnemy && fighter.CheckCombineAttacks() && move.CheckOffensive())
                 {
-                    OffensiveMove offensiveMove = moveEvent.GetOffensiveMoves()[0];
-                    Enums.DamageType damageType = offensiveMove.GetDamageType();
+                    Enums.DamageType damageType = move.GetDamageType();
 
                     if (damageType == Enums.DamageType.Health)      // Currently other damage types cannot be combined into one attack.
                     {
@@ -501,7 +499,6 @@ public class Fight : MonoBehaviour
         if (meleeMoveEvents.Count > 0)
         {
             MoveEvent meleeMoveEvent = new MoveEvent();
-            //meleeMoveEvent.SetMoveType(meleeMoveEvents[0].GetMoveType());
             meleeMoveEvent.AddTarget(meleeMoveEvents[0].GetTargets()[0]);
             meleeMoveEvent.SetTargetType(meleeMoveEvents[0].GetTargetType());
             meleeMoveEvent.SetEffectiveMoveEventCastingSpeed(minMoveEventCastingSpeed);
@@ -509,7 +506,7 @@ public class Fight : MonoBehaviour
 
             foreach (MoveEvent moveEvent in meleeMoveEvents)
             {
-                meleeMoveEvent.AddMove(moveEvent.GetOffensiveMoves()[0]);
+                meleeMoveEvent.AddMove(moveEvent.GetMoves()[0]);
                 meleeMoveEvent.AddFighter(moveEvent.GetFighters()[0]);
                 meleeMoveEvent.AddRandomAdd(moveEvent.GetRandomAdds()[0]);
             }
@@ -526,7 +523,7 @@ public class Fight : MonoBehaviour
 
             foreach (MoveEvent moveEvent in projectileMoveEvents)
             {
-                projectileMoveEvent.AddMove(moveEvent.GetOffensiveMoves()[0]);
+                projectileMoveEvent.AddMove(moveEvent.GetMoves()[0]);
                 projectileMoveEvent.AddFighter(moveEvent.GetFighters()[0]);
                 projectileMoveEvent.AddRandomAdd(moveEvent.GetRandomAdds()[0]);
             }
@@ -535,7 +532,7 @@ public class Fight : MonoBehaviour
         if (psychicMoveEvents.Count > 0)
         {
             // Sort in ascending order. Psychic moves will be attempted in ascending order of power.
-            psychicMoveEvents.Sort((left, right) => MovePower(left.GetFighters()[0], left.GetOffensiveMoves()[0], left.GetRandomAdds()[0]).CompareTo(MovePower(right.GetFighters()[0], right.GetOffensiveMoves()[0], right.GetRandomAdds()[0])));
+            psychicMoveEvents.Sort((left, right) => MovePower(left.GetFighters()[0], left.GetMoves()[0], left.GetRandomAdds()[0]).CompareTo(MovePower(right.GetFighters()[0], right.GetMoves()[0], right.GetRandomAdds()[0])));
 
             foreach (MoveEvent moveEvent in psychicMoveEvents) // Psychic moves are added separately and not combined into one MoveEvent.
             {
@@ -546,7 +543,7 @@ public class Fight : MonoBehaviour
                 psychicMoveEvent.SetEffectiveMoveEventCastingSpeed(minMoveEventCastingSpeed);
                 psychicMoveEvent.SetMoveType(Enums.MoveType.Psychic);
 
-                psychicMoveEvent.AddMove(moveEvent.GetOffensiveMoves()[0]);
+                psychicMoveEvent.AddMove(moveEvent.GetMoves()[0]);
                 psychicMoveEvent.AddFighter(moveEvent.GetFighters()[0]);
                 psychicMoveEvent.AddRandomAdd(moveEvent.GetRandomAdds()[0]);
 
@@ -642,13 +639,10 @@ public class Fight : MonoBehaviour
         {
             string fighterPrintString = "";
 
-            List<PowerUpMove> theirPowerUpMoves = new List<PowerUpMove>();
+            List<Move> theirPowerUpMoves = new List<Move>();
             foreach (PowerUp powerUp in Team1[i].GetPowerUps())
             {
-                if (powerUp.GetFighter() == Team1[i])
-                {
-                    theirPowerUpMoves.Add(powerUp.GetPowerUpMove());
-                }
+                theirPowerUpMoves.Add(powerUp.GetPowerUpMove());
             }
             fighterPrintString += Team1[i].GetName() + "   Overall: " + Team1[i].GetOverallRating() + "  Health: " + Team1[i].GetHealth() + "  Mana: " + Team1[i].GetMana() + "  Health Co = " + Team1[i].GetHealthCo();
             if (Team1[i].GetStatuses().Count > 0)
@@ -675,13 +669,10 @@ public class Fight : MonoBehaviour
         {
             string fighterPrintString = "";
 
-            List<PowerUpMove> theirPowerUpMoves = new List<PowerUpMove>();
+            List<Move> theirPowerUpMoves = new List<Move>();
             foreach (PowerUp powerUp in Team2[i].GetPowerUps())
             {
-                if (powerUp.GetFighter() == Team2[i])
-                {
-                    theirPowerUpMoves.Add(powerUp.GetPowerUpMove());
-                }
+                theirPowerUpMoves.Add(powerUp.GetPowerUpMove());
             }
             fighterPrintString += Team2[i].GetName() + "   Overall: " + Team2[i].GetOverallRating() + "  Health: " + Team2[i].GetHealth() + "  Mana: " + Team2[i].GetMana() + "  Health Co = " + Team2[i].GetHealthCo();
             if (Team2[i].GetStatuses().Count > 0)
@@ -714,13 +705,10 @@ public class Fight : MonoBehaviour
             {
                 string fighterPrintString = "";
 
-                List<PowerUpMove> theirPowerUpMoves = new List<PowerUpMove>();
+                List<Move> theirPowerUpMoves = new List<Move>();
                 foreach (PowerUp powerUp in Team3[i].GetPowerUps())
                 {
-                    if (powerUp.GetFighter() == Team3[i])
-                    {
-                        theirPowerUpMoves.Add(powerUp.GetPowerUpMove());
-                    }
+                    theirPowerUpMoves.Add(powerUp.GetPowerUpMove());
                 }
                 fighterPrintString += Team3[i].GetName() + "   Overall: " + Team3[i].GetOverallRating() + "  Health: " + Team3[i].GetHealth() + "  Mana: " + Team3[i].GetMana() + "  Health Co = " + Team3[i].GetHealthCo();
                 if (Team3[i].GetStatuses().Count > 0)
@@ -768,7 +756,7 @@ public class Fight : MonoBehaviour
                 }
             case Enums.TargetType.TeamMembersWithStatuses:
                 {
-                    List<Enums.StatusType> requiredStatuses = moveEvent.GetMedicalMoves()[0].GetRequiredTargetStatusesList();
+                    List<Enums.StatusType> requiredStatuses = moveEvent.GetMoves()[0].GetRequiredTargetStatusesList();
                     List<Fighter> teamMembersWithStatuses = fighter.GetAI().GetTeammatesWithStatuses(this, fighter, requiredStatuses);
 
                     if (fighter.CheckStatuses(requiredStatuses) == true)
@@ -784,7 +772,7 @@ public class Fight : MonoBehaviour
                 break;
         }
 
-        MedicalMove medicalMove = moveEvent.GetMedicalMoves()[0];
+        Move medicalMove = moveEvent.GetMoves()[0];
         float movePower = MoveEventPower(moveEvent);
         float movePowerCo = movePower / medicalMove.GetLevel();
         Enums.HealType healType = medicalMove.GetHealType();
@@ -907,7 +895,7 @@ public class Fight : MonoBehaviour
         }
     }
 
-    public void ExecuteOffensiveMoveAgainstTarget(Enums.MoveType moveType, float movePower, List<Enums.Nature> moveNatures, List<OffensiveMove> offensiveMoves, List<float> attackerRandomAdds, List<Fighter> attackers, Fighter target)
+    public void ExecuteOffensiveMoveAgainstTarget(Enums.MoveType moveType, float movePower, List<Enums.Nature> moveNatures, List<Move> offensiveMoves, List<float> attackerRandomAdds, List<Fighter> attackers, Fighter target)
     {
         Hit hit = new Hit();
         float targetRandomAdd = RandomAdd();    // Each target gets a new RandomAdd each time they are attacked.
@@ -1006,7 +994,7 @@ public class Fight : MonoBehaviour
             case Enums.HitResult.Avoided:
                 {
                     Fighter defender = hit.GetDefenders()[0];                   // Can only be one defender for an Avoid move.
-                    DefensiveMove defensiveMove = hit.GetDefensiveMoves()[0];
+                    Move defensiveMove = hit.GetDefensiveMoves()[0];
                     if (hit.CheckWasProtected() == true)
                     {
                         resultString += "It's avoided with " + defender.GetName() + "'s " + defensiveMove.GetName() + "!";
@@ -1022,7 +1010,7 @@ public class Fight : MonoBehaviour
             case Enums.HitResult.PartiallyAvoided:
                 {
                     Fighter defender = hit.GetDefenders()[0];                   // Can only be one defender for an Avoid move.
-                    DefensiveMove defensiveMove = hit.GetDefensiveMoves()[0];
+                    Move defensiveMove = hit.GetDefensiveMoves()[0];
                     if (hit.CheckWasProtected() == true)
                     {
                         resultString += "It's partially avoided with " + defender.GetName() + "'s " + defensiveMove.GetName() + Util.DamageString(damage, damageType, target, attackers, false);
@@ -1100,7 +1088,7 @@ public class Fight : MonoBehaviour
             case Enums.HitResult.Substitution:
                 {
                     Substitution substitution = target.GetSubstition();
-                    SubMove subMove = substitution.GetSubMove();
+                    Move subMove = substitution.GetSubMove();
                     Fighter subFighter = substitution.GetFighter();
                     float subMovePower = substitution.GetPower();
                     bool subMoveDoesDamage = subMove.GetDamage() > 0;
@@ -1197,7 +1185,7 @@ public class Fight : MonoBehaviour
                     int offensiveMovesCount = offensiveMoves.Count;
                     for (int index = 0; index < offensiveMovesCount; ++index)
                     {
-                        OffensiveMove offensiveMove = offensiveMoves[index];
+                        Move offensiveMove = offensiveMoves[index];
                         float individualOffensiveMovePower = MovePower(attackers[index], offensiveMove, attackerRandomAdds[index]);
                         int duration = offensiveMove.GetDuration();
                         Enums.StatusType[] statusesToApply = offensiveMove.GetStatusTypes();
@@ -1255,7 +1243,7 @@ public class Fight : MonoBehaviour
         float movePower = MoveEventPower(moveEvent);
         List<Enums.Nature> moveNatures = GetFinalNaturesInMoveEvent(moveEvent);
         List<Fighter> fighters = moveEvent.GetFighters();
-        List<OffensiveMove> offensiveMoves = moveEvent.GetOffensiveMoves();
+        List<Move> offensiveMoves = moveEvent.GetMoves();
         List<float> attackerRandomAdds = moveEvent.GetRandomAdds();
         List<Fighter> targets = moveEvent.GetTargets();
 
@@ -1269,7 +1257,7 @@ public class Fight : MonoBehaviour
         for (int index = 0; index < fightersCount; ++index)
         {
             Fighter fighter = fighters[index];
-            OffensiveMove offensiveMove = offensiveMoves[index];
+            Move offensiveMove = offensiveMoves[index];
 
             fighter.RemoveMana(offensiveMove.GetMana());
             fighter.RemoveSubstitution();
@@ -1279,7 +1267,7 @@ public class Fight : MonoBehaviour
 
     public void ExecutePowerUpMoveEvent(MoveEvent moveEvent)
     {
-        PowerUpMove powerUpMove = moveEvent.GetPowerUpMoves()[0];   // All fighters in MoveEvent should be performing the same PowerUpMove.
+        Move powerUpMove = moveEvent.GetMoves()[0];   // All fighters in MoveEvent should be performing the same PowerUpMove.
         int powerUpMoveManaCost = powerUpMove.GetMana();
         int endingRoundNumber = RoundNumber + powerUpMove.GetDuration();
         BonusData bonusData = powerUpMove.GetBonusData();
@@ -1370,7 +1358,7 @@ public class Fight : MonoBehaviour
         Fighter fighter = moveEvent.GetFighters()[0];
         float randomAdd = moveEvent.GetRandomAdds()[0];
 
-        SubMove subMove = moveEvent.GetSubMoves()[0];
+        Move subMove = moveEvent.GetMoves()[0];
         List<Fighter> enemies = AI.GetEnemies(this, fighter);
         List<Fighter> enemiesTricked = GetEnemiesTrickedBySubstitution(fighter, subMove, enemies);
         float movePower = MovePower(fighter, subMove, randomAdd);
@@ -1393,13 +1381,13 @@ public class Fight : MonoBehaviour
         // Need to make instances of the summoned fighters.
     }*/
 
-    public AttackBools GetAttackBoolsForOffensiveMoves(List<OffensiveMove> offensiveMoves)
+    public AttackBools GetAttackBoolsForOffensiveMoves(List<Move> offensiveMoves)
     {
         bool touchSuccess = false;
         bool absorbed = true;
         bool occular = false;
 
-        foreach (OffensiveMove offensiveMove in offensiveMoves)
+        foreach (Move offensiveMove in offensiveMoves)
         {
             if (offensiveMove.CheckTouchSuccess() == true)
             {
@@ -1425,7 +1413,7 @@ public class Fight : MonoBehaviour
         return attackBools;
     }
 
-    public List<Fighter> GetEnemiesTrickedBySubstitution(Fighter fighter, SubMove subMove, List<Fighter> enemies)
+    public List<Fighter> GetEnemiesTrickedBySubstitution(Fighter fighter, Move subMove, List<Fighter> enemies)
     {
         List<Fighter> enemiesTricked = new List<Fighter>();
         float subSkill = .5f * fighter.GetIntelligence() + .25f * fighter.GetSpellcraft() + .25f * subMove.GetLevel();
@@ -1458,7 +1446,7 @@ public class Fight : MonoBehaviour
         return enemiesTricked;
     }
 
-    public float GetDefensiveMovePowerChangeFromNatures(List<Enums.Nature> attackNatures, Fighter defender, DefensiveMove defensiveMove)
+    public float GetDefensiveMovePowerChangeFromNatures(List<Enums.Nature> attackNatures, Fighter defender, Move defensiveMove)
     {
         float powerChange = 0.0f;
         List<Enums.Nature> defensiveMoveNatures = defensiveMove.GetNaturesList();
@@ -1536,7 +1524,7 @@ public class Fight : MonoBehaviour
         return powerChange;
     }
 
-    public Hit GetDefensiveMovesHit(Enums.MoveType moveType, float attackPower, List<Enums.Nature> attackNatures, List<OffensiveMove> offensiveMoves, List<float> attackerRandomAdds, List<Fighter> attackers, Fighter target, float targetRandomAdd, List<Fighter> protectors, Dictionary<Fighter, float> protectorRandomAddMap, float subBonus)
+    public Hit GetDefensiveMovesHit(Enums.MoveType moveType, float attackPower, List<Enums.Nature> attackNatures, List<Move> offensiveMoves, List<float> attackerRandomAdds, List<Fighter> attackers, Fighter target, float targetRandomAdd, List<Fighter> protectors, Dictionary<Fighter, float> protectorRandomAddMap, float subBonus)
     {
         Hit defensiveMovesHit = new Hit(); // Returned at end of function.
 
@@ -1546,7 +1534,7 @@ public class Fight : MonoBehaviour
         for (int index = 0; index < offensiveMovesCount; ++index)
         {
             Fighter attacker = attackers[index];
-            OffensiveMove offensiveMove = offensiveMoves[index];
+            Move offensiveMove = offensiveMoves[index];
             float randomAdd = attackerRandomAdds[index];
             float moveCastingSpeed = attacker.GetCastingSpeed(offensiveMove, randomAdd);
 
@@ -1580,9 +1568,9 @@ public class Fight : MonoBehaviour
             if (protector.CheckIfAlive() == true && protector.CheckIfCanMove() == true) // Don't include protectors who cannot move.
             {
                 float protectorRandomAdd = protectorRandomAddMap[protector];
-                List<DefensiveMove> defensiveMoves = protector.GetDefensiveMoves();
+                List<Move> defensiveMoves = protector.GetMoves(Enums.MoveType.Defensive);
 
-                foreach (DefensiveMove defensiveMove in defensiveMoves)
+                foreach (Move defensiveMove in defensiveMoves)
                 {
                     bool defenseTouchFail = defensiveMove.CheckTouchFail();
                     bool defendsOccular = defensiveMove.CheckOccularSuccess();
@@ -1638,7 +1626,7 @@ public class Fight : MonoBehaviour
         {
             //protectorBlockAction.Get
             List<Fighter> listContainingProtector = new List<Fighter>() { protectorBlockAction.GetDefender() };
-            List<DefensiveMove> listContainingDefensiveMove = new List<DefensiveMove>() { protectorBlockAction.GetDefensiveMove() };
+            List<Move> listContainingDefensiveMove = new List<Move>() { protectorBlockAction.GetDefensiveMove() };
             bool wasEasy = (protectorBlockAction.GetPower() - attackPower) >= EASY_BLOCK_POWER_DIFF;
 
             defensiveMovesHit.SetDamage(0);
@@ -1662,7 +1650,7 @@ public class Fight : MonoBehaviour
 
             List<float> defensiveMovePowers = new List<float>();
             List<Fighter> defenders = new List<Fighter>();
-            List<DefensiveMove> defendersDefensiveMoves = new List<DefensiveMove>();
+            List<Move> defendersDefensiveMoves = new List<Move>();
             float defensiveMovesPowerSum = 0.0f;
             bool defendersCanBlock = false;
 
@@ -1688,7 +1676,7 @@ public class Fight : MonoBehaviour
 
             if (defendersCanBlock == false && targetCanMove == true) // Add the target to the defense along with protectors.
             {
-                foreach (DefensiveMove defensiveMove in target.GetDefensiveMoves())
+                foreach (Move defensiveMove in target.GetMoves(Enums.MoveType.Defensive))
                 {
                     bool defenseTouchFail = defensiveMove.CheckTouchFail();
                     bool defendsOccular = defensiveMove.CheckOccularSuccess();
@@ -1802,7 +1790,7 @@ public class Fight : MonoBehaviour
         return defensiveMovesHit;
     }
 
-    public Hit GetDeflectHitMelee(Enums.MoveType moveType, float attackPower, List<Enums.Nature> moveNatures, List<OffensiveMove> offensiveMoves, List<float> attackerRandomAdds, List<Fighter> attackers, Fighter target, float targetRandomAdd, List<Fighter> protectors, Dictionary<Fighter, float> protectorRandomAddMap, float subBonus)
+    public Hit GetDeflectHitMelee(Enums.MoveType moveType, float attackPower, List<Enums.Nature> moveNatures, List<Move> offensiveMoves, List<float> attackerRandomAdds, List<Fighter> attackers, Fighter target, float targetRandomAdd, List<Fighter> protectors, Dictionary<Fighter, float> protectorRandomAddMap, float subBonus)
     {
         Hit deflectHit = new Hit(); // Returned at end of function.
 
@@ -2013,16 +2001,16 @@ public class Fight : MonoBehaviour
     }
 
 
-    public Hit GetHitPsychic(Enums.MoveType moveType, float attackPower, List<Enums.Nature> attackNatures, List<OffensiveMove> offensiveMoves, List<float> attackerRandomAdds, List<Fighter> attackers, Fighter target, float targetRandomAdd, List<Fighter> protectors)
+    public Hit GetHitPsychic(Enums.MoveType moveType, float attackPower, List<Enums.Nature> attackNatures, List<Move> offensiveMoves, List<float> attackerRandomAdds, List<Fighter> attackers, Fighter target, float targetRandomAdd, List<Fighter> protectors)
     {
         Hit psychicHit = new Hit(); // Returned at end of function.
         psychicHit.SetDefenders(new List<Fighter>());
-        psychicHit.SetDefensiveMoves(new List<DefensiveMove>());
+        psychicHit.SetDefensiveMoves(new List<Move>());
         psychicHit.SetDamage(0);
         psychicHit.SetWasEasy(false);
         psychicHit.SetWasProtected(false);
 
-        OffensiveMove offensiveMove = offensiveMoves[0]; // Psychic moves are currently all independent and not combined.
+        Move offensiveMove = offensiveMoves[0]; // Psychic moves are currently all independent and not combined.
         int fullDamage = AttackDamage(target, attackers, offensiveMoves, attackerRandomAdds);
         float targetIntelligence = target.GetIntelligence();
         int randomNum = Random.Range(0, 100);
@@ -2083,7 +2071,7 @@ public class Fight : MonoBehaviour
         return psychicHit;
     }
 
-    public Hit GetHitMelee(Enums.MoveType moveType, float attackPower, List<Enums.Nature> attackNatures, List<OffensiveMove> offensiveMoves, List<float> attackerRandomAdds, List<Fighter> attackers, Fighter target, float targetRandomAdd, List<Fighter> protectors, Dictionary<Fighter, float> protectorRandomAddMap)
+    public Hit GetHitMelee(Enums.MoveType moveType, float attackPower, List<Enums.Nature> attackNatures, List<Move> offensiveMoves, List<float> attackerRandomAdds, List<Fighter> attackers, Fighter target, float targetRandomAdd, List<Fighter> protectors, Dictionary<Fighter, float> protectorRandomAddMap)
     {
         Hit meleeHit = new Hit(); // Returned at end of function.
 
@@ -2124,7 +2112,7 @@ public class Fight : MonoBehaviour
             for (int index = 0; index < attackersCount; ++index)
             {
                 Fighter attacker = attackers[index];
-                OffensiveMove offensiveMove = offensiveMoves[index];
+                Move offensiveMove = offensiveMoves[index];
                 float randomAdd = attackerRandomAdds[index];
                 float castingSpeed = attacker.GetCastingSpeed(offensiveMove, randomAdd);
 
@@ -2183,7 +2171,7 @@ public class Fight : MonoBehaviour
         return meleeHit;
     }
 
-    public Hit GetHitRanged(Enums.MoveType moveType, float attackPower, List<Enums.Nature> attackNatures, List<OffensiveMove> offensiveMoves, List<float> attackerRandomAdds, List<Fighter> attackers, Fighter target, float targetRandomAdd, List<Fighter> protectors, Dictionary<Fighter, float> protectorRandomAddMap)
+    public Hit GetHitRanged(Enums.MoveType moveType, float attackPower, List<Enums.Nature> attackNatures, List<Move> offensiveMoves, List<float> attackerRandomAdds, List<Fighter> attackers, Fighter target, float targetRandomAdd, List<Fighter> protectors, Dictionary<Fighter, float> protectorRandomAddMap)
     {
         Hit rangedHit = new Hit(); // Returned at end of function.
 
@@ -2222,7 +2210,7 @@ public class Fight : MonoBehaviour
             for (int index = 0; index < attackersCount; ++index)
             {
                 Fighter attacker = attackers[index];
-                OffensiveMove offensiveMove = offensiveMoves[index];
+                Move offensiveMove = offensiveMoves[index];
                 float randomAdd = attackerRandomAdds[index];
                 float accuracy = MoveAccuracyRanged(attacker, offensiveMove, subBonus, randomAdd);
 
@@ -2343,34 +2331,7 @@ public class Fight : MonoBehaviour
             Move move = null;
 
             Enums.MoveType moveType = originalMoveEvent.GetMoveType();
-            switch (moveType)
-            {
-                case Enums.MoveType.Melee:
-                case Enums.MoveType.NinTai:
-                case Enums.MoveType.Spell:
-                case Enums.MoveType.Offensive:
-                case Enums.MoveType.Projectile:
-                    move = originalMoveEvent.GetOffensiveMoves()[index];
-                    break;
-                case Enums.MoveType.Medical:
-                    move = originalMoveEvent.GetMedicalMoves()[index];
-                    break;
-                case Enums.MoveType.PowerUp:
-                    move = originalMoveEvent.GetPowerUpMoves()[index];
-                    break;
-                case Enums.MoveType.Summon:
-                    move = originalMoveEvent.GetSummonMoves()[index];
-                    break;
-                case Enums.MoveType.Substitution:
-                    move = originalMoveEvent.GetSubMoves()[index];
-                    break;
-                case Enums.MoveType.Clone:
-                    move = originalMoveEvent.GetCloneMoves()[index];
-                    break;
-                default:
-                    Debug.LogError("Error! Unexpected MoveType [" + moveType + "] in Fight.GetMoveEventWithActualAttackersAndTargets!");
-                    break;
-            }
+            move = originalMoveEvent.GetMoves()[index];
 
             if (fighter.CheckIfAlive() == true && fighter.GetAI().CheckIfCanPerformMove(this, fighter, move) == true)
             {
@@ -2381,35 +2342,7 @@ public class Fight : MonoBehaviour
                 {
                     moveEvent.AddFighter(fighter);
                     moveEvent.AddRandomAdd(originalMoveEvent.GetRandomAdds()[index]);
-
-                    switch (moveType)
-                    {
-                        case Enums.MoveType.Melee:
-                        case Enums.MoveType.NinTai:
-                        case Enums.MoveType.Spell:
-                        case Enums.MoveType.Offensive:
-                        case Enums.MoveType.Projectile:
-                            moveEvent.AddMove(originalMoveEvent.GetOffensiveMoves()[index]);
-                            break;
-                        case Enums.MoveType.Medical:
-                            moveEvent.AddMove(originalMoveEvent.GetMedicalMoves()[index]);
-                            break;
-                        case Enums.MoveType.PowerUp:
-                            moveEvent.AddMove(originalMoveEvent.GetPowerUpMoves()[index]);
-                            break;
-                        case Enums.MoveType.Summon:
-                            moveEvent.AddMove(originalMoveEvent.GetSummonMoves()[index]);
-                            break;
-                        case Enums.MoveType.Substitution:
-                            moveEvent.AddMove(originalMoveEvent.GetSubMoves()[index]);
-                            break;
-                        case Enums.MoveType.Clone:
-                            moveEvent.AddMove(originalMoveEvent.GetCloneMoves()[index]);
-                            break;
-                        default:
-                            Debug.LogError("Error! Unexpected MoveType [" + moveType + "] in MoveEvent.GetMoveEventWithActualAttackersAndTargets!");
-                            break;
-                    }
+                    moveEvent.AddMove(originalMoveEvent.GetMoves()[index]);
                 }
             }
         }
@@ -2566,7 +2499,7 @@ public class Fight : MonoBehaviour
     }
 
     // Spells/Projectiles. Melee are handled differently.
-    public float MoveAccuracyRanged(Fighter fighter, OffensiveMove offensiveMove, float subBonus, float randomAdd)
+    public float MoveAccuracyRanged(Fighter fighter, Move offensiveMove, float subBonus, float randomAdd)
     {
         return offensiveMove.GetAccuracy() + subBonus + randomAdd;
     }
@@ -2584,7 +2517,7 @@ public class Fight : MonoBehaviour
         for (int index = 0; index < moveEvent.GetFighters().Count; index++)
         {
             Fighter fighter = moveEvent.GetFighters()[index];
-            OffensiveMove offensiveMove = moveEvent.GetOffensiveMoves()[index];
+            Move offensiveMove = moveEvent.GetMoves()[index];
             float randomAdd = moveEvent.GetRandomAdds()[index];
             float moveAccuracy = MoveAccuracyRanged(fighter, offensiveMove, cloneBonus, randomAdd);
             moveAccuracies.Add(moveAccuracy);
@@ -3095,7 +3028,7 @@ public class Fight : MonoBehaviour
 
                 if (RoundNumber == powerUp.GetEndingRoundNumber())
                 {
-                    PowerUpMove powerUpMove = powerUp.GetPowerUpMove();
+                    Move powerUpMove = powerUp.GetPowerUpMove();
                     fighter.RemoveBonusData(powerUpMove.GetBonusData(), Enums.BonusSource.PowerUpMove, null, null, powerUpMove, null);
                     powerUps.RemoveAt(index);
                 }

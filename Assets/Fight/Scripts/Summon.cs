@@ -6,14 +6,14 @@ public class Summon
 {
     protected int           mEndingRoundNumber;
     protected Fighter       mSummoned, mSummoner;
-    protected SummonMove    mSummonMove;
+    protected Move          mSummonMove;
 
     public int GetEndingRoundNumber() { return mEndingRoundNumber; }
     public Fighter GetSummoned() { return mSummoned; }
     public Fighter GetSummoner() { return mSummoner; }
-    public SummonMove GetSummonMove() { return mSummonMove; }
+    public Move GetSummonMove() { return mSummonMove; }
     public void SetEndingRoundNumber(int endingRoundNumber) { mEndingRoundNumber = endingRoundNumber; }
     public void SetSummoned(Fighter summoned) { mSummoned = summoned; }
     public void SetSummoner(Fighter summoner) { mSummoner = summoner; }
-    public void SetSummonMove(SummonMove summonMove) { mSummonMove = summonMove; }
+    public void SetSummonMove(Move summonMove) { mSummonMove = summonMove; }
 }

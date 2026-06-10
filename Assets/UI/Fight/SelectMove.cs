@@ -27,7 +27,7 @@ public class SelectMove : MonoBehaviour
 
     public void OnMedicalClickEvent(ClickEvent evt)
     {
-        List<MedicalMove> medicalMoves = SelectedFighter.GetMedicalMoves();
+        List<Move> medicalMoves = SelectedFighter.GetMoves(Enums.MoveType.Medical);
         List<Move> medicalMovesResult = new List<Move>(medicalMoves.Count);
         medicalMovesResult.AddRange(medicalMoves);
         Moves = medicalMovesResult;
@@ -36,7 +36,7 @@ public class SelectMove : MonoBehaviour
     
     public void OnOffensiveClickEvent(ClickEvent evt)
     {
-        List<OffensiveMove> offensiveMoves = SelectedFighter.GetOffensiveMoves();
+        List<Move> offensiveMoves = SelectedFighter.GetMoves(Enums.MoveType.Offensive);
         List<Move> offensiveMovesResult = new List<Move>(offensiveMoves.Count);
         offensiveMovesResult.AddRange(offensiveMoves);
         Moves = offensiveMovesResult;
@@ -45,10 +45,10 @@ public class SelectMove : MonoBehaviour
 
     public void OnPowerUpClickEvent(ClickEvent evt)
     {
-        List<OffensiveMove> offensiveMoves = SelectedFighter.GetOffensiveMoves();
-        List<Move> offensiveMovesResult = new List<Move>(offensiveMoves.Count);
-        offensiveMovesResult.AddRange(offensiveMoves);
-        Moves = offensiveMovesResult;
+        List<Move> powerUpMoves = SelectedFighter.GetMoves(Enums.MoveType.PowerUp);
+        List<Move> powerUpMovesResult = new List<Move>(powerUpMoves.Count);
+        powerUpMovesResult.AddRange(powerUpMoves);
+        Moves = powerUpMovesResult;
         SortMoves();
     }
 
