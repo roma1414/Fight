@@ -3,16 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using System.IO;
+using UnityEngine.UIElements;
 
 public class Fight : MonoBehaviour
 {
+    [SerializeField] SelectMove                 SelectMoveUI;
     [SerializeField] protected Enums.DebugLevel DebugLevel;
     [SerializeField] bool                       NarutoMode;
     [SerializeField] protected int              Teams;
-    [SerializeField] protected List<Fighter>      Team1, Team2, Team3;
+    [SerializeField] protected List<Fighter>    Team1, Team2, Team3;
 
     protected List<Clone>                       Clones;
-    protected List<Fighter>                       Fighters, OriginalFighters, OriginalTeam1, OriginalTeam2, OriginalTeam3;
+    protected List<Fighter>                     Fighters, OriginalFighters, OriginalTeam1, OriginalTeam2, OriginalTeam3;
     protected List<Protection>                  Protections;
     protected int                               RoundNumber;
     protected List<Summon>                      Summons;

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Fighter : MonoBehaviour
@@ -426,14 +427,34 @@ public class Fighter : MonoBehaviour
     public int GetMaxMana() { return MaxMana + (int)(GetTotalAttributeBonus(Enums.Attribute.Mana) + 0.5f); } // .5 is for rounding
     public float GetMaxManaRating() { return GetManaRating(MaxMana); }
 
+    // Multiple move types are considered "Offensive", so that logic is treated uniquely.
     public List<Move> GetMoves(Enums.MoveType moveType)
     {
         List<Move> moves = new List<Move>();
         foreach (Move move in Moves)
         {
-            if (move.GetMoveType() == moveType)
+            if (moveType == Enums.MoveType.Offensive)
             {
-                moves.Add(move);
+                Enums.MoveType tempMoveType = move.GetMoveType();
+                switch (tempMoveType)
+                {
+                    case Enums.MoveType.Melee:
+                    case Enums.MoveType.NinTai:
+                    case Enums.MoveType.Offensive:
+                    case Enums.MoveType.Projectile:
+                    case Enums.MoveType.Psychic:
+                        {
+                            moves.Add(move);
+                            break;
+                        }
+                }
+            }
+            else
+            {
+                if (move.GetMoveType() == moveType)
+                {
+                    moves.Add(move);
+                }
             }
         }
 

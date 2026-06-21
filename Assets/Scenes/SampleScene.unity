@@ -574,6 +574,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f965104cc1051f46a06eee200c32201, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Fight
+  SelectMoveUI: {fileID: 2014911277}
   DebugLevel: 1
   NarutoMode: 0
   Teams: 2

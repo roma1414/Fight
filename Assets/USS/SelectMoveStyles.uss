@@ -1,4 +1,4 @@
-.MoveTypeTab {
+.Tab {
     color: rgb(192, 192, 192);
     width: auto;
     height: 100%;
@@ -11,13 +11,13 @@
     -unity-font-style: bold;
 }
 
-#Background {
-}
-
-
-
-.MoveTypeTab:hover {
+.Tab:hover {
     background-color: rgb(77, 77, 77);
     color: rgb(211, 211, 211);
+    transition-duration: 0.15s;
+}
+
+.Tab.selected {
+    background-color: rgb(0, 0, 0);
     transition-duration: 0.15s;
 }

@@ -4,14 +4,16 @@ using UnityEngine.UIElements;
 
 public class SelectMove : MonoBehaviour
 {
-    [SerializeField] UIDocument uiDocument;
-    protected VisualElement root;
-    protected List<Move> Moves;
-    protected Fighter SelectedFighter;
-    protected bool SortDescending = true;
-    protected Enums.SelectMoveSortType SortType;
-
-    public void OnLevelClickEvent(ClickEvent evt)
+    [SerializeField] UIDocument         uiDocument;
+    protected VisualElement             root;
+    protected List<Move>                Moves;
+    protected Fighter                   SelectedFighter;
+    protected bool                      SortDescending = true;
+    protected VisualElement             CurrentlySelectedTab;
+    protected VisualElement             CurrentlySelectedSubTab;
+    protected VisualElement             OffensiveTab, MedicalTab, PowerUpTab, SummonTab, SubTab, NameTab, LevelTab, ManaTab, TargetTab, TypeTab;
+    
+    /*public void OnLevelClickEvent(ClickEvent evt)
     {
         if (SortType == Enums.SelectMoveSortType.Level)
         {
@@ -27,36 +29,60 @@ public class SelectMove : MonoBehaviour
 
     public void OnMedicalClickEvent(ClickEvent evt)
     {
-        List<Move> medicalMoves = SelectedFighter.GetMoves(Enums.MoveType.Medical);
-        List<Move> medicalMovesResult = new List<Move>(medicalMoves.Count);
-        medicalMovesResult.AddRange(medicalMoves);
-        Moves = medicalMovesResult;
+        Moves = SelectedFighter.GetMoves(Enums.MoveType.Medical);
         SortMoves();
-    }
-    
-    public void OnOffensiveClickEvent(ClickEvent evt)
+    }*/
+
+    public void OnTabClickEvent(VisualElement clickedTab)
     {
-        List<Move> offensiveMoves = SelectedFighter.GetMoves(Enums.MoveType.Offensive);
-        List<Move> offensiveMovesResult = new List<Move>(offensiveMoves.Count);
-        offensiveMovesResult.AddRange(offensiveMoves);
-        Moves = offensiveMovesResult;
-        SortMoves();
+        if (CurrentlySelectedTab != null)
+        {
+            CurrentlySelectedTab.RemoveFromClassList("selected");
+        }
+
+        CurrentlySelectedTab = clickedTab;
+        CurrentlySelectedTab.AddToClassList("selected");
+
+        UpdateMovesForTab();
     }
 
-    public void OnPowerUpClickEvent(ClickEvent evt)
+    public void OnSubTabClickEvent(VisualElement clickedTab)
     {
-        List<Move> powerUpMoves = SelectedFighter.GetMoves(Enums.MoveType.PowerUp);
-        List<Move> powerUpMovesResult = new List<Move>(powerUpMoves.Count);
-        powerUpMovesResult.AddRange(powerUpMoves);
-        Moves = powerUpMovesResult;
+        if (clickedTab == CurrentlySelectedSubTab)
+        {
+            SortDescending = SortDescending ? false : true;
+        }
+        else
+        {
+            if (CurrentlySelectedSubTab != null)
+            {
+                CurrentlySelectedSubTab.RemoveFromClassList("selected");
+            }
+
+            CurrentlySelectedSubTab = clickedTab;
+            CurrentlySelectedSubTab.AddToClassList("selected");
+        }
+
         SortMoves();
     }
 
     public void SortMoves()
     {
-        switch (SortType)
+        switch (CurrentlySelectedSubTab.name)
         {
-            case Enums.SelectMoveSortType.Level:
+            case "NameTab":
+                {
+                    if (SortDescending)
+                    {
+                        Moves.Sort((left, right) => left.GetName().CompareTo(right.GetName())); // Sort in ascending order. I think...
+                    }
+                    else
+                    {
+                        Moves.Sort((left, right) => right.GetName().CompareTo(left.GetName())); // Sort in descending order. I think...
+                    }
+                    break;
+                }
+            case "LevelTab":
                 {
                     if (SortDescending)
                     {
@@ -68,7 +94,7 @@ public class SelectMove : MonoBehaviour
                     }
                     break;
                 }
-            case Enums.SelectMoveSortType.Mana:
+            case "ManaTab":
                 {
                     if (SortDescending)
                     {
@@ -80,7 +106,7 @@ public class SelectMove : MonoBehaviour
                     }
                     break;
                 }
-            case Enums.SelectMoveSortType.TargetType:
+            case "TargetTab":
                 {
                     if (SortDescending)
                     {
@@ -92,7 +118,7 @@ public class SelectMove : MonoBehaviour
                     }
                     break;
                 }
-            case Enums.SelectMoveSortType.MoveType:
+            case "TypeTab":
                 {
                     if (SortDescending)
                     {
@@ -104,6 +130,9 @@ public class SelectMove : MonoBehaviour
                     }
                     break;
                 }
+            default:
+                Debug.LogError("Error! Unexpected CurrentlySelectedSubTab.name in SortMoves!");
+                break;
         }
     }
     
@@ -112,13 +141,66 @@ public class SelectMove : MonoBehaviour
     {
         root = uiDocument.rootVisualElement;
 
-        //var offensive = root.Q<VisualElement>("OffensiveTab");
-        //offensive.RegisterCallback<ClickEvent>(OnOffensiveClickEvent);
+        OffensiveTab = root.Q<VisualElement>("OffensiveTab");
+        OffensiveTab.RegisterCallback<ClickEvent>(evt => OnTabClickEvent(OffensiveTab));
+        MedicalTab = root.Q<VisualElement>("MedicalTab");
+        MedicalTab.RegisterCallback<ClickEvent>(evt => OnTabClickEvent(MedicalTab));
+        PowerUpTab = root.Q<VisualElement>("PowerUpTab");
+        PowerUpTab.RegisterCallback<ClickEvent>(evt => OnTabClickEvent(PowerUpTab));
+        SummonTab = root.Q<VisualElement>("SummonTab");
+        SummonTab.RegisterCallback<ClickEvent>(evt => OnTabClickEvent(SummonTab));
+        SubTab = root.Q<VisualElement>("SubTab");
+        SubTab.RegisterCallback<ClickEvent>(evt => OnTabClickEvent(SubTab));
+        CurrentlySelectedTab = OffensiveTab;
+        CurrentlySelectedTab.AddToClassList("selected");
+        Moves = new List<Move>();
+
+        NameTab = root.Q<VisualElement>("NameTab");
+        NameTab.RegisterCallback<ClickEvent>(evt => OnSubTabClickEvent(NameTab));
+        LevelTab = root.Q<VisualElement>("LevelTab");
+        LevelTab.RegisterCallback<ClickEvent>(evt => OnSubTabClickEvent(LevelTab));
+        ManaTab = root.Q<VisualElement>("ManaTab");
+        ManaTab.RegisterCallback<ClickEvent>(evt => OnSubTabClickEvent(ManaTab));
+        TargetTab = root.Q<VisualElement>("TargetTab");
+        TargetTab.RegisterCallback<ClickEvent>(evt => OnSubTabClickEvent(TargetTab));
+        TypeTab = root.Q<VisualElement>("TypeTab");
+        TypeTab.RegisterCallback<ClickEvent>(evt => OnSubTabClickEvent(TypeTab));
+        CurrentlySelectedSubTab = LevelTab;
+        CurrentlySelectedSubTab.AddToClassList("selected");
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    public void UpdateMovesForTab()
+    {
+        Enums.MoveType moveType = Enums.MoveType.Offensive;
+        switch (CurrentlySelectedTab.name)
+        {
+            case "OffensiveTab":
+                moveType = Enums.MoveType.Offensive;
+                break;
+            case "MedicalTab":
+                moveType = Enums.MoveType.Medical;
+                break;
+            case "PowerUpTab":
+                moveType = Enums.MoveType.PowerUp;
+                break;
+            case "SummonTab":
+                moveType = Enums.MoveType.Summon;
+                break;
+            case "SubTab":
+                moveType = Enums.MoveType.Substitution;
+                break;
+            default:
+                Debug.LogError("Error! Unexpected CurrentlySelectedTab.name in UpdateMovesForTab!");
+                break;
+        }
+
+        //Moves = SelectedFighter.GetMoves(moveType);
+        //SortMoves();
     }
 }
