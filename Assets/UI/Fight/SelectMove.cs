@@ -5,9 +5,10 @@ using UnityEngine.UIElements;
 public class SelectMove : MonoBehaviour
 {
     [SerializeField] UIDocument         uiDocument;
+    [SerializeField] VisualTreeAsset    MoveRowTemplate;
     protected VisualElement             root;
     protected List<Move>                Moves;
-    [SerializeField] protected Fighter                   SelectedFighter;
+    [SerializeField] protected Fighter  SelectedFighter;
     protected bool                      SortDescending = true;
     protected VisualElement             CurrentlySelectedTab;
     protected VisualElement             CurrentlySelectedSubTab;
@@ -60,7 +61,31 @@ public class SelectMove : MonoBehaviour
         CurrentlySelectedTab = clickedTab;
         CurrentlySelectedTab.AddToClassList("selected");
 
-        UpdateMovesForTab();
+        Enums.MoveType moveType = Enums.MoveType.Offensive;
+        switch (CurrentlySelectedTab.name)
+        {
+            case "OffensiveTab":
+                moveType = Enums.MoveType.Offensive;
+                break;
+            case "MedicalTab":
+                moveType = Enums.MoveType.Medical;
+                break;
+            case "PowerUpTab":
+                moveType = Enums.MoveType.PowerUp;
+                break;
+            case "SummonTab":
+                moveType = Enums.MoveType.Summon;
+                break;
+            case "SubTab":
+                moveType = Enums.MoveType.Substitution;
+                break;
+            default:
+                Debug.LogError("Error! Unexpected CurrentlySelectedTab.name in UpdateMovesForTab!");
+                break;
+        }
+
+        Moves = SelectedFighter.GetMoves(moveType);
+        SortMoves();
     }
 
     public void OnSubTabClickEvent(VisualElement clickedTab)
@@ -174,7 +199,7 @@ public class SelectMove : MonoBehaviour
         CurrentlySelectedTab.AddToClassList("selected");
         Moves = SelectedFighter.GetMoves(Enums.MoveType.Offensive); //new List<Move>();
 
-        NameTab = root.Q<VisualElement>("NameTab");
+        NameTab = root.Q<VisualElement>(name:"NameTab");
         NameTab.RegisterCallback<ClickEvent>(evt => OnSubTabClickEvent(NameTab));
         LevelTab = root.Q<VisualElement>("LevelTab");
         LevelTab.RegisterCallback<ClickEvent>(evt => OnSubTabClickEvent(LevelTab));
@@ -202,34 +227,5 @@ public class SelectMove : MonoBehaviour
     void Update()
     {
         
-    }
-
-    public void UpdateMovesForTab()
-    {
-        Enums.MoveType moveType = Enums.MoveType.Offensive;
-        switch (CurrentlySelectedTab.name)
-        {
-            case "OffensiveTab":
-                moveType = Enums.MoveType.Offensive;
-                break;
-            case "MedicalTab":
-                moveType = Enums.MoveType.Medical;
-                break;
-            case "PowerUpTab":
-                moveType = Enums.MoveType.PowerUp;
-                break;
-            case "SummonTab":
-                moveType = Enums.MoveType.Summon;
-                break;
-            case "SubTab":
-                moveType = Enums.MoveType.Substitution;
-                break;
-            default:
-                Debug.LogError("Error! Unexpected CurrentlySelectedTab.name in UpdateMovesForTab!");
-                break;
-        }
-
-        Moves = SelectedFighter.GetMoves(moveType);
-        SortMoves();
     }
 }

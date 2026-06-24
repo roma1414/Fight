@@ -22,11 +22,11 @@
     transition-duration: 0.15s;
 }
 
-.move-row {
+.character-row {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    height: 22px;
+    height: 32px;
     padding-left: 8px;
     padding-right: 8px;
 }
@@ -35,6 +35,6 @@
     flex-grow: 1;
 }
 
-#level-label {
+#health-label {
     width: 80px;
 }
