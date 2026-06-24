@@ -1,8 +1,8 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/USS/SelectMoveStyles.uss?fileID=7433441132597879392&amp;guid=d141e88c757744b4c90e76abb674df7a&amp;type=3#SelectMoveStyles"/>
     <ui:VisualElement name="Background" style="flex-grow: 1; background-color: rgb(0, 0, 0);">
-        <ui:VisualElement name="TopPanel" style="flex-grow: 1; background-color: rgb(255, 255, 255);"/>
-        <ui:VisualElement name="BottomPanel" style="flex-grow: 1; background-color: rgb(0, 0, 0); flex-direction: row; align-items: auto; justify-content: flex-start;">
+        <ui:VisualElement name="TopPanel" style="flex-grow: 1; background-color: rgb(255, 255, 255); height: 50%;"/>
+        <ui:VisualElement name="BottomPanel" style="flex-grow: 1; background-color: rgb(0, 0, 0); flex-direction: row; align-items: auto; justify-content: flex-start; height: 50%;">
             <ui:VisualElement name="BottomLeftPanel" style="flex-grow: 0; width: 64%; height: 100%; align-items: auto; justify-content: center;">
                 <ui:VisualElement name="MoveTypeTabs" style="flex-grow: 0; align-items: auto; width: 95%; height: 10%; flex-direction: row; align-self: center; justify-content: flex-start; border-top-width: 4px; border-right-width: 4px; border-bottom-width: 2px; border-left-width: 4px; border-left-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-top-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255);">
                     <ui:Button text="Offensive" name="OffensiveTab" class="Tab" style="padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0;"/>

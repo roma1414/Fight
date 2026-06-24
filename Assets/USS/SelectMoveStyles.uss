@@ -13,7 +13,7 @@
 
 .Tab:hover {
     background-color: rgb(77, 77, 77);
-    color: rgb(211, 211, 211);
+    color: rgb(245, 245, 245);
     transition-duration: 0.15s;
 }
 

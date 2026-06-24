@@ -31,29 +31,12 @@ public class SelectMove : MonoBehaviour
         MovesListView.itemsSource = Moves;
         MovesListView.makeItem = MakeItem;
         MovesListView.bindItem = BindItem;
-        //MovesListView.fixedItemHeight = 32;
         MovesListView.virtualizationMethod = CollectionVirtualizationMethod.FixedHeight;
         MovesListView.selectionType = SelectionType.Single;
-        MovesListView.Rebuild();
+        SortMoves();
     }
 
-    VisualElement MakeItem()
-    {
-        /*var row = new VisualElement();
-        row.AddToClassList("move-row");
-
-        var nameLabel = new Label();
-        nameLabel.name = "name-label";
-
-        var levelLabel = new Label();
-        levelLabel.name = "level-label";
-
-        row.Add(nameLabel);
-        row.Add(levelLabel);
-
-        return row;*/
-        return MoveRowTemplate.Instantiate();
-    }
+    VisualElement MakeItem() { return MoveRowTemplate.Instantiate(); }
 
     public void OnTabClickEvent(VisualElement clickedTab)
     {
@@ -121,11 +104,11 @@ public class SelectMove : MonoBehaviour
                 {
                     if (SortDescending)
                     {
-                        Moves.Sort((left, right) => left.GetName().CompareTo(right.GetName())); // Sort in ascending order. I think...
+                        Moves.Sort((left, right) => right.GetName().CompareTo(left.GetName())); // Sort in descending order. I think...
                     }
                     else
                     {
-                        Moves.Sort((left, right) => right.GetName().CompareTo(left.GetName())); // Sort in descending order. I think...
+                        Moves.Sort((left, right) => left.GetName().CompareTo(right.GetName())); // Sort in ascending order. I think...
                     }
                     break;
                 }
@@ -133,11 +116,11 @@ public class SelectMove : MonoBehaviour
                 {
                     if (SortDescending)
                     {
-                        Moves.Sort((left, right) => left.GetLevel().CompareTo(right.GetLevel())); // Sort in ascending order. I think...
+                        Moves.Sort((left, right) => right.GetLevel().CompareTo(left.GetLevel())); // Sort in descending order. I think...
                     }
                     else
                     {
-                        Moves.Sort((left, right) => right.GetLevel().CompareTo(left.GetLevel())); // Sort in descending order. I think...
+                        Moves.Sort((left, right) => left.GetLevel().CompareTo(right.GetLevel())); // Sort in ascending order. I think...
                     }
                     break;
                 }
@@ -145,11 +128,11 @@ public class SelectMove : MonoBehaviour
                 {
                     if (SortDescending)
                     {
-                        Moves.Sort((left, right) => left.GetMana().CompareTo(right.GetMana())); // Sort in ascending order. I think...
+                        Moves.Sort((left, right) => right.GetMana().CompareTo(left.GetMana())); // Sort in descending order. I think...
                     }
                     else
                     {
-                        Moves.Sort((left, right) => right.GetMana().CompareTo(left.GetMana())); // Sort in descending order. I think...
+                        Moves.Sort((left, right) => left.GetMana().CompareTo(right.GetMana())); // Sort in ascending order. I think...
                     }
                     break;
                 }
@@ -157,11 +140,11 @@ public class SelectMove : MonoBehaviour
                 {
                     if (SortDescending)
                     {
-                        Moves.Sort((left, right) => left.GetTargetType().CompareTo(right.GetTargetType())); // Sort in ascending order. I think...
+                        Moves.Sort((left, right) => right.GetTargetType().CompareTo(left.GetTargetType())); // Sort in descending order. I think...
                     }
                     else
                     {
-                        Moves.Sort((left, right) => right.GetTargetType().CompareTo(left.GetTargetType())); // Sort in descending order. I think...
+                        Moves.Sort((left, right) => left.GetTargetType().CompareTo(right.GetTargetType())); // Sort in ascending order. I think...
                     }
                     break;
                 }
@@ -169,11 +152,11 @@ public class SelectMove : MonoBehaviour
                 {
                     if (SortDescending)
                     {
-                        Moves.Sort((left, right) => left.GetMoveType().CompareTo(right.GetMoveType())); // Sort in ascending order. I think...
+                        Moves.Sort((left, right) => right.GetMoveType().CompareTo(left.GetMoveType())); // Sort in descending order. I think...
                     }
                     else
                     {
-                        Moves.Sort((left, right) => right.GetMoveType().CompareTo(left.GetMoveType())); // Sort in descending order. I think...
+                        Moves.Sort((left, right) => left.GetMoveType().CompareTo(right.GetMoveType())); // Sort in ascending order. I think...
                     }
                     break;
                 }
