@@ -7,31 +7,48 @@ public class SelectMove : MonoBehaviour
     [SerializeField] UIDocument         uiDocument;
     protected VisualElement             root;
     protected List<Move>                Moves;
-    protected Fighter                   SelectedFighter;
+    [SerializeField] protected Fighter                   SelectedFighter;
     protected bool                      SortDescending = true;
     protected VisualElement             CurrentlySelectedTab;
     protected VisualElement             CurrentlySelectedSubTab;
     protected VisualElement             OffensiveTab, MedicalTab, PowerUpTab, SummonTab, SubTab, NameTab, LevelTab, ManaTab, TargetTab, TypeTab;
-    
-    /*public void OnLevelClickEvent(ClickEvent evt)
-    {
-        if (SortType == Enums.SelectMoveSortType.Level)
-        {
-            SortDescending = SortDescending ? false : true;
-        }
-        else
-        {
-            SortType = Enums.SelectMoveSortType.Level;
-        }
+    protected ListView                  MovesListView;
 
-        SortMoves();
+    void BindItem(VisualElement element, int index)
+    {
+        Move move = Moves[index];
+
+        element.Q<Label>("name-label").text = move.GetName();
+        element.Q<Label>("level-label").text = $"HP: {move.GetLevel()}";
+    }
+    
+    public void ConfigureListView()
+    {
+        MovesListView.itemsSource = Moves;
+        MovesListView.makeItem = MakeItem;
+        MovesListView.bindItem = BindItem;
+        MovesListView.fixedItemHeight = 22;
+        MovesListView.virtualizationMethod = CollectionVirtualizationMethod.FixedHeight;
+        MovesListView.selectionType = SelectionType.Single;
+        MovesListView.Rebuild();
     }
 
-    public void OnMedicalClickEvent(ClickEvent evt)
+    VisualElement MakeItem()
     {
-        Moves = SelectedFighter.GetMoves(Enums.MoveType.Medical);
-        SortMoves();
-    }*/
+        var row = new VisualElement();
+        row.AddToClassList("move-row");
+
+        var nameLabel = new Label();
+        nameLabel.name = "name-label";
+
+        var levelLabel = new Label();
+        levelLabel.name = "level-label";
+
+        row.Add(nameLabel);
+        row.Add(levelLabel);
+
+        return row;
+    }
 
     public void OnTabClickEvent(VisualElement clickedTab)
     {
@@ -134,6 +151,8 @@ public class SelectMove : MonoBehaviour
                 Debug.LogError("Error! Unexpected CurrentlySelectedSubTab.name in SortMoves!");
                 break;
         }
+
+        MovesListView.Rebuild();
     }
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -153,7 +172,7 @@ public class SelectMove : MonoBehaviour
         SubTab.RegisterCallback<ClickEvent>(evt => OnTabClickEvent(SubTab));
         CurrentlySelectedTab = OffensiveTab;
         CurrentlySelectedTab.AddToClassList("selected");
-        Moves = new List<Move>();
+        Moves = SelectedFighter.GetMoves(Enums.MoveType.Offensive); //new List<Move>();
 
         NameTab = root.Q<VisualElement>("NameTab");
         NameTab.RegisterCallback<ClickEvent>(evt => OnSubTabClickEvent(NameTab));
@@ -167,6 +186,16 @@ public class SelectMove : MonoBehaviour
         TypeTab.RegisterCallback<ClickEvent>(evt => OnSubTabClickEvent(TypeTab));
         CurrentlySelectedSubTab = LevelTab;
         CurrentlySelectedSubTab.AddToClassList("selected");
+
+        MovesListView = root.Q<ListView>("MovesListView");        
+        /*MovesListView.selectionChanged += selectedItems =>
+        {
+            foreach (Move move in selectedItems)
+            {
+                Debug.Log($"Selected: {move.GetName()}");
+            }
+        };*/
+        ConfigureListView();
     }
 
     // Update is called once per frame
@@ -200,7 +229,7 @@ public class SelectMove : MonoBehaviour
                 break;
         }
 
-        //Moves = SelectedFighter.GetMoves(moveType);
-        //SortMoves();
+        Moves = SelectedFighter.GetMoves(moveType);
+        SortMoves();
     }
 }
