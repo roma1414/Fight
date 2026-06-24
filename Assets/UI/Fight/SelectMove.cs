@@ -20,7 +20,10 @@ public class SelectMove : MonoBehaviour
         Move move = Moves[index];
 
         element.Q<Label>("name-label").text = move.GetName();
-        element.Q<Label>("level-label").text = $"HP: {move.GetLevel()}";
+        element.Q<Label>("level-label").text = move.GetLevel().ToString();//$"HP: {move.GetLevel()}";
+        element.Q<Label>("mana-label").text = move.GetMana().ToString();
+        element.Q<Label>("target-label").text = move.GetTargetType().ToString();
+        element.Q<Label>("type-label").text = move.GetMoveType().ToString();//$"HP: {move.GetLevel()}";
     }
     
     public void ConfigureListView()
@@ -28,7 +31,7 @@ public class SelectMove : MonoBehaviour
         MovesListView.itemsSource = Moves;
         MovesListView.makeItem = MakeItem;
         MovesListView.bindItem = BindItem;
-        MovesListView.fixedItemHeight = 22;
+        //MovesListView.fixedItemHeight = 32;
         MovesListView.virtualizationMethod = CollectionVirtualizationMethod.FixedHeight;
         MovesListView.selectionType = SelectionType.Single;
         MovesListView.Rebuild();
@@ -36,7 +39,7 @@ public class SelectMove : MonoBehaviour
 
     VisualElement MakeItem()
     {
-        var row = new VisualElement();
+        /*var row = new VisualElement();
         row.AddToClassList("move-row");
 
         var nameLabel = new Label();
@@ -48,7 +51,8 @@ public class SelectMove : MonoBehaviour
         row.Add(nameLabel);
         row.Add(levelLabel);
 
-        return row;
+        return row;*/
+        return MoveRowTemplate.Instantiate();
     }
 
     public void OnTabClickEvent(VisualElement clickedTab)
@@ -85,6 +89,7 @@ public class SelectMove : MonoBehaviour
         }
 
         Moves = SelectedFighter.GetMoves(moveType);
+        MovesListView.itemsSource = Moves;
         SortMoves();
     }
 

@@ -443,6 +443,7 @@ public class Fighter : MonoBehaviour
                     case Enums.MoveType.Offensive:
                     case Enums.MoveType.Projectile:
                     case Enums.MoveType.Psychic:
+                    case Enums.MoveType.Spell:
                         {
                             moves.Add(move);
                             break;

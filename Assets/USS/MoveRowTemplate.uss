@@ -1,16 +1,16 @@
 .move-row {
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    height: 22px;
-    padding-left: 8px;
-    padding-right: 8px;
-}
-
-#name-label {
     flex-grow: 1;
+    flex-direction: row;
+    align-items: center;
+    height: 100%;
 }
 
-#level-label {
-    width: 80px;
+.column-label {
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: 0;
+    font-size: 32px;
+    color: rgb(245, 245, 245);
+    -unity-text-align: middle-center;
+    text-overflow: ellipsis;
 }

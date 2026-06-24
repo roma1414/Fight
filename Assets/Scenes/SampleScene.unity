@@ -563,7 +563,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SelectMove
   uiDocument: {fileID: 2014911275}
   MoveRowTemplate: {fileID: 9197481963319205126, guid: 2922f4fcd90b741289d77df73a8f5531, type: 3}
-  SelectedFighter: {fileID: 1512450206}
+  SelectedFighter: {fileID: 1789790781}
 --- !u!1 &2112688909
 GameObject:
   m_ObjectHideFlags: 0

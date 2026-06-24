@@ -22,19 +22,6 @@
     transition-duration: 0.15s;
 }
 
-.character-row {
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    height: 32px;
-    padding-left: 8px;
-    padding-right: 8px;
-}
 
-#name-label {
-    flex-grow: 1;
-}
 
-#health-label {
-    width: 80px;
-}
+
