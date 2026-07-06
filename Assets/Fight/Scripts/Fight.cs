@@ -2264,13 +2264,23 @@ public class Fight : MonoBehaviour
         return rangedHit;
     }
 
+    public MoveEvent GetMoveEvent(Fighter fighter)
+    {
+        if (fighter.GetControlType() == Enums.ControlType.CPU)
+        {
+            return fighter.GetAI().GetCPUMoveEvent(this, fighter);
+        }
+
+        // Get move selection from human-controlled user. CPU for now, until that function exists. TODO
+        return SelectMoveUI.GetUserMoveEvent(fighter);
+    }
+
     public List<MoveEvent> GetMoveEventList()
     {
         List<MoveEvent> moveEvents = new List<MoveEvent>();
-
         foreach (Fighter fighter in Fighters)
         {
-            MoveEvent moveEvent = fighter.GetAI().GetMoveEvent(this, fighter);
+            MoveEvent moveEvent = GetMoveEvent(fighter);
             moveEvents.Add(moveEvent);
         }
 
@@ -2368,6 +2378,8 @@ public class Fight : MonoBehaviour
 
         return protectors;
     }
+
+    public int GetRoundNumber() { return RoundNumber;}
 
     public List<Fighter> GetTeamList(int team)
     {

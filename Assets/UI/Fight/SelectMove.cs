@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -8,14 +9,19 @@ public class SelectMove : MonoBehaviour
     [SerializeField] VisualTreeAsset    MoveRowTemplate;
     protected VisualElement             root;
     protected List<Move>                Moves;
+    [SerializeField] protected Fight    Fight;
     [SerializeField] protected Fighter  SelectedFighter;
     protected bool                      SortDescending = true;
     protected VisualElement             CurrentlySelectedTab;
     protected VisualElement             CurrentlySelectedSubTab;
-    protected VisualElement             OffensiveTab, MedicalTab, PowerUpTab, SummonTab, SubTab, NameTab, LevelTab, ManaTab, TargetTab, TypeTab;
+    protected VisualElement             OffensiveTab, MedicalTab, PowerUpTab, SummonTab, SubTab, ProtectTab, NameTab, LevelTab, ManaTab, TargetTab, TypeTab;
     protected ListView                  MovesListView;
+    protected Label                     NameLabel, RoundLabel, HealthLabel, ManaLabel;
+    protected Button                    AdvanceButton;
+    protected Move                      SelectedMove;
+    protected bool                      Advance = false;
 
-    void BindItem(VisualElement element, int index)
+    void BindMoveItem(VisualElement element, int index)
     {
         Move move = Moves[index];
 
@@ -25,18 +31,100 @@ public class SelectMove : MonoBehaviour
         element.Q<Label>("target-label").text = move.GetTargetType().ToString();
         element.Q<Label>("type-label").text = move.GetMoveType().ToString();//$"HP: {move.GetLevel()}";
     }
+
+    public void ConfigureForFighter(Fighter fighter)
+    {
+        SelectedFighter = fighter;
+
+        NameLabel.text = SelectedFighter.GetName();
+        RoundLabel.text = $"Round: {Fight.GetRoundNumber()}";
+        HealthLabel.text = $"Health: {SelectedFighter.GetHealth()}";
+        ManaLabel.text = $"Mana: {SelectedFighter.GetMana()}";
+
+        OnTabClickEvent(CurrentlySelectedTab);
+        // OnSubTabClickEvent will invert sort direction, so we invert it first
+        SortDescending = !SortDescending;
+        OnSubTabClickEvent(CurrentlySelectedSubTab);
+    }
     
-    public void ConfigureListView()
+    public void ConfigureMovesListView()
     {
         MovesListView.itemsSource = Moves;
-        MovesListView.makeItem = MakeItem;
-        MovesListView.bindItem = BindItem;
+        MovesListView.makeItem = MakeMoveItem;
+        MovesListView.bindItem = BindMoveItem;
         MovesListView.virtualizationMethod = CollectionVirtualizationMethod.FixedHeight;
         MovesListView.selectionType = SelectionType.Single;
         SortMoves();
     }
 
-    VisualElement MakeItem() { return MoveRowTemplate.Instantiate(); }
+    public List<Move> GetPossibleMoves(Enums.MoveType moveType)
+    {
+        List<Move> moves = SelectedFighter.GetMoves(moveType);
+        List<Move> possibleMoves = new List<Move>();
+        foreach(Move move in moves)
+        {
+            if (SelectedFighter.GetAI().CheckIfCanPerformMove(Fight, SelectedFighter, move))
+            {
+                possibleMoves.Add(move);
+            }
+        }
+        
+        return possibleMoves;
+    }
+
+    public MoveEvent GetUserMoveEvent(Fighter fighter)
+    {
+        SelectedFighter = fighter;
+        ConfigureForFighter(fighter);
+
+        MoveEvent moveEvent = new MoveEvent();
+        moveEvent.AddFighter(SelectedFighter);
+        moveEvent.AddRandomAdd(Fight.RandomAdd());
+
+        moveEvent.SetMoveType(Enums.MoveType.Offensive);
+
+        Advance = false;
+        StartCoroutine(WaitForSelection());
+
+        moveEvent.AddMove(SelectedMove);
+
+        moveEvent.SetTargetType(Enums.TargetType.OneEnemy);
+        List<Fighter> enemies = AI.GetEnemies(Fight, SelectedFighter);
+        moveEvent.AddTarget(enemies[Random.Range(0, enemies.Count)]);
+
+        return moveEvent;
+    }
+
+    VisualElement MakeMoveItem() { return MoveRowTemplate.Instantiate(); }
+
+    public void OnAdvanceClickEvent()
+    {
+        if (MovesListView.selectedItem != null)
+        {
+            SelectedMove = (Move)MovesListView.selectedItem;
+            Advance = true;
+        }
+    }
+
+    public void OnSubTabClickEvent(VisualElement clickedTab)
+    {
+        if (clickedTab == CurrentlySelectedSubTab)
+        {
+            SortDescending = !SortDescending;
+        }
+        else
+        {
+            if (CurrentlySelectedSubTab != null)
+            {
+                CurrentlySelectedSubTab.RemoveFromClassList("selected");
+            }
+
+            CurrentlySelectedSubTab = clickedTab;
+            CurrentlySelectedSubTab.AddToClassList("selected");
+        }
+
+        SortMoves();
+    }
 
     public void OnTabClickEvent(VisualElement clickedTab)
     {
@@ -66,33 +154,16 @@ public class SelectMove : MonoBehaviour
             case "SubTab":
                 moveType = Enums.MoveType.Substitution;
                 break;
+            case "ProtectTab":
+                moveType = Enums.MoveType.Protect;
+                break;
             default:
                 Debug.LogError("Error! Unexpected CurrentlySelectedTab.name in UpdateMovesForTab!");
                 break;
         }
 
-        Moves = SelectedFighter.GetMoves(moveType);
+        Moves = GetPossibleMoves(moveType);
         MovesListView.itemsSource = Moves;
-        SortMoves();
-    }
-
-    public void OnSubTabClickEvent(VisualElement clickedTab)
-    {
-        if (clickedTab == CurrentlySelectedSubTab)
-        {
-            SortDescending = SortDescending ? false : true;
-        }
-        else
-        {
-            if (CurrentlySelectedSubTab != null)
-            {
-                CurrentlySelectedSubTab.RemoveFromClassList("selected");
-            }
-
-            CurrentlySelectedSubTab = clickedTab;
-            CurrentlySelectedSubTab.AddToClassList("selected");
-        }
-
         SortMoves();
     }
 
@@ -183,9 +254,12 @@ public class SelectMove : MonoBehaviour
         SummonTab.RegisterCallback<ClickEvent>(evt => OnTabClickEvent(SummonTab));
         SubTab = root.Q<VisualElement>("SubTab");
         SubTab.RegisterCallback<ClickEvent>(evt => OnTabClickEvent(SubTab));
+        ProtectTab = root.Q<VisualElement>("ProtectTab");
+        ProtectTab.RegisterCallback<ClickEvent>(evt => OnTabClickEvent(ProtectTab));
         CurrentlySelectedTab = OffensiveTab;
         CurrentlySelectedTab.AddToClassList("selected");
-        Moves = SelectedFighter.GetMoves(Enums.MoveType.Offensive); //new List<Move>();
+        //Moves = GetPossibleMoves(Enums.MoveType.Offensive);
+        Moves = SelectedFighter.GetMoves(Enums.MoveType.Offensive);
 
         NameTab = root.Q<VisualElement>(name:"NameTab");
         NameTab.RegisterCallback<ClickEvent>(evt => OnSubTabClickEvent(NameTab));
@@ -208,12 +282,29 @@ public class SelectMove : MonoBehaviour
                 Debug.Log($"Selected: {move.GetName()}");
             }
         };*/
-        ConfigureListView();
+        ConfigureMovesListView();
+
+        NameLabel = root.Q<Label>(name:"NameLabel");
+        NameLabel.text = SelectedFighter.GetName();
+        RoundLabel = root.Q<Label>(name:"RoundLabel");
+        RoundLabel.text = $"Round: {Fight.GetRoundNumber()}";
+        HealthLabel = root.Q<Label>(name:"HealthLabel");
+        HealthLabel.text = "Health: 100";
+        ManaLabel = root.Q<Label>(name:"ManaLabel");
+        ManaLabel.text = "Mana: 100";
+
+        AdvanceButton = root.Q<Button>("AdvanceButton");
+        AdvanceButton.RegisterCallback<ClickEvent>(evt => OnAdvanceClickEvent());
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    public IEnumerator WaitForSelection()
+    {
+        yield return new WaitUntil(() => Advance == true);
     }
 }

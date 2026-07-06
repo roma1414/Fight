@@ -368,7 +368,7 @@ GameObject:
   - component: {fileID: 1512450207}
   - component: {fileID: 1512450206}
   m_Layer: 0
-  m_Name: Witch
+  m_Name: FireWitch
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -386,7 +386,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4feff7ba81aada2428e3ed14f8e11b54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Fighter
-  Name: Witch
+  Name: Fire Witch
   Spellcraft: 9
   Melee: 1
   Psychic: 6
@@ -399,7 +399,7 @@ MonoBehaviour:
   Health: 100
   Level: 10
   Team: 2
-  ControlType: 1
+  ControlType: 0
   FightingStyle: 3
   AI: {fileID: 11400000, guid: a63555b92f11f0f42a9184aa4c97ab4c, type: 2}
   ID: 2
@@ -408,6 +408,7 @@ MonoBehaviour:
   Natures: 
   Traits: 
   Moves:
+  - {fileID: 11400000, guid: 3b2e4194d981746b7811ed2235b6baf9, type: 2}
   - {fileID: 11400000, guid: d5c261949d4dbe740a33d1e39b3ff7e8, type: 2}
   - {fileID: 11400000, guid: 3a9d010988cade8489beef962a949ca9, type: 2}
 --- !u!4 &1512450207
@@ -476,6 +477,7 @@ MonoBehaviour:
   Natures: 
   Traits: 
   Moves:
+  - {fileID: 11400000, guid: 3b2e4194d981746b7811ed2235b6baf9, type: 2}
   - {fileID: 11400000, guid: 5e2a6cc19aa20486d9724a52e244134d, type: 2}
   - {fileID: 11400000, guid: d4524c7d97981474f90d29d5ec441f1e, type: 2}
 --- !u!4 &1789790782
@@ -563,6 +565,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SelectMove
   uiDocument: {fileID: 2014911275}
   MoveRowTemplate: {fileID: 9197481963319205126, guid: 2922f4fcd90b741289d77df73a8f5531, type: 3}
+  Fight: {fileID: 2112688910}
   SelectedFighter: {fileID: 1789790781}
 --- !u!1 &2112688909
 GameObject:

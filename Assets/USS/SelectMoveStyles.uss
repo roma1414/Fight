@@ -22,6 +22,22 @@
     transition-duration: 0.15s;
 }
 
+.HealthLabel {
+    font-size: 32px;
+    color: rgb(192, 192, 192);
+    -unity-text-align: middle-left;
+}
 
+.AdvanceButton {
+    font-size: 48px;
+    color: rgb(26, 26, 26);
+    height: 16%;
+    flex-shrink: 0;
+    background-color: rgb(220, 220, 220);
+}
 
-
+.AdvanceButton:hover {
+    color: rgb(0, 0, 0);
+    background-color: rgb(255, 255, 255);
+    transition-duration: 0.15s;
+}

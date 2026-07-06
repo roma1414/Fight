@@ -322,6 +322,7 @@ public class AI : ScriptableObject
             case Enums.MoveType.Clone:
             case Enums.MoveType.Defensive:
             case Enums.MoveType.Avoid:
+            case Enums.MoveType.Protect:
                 {
                     return true;
                 }
@@ -716,17 +717,6 @@ public class AI : ScriptableObject
 
         Debug.LogError("Error! Unable to find create a medical MoveEvent in AI.GetMedicalMoveEvent! Returning a Skip MoveEvent.");
         return GetSkipMoveEvent(fighter);
-    }
-
-    public MoveEvent GetMoveEvent(Fight fight, Fighter fighter)
-    {
-        if (fighter.GetControlType() == Enums.ControlType.CPU)
-        {
-            return GetCPUMoveEvent(fight, fighter);
-        }
-
-        // Get move selection from human-controlled user. CPU for now, until that function exists. TODO
-        return GetCPUMoveEvent(fight, fighter); // GetUserMoveEvent(fight, fighter);
     }
 
     public MoveEvent GetMoveEventOfType(Fight fight, Fighter fighter, Enums.MoveType moveType)
