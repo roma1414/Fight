@@ -565,6 +565,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SelectMove
   uiDocument: {fileID: 2014911275}
   MoveRowTemplate: {fileID: 9197481963319205126, guid: 2922f4fcd90b741289d77df73a8f5531, type: 3}
+  TargetRowTemplate: {fileID: 9197481963319205126, guid: eca9f6c38fd74473493faf394ebe65d3, type: 3}
   Fight: {fileID: 2112688910}
   SelectedFighter: {fileID: 1789790781}
 --- !u!1 &2112688909

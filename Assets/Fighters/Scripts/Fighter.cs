@@ -392,6 +392,43 @@ public class Fighter : MonoBehaviour
     public List<AttributeBonus> GetAttributeBonuses() { return AttributeBonuses; }
     public List<Enums.Nature> GetBonusNatures() { return BonusNatures; }
     public List<Enums.Trait> GetBonusTraits() { return BonusTraits; }
+
+    public float GetCastingSpeed(Move move, float randomAdd)
+    {
+        float castingSpeed = 0.0f;
+        Enums.MoveType moveType = move.GetMoveType();
+
+        switch (moveType)
+        {
+            case Enums.MoveType.Melee:
+            case Enums.MoveType.NinTai:
+                {
+                    castingSpeed = .5f * GetSpeed() * GetHealthCo() + .5f * move.GetCastingSpeed() + randomAdd;
+                    break;
+                }
+            case Enums.MoveType.Projectile:
+                {
+                    castingSpeed = move.GetCastingSpeed();
+                    if (CheckTrait(Enums.Trait.QuickDraw) == true)
+                    {
+                        castingSpeed += QUICK_DRAW_TRAIT_CASTING_SPEED_INCREASE;
+                    }
+                    break;
+                }
+            default:
+                {
+                    castingSpeed = move.GetCastingSpeed();
+                    if (CheckTrait(Enums.Trait.QuickCasting) == true)
+                    {
+                        castingSpeed += CASTING_TRAIT_CASTING_SPEED_INCREASE;
+                    }
+                    break;
+                }
+        }
+
+        return castingSpeed;
+    }
+
     public int GetMana() { return Mana; }
 
     public static float GetManaRating(int mana)
@@ -419,11 +456,11 @@ public class Fighter : MonoBehaviour
     }
 
     public Enums.FightingStyle GetFightingStyle() { return FightingStyle; }
-    public float GetPsychic() { return Psychic + GetTotalAttributeBonus(Enums.Attribute.Psychic); }
     public int GetHealth() { return Health; }
     public float GetHealthCo() { return .2f + .8f * Mathf.Min(1.0f, Health / 75.0f); } //+ .4f * Mathf.Min(1.0f, Mana / 75.0f); } Not considering mana anymore since it's not chakra
     public ulong GetID() { return ID; }
     public float GetIntelligence() { return Intelligence + GetTotalAttributeBonus(Enums.Attribute.Intelligence); }
+    public float GetLevel() { return Level; }
     public int GetMaxMana() { return MaxMana + (int)(GetTotalAttributeBonus(Enums.Attribute.Mana) + 0.5f); } // .5 is for rounding
     public float GetMaxManaRating() { return GetManaRating(MaxMana); }
 
@@ -464,7 +501,6 @@ public class Fighter : MonoBehaviour
 
     public string GetName() { return Name; }
     public List<Enums.Nature> GetNatures() { return Natures; }
-    public float GetSpellcraft() { return Spellcraft + GetTotalAttributeBonus(Enums.Attribute.Spellcraft); }
     public float GetNinTaiDefenseSkill(float randomAdd) { return GetMelee() * GetHealthCo() + randomAdd; }
 
     public float GetOverallRating()
@@ -497,44 +533,9 @@ public class Fighter : MonoBehaviour
     }
 
     public List<PowerUp> GetPowerUps() { return PowerUps; }
-
-    public float GetCastingSpeed(Move move, float randomAdd)
-    {
-        float castingSpeed = 0.0f;
-        Enums.MoveType moveType = move.GetMoveType();
-
-        switch (moveType)
-        {
-            case Enums.MoveType.Melee:
-            case Enums.MoveType.NinTai:
-                {
-                    castingSpeed = .5f * GetSpeed() * GetHealthCo() + .5f * move.GetCastingSpeed() + randomAdd;
-                    break;
-                }
-            case Enums.MoveType.Projectile:
-                {
-                    castingSpeed = move.GetCastingSpeed();
-                    if (CheckTrait(Enums.Trait.QuickDraw) == true)
-                    {
-                        castingSpeed += QUICK_DRAW_TRAIT_CASTING_SPEED_INCREASE;
-                    }
-                    break;
-                }
-            default:
-                {
-                    castingSpeed = move.GetCastingSpeed();
-                    if (CheckTrait(Enums.Trait.QuickCasting) == true)
-                    {
-                        castingSpeed += CASTING_TRAIT_CASTING_SPEED_INCREASE;
-                    }
-                    break;
-                }
-        }
-
-        return castingSpeed;
-    }
-
+    public float GetPsychic() { return Psychic + GetTotalAttributeBonus(Enums.Attribute.Psychic); }
     public float GetSpeed() { return Speed + GetTotalAttributeBonus(Enums.Attribute.Speed); }
+    public float GetSpellcraft() { return Spellcraft + GetTotalAttributeBonus(Enums.Attribute.Spellcraft); }
     public List<Status> GetStatuses() { return Statuses; }
     public float GetStrength() { return Strength + GetTotalAttributeBonus(Enums.Attribute.Strength); }
 

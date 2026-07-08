@@ -6,16 +6,17 @@ using UnityEngine.UIElements;
 public class SelectMove : MonoBehaviour
 {
     [SerializeField] UIDocument         uiDocument;
-    [SerializeField] VisualTreeAsset    MoveRowTemplate;
+    [SerializeField] VisualTreeAsset    MoveRowTemplate, TargetRowTemplate;
     protected VisualElement             root;
     protected List<Move>                Moves;
+    protected List<Target>              Targets;
     [SerializeField] protected Fight    Fight;
     [SerializeField] protected Fighter  SelectedFighter;
     protected bool                      SortDescending = true;
     protected VisualElement             CurrentlySelectedTab;
     protected VisualElement             CurrentlySelectedSubTab;
     protected VisualElement             OffensiveTab, MedicalTab, PowerUpTab, SummonTab, SubTab, ProtectTab, NameTab, LevelTab, ManaTab, TargetTab, TypeTab;
-    protected ListView                  MovesListView;
+    protected ListView                  MovesListView, TargetsListView;
     protected Label                     NameLabel, RoundLabel, HealthLabel, ManaLabel;
     protected Button                    AdvanceButton;
     protected Move                      SelectedMove;
@@ -30,6 +31,16 @@ public class SelectMove : MonoBehaviour
         element.Q<Label>("mana-label").text = move.GetMana().ToString();
         element.Q<Label>("target-label").text = move.GetTargetType().ToString();
         element.Q<Label>("type-label").text = move.GetMoveType().ToString();//$"HP: {move.GetLevel()}";
+    }
+
+    void BindTargetItem(VisualElement element, int index)
+    {
+        Target target = Targets[index];
+
+        element.Q<Label>("name-label").text = target.GetName();
+        element.Q<Label>("level-label").text = target.GetLevel().ToString();
+        element.Q<Label>("health-label").text = target.GetHealth().ToString();
+        element.Q<Label>("mana-label").text = target.GetMana().ToString();
     }
 
     public void ConfigureForFighter(Fighter fighter)
@@ -52,9 +63,19 @@ public class SelectMove : MonoBehaviour
         MovesListView.itemsSource = Moves;
         MovesListView.makeItem = MakeMoveItem;
         MovesListView.bindItem = BindMoveItem;
+        MovesListView.selectionChanged += MoveSelectionChanged;
         MovesListView.virtualizationMethod = CollectionVirtualizationMethod.FixedHeight;
         MovesListView.selectionType = SelectionType.Single;
         SortMoves();
+    }
+
+    public void ConfigureTargetsListView()
+    {
+        TargetsListView.itemsSource = new List<Target>();
+        TargetsListView.makeItem = MakeTargetItem;
+        TargetsListView.bindItem = BindTargetItem;
+        TargetsListView.virtualizationMethod = CollectionVirtualizationMethod.FixedHeight;
+        TargetsListView.selectionType = SelectionType.Single;
     }
 
     public List<Move> GetPossibleMoves(Enums.MoveType moveType)
@@ -72,30 +93,155 @@ public class SelectMove : MonoBehaviour
         return possibleMoves;
     }
 
-    public MoveEvent GetUserMoveEvent(Fighter fighter)
+    public IEnumerator GetUserMoveEvent(Fighter fighter, System.Action<MoveEvent> onMoveEventSelected)
     {
         SelectedFighter = fighter;
         ConfigureForFighter(fighter);
 
+        Advance = false;
+        SelectedMove = null;
+        yield return WaitForSelection();
+
         MoveEvent moveEvent = new MoveEvent();
         moveEvent.AddFighter(SelectedFighter);
         moveEvent.AddRandomAdd(Fight.RandomAdd());
-
-        moveEvent.SetMoveType(Enums.MoveType.Offensive);
-
-        Advance = false;
-        StartCoroutine(WaitForSelection());
-
+        moveEvent.SetMoveType(SelectedMove.GetMoveType());
         moveEvent.AddMove(SelectedMove);
 
         moveEvent.SetTargetType(Enums.TargetType.OneEnemy);
         List<Fighter> enemies = AI.GetEnemies(Fight, SelectedFighter);
         moveEvent.AddTarget(enemies[Random.Range(0, enemies.Count)]);
 
-        return moveEvent;
+        onMoveEventSelected(moveEvent);
     }
 
     VisualElement MakeMoveItem() { return MoveRowTemplate.Instantiate(); }
+    VisualElement MakeTargetItem() { return TargetRowTemplate.Instantiate(); }
+
+    void MoveSelectionChanged(IEnumerable<object> selectedItems)
+    {
+        if (MovesListView.selectedItem != null)
+        {
+            SelectedMove = (Move)MovesListView.selectedItem;
+            Targets = new List<Target>();
+            List<Fighter>FighterTargets = new List<Fighter>();
+
+            switch (SelectedMove.GetTargetType())
+            {
+                case Enums.TargetType.OneEnemy:
+                    {
+                        if (SelectedMove.GetRequiredTargetStatusesList().Count > 0)
+                        {
+                            FighterTargets = SelectedFighter.GetAI().GetEnemiesWithStatuses(Fight, SelectedFighter, SelectedMove.GetRequiredTargetStatusesList());
+                        }
+                        else
+                        {
+                            FighterTargets = AI.GetEnemies(Fight, SelectedFighter);
+                        }
+                        break;
+                    }
+                case Enums.TargetType.EnemyTeam:
+                    {
+                        for (int i = 1; i <= 3; i++)
+                        {
+                            if (SelectedFighter.GetTeam() != i && i <= Fight.GetTeams() && Fight.GetTeamList(i).Count > 0)
+                            {
+                                Target target = new Target();
+                                target.SetName($"Team {i}");
+                                target.SetLevel("");
+                                target.SetHealth("");
+                                target.SetMana("");
+                                Targets.Add(target);
+                            }
+                        }
+                        break;
+                    }
+                case Enums.TargetType.AllEnemies:
+                    {
+                        Target target = new Target();
+                        target.SetName("All Enemies");
+                        target.SetLevel("");
+                        target.SetHealth("");
+                        target.SetMana("");
+                        Targets.Add(target);
+                        break;
+                    }
+                case Enums.TargetType.EnemiesWithStatuses:
+                    {
+                        FighterTargets = SelectedFighter.GetAI().GetEnemiesWithStatuses(Fight, SelectedFighter, SelectedMove.GetRequiredTargetStatusesList());
+                        break;
+                    }
+                case Enums.TargetType.OneTeamMember:
+                    {
+                        if (SelectedMove.GetRequiredTargetStatusesList().Count > 0)
+                        {
+                            if (SelectedFighter.CheckStatuses(SelectedMove.GetRequiredTargetStatusesList()))
+                            {
+                                FighterTargets.Add(SelectedFighter);
+                            }
+                            FighterTargets.AddRange(SelectedFighter.GetAI().GetTeammatesWithStatuses(Fight, SelectedFighter, SelectedMove.GetRequiredTargetStatusesList()));
+                        }
+                        else
+                        {
+                            FighterTargets.Add(SelectedFighter);
+                            FighterTargets.AddRange(SelectedFighter.GetAI().GetTeammates(Fight, SelectedFighter));
+                        }
+                        break;
+                    }
+                case Enums.TargetType.Team:
+                    {
+                        Target target = new Target();
+                        target.SetName($"Team {SelectedFighter.GetTeam()}");
+                        target.SetLevel("");
+                        target.SetHealth("");
+                        target.SetMana("");
+                        Targets.Add(target);
+                        break;
+                    }
+                case Enums.TargetType.TeamMembersWithStatuses:
+                    {
+                        if (SelectedFighter.CheckStatuses(SelectedMove.GetRequiredTargetStatusesList()))
+                        {
+                            FighterTargets.Add(SelectedFighter);
+                        }
+                        FighterTargets = SelectedFighter.GetAI().GetTeammatesWithStatuses(Fight, SelectedFighter, SelectedMove.GetRequiredTargetStatusesList());
+                        break;
+                    }
+                case Enums.TargetType.Self:
+                    {
+                        Target target = new Target();
+                        target.SetName("Self");
+                        target.SetLevel(SelectedFighter.GetLevel().ToString());
+                        target.SetHealth(SelectedFighter.GetHealth().ToString());
+                        target.SetMana(SelectedFighter.GetMana().ToString());
+                        Targets.Add(target);
+                        break;
+                    }
+                default:
+                    Debug.LogError("Error! Unexpected SelectedMove.GetTargetType() in MoveSelectionChanged!");
+                    break;
+            }
+
+            foreach (Fighter target in FighterTargets)
+            {
+                Target targetInfo = new Target();
+                targetInfo.SetName(target.GetName());
+                targetInfo.SetLevel(target.GetLevel().ToString());
+                targetInfo.SetHealth(target.GetHealth().ToString());
+                targetInfo.SetMana(target.GetMana().ToString());
+                Targets.Add(targetInfo);
+            }
+
+            TargetsListView.itemsSource = Targets;
+            TargetsListView.Rebuild();
+        }
+        else
+        {
+            Targets = new List<Target>();
+            TargetsListView.itemsSource = Targets;
+            TargetsListView.Rebuild();
+        }
+    }
 
     public void OnAdvanceClickEvent()
     {
@@ -165,6 +311,7 @@ public class SelectMove : MonoBehaviour
         Moves = GetPossibleMoves(moveType);
         MovesListView.itemsSource = Moves;
         SortMoves();
+        MoveSelectionChanged(MovesListView.selectedItems);
     }
 
     public void SortMoves()
@@ -259,7 +406,7 @@ public class SelectMove : MonoBehaviour
         CurrentlySelectedTab = OffensiveTab;
         CurrentlySelectedTab.AddToClassList("selected");
         //Moves = GetPossibleMoves(Enums.MoveType.Offensive);
-        Moves = SelectedFighter.GetMoves(Enums.MoveType.Offensive);
+        Moves = new List<Move>();//SelectedFighter.GetMoves(Enums.MoveType.Offensive);
 
         NameTab = root.Q<VisualElement>(name:"NameTab");
         NameTab.RegisterCallback<ClickEvent>(evt => OnSubTabClickEvent(NameTab));
@@ -274,6 +421,7 @@ public class SelectMove : MonoBehaviour
         CurrentlySelectedSubTab = LevelTab;
         CurrentlySelectedSubTab.AddToClassList("selected");
 
+        TargetsListView = root.Q<ListView>("TargetsListView");  
         MovesListView = root.Q<ListView>("MovesListView");        
         /*MovesListView.selectionChanged += selectedItems =>
         {
@@ -282,6 +430,7 @@ public class SelectMove : MonoBehaviour
                 Debug.Log($"Selected: {move.GetName()}");
             }
         };*/
+        ConfigureTargetsListView();
         ConfigureMovesListView();
 
         NameLabel = root.Q<Label>(name:"NameLabel");
@@ -292,6 +441,7 @@ public class SelectMove : MonoBehaviour
         HealthLabel.text = "Health: 100";
         ManaLabel = root.Q<Label>(name:"ManaLabel");
         ManaLabel.text = "Mana: 100";
+        //ConfigureForFighter(SelectedFighter);
 
         AdvanceButton = root.Q<Button>("AdvanceButton");
         AdvanceButton.RegisterCallback<ClickEvent>(evt => OnAdvanceClickEvent());

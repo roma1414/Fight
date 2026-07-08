@@ -2264,23 +2264,24 @@ public class Fight : MonoBehaviour
         return rangedHit;
     }
 
-    public MoveEvent GetMoveEvent(Fighter fighter)
+    public IEnumerator GetMoveEvent(Fighter fighter, System.Action<MoveEvent> onMoveEventReady)
     {
         if (fighter.GetControlType() == Enums.ControlType.CPU)
         {
-            return fighter.GetAI().GetCPUMoveEvent(this, fighter);
+            onMoveEventReady(fighter.GetAI().GetCPUMoveEvent(this, fighter));
+            yield break;
         }
 
-        // Get move selection from human-controlled user. CPU for now, until that function exists. TODO
-        return SelectMoveUI.GetUserMoveEvent(fighter);
+        yield return SelectMoveUI.GetUserMoveEvent(fighter, onMoveEventReady);
     }
 
-    public List<MoveEvent> GetMoveEventList()
+    public IEnumerator GetMoveEventList(System.Action<List<MoveEvent>> onMoveEventListReady)
     {
         List<MoveEvent> moveEvents = new List<MoveEvent>();
         foreach (Fighter fighter in Fighters)
         {
-            MoveEvent moveEvent = GetMoveEvent(fighter);
+            MoveEvent moveEvent = null;
+            yield return GetMoveEvent(fighter, result => moveEvent = result);
             moveEvents.Add(moveEvent);
         }
 
@@ -2317,7 +2318,7 @@ public class Fight : MonoBehaviour
         finalMoveEvents.AddRange(subMoveEvents);
         finalMoveEvents.AddRange(generalMoveEvents);
 
-        return finalMoveEvents;
+        onMoveEventListReady(finalMoveEvents);
     }
 
     public MoveEvent GetMoveEventWithActualAttackersAndTargets(MoveEvent originalMoveEvent)
@@ -2396,6 +2397,8 @@ public class Fight : MonoBehaviour
         Debug.LogError("Error! Unknown team[" + team + "] in Fight.GetTeamList. Returning null.");
         return null;
     }
+
+    public int GetTeams() { return Teams; }
 
     public void InitFight()
     {
@@ -2941,7 +2944,7 @@ public class Fight : MonoBehaviour
         }
     }
 
-    private void Start()
+    private IEnumerator Start()
     {
         InitFight();
 
@@ -2956,7 +2959,8 @@ public class Fight : MonoBehaviour
             mWriter.WriteLine("Round " + RoundNumber + "\n");
             DisplayTeamsText();
 
-            List<MoveEvent> moveEventList = GetMoveEventList();
+            List<MoveEvent> moveEventList = null;
+            yield return GetMoveEventList(result => moveEventList = result);
 
             foreach (MoveEvent moveEvent in moveEventList)
             {
