@@ -29,6 +29,14 @@ public class MoveEvent
     public void AddRandomAdd(float randomAdd) { RandomAdds.Add(randomAdd); }
     public void AddTarget(Fighter target) { Targets.Add(target); }
 
+    public void AddTargets(List<Fighter> targets)
+    {
+        foreach (Fighter target in targets)
+        {
+            Targets.Add(target);
+        }
+    }
+
     public bool CheckCombineAttacks()
     {
         foreach (Fighter fighter in Fighters)

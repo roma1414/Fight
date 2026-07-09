@@ -895,6 +895,14 @@ public class AI : ScriptableObject
                 {
                     int targetTeam = GetTargetTeam(fight, fighter, offensiveMove);
                     moveEvent.SetTargetTeam(targetTeam);
+                    List<Fighter> targets = fight.GetTeamList(targetTeam);
+                    moveEvent.AddTargets(targets);
+                    break;
+                }
+            case Enums.TargetType.AllEnemies:
+                {
+                    List<Fighter> targets = GetEnemies(fight, fighter);
+                    moveEvent.AddTargets(targets);
                     break;
                 }
             default:

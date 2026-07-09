@@ -20,6 +20,7 @@ public class SelectMove : MonoBehaviour
     protected Label                     NameLabel, RoundLabel, HealthLabel, ManaLabel;
     protected Button                    AdvanceButton;
     protected Move                      SelectedMove;
+    protected Target                    SelectedTarget;
     protected bool                      Advance = false;
 
     void BindMoveItem(VisualElement element, int index)
@@ -100,17 +101,52 @@ public class SelectMove : MonoBehaviour
 
         Advance = false;
         SelectedMove = null;
+        SelectedTarget = null;
         yield return WaitForSelection();
 
         MoveEvent moveEvent = new MoveEvent();
         moveEvent.AddFighter(SelectedFighter);
+        moveEvent.AddMove(SelectedMove);
         moveEvent.AddRandomAdd(Fight.RandomAdd());
         moveEvent.SetMoveType(SelectedMove.GetMoveType());
-        moveEvent.AddMove(SelectedMove);
 
-        moveEvent.SetTargetType(Enums.TargetType.OneEnemy);
-        List<Fighter> enemies = AI.GetEnemies(Fight, SelectedFighter);
-        moveEvent.AddTarget(enemies[Random.Range(0, enemies.Count)]);
+        moveEvent.SetTargetType(SelectedMove.GetTargetType());
+        switch (SelectedTarget.GetTargetType())
+        {
+            case Enums.TargetType.OneEnemy:
+            case Enums.TargetType.EnemiesWithStatuses:
+            case Enums.TargetType.OneTeamMember:
+            case Enums.TargetType.TeamMembersWithStatuses:
+                moveEvent.AddTarget(SelectedTarget.GetFighterTarget());
+                break;
+            case Enums.TargetType.EnemyTeam:
+                {
+                    List<Fighter> enemyTeam = Fight.GetTeamList(SelectedTarget.GetTargetTeam());
+                    moveEvent.AddTargets(enemyTeam);
+                    moveEvent.SetTargetTeam(SelectedTarget.GetTargetTeam());
+                    break;
+                }
+            case Enums.TargetType.AllEnemies:
+                {
+                    List<Fighter> enemies = AI.GetEnemies(Fight, SelectedFighter);
+                    moveEvent.AddTargets(enemies);
+                    break;
+                }
+            case Enums.TargetType.Team:
+                {
+                    moveEvent.SetTargetTeam(SelectedTarget.GetTargetTeam());
+                    List<Fighter> team = Fight.GetTeamList(SelectedFighter.GetTeam());
+                    moveEvent.AddTargets(team);
+                    moveEvent.SetTargetTeam(SelectedFighter.GetTeam());
+                    break;
+                }
+            case Enums.TargetType.Self:
+                moveEvent.AddTarget(SelectedFighter);
+                break;
+            default:
+                Debug.LogError("Error! Unexpected SelectedTarget.GetTargetType() in GetUserMoveEvent!");
+                break;
+        }
 
         onMoveEventSelected(moveEvent);
     }
@@ -124,7 +160,7 @@ public class SelectMove : MonoBehaviour
         {
             SelectedMove = (Move)MovesListView.selectedItem;
             Targets = new List<Target>();
-            List<Fighter>FighterTargets = new List<Fighter>();
+            List<Fighter> FighterTargets = new List<Fighter>();
 
             switch (SelectedMove.GetTargetType())
             {
@@ -151,6 +187,8 @@ public class SelectMove : MonoBehaviour
                                 target.SetLevel("");
                                 target.SetHealth("");
                                 target.SetMana("");
+                                target.SetTargetType(Enums.TargetType.EnemyTeam);
+                                target.SetTargetTeam(i);
                                 Targets.Add(target);
                             }
                         }
@@ -163,6 +201,7 @@ public class SelectMove : MonoBehaviour
                         target.SetLevel("");
                         target.SetHealth("");
                         target.SetMana("");
+                        target.SetTargetType(Enums.TargetType.AllEnemies);
                         Targets.Add(target);
                         break;
                     }
@@ -195,6 +234,8 @@ public class SelectMove : MonoBehaviour
                         target.SetLevel("");
                         target.SetHealth("");
                         target.SetMana("");
+                        target.SetTargetType(Enums.TargetType.Team);
+                        target.SetTargetTeam(SelectedFighter.GetTeam());
                         Targets.Add(target);
                         break;
                     }
@@ -214,6 +255,7 @@ public class SelectMove : MonoBehaviour
                         target.SetLevel(SelectedFighter.GetLevel().ToString());
                         target.SetHealth(SelectedFighter.GetHealth().ToString());
                         target.SetMana(SelectedFighter.GetMana().ToString());
+                        target.SetTargetType(Enums.TargetType.Self);
                         Targets.Add(target);
                         break;
                     }
@@ -229,6 +271,15 @@ public class SelectMove : MonoBehaviour
                 targetInfo.SetLevel(target.GetLevel().ToString());
                 targetInfo.SetHealth(target.GetHealth().ToString());
                 targetInfo.SetMana(target.GetMana().ToString());
+                targetInfo.SetFighterTarget(target);
+                if (target.GetTeam() == SelectedFighter.GetTeam())
+                {
+                    targetInfo.SetTargetType(Enums.TargetType.OneTeamMember);
+                }
+                else
+                {
+                    targetInfo.SetTargetType(Enums.TargetType.OneEnemy);
+                }
                 Targets.Add(targetInfo);
             }
 
@@ -245,9 +296,10 @@ public class SelectMove : MonoBehaviour
 
     public void OnAdvanceClickEvent()
     {
-        if (MovesListView.selectedItem != null)
+        if (MovesListView.selectedItem != null && TargetsListView.selectedItem != null)
         {
             SelectedMove = (Move)MovesListView.selectedItem;
+            SelectedTarget = (Target)TargetsListView.selectedItem;
             Advance = true;
         }
     }
