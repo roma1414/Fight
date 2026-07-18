@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-using System.Threading.Tasks;
-
 public class SelectMove : MonoBehaviour
 {
     [SerializeField] UIDocument         uiDocument;
@@ -26,10 +24,17 @@ public class SelectMove : MonoBehaviour
     protected bool                      Advance = false;
     protected Image                     Portrait;
 
-    public async void AnimatePortrait()
+    public IEnumerator AnimatePortrait(Fighter fighter)
     {
+        Portrait.RemoveFromClassList("PortraitQuote");
+        yield return null;
+
+        Portrait.image = fighter.GetArt().GetPortrait();
         Portrait.AddToClassList("PortraitQuote");
-        await Task.Delay(2000);
+        yield return new WaitForSeconds(1f);
+
+        Portrait.RemoveFromClassList("PortraitQuote");
+        Portrait.image = null;
     }
 
     void BindMoveItem(VisualElement element, int index)

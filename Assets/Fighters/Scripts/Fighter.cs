@@ -13,7 +13,7 @@ public class Fighter : MonoBehaviour
     [SerializeField] protected Enums.FightingStyle  FightingStyle;
     [SerializeField] protected AI                   AI;
     [SerializeField] protected ulong                ID;
-    [SerializeField] protected Images               Images;
+    [SerializeField] protected FighterArt           Art;
     [SerializeField] protected Weapon               Weapon;
     [SerializeField] protected List<Enums.Nature>   Natures;
     [SerializeField] protected List<Enums.Trait>    Traits;
@@ -389,6 +389,7 @@ public class Fighter : MonoBehaviour
 
     public bool CheckTraitOwned(Enums.Trait trait) { return Traits.Contains(trait); }
     public AI GetAI() { return AI; }
+    public FighterArt GetArt() { return Art; }
     public List<AttributeBonus> GetAttributeBonuses() { return AttributeBonuses; }
     public List<Enums.Nature> GetBonusNatures() { return BonusNatures; }
     public List<Enums.Trait> GetBonusTraits() { return BonusTraits; }
@@ -429,13 +430,6 @@ public class Fighter : MonoBehaviour
         return castingSpeed;
     }
 
-    public int GetMana() { return Mana; }
-
-    public static float GetManaRating(int mana)
-    {
-        return ((float)mana / 100.0f) * 5f;
-    }
-
     public Enums.ControlType GetControlType() { return ControlType; }
     public float GetDamageCo() { return Mathf.Max(1 - GetDamageResistance(), MIN_DAMAGE_RESISTANCE_CO); }
     public float GetDamageResistance() { return DamageResistance + GetTotalAttributeBonus(Enums.Attribute.DamageResistance); }
@@ -461,6 +455,13 @@ public class Fighter : MonoBehaviour
     public ulong GetID() { return ID; }
     public float GetIntelligence() { return Intelligence + GetTotalAttributeBonus(Enums.Attribute.Intelligence); }
     public float GetLevel() { return Level; }
+    public int GetMana() { return Mana; }
+
+    public static float GetManaRating(int mana)
+    {
+        return ((float)mana / 100.0f) * 5f;
+    }
+    
     public int GetMaxMana() { return MaxMana + (int)(GetTotalAttributeBonus(Enums.Attribute.Mana) + 0.5f); } // .5 is for rounding
     public float GetMaxManaRating() { return GetManaRating(MaxMana); }
 

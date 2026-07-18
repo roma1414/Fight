@@ -403,7 +403,7 @@ MonoBehaviour:
   FightingStyle: 3
   AI: {fileID: 11400000, guid: a63555b92f11f0f42a9184aa4c97ab4c, type: 2}
   ID: 2
-  Images: {fileID: 0}
+  Art: {fileID: 0}
   Weapon: {fileID: 0}
   Natures: 1000
   Traits: 
@@ -461,7 +461,7 @@ MonoBehaviour:
   Speed: 2
   Strength: 1
   Intelligence: 6
-  DamageResistance: 0
+  DamageResistance: 0.99
   Mana: 180
   MaxMana: 180
   Health: 100
@@ -471,7 +471,7 @@ MonoBehaviour:
   FightingStyle: 3
   AI: {fileID: 11400000, guid: a63555b92f11f0f42a9184aa4c97ab4c, type: 2}
   ID: 2
-  Images: {fileID: 0}
+  Art: {fileID: 11400000, guid: 6e79f7bc8bb854c60b03461919014328, type: 2}
   Weapon: {fileID: 0}
   Natures: 
   Traits: 
@@ -542,14 +542,13 @@ MonoBehaviour:
   FightingStyle: 1
   AI: {fileID: 11400000, guid: 56eb54d9b48509c4db48b26ccde66167, type: 2}
   ID: 1
-  Images: {fileID: 0}
+  Art: {fileID: 0}
   Weapon: {fileID: 0}
   Natures: 
   Traits: 
   Moves:
   - {fileID: 11400000, guid: 3b2e4194d981746b7811ed2235b6baf9, type: 2}
   - {fileID: 11400000, guid: 5e2a6cc19aa20486d9724a52e244134d, type: 2}
-  - {fileID: 11400000, guid: d4524c7d97981474f90d29d5ec441f1e, type: 2}
 --- !u!4 &1789790782
 Transform:
   m_ObjectHideFlags: 0

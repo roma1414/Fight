@@ -858,7 +858,7 @@ public class Fight : MonoBehaviour
         fighter.AddUsedMove(medicalMove, RoundNumber);
     }
 
-    public void ExecuteMoveEvent(MoveEvent moveEvent)
+    public IEnumerator ExecuteMoveEvent(MoveEvent moveEvent)
     {
         PrintAttackString(moveEvent);
 
@@ -871,7 +871,7 @@ public class Fight : MonoBehaviour
             case Enums.MoveType.NinTai:
             case Enums.MoveType.Projectile:
             case Enums.MoveType.Offensive:
-                ExecuteOffensiveMoveEvent(moveEvent);
+                yield return ExecuteOffensiveMoveEvent(moveEvent);
                 break;
             case Enums.MoveType.PowerUp:
                 ExecutePowerUpMoveEvent(moveEvent);
@@ -1238,7 +1238,7 @@ public class Fight : MonoBehaviour
         }
     }
 
-    public void ExecuteOffensiveMoveEvent(MoveEvent originalMoveEvent)
+    public IEnumerator ExecuteOffensiveMoveEvent(MoveEvent originalMoveEvent)
     {
         MoveEvent moveEvent = GetMoveEventWithActualAttackersAndTargets(originalMoveEvent);
 
@@ -1248,6 +1248,11 @@ public class Fight : MonoBehaviour
         List<Move> offensiveMoves = moveEvent.GetMoves();
         List<float> attackerRandomAdds = moveEvent.GetRandomAdds();
         List<Fighter> targets = moveEvent.GetTargets();
+
+        if (fighters[0].GetName() == "Fire Mage")
+        {
+            yield return SelectMoveUI.AnimatePortrait(fighters[0]);
+        }
 
         foreach (Fighter target in targets)
         {
@@ -2966,7 +2971,7 @@ public class Fight : MonoBehaviour
             {
                 if (CheckIfShouldExecuteMoveEvent(moveEvent) == true)
                 {
-                    ExecuteMoveEvent(moveEvent);
+                    yield return ExecuteMoveEvent(moveEvent);
 
                     if (CheckForEndOfFight() == true)
                     {
