@@ -12,19 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f22992ffeb079114cabf4a66b094a39c, type: 3}
   m_Name: WildInferno
   m_EditorClassIdentifier: Assembly-CSharp::Move
-  Name: 
-  Level: 0
-  Mana: 0
+  Name: Wild Inferno
+  Level: 8
+  Mana: 60
   RoundsToCast: 0
   UsesPerFight: 0
-  CastingSpeed: 0
+  CastingSpeed: 2
   ID: 0
   Occular: 0
   UseMeleSkill: 0
   RequiredTargetStatuses: 
-  TargetType: 0
-  MoveType: 0
-  Natures: 
+  TargetType: 2
+  MoveType: 1
+  Natures: 0400
   MoveAnimations: {fileID: 0}
   Number: 0
   CloneStrength: 0
@@ -38,10 +38,10 @@ MonoBehaviour:
   HealthAmount: 0
   ManaRestoreAmount: 0
   HealType: 0
-  Damage: 0
+  Damage: 75
   Duration: 0
-  Accuracy: 0
-  Absorbed: 0
+  Accuracy: 7
+  Absorbed: 1
   TouchSuccess: 0
   DamageType: 0
   StatusTypes: 

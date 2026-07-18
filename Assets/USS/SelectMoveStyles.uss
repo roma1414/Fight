@@ -41,3 +41,17 @@
     background-color: rgb(255, 255, 255);
     transition-duration: 0.15s;
 }
+
+.Portrait {
+    translate: -50% 25%;
+    transition-property: translate;
+    transition-duration: 1s;
+    transition-timing-function: ease-out;
+    width: 15%;
+    height: 50%;
+    background-color: rgb(255, 0, 0);
+}
+
+.PortraitQuote {
+    translate: 0 0;
+}

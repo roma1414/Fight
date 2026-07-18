@@ -357,6 +357,74 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &872982785
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 872982787}
+  - component: {fileID: 872982786}
+  m_Layer: 0
+  m_Name: WaterWitch
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &872982786
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 872982785}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4feff7ba81aada2428e3ed14f8e11b54, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Fighter
+  Name: Water Witch
+  Spellcraft: 9
+  Melee: 1
+  Psychic: 6
+  Speed: 2
+  Strength: 1
+  Intelligence: 6
+  DamageResistance: 0
+  Mana: 180
+  MaxMana: 180
+  Health: 100
+  Level: 10
+  Team: 2
+  ControlType: 1
+  FightingStyle: 3
+  AI: {fileID: 11400000, guid: a63555b92f11f0f42a9184aa4c97ab4c, type: 2}
+  ID: 2
+  Images: {fileID: 0}
+  Weapon: {fileID: 0}
+  Natures: 1000
+  Traits: 
+  Moves:
+  - {fileID: 11400000, guid: 3b2e4194d981746b7811ed2235b6baf9, type: 2}
+  - {fileID: 11400000, guid: d5c261949d4dbe740a33d1e39b3ff7e8, type: 2}
+--- !u!4 &872982787
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 872982785}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1512450205
 GameObject:
   m_ObjectHideFlags: 0
@@ -368,7 +436,7 @@ GameObject:
   - component: {fileID: 1512450207}
   - component: {fileID: 1512450206}
   m_Layer: 0
-  m_Name: FireWitch
+  m_Name: FireMage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -386,7 +454,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4feff7ba81aada2428e3ed14f8e11b54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Fighter
-  Name: Fire Witch
+  Name: Fire Mage
   Spellcraft: 9
   Melee: 1
   Psychic: 6
@@ -412,6 +480,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: d5c261949d4dbe740a33d1e39b3ff7e8, type: 2}
   - {fileID: 11400000, guid: 3a9d010988cade8489beef962a949ca9, type: 2}
   - {fileID: 11400000, guid: 28c53b5eb0f824e3cb1d959ec13c4b4e, type: 2}
+  - {fileID: 11400000, guid: 5c7dcfc142d5a4211a2025e7ebe7e6fe, type: 2}
 --- !u!4 &1512450207
 Transform:
   m_ObjectHideFlags: 0
@@ -438,7 +507,7 @@ GameObject:
   - component: {fileID: 1789790782}
   - component: {fileID: 1789790781}
   m_Layer: 0
-  m_Name: Knight
+  m_Name: Paladin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -456,16 +525,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4feff7ba81aada2428e3ed14f8e11b54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Fighter
-  Name: Knight
-  Spellcraft: 0
-  Melee: 9
+  Name: Paladin
+  Spellcraft: 5
+  Melee: 8
   Psychic: 0
   Speed: 5
   Strength: 8
   Intelligence: 3
   DamageResistance: 0.15
-  Mana: 80
-  MaxMana: 80
+  Mana: 100
+  MaxMana: 100
   Health: 100
   Level: 10
   Team: 1
@@ -604,6 +673,7 @@ MonoBehaviour:
   Teams: 2
   Team1:
   - {fileID: 1789790781}
+  - {fileID: 872982786}
   Team2:
   - {fileID: 1512450206}
   Team3: []
@@ -630,5 +700,6 @@ SceneRoots:
   - {fileID: 619394802}
   - {fileID: 2112688911}
   - {fileID: 1789790782}
-  - {fileID: 1512450207}
+  - {fileID: 872982787}
   - {fileID: 2014911276}
+  - {fileID: 1512450207}

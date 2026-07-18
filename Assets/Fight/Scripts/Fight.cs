@@ -1349,7 +1349,7 @@ public class Fight : MonoBehaviour
     public void ExecuteProtectMoveEvent(MoveEvent moveEvent)
     {
         Protection protection = new Protection();
-        protection.SetProtected(moveEvent.GetFighters()[0]);
+        protection.SetProtector(moveEvent.GetFighters()[0]);
         protection.SetProtected(moveEvent.GetTargets()[0]);
 
         Protections.Add(protection);

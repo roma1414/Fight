@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
+using System.Threading.Tasks;
+
 public class SelectMove : MonoBehaviour
 {
     [SerializeField] UIDocument         uiDocument;
@@ -22,6 +24,13 @@ public class SelectMove : MonoBehaviour
     protected Move                      SelectedMove;
     protected Target                    SelectedTarget;
     protected bool                      Advance = false;
+    protected Image                     Portrait;
+
+    public async void AnimatePortrait()
+    {
+        Portrait.AddToClassList("PortraitQuote");
+        await Task.Delay(2000);
+    }
 
     void BindMoveItem(VisualElement element, int index)
     {
@@ -497,6 +506,8 @@ public class SelectMove : MonoBehaviour
 
         AdvanceButton = root.Q<Button>("AdvanceButton");
         AdvanceButton.RegisterCallback<ClickEvent>(evt => OnAdvanceClickEvent());
+
+        Portrait = root.Q<Image>("Portrait");
     }
 
     // Update is called once per frame
