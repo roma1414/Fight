@@ -1,0 +1,75 @@
+Round 1
+
+Paladin  +  Water Witch  vs  Fire Mage  +  Mystic Assassin
+
+Paladin   Overall: 6.78  Health: 100  Mana: 100  Health Co = 1
+Water Witch   Overall: 8.01  Health: 100  Mana: 180  Health Co = 1
+
+Fire Mage   Overall: 8.01  Health: 100  Mana: 180  Health Co = 1
+Mystic Assassin   Overall: 7.15  Health: 100  Mana: 140  Health Co = 1
+
+###################################################################
+###################################################################
+
+Fire Mage uses Fire Storm against Team 1!
+It hits Paladin and does 61 damage!
+It hits Water Witch and does 50 damage!
+Mystic Assassin uses Slash against Water Witch!
+It hits Water Witch and does 28 damage!
+Water Witch uses Shark Missile against Mystic Assassin!
+It misses Mystic Assassin!
+Paladin uses Slash against Mystic Assassin!
+It misses Mystic Assassin!
+
+
+Round 2
+
+Paladin  +  Water Witch  vs  Fire Mage  +  Mystic Assassin
+
+Paladin   Overall: 4.38384  Health: 39  Mana: 100  Health Co = 0.616
+Water Witch   Overall: 7.86808  Health: 22  Mana: 168  Health Co = 0.4346667
+
+Fire Mage   Overall: 7.56  Health: 100  Mana: 130  Health Co = 1
+Mystic Assassin   Overall: 7.15  Health: 100  Mana: 140  Health Co = 1
+
+###################################################################
+###################################################################
+
+Paladin uses Slash against Mystic Assassin!
+It misses Mystic Assassin!
+Mystic Assassin uses Straight Punch against Water Witch!
+It hits Water Witch and does 19 damage!
+Fire Mage uses Fireball against Water Witch!
+It hits Water Witch and does 47 damage!
+Water Witch is defeated!
+
+
+Round 3
+
+Paladin  vs  Fire Mage  +  Mystic Assassin
+
+Paladin   Overall: 4.38384  Health: 39  Mana: 100  Health Co = 0.616
+
+Fire Mage   Overall: 7.335  Health: 100  Mana: 105  Health Co = 1
+Mystic Assassin   Overall: 7.15  Health: 100  Mana: 140  Health Co = 1
+
+###################################################################
+###################################################################
+
+Paladin uses Straight Punch against Mystic Assassin!
+It misses Mystic Assassin!
+Fire Mage uses Fire Storm against Team 1!
+It hits Paladin and does 56 damage!
+Paladin is defeated!
+
+###################################################################
+###################################################################
+
+The fight is over!
+Team 2 wins!
+Number of rounds: 3
+Surviving fighters:
+
+Fire Mage  Health: 100  Mana: 55
+Mystic Assassin  Health: 100  Mana: 140
+

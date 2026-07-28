@@ -9,27 +9,41 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0c136b2fd7ac6b84cb544eac10b6d74a, type: 3}
-  m_Name: KnightShield
-  m_EditorClassIdentifier: 
-  Name: Knight Shield
-  Level: 5
+  m_Script: {fileID: 11500000, guid: f22992ffeb079114cabf4a66b094a39c, type: 3}
+  m_Name: Shield
+  m_EditorClassIdentifier: Assembly-CSharp::Move
+  Name: Shield
+  Level: 4
   Mana: 0
   RoundsToCast: 0
   UsesPerFight: 0
   CastingSpeed: 10
   ID: 0
   Occular: 0
-  UseMeleSkill: 1
+  UseMeleSkill: 0
   RequiredTargetStatuses: 
   TargetType: 4
   MoveType: 8
   Natures: 
   MoveAnimations: {fileID: 0}
+  Number: 0
+  CloneStrength: 0
   UsesPerRound: 0
   MaxLevelAvoided: 0
-  WorksAgaintsMelee: 0
+  WorksAgaintsMelee: 1
   WorksAgainstRanged: 1
   Absorbing: 0
-  OccularSuccess: 1
+  OccularSuccess: 0
   TouchFail: 1
+  HealthAmount: 0
+  ManaRestoreAmount: 0
+  HealType: 0
+  Damage: 0
+  Duration: 0
+  Accuracy: 0
+  Absorbed: 0
+  TouchSuccess: 0
+  DamageType: 0
+  StatusTypes: 
+  BonusData: {fileID: 0}
+  Summons: []

@@ -410,6 +410,10 @@ MonoBehaviour:
   Moves:
   - {fileID: 11400000, guid: 3b2e4194d981746b7811ed2235b6baf9, type: 2}
   - {fileID: 11400000, guid: d5c261949d4dbe740a33d1e39b3ff7e8, type: 2}
+  - {fileID: 11400000, guid: d397757c00c4045f18074db5fa48fe68, type: 2}
+  - {fileID: 11400000, guid: 4ad11e5da2c2044df9988fb0bd9b211a, type: 2}
+  - {fileID: 11400000, guid: 5e2a6cc19aa20486d9724a52e244134d, type: 2}
+  - {fileID: 11400000, guid: 7d6b9412efb6c4176add8840f9a888d2, type: 2}
 --- !u!4 &872982787
 Transform:
   m_ObjectHideFlags: 0
@@ -461,19 +465,19 @@ MonoBehaviour:
   Speed: 2
   Strength: 1
   Intelligence: 6
-  DamageResistance: 0.99
+  DamageResistance: 0
   Mana: 180
   MaxMana: 180
   Health: 100
   Level: 10
   Team: 2
-  ControlType: 0
+  ControlType: 1
   FightingStyle: 3
-  AI: {fileID: 11400000, guid: a63555b92f11f0f42a9184aa4c97ab4c, type: 2}
+  AI: {fileID: 11400000, guid: 5c4a98beb2d344374be1a5d6f13f9ea4, type: 2}
   ID: 2
   Art: {fileID: 11400000, guid: 6e79f7bc8bb854c60b03461919014328, type: 2}
   Weapon: {fileID: 0}
-  Natures: 
+  Natures: 0400
   Traits: 
   Moves:
   - {fileID: 11400000, guid: 3b2e4194d981746b7811ed2235b6baf9, type: 2}
@@ -481,6 +485,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 3a9d010988cade8489beef962a949ca9, type: 2}
   - {fileID: 11400000, guid: 28c53b5eb0f824e3cb1d959ec13c4b4e, type: 2}
   - {fileID: 11400000, guid: 5c7dcfc142d5a4211a2025e7ebe7e6fe, type: 2}
+  - {fileID: 11400000, guid: 4a9543fa68a7a4a77913fa8a8a13b6e9, type: 2}
+  - {fileID: 11400000, guid: 5e2a6cc19aa20486d9724a52e244134d, type: 2}
 --- !u!4 &1512450207
 Transform:
   m_ObjectHideFlags: 0
@@ -532,7 +538,7 @@ MonoBehaviour:
   Speed: 5
   Strength: 8
   Intelligence: 3
-  DamageResistance: 0.15
+  DamageResistance: 0.2
   Mana: 100
   MaxMana: 100
   Health: 100
@@ -549,6 +555,8 @@ MonoBehaviour:
   Moves:
   - {fileID: 11400000, guid: 3b2e4194d981746b7811ed2235b6baf9, type: 2}
   - {fileID: 11400000, guid: 5e2a6cc19aa20486d9724a52e244134d, type: 2}
+  - {fileID: 11400000, guid: d4524c7d97981474f90d29d5ec441f1e, type: 2}
+  - {fileID: 11400000, guid: 97b4d939c16024819b71cdfd0610d3fd, type: 2}
 --- !u!4 &1789790782
 Transform:
   m_ObjectHideFlags: 0
@@ -556,6 +564,75 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1789790780}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1810214936
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1810214938}
+  - component: {fileID: 1810214937}
+  m_Layer: 0
+  m_Name: MysticAssassin
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1810214937
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1810214936}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4feff7ba81aada2428e3ed14f8e11b54, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Fighter
+  Name: Mystic Assassin
+  Spellcraft: 7
+  Melee: 8
+  Psychic: 5
+  Speed: 9
+  Strength: 5
+  Intelligence: 7
+  DamageResistance: 0.15
+  Mana: 140
+  MaxMana: 140
+  Health: 100
+  Level: 10
+  Team: 2
+  ControlType: 1
+  FightingStyle: 0
+  AI: {fileID: 11400000, guid: f2884b357371e4ace93371c27330be7a, type: 2}
+  ID: 2
+  Art: {fileID: 0}
+  Weapon: {fileID: 0}
+  Natures: 0f00
+  Traits: 0000
+  Moves:
+  - {fileID: 11400000, guid: 3b2e4194d981746b7811ed2235b6baf9, type: 2}
+  - {fileID: 11400000, guid: 5e2a6cc19aa20486d9724a52e244134d, type: 2}
+  - {fileID: 11400000, guid: d4524c7d97981474f90d29d5ec441f1e, type: 2}
+--- !u!4 &1810214938
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1810214936}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -675,6 +752,7 @@ MonoBehaviour:
   - {fileID: 872982786}
   Team2:
   - {fileID: 1512450206}
+  - {fileID: 1810214937}
   Team3: []
 --- !u!4 &2112688911
 Transform:
@@ -702,3 +780,4 @@ SceneRoots:
   - {fileID: 872982787}
   - {fileID: 2014911276}
   - {fileID: 1512450207}
+  - {fileID: 1810214938}

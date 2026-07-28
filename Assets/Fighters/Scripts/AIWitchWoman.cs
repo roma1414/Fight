@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New WitchWomanAI", menuName = "Assets/AIs/New UchihaItachiAI")]
+[CreateAssetMenu(fileName = "New WitchWomanAI", menuName = "Assets/AIs/New WitchWomanAI")]
 public class AIWitchWoman : AI
 {
     public override MoveEvent GetCustomAIMoveEvent(Fight fight, Fighter fighter)

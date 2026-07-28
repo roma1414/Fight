@@ -379,9 +379,9 @@ public class Fight : MonoBehaviour
             {
                 Debug.LogError("Error! Unexpected MoveType [" + moveType + "] for MoveEvent passed into Fight.CombinMoveEvents!");
             }
-            if (moveEvent.GetTargets().Count > 1 || moveEvent.GetFighters().Count > 1)
+            if (moveEvent.GetFighters().Count > 1)
             {
-                Debug.LogError("Error! Unexpected nunber of targets [" + moveEvent.GetTargets().Count + "] or fighters [" + moveEvent.GetFighters().Count + "] for MoveEvent passed into Fight.CombinMoveEvents!");
+                Debug.LogError("Error! Unexpected nunber of fighters [" + moveEvent.GetFighters().Count + "] for MoveEvent passed into Fight.CombinMoveEvents!");
             }
         }
 
@@ -504,7 +504,7 @@ public class Fight : MonoBehaviour
             meleeMoveEvent.AddTarget(meleeMoveEvents[0].GetTargets()[0]);
             meleeMoveEvent.SetTargetType(meleeMoveEvents[0].GetTargetType());
             meleeMoveEvent.SetEffectiveMoveEventCastingSpeed(minMoveEventCastingSpeed);
-            meleeMoveEvent.SetMoveType(Enums.MoveType.Offensive);
+            meleeMoveEvent.SetMoveType(meleeMoveEvents[0].GetMoveType());
 
             foreach (MoveEvent moveEvent in meleeMoveEvents)
             {
@@ -521,7 +521,7 @@ public class Fight : MonoBehaviour
             projectileMoveEvent.AddTarget(projectileMoveEvents[0].GetTargets()[0]);
             projectileMoveEvent.SetTargetType(projectileMoveEvents[0].GetTargetType());
             projectileMoveEvent.SetEffectiveMoveEventCastingSpeed(minMoveEventCastingSpeed);
-            projectileMoveEvent.SetMoveType(Enums.MoveType.Offensive);
+            projectileMoveEvent.SetMoveType(projectileMoveEvents[0].GetMoveType());
 
             foreach (MoveEvent moveEvent in projectileMoveEvents)
             {
@@ -2302,7 +2302,7 @@ public class Fight : MonoBehaviour
         {
             if (moveEvent.GetMoveType() != Enums.MoveType.Skip)
             {
-                switch (moveEvent.GetMoves()[0].GetMoveType())
+                switch (moveEvent.GetMoveType())
                 {
                     case Enums.MoveType.Substitution:
                         subMoveEvents.Add(moveEvent);

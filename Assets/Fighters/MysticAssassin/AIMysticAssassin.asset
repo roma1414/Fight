@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c717ec4fe48500a4cb13774b559e8a09, type: 3}
-  m_Name: AIPaladin
-  m_EditorClassIdentifier: 
-  SpellFraction: 0.2
-  MeleeFraction: 0.6
+  m_Name: AIMysticAssassin
+  m_EditorClassIdentifier: Assembly-CSharp::AI
+  SpellFraction: 0
+  MeleeFraction: 0.5
   PsychicFraction: 0
   CloneFraction: 0
   MedicalFraction: 0.75
-  NinTaiFraction: 0.2
-  ProjectileFraction: 0
+  NinTaiFraction: 0
+  ProjectileFraction: 0.5
   SubFraction: 0
   SummonFraction: 0
   CustomAI: 0

@@ -9,17 +9,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c717ec4fe48500a4cb13774b559e8a09, type: 3}
-  m_Name: AIPaladin
+  m_Script: {fileID: 11500000, guid: 48d26c7cb867a004e988b4092202409e, type: 3}
+  m_Name: AIWaterWitch
   m_EditorClassIdentifier: 
-  SpellFraction: 0.2
-  MeleeFraction: 0.6
+  SpellFraction: 0.9
+  MeleeFraction: 0
   PsychicFraction: 0
   CloneFraction: 0
   MedicalFraction: 0.75
-  NinTaiFraction: 0.2
+  NinTaiFraction: 0
   ProjectileFraction: 0
   SubFraction: 0
-  SummonFraction: 0
-  CustomAI: 0
+  SummonFraction: 0.1
+  CustomAI: 1
   ID: 0
