@@ -517,7 +517,6 @@ public class Fight : MonoBehaviour
         if (projectileMoveEvents.Count > 0)
         {
             MoveEvent projectileMoveEvent = new MoveEvent();
-            //projectileMoveEvent.SetMoveType(projectileMoveEvents[0].GetMoveType());
             projectileMoveEvent.AddTarget(projectileMoveEvents[0].GetTargets()[0]);
             projectileMoveEvent.SetTargetType(projectileMoveEvents[0].GetTargetType());
             projectileMoveEvent.SetEffectiveMoveEventCastingSpeed(minMoveEventCastingSpeed);
@@ -1249,10 +1248,10 @@ public class Fight : MonoBehaviour
         List<float> attackerRandomAdds = moveEvent.GetRandomAdds();
         List<Fighter> targets = moveEvent.GetTargets();
 
-        if (fighters[0].GetName() == "Fire Mage")
+        /*if (fighters[0].GetName() == "Fire Mage")
         {
             yield return SelectMoveUI.AnimatePortrait(fighters[0]);
-        }
+        }*/
 
         foreach (Fighter target in targets)
         {
@@ -1270,6 +1269,8 @@ public class Fight : MonoBehaviour
             fighter.RemoveSubstitution();
             fighter.AddUsedMove(offensiveMove, RoundNumber);
         }
+
+        yield break;
     }
 
     public void ExecutePowerUpMoveEvent(MoveEvent moveEvent)
@@ -1607,11 +1608,18 @@ public class Fight : MonoBehaviour
                         defensiveAction.SetDefensiveMove(defensiveMove);
                         defensiveAction.SetPower(defensiveMovePower);
 
-                        DefensiveAction protectorBestAction = protectorBestActionMap[protector];
-
-                        if (protectorBestAction == null || defensiveMovePower > protectorBestAction.GetPower())
+                        // If no defensive action is set yet, set it.
+                        if (protectorBestActionMap.ContainsKey(protector) == false)
                         {
                             protectorBestActionMap[protector] = defensiveAction;
+                        }
+                        else
+                        {
+                            DefensiveAction protectorBestAction = protectorBestActionMap[protector];
+                            if (defensiveMovePower > protectorBestAction.GetPower())
+                            {
+                                protectorBestActionMap[protector] = defensiveAction;
+                            }
                         }
 
                         if (defensiveMovePower >= attackPower)
@@ -2348,19 +2356,30 @@ public class Fight : MonoBehaviour
             Fighter fighter = fighters[index];
             Move move = null;
 
-            Enums.MoveType moveType = originalMoveEvent.GetMoveType();
-            move = originalMoveEvent.GetMoves()[index];
-
-            if (fighter.CheckIfAlive() == true && fighter.GetAI().CheckIfCanPerformMove(this, fighter, move) == true)
+            Enums.MoveType moveType = originalMoveEvent.GetMoveType();            
+            if (moveType == Enums.MoveType.Protect)
             {
-                if (moveType == Enums.MoveType.PowerUp ||
-                    moveType == Enums.MoveType.Protect ||
-                    fighter.CheckIfCanMove() == true ||
-                    (move.CheckOccular() == true && fighter.CheckStatus(Enums.StatusType.PsychicControl) == false && fighter.CheckStatus(Enums.StatusType.PsychicParalysis) == false))
+                if (fighter.CheckIfAlive() == true)
                 {
                     moveEvent.AddFighter(fighter);
                     moveEvent.AddRandomAdd(originalMoveEvent.GetRandomAdds()[index]);
-                    moveEvent.AddMove(originalMoveEvent.GetMoves()[index]);
+                }
+            }
+            else
+            {
+                move = originalMoveEvent.GetMoves()[index];
+
+                if (fighter.CheckIfAlive() == true && fighter.GetAI().CheckIfCanPerformMove(this, fighter, move) == true)
+                {
+                    if (moveType == Enums.MoveType.PowerUp ||
+                        moveType == Enums.MoveType.Protect ||
+                        fighter.CheckIfCanMove() == true ||
+                        (move.CheckOccular() == true && fighter.CheckStatus(Enums.StatusType.PsychicControl) == false && fighter.CheckStatus(Enums.StatusType.PsychicParalysis) == false))
+                    {
+                        moveEvent.AddFighter(fighter);
+                        moveEvent.AddRandomAdd(originalMoveEvent.GetRandomAdds()[index]);
+                        moveEvent.AddMove(originalMoveEvent.GetMoves()[index]);
+                    }
                 }
             }
         }
