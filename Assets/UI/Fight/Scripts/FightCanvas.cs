@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 //using UnityEngine.UIElements;
@@ -12,11 +13,17 @@ public class FightCanvas : MonoBehaviour
     [SerializeField] private Fighter        SelectedFighter;
     [SerializeField] private TMP_Text       NameText, RoundText, HealthText, ManaText;
     [SerializeField] private ToggleGroup    BottomTabs, TopTabs;
-    private Move                            SelectedMove;
-    private List<Move>                      Moves;
+    [SerializeField] private RectTransform  MovesContent;
+    [SerializeField] private MoveRowUI      MoveRowPrefab;
+    //private Move                            SelectedMove;
+    private List<Move>                      Moves = new List<Move>();
     private List<Target>                    Targets;
     private bool                            Advance = false;
     private bool                            SortDescending = true;
+    private MoveRowUI                       SelectedMoveRow;
+    public Move                             SelectedMove { get; private set; }
+    public event Action<Move>               SelectionChanged;
+    private readonly List<MoveRowUI>        MoveRows = new List<MoveRowUI>();
 
     public void ConfigureForFighter(Fighter fighter)
     {
@@ -50,7 +57,64 @@ public class FightCanvas : MonoBehaviour
         return possibleMoves;
     }
 
-    void MoveSelectionChanged(IEnumerable<object> selectedItems)
+    public IEnumerator GetUserMoveEvent(Fighter fighter, System.Action<MoveEvent> onMoveEventSelected)
+    {
+        SelectedFighter = fighter;
+        ConfigureForFighter(fighter);
+
+        Advance = false;
+        SelectedMove = null;
+        //SelectedTarget = null;
+        yield return WaitForSelection();
+
+        MoveEvent moveEvent = new MoveEvent();
+        moveEvent.AddFighter(SelectedFighter);
+        moveEvent.AddMove(SelectedMove);
+        moveEvent.AddRandomAdd(Fight.RandomAdd());
+        moveEvent.SetMoveType(SelectedMove.GetMoveType());
+
+        moveEvent.SetTargetType(SelectedMove.GetTargetType());
+        /*switch (SelectedTarget.GetTargetType())
+        {
+            case Enums.TargetType.OneEnemy:
+            case Enums.TargetType.EnemiesWithStatuses:
+            case Enums.TargetType.OneTeamMember:
+            case Enums.TargetType.TeamMembersWithStatuses:
+                moveEvent.AddTarget(SelectedTarget.GetFighterTarget());
+                break;
+            case Enums.TargetType.EnemyTeam:
+                {
+                    List<Fighter> enemyTeam = Fight.GetTeamList(SelectedTarget.GetTargetTeam());
+                    moveEvent.AddTargets(enemyTeam);
+                    moveEvent.SetTargetTeam(SelectedTarget.GetTargetTeam());
+                    break;
+                }
+            case Enums.TargetType.AllEnemies:
+                {
+                    List<Fighter> enemies = AI.GetEnemies(Fight, SelectedFighter);
+                    moveEvent.AddTargets(enemies);
+                    break;
+                }
+            case Enums.TargetType.Team:
+                {
+                    moveEvent.SetTargetTeam(SelectedTarget.GetTargetTeam());
+                    List<Fighter> team = Fight.GetTeamList(SelectedFighter.GetTeam());
+                    moveEvent.AddTargets(team);
+                    moveEvent.SetTargetTeam(SelectedFighter.GetTeam());
+                    break;
+                }
+            case Enums.TargetType.Self:
+                moveEvent.AddTarget(SelectedFighter);
+                break;
+            default:
+                Debug.LogError("Error! Unexpected SelectedTarget.GetTargetType() in GetUserMoveEvent!");
+                break;
+        }*/
+
+        onMoveEventSelected(moveEvent);
+    }
+
+    /*void MoveSelectionChanged(IEnumerable<object> selectedItems)
     {
         if (MovesListView.selectedItem != null)
         {
@@ -198,7 +262,7 @@ public class FightCanvas : MonoBehaviour
             SelectedTarget = (Target)TargetsListView.selectedItem;
             Advance = true;
         }
-    }
+    }*/
 
     public void OnBottomTabClickEvent(string tabName)
     {
@@ -214,39 +278,82 @@ public class FightCanvas : MonoBehaviour
     public void OnTopTabClickEvent(string tabName)
     {
         Toggle selected = TopTabs.ActiveToggles().FirstOrDefault();
-        if (selected.name != tabName)
+        Enums.MoveType moveType = Enums.MoveType.Offensive;
+        switch (tabName)
         {
-            Enums.MoveType moveType = Enums.MoveType.Offensive;
-            switch (tabName)
-            {
-                case "OffensiveTab":
-                    moveType = Enums.MoveType.Offensive;
-                    break;
-                case "MedicalTab":
-                    moveType = Enums.MoveType.Medical;
-                    break;
-                case "PowerUpTab":
-                    moveType = Enums.MoveType.PowerUp;
-                    break;
-                case "SummonTab":
-                    moveType = Enums.MoveType.Summon;
-                    break;
-                case "SubTab":
-                    moveType = Enums.MoveType.Substitution;
-                    break;
-                case "ProtectTab":
-                    moveType = Enums.MoveType.Protect;
-                    break;
-                default:
-                    Debug.LogError("Error! Unexpected CurrentlySelectedTab.name in UpdateMovesForTab!");
-                    break;
-            }
-
-            Moves = GetPossibleMoves(moveType);
-            //MovesListView.itemsSource = Moves;
-            SortMoves();
-            //MoveSelectionChanged(MovesListView.selectedItems);
+            case "OffensiveTab":
+                moveType = Enums.MoveType.Offensive;
+                break;
+            case "MedicalTab":
+                moveType = Enums.MoveType.Medical;
+                break;
+            case "PowerUpTab":
+                moveType = Enums.MoveType.PowerUp;
+                break;
+            case "SummonTab":
+                moveType = Enums.MoveType.Summon;
+                break;
+            case "SubTab":
+                moveType = Enums.MoveType.Substitution;
+                break;
+            case "OtherTab":
+                moveType = Enums.MoveType.Protect;
+                break;
+            default:
+                Debug.LogError("Error! Unexpected CurrentlySelectedTab.name in UpdateMovesForTab!");
+                break;
         }
+
+        Moves = GetPossibleMoves(moveType);
+        //MovesListView.itemsSource = Moves;
+        SortMoves();
+        //MoveSelectionChanged(MovesListView.selectedItems);
+    }
+
+    public void PopulateMoves(IEnumerable<Move> moves)
+    {
+        SelectedMoveRow = null;
+        SelectedMove = null;
+
+        foreach (MoveRowUI row in MoveRows)
+        {
+            // Hide immediately; Destroy runs at the end of the frame.
+            row.gameObject.SetActive(false);
+            Destroy(row.gameObject);
+        }
+
+        MoveRows.Clear();
+
+        foreach (Move move in moves)
+        {
+            if (move == null)
+                continue;
+
+            MoveRowUI row = Instantiate(MoveRowPrefab, MovesContent);
+            row.Bind(move, SelectMoveRow);
+            MoveRows.Add(row);
+        }
+
+        // Select the first row automatically when the list isn't empty.
+        if (MoveRows.Count > 0)
+            SelectMoveRow(MoveRows[0]);
+        else
+            SelectionChanged?.Invoke(null);
+    }
+
+    private void SelectMoveRow(MoveRowUI row)
+    {
+        if (SelectedMoveRow == row)
+            return;
+
+        if (SelectedMoveRow != null)
+            SelectedMoveRow.SetSelected(false);
+
+        SelectedMoveRow = row;
+        SelectedMove = row.Move;
+        SelectedMoveRow.SetSelected(true);
+
+        SelectionChanged?.Invoke(SelectedMove);
     }
 
     public void SortMoves()
@@ -321,6 +428,7 @@ public class FightCanvas : MonoBehaviour
         }
 
         //MovesListView.Rebuild();
+        PopulateMoves(Moves);
     }
 
     void Start()

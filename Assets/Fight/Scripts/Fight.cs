@@ -7,8 +7,7 @@ using UnityEngine.UIElements;
 
 public class Fight : MonoBehaviour
 {
-    [SerializeField] SelectMove                 SelectMoveUI;
-    [SerializeField] protected Canvas           FightCanvas;
+    [SerializeField] protected FightCanvas      FightCanvas;
     [SerializeField] protected Enums.DebugLevel DebugLevel;
     [SerializeField] bool                       NarutoMode;
     [SerializeField] protected int              Teams;
@@ -2286,7 +2285,7 @@ public class Fight : MonoBehaviour
             yield break;
         }
 
-        yield return SelectMoveUI.GetUserMoveEvent(fighter, onMoveEventReady);
+        yield return FightCanvas.GetUserMoveEvent(fighter, onMoveEventReady);
     }
 
     public IEnumerator GetMoveEventList(System.Action<List<MoveEvent>> onMoveEventListReady)
