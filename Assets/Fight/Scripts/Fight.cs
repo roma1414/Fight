@@ -8,6 +8,7 @@ using UnityEngine.UIElements;
 public class Fight : MonoBehaviour
 {
     [SerializeField] SelectMove                 SelectMoveUI;
+    [SerializeField] protected Canvas           FightCanvas;
     [SerializeField] protected Enums.DebugLevel DebugLevel;
     [SerializeField] bool                       NarutoMode;
     [SerializeField] protected int              Teams;
