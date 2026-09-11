@@ -261,8 +261,8 @@ public class Fight : MonoBehaviour
         {
             switch (moveEvent.GetTargetType())
             {
-                case Enums.TargetType.OneEnemy:
-                case Enums.TargetType.OneTeamMember:
+                case Enums.TargetType.Enemy:
+                case Enums.TargetType.TeamMember:
                 case Enums.TargetType.EnemiesWithStatuses:
                 case Enums.TargetType.TeamMembersWithStatuses:
                     {
@@ -397,7 +397,7 @@ public class Fight : MonoBehaviour
 
             if (Fighters.Contains(fighter) == true && fighter.GetAI().CheckIfCanPerformMove(this, fighter, move)) // Fighter is alive and move has targets.
             {
-                if (moveEvent.GetTargetType() == Enums.TargetType.OneEnemy && fighter.CheckCombineAttacks() && move.CheckOffensive())
+                if (moveEvent.GetTargetType() == Enums.TargetType.Enemy && fighter.CheckCombineAttacks() && move.CheckOffensive())
                 {
                     Enums.DamageType damageType = move.GetDamageType();
 
@@ -464,7 +464,7 @@ public class Fight : MonoBehaviour
 
         foreach (MoveEvent moveEvent in moveEvents)
         {
-            if (moveEvent.GetTargetType() == Enums.TargetType.OneEnemy && moveEvent.CheckCombineAttacks() == true)
+            if (moveEvent.GetTargetType() == Enums.TargetType.Enemy && moveEvent.CheckCombineAttacks() == true)
             {
                 float moveEventCastingSpeed = moveEvent.GetMoveEventCastingSpeed();
 
@@ -743,7 +743,7 @@ public class Fight : MonoBehaviour
         switch (targetType)
         {
             case Enums.TargetType.Self:
-            case Enums.TargetType.OneTeamMember:
+            case Enums.TargetType.TeamMember:
                 {
                     Fighter target = moveEvent.GetTargets()[0];
                     targets.Add(target);
@@ -2507,7 +2507,7 @@ public class Fight : MonoBehaviour
         {
             MoveEvent earlierMoveEvent = earlierMoveEvents[index];
 
-            if (earlierMoveEvent.GetTargetType() == Enums.TargetType.OneEnemy &&
+            if (earlierMoveEvent.GetTargetType() == Enums.TargetType.Enemy &&
                 earlierMoveEvent.CheckCombineAttacks() == true &&
                 ((moveType == Enums.MoveType.Psychic && earlierMoveEvent.GetMoveType() != Enums.MoveType.Psychic) || (moveType != Enums.MoveType.Psychic && earlierMoveEvent.GetMoveType() == Enums.MoveType.Psychic)))
             {
@@ -2757,10 +2757,10 @@ public class Fight : MonoBehaviour
             if (usedIndices.Contains(index) == false)   // If index has already been inserted into finalMoveEvents then we skip it
             {
                 MoveEvent moveEvent = moveEvents[index];
-                Fighter target = moveEvent.GetTargets()[0];   // We only care about OneEnemy MoveEvents, so we can assume 1 target.
+                Fighter target = moveEvent.GetTargets()[0];   // We only care about Enemy MoveEvents, so we can assume 1 target.
 
                 if (index > 0 &&
-                    moveEvent.GetTargetType() == Enums.TargetType.OneEnemy &&
+                    moveEvent.GetTargetType() == Enums.TargetType.Enemy &&
                     targetsHandled.Contains(target) == false && 
                     moveEvent.CheckCombineAttacks() == true)
                 {
@@ -2794,7 +2794,7 @@ public class Fight : MonoBehaviour
                 Fighter fighter = fighters[0];
                 Move move = moveEvent.GetMoves()[0];
 
-                bool cloneAttack = (fighter.CheckIfSubbed() == true && targetType == Enums.TargetType.OneEnemy);
+                bool cloneAttack = (fighter.CheckIfSubbed() == true && targetType == Enums.TargetType.Enemy);
 
                 if (cloneAttack == true)
                 {
@@ -2835,8 +2835,8 @@ public class Fight : MonoBehaviour
 
                 switch (targetType)
                 {
-                    case Enums.TargetType.OneEnemy:
-                    case Enums.TargetType.OneTeamMember:
+                    case Enums.TargetType.Enemy:
+                    case Enums.TargetType.TeamMember:
                         {
                             Fighter target = targets[0];
                             printString += target.GetName() + "!";

@@ -32,9 +32,18 @@ public class MoveRowUI : MonoBehaviour
     {
         Move = move;
         onSelected = selectionCallback;
+        Enums.MoveType moveType = move.GetMoveType();
+
+        if (moveType == Enums.MoveType.Protect)
+        {
+            LevelText.text = "N/A";
+        }
+        else
+        {
+            LevelText.text = move.GetLevel().ToString();
+        }
 
         NameText.text = move.GetName();
-        LevelText.text = move.GetLevel().ToString();
         ManaText.text = move.GetMana().ToString();
         TargetText.text = move.GetTargetType().ToString();
         TypeText.text = move.GetMoveType().ToString();

@@ -34,8 +34,8 @@ public class TargetRowUI : MonoBehaviour
         Enums.TargetType targetType = target.GetTargetType();
 
         if (targetType == Enums.TargetType.Self ||
-            targetType == Enums.TargetType.OneEnemy ||
-            targetType == Enums.TargetType.OneTeamMember ||
+            targetType == Enums.TargetType.Enemy ||
+            targetType == Enums.TargetType.TeamMember ||
             targetType == Enums.TargetType.EnemiesWithStatuses ||
             targetType == Enums.TargetType.TeamMembersWithStatuses)
         {

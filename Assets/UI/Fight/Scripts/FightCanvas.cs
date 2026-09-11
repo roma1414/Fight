@@ -68,8 +68,8 @@ public class FightCanvas : MonoBehaviour
         ConfigureForFighter(fighter);
 
         Advance = false;
-        SelectedMove = null;
-        SelectedTarget = null;
+        //SelectedMove = null;
+        //SelectedTarget = null;
         yield return WaitForSelection();
 
         MoveEvent moveEvent = new MoveEvent();
@@ -81,9 +81,9 @@ public class FightCanvas : MonoBehaviour
         moveEvent.SetTargetType(SelectedMove.GetTargetType());
         switch (SelectedTarget.GetTargetType())
         {
-            case Enums.TargetType.OneEnemy:
+            case Enums.TargetType.Enemy:
             case Enums.TargetType.EnemiesWithStatuses:
-            case Enums.TargetType.OneTeamMember:
+            case Enums.TargetType.TeamMember:
             case Enums.TargetType.TeamMembersWithStatuses:
                 moveEvent.AddTarget(SelectedTarget.GetFighterTarget());
                 break;
@@ -158,7 +158,7 @@ public class FightCanvas : MonoBehaviour
 
             switch (SelectedMove.GetTargetType())
             {
-                case Enums.TargetType.OneEnemy:
+                case Enums.TargetType.Enemy:
                     {
                         if (SelectedMove.GetRequiredTargetStatusesList().Count > 0)
                         {
@@ -204,7 +204,7 @@ public class FightCanvas : MonoBehaviour
                         FighterTargets = SelectedFighter.GetAI().GetEnemiesWithStatuses(Fight, SelectedFighter, SelectedMove.GetRequiredTargetStatusesList());
                         break;
                     }
-                case Enums.TargetType.OneTeamMember:
+                case Enums.TargetType.TeamMember:
                     {
                         if (SelectedMove.GetRequiredTargetStatusesList().Count > 0)
                         {
@@ -268,11 +268,11 @@ public class FightCanvas : MonoBehaviour
                 targetInfo.SetFighterTarget(target);
                 if (target.GetTeam() == SelectedFighter.GetTeam())
                 {
-                    targetInfo.SetTargetType(Enums.TargetType.OneTeamMember);
+                    targetInfo.SetTargetType(Enums.TargetType.TeamMember);
                 }
                 else
                 {
-                    targetInfo.SetTargetType(Enums.TargetType.OneEnemy);
+                    targetInfo.SetTargetType(Enums.TargetType.Enemy);
                 }
                 Targets.Add(targetInfo);
             }

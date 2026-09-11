@@ -2,11 +2,11 @@
 {
     public enum TargetType : short
     {
-        OneEnemy,
+        Enemy,
         EnemyTeam,
         AllEnemies,             // Enemies from all opposing teams.
         EnemiesWithStatuses,
-        OneTeamMember,
+        TeamMember,
         Team,
         TeamMembersWithStatuses,
         Self

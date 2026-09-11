@@ -155,7 +155,7 @@ public class AI : ScriptableObject
         {
             switch (move.GetTargetType())
             {
-                case Enums.TargetType.OneEnemy:
+                case Enums.TargetType.Enemy:
                 case Enums.TargetType.EnemyTeam:
                 case Enums.TargetType.AllEnemies:
                     {
@@ -192,7 +192,7 @@ public class AI : ScriptableObject
 
         switch (move.GetTargetType())
         {
-            case Enums.TargetType.OneEnemy:
+            case Enums.TargetType.Enemy:
             case Enums.TargetType.EnemiesWithStatuses:
                 {
                     if (enemiesWithRequiredStatusesNotUnderPsychic.Count > 0)
@@ -217,7 +217,7 @@ public class AI : ScriptableObject
         {
             switch (move.GetTargetType())
             {
-                case Enums.TargetType.OneTeamMember:
+                case Enums.TargetType.TeamMember:
                 case Enums.TargetType.Team:
                 case Enums.TargetType.Self:
                     {
@@ -243,7 +243,7 @@ public class AI : ScriptableObject
 
         switch (move.GetTargetType())
         {
-            case Enums.TargetType.OneTeamMember:
+            case Enums.TargetType.TeamMember:
             case Enums.TargetType.TeamMembersWithStatuses:
                 {
                     if (teamMembersWithRequiredStatuses.Count > 0)
@@ -346,7 +346,7 @@ public class AI : ScriptableObject
 
         switch (move.GetTargetType())
         {
-            case Enums.TargetType.OneEnemy:
+            case Enums.TargetType.Enemy:
             case Enums.TargetType.EnemiesWithStatuses:
                 {
                     if (enemiesWithRequiredStatuses.Count > 0)
@@ -690,7 +690,7 @@ public class AI : ScriptableObject
 
             moveEvent.AddMove(medicalMove);
             moveEvent.AddTarget(target);
-            moveEvent.SetTargetType(Enums.TargetType.OneTeamMember);
+            moveEvent.SetTargetType(Enums.TargetType.TeamMember);
 
             return moveEvent;
         }
@@ -710,7 +710,7 @@ public class AI : ScriptableObject
 
             moveEvent.AddMove(medicalMove);
             moveEvent.AddTarget(target);
-            moveEvent.SetTargetType(Enums.TargetType.OneTeamMember);
+            moveEvent.SetTargetType(Enums.TargetType.TeamMember);
 
             return moveEvent;
         }
@@ -885,7 +885,7 @@ public class AI : ScriptableObject
 
         switch (targetType)
         {
-            case Enums.TargetType.OneEnemy:
+            case Enums.TargetType.Enemy:
                 {
                     Fighter target = GetTarget(fight, fighter, offensiveMove);
                     moveEvent.AddTarget(target);
@@ -977,7 +977,7 @@ public class AI : ScriptableObject
                             }
                             break;
                         }
-                    case Enums.TargetType.OneTeamMember:
+                    case Enums.TargetType.TeamMember:
                         {
                             if (medicalMove.GetHealType() == Enums.HealType.Health || medicalMove.GetHealType() == Enums.HealType.HealthAndMana)
                             {
@@ -1038,7 +1038,7 @@ public class AI : ScriptableObject
         moveEvent.SetMoveType(Enums.MoveType.Protect);
         moveEvent.AddFighter(fighter);
         moveEvent.AddRandomAdd(Fight.RandomAdd());
-        moveEvent.SetTargetType(Enums.TargetType.OneTeamMember);  // This could be changed to Self at the end if there are no teammates to protect.
+        moveEvent.SetTargetType(Enums.TargetType.TeamMember);  // This could be changed to Self at the end if there are no teammates to protect.
 
         if (teammatesInNeed.Count > 0)  // Teammates near death or unable to move. There could be copies of teammates if someone is in both lists.
         {
@@ -1193,7 +1193,7 @@ public class AI : ScriptableObject
     {
         Enums.TargetType targetType = offensiveMove.GetTargetType();
 
-        if (targetType != Enums.TargetType.OneEnemy)
+        if (targetType != Enums.TargetType.Enemy)
         {
             Debug.LogError("Error! Incorrect Enums.TargetType in AI.GetTarget for OffensiveMove " + offensiveMove.GetName() + " with ID: " + offensiveMove.GetID() + "!");
             return null;

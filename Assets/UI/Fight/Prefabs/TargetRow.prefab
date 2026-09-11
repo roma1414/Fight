@@ -666,7 +666,7 @@ MonoBehaviour:
   HealthText: {fileID: 3875808236781565971}
   ManaText: {fileID: 1955607247374634361}
   normalColor: {r: 0, g: 0, b: 0, a: 1}
-  selectedColor: {r: 0.2, g: 0.45, b: 0.8, a: 1}
+  selectedColor: {r: 0.1176471, g: 0.5647059, b: 1, a: 1}
 --- !u!1 &8883480031623392287
 GameObject:
   m_ObjectHideFlags: 0
