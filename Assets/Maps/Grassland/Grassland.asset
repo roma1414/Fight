@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa26e39525c634470b0220ed71a061c1, type: 3}
+  m_Name: Grassland
+  m_EditorClassIdentifier: Assembly-CSharp::MapArt
+  Background_1: {fileID: -8234818348027297460, guid: daf5d4e5d563b440b943a1168409230e, type: 3}
+  Background_2: {fileID: 5980447865194789551, guid: 2c505156b7be3420aa7a4f009858900a, type: 3}
+  Background_3: {fileID: -5781249754181073588, guid: 7cddd4ebeb4f84c9ab900ee9b52cde04, type: 3}

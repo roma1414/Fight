@@ -12,7 +12,6 @@ public class Fight : MonoBehaviour
     [SerializeField] bool                       NarutoMode;
     [SerializeField] protected int              Teams;
     [SerializeField] protected List<Fighter>    Team1, Team2, Team3;
-
     protected List<Clone>                       Clones;
     protected List<Fighter>                     Fighters, OriginalFighters, OriginalTeam1, OriginalTeam2, OriginalTeam3;
     protected List<Protection>                  Protections;
@@ -1252,6 +1251,7 @@ public class Fight : MonoBehaviour
         {
             yield return SelectMoveUI.AnimatePortrait(fighters[0]);
         }*/
+        yield return FightCanvas.DisplayMovePreview(moveEvent);
 
         foreach (Fighter target in targets)
         {

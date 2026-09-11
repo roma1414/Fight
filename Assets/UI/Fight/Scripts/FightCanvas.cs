@@ -17,6 +17,8 @@ public class FightCanvas : MonoBehaviour
     [SerializeField] private MoveRowUI      MoveRowPrefab;
     [SerializeField] private RectTransform  TargetsContent;
     [SerializeField] private TargetRowUI    TargetRowPrefab;
+    [SerializeField] protected MapArt       MapArt;
+    [SerializeField] private Image          Background;
     private bool                            SortDescending = true;
     private bool                            Advance = false;
     private List<Move>                      Moves = new List<Move>();
@@ -29,6 +31,27 @@ public class FightCanvas : MonoBehaviour
     private List<Target>                    Targets = new List<Target>();
     public event Action<Target>             TargetSelectionChanged;
     private readonly List<TargetRowUI>      TargetRows = new List<TargetRowUI>();
+
+    public void ConfigureFightWindowForAttackers(MoveEvent moveEvent)
+    {
+        int team = moveEvent.GetFighters()[0].GetTeam();
+        if (team == 1)
+        {
+            Background.sprite = MapArt.GetBackground_1();
+        }
+        else if (team == 2)
+        {
+            Background.sprite = MapArt.GetBackground_2();
+        }
+        else
+        {
+            Background.sprite = MapArt.GetBackground_3();
+        }
+
+        Vector2 position = Background.rectTransform.anchoredPosition;
+        position.x = 0f;
+        Background.rectTransform.anchoredPosition = position;
+    }
 
     public void ConfigureForFighter(Fighter fighter)
     {
@@ -45,6 +68,12 @@ public class FightCanvas : MonoBehaviour
         SortDescending = !SortDescending;
         Toggle selectedBottomTab = BottomTabs.ActiveToggles().FirstOrDefault();
         OnBottomTabClickEvent(selectedBottomTab.name);
+    }
+
+    public IEnumerator DisplayMovePreview(MoveEvent moveEvent)
+    {
+        ConfigureFightWindowForAttackers(moveEvent);
+        yield return new WaitForSeconds(1f);
     }
 
     public List<Move> GetPossibleMoves(Enums.MoveType moveType)
