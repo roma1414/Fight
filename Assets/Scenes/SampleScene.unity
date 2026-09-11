@@ -2322,7 +2322,7 @@ MonoBehaviour:
   MovesContent: {fileID: 1550053193}
   MoveRowPrefab: {fileID: 3423927520296425485, guid: 684f5cbad6864408bb7ed48501d771b6, type: 3}
   TargetsContent: {fileID: 1829046166}
-  TargetRowPrefab: {fileID: 2463546590011571932, guid: 16df16b800e13498da75a15702dab4fb, type: 3}
+  TargetRowPrefab: {fileID: 7820163007712450561, guid: ad81037405b0743e9930e4883ceb24db, type: 3}
 --- !u!1 &832303407
 GameObject:
   m_ObjectHideFlags: 0

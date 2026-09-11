@@ -31,11 +31,26 @@ public class TargetRowUI : MonoBehaviour
     {
         Target = target;
         onSelected = selectionCallback;
+        Enums.TargetType targetType = target.GetTargetType();
 
-        NameText.text = target.GetName();
-        LevelText.text = target.GetLevel().ToString();
-        HealthText.text = target.GetHealth().ToString();
-        ManaText.text = target.GetMana().ToString();
+        if (targetType == Enums.TargetType.Self ||
+            targetType == Enums.TargetType.OneEnemy ||
+            targetType == Enums.TargetType.OneTeamMember ||
+            targetType == Enums.TargetType.EnemiesWithStatuses ||
+            targetType == Enums.TargetType.TeamMembersWithStatuses)
+        {
+            NameText.text = target.GetName();
+            LevelText.text = $"Level: {target.GetLevel().ToString()}";
+            HealthText.text = $"Health: {target.GetHealth().ToString()}";
+            ManaText.text = $"Mana: {target.GetMana().ToString()}";
+        }
+        else
+        {
+            NameText.text = target.GetName();
+            LevelText.text = "";
+            HealthText.text = "";
+            ManaText.text = "";
+        }
 
         SetSelected(false);
     }
