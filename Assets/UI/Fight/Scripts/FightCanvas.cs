@@ -18,7 +18,10 @@ public class FightCanvas : MonoBehaviour
     [SerializeField] private RectTransform  TargetsContent;
     [SerializeField] private TargetRowUI    TargetRowPrefab;
     [SerializeField] protected MapArt       MapArt;
-    [SerializeField] private Image          Background;
+    [SerializeField] private GameObject     SelectMovePanel;
+    [SerializeField] private GameObject     DynamicPanel;
+    [SerializeField] private Image          SelectMoveBackground;
+    [SerializeField] private Image          FightBackground;
     private bool                            SortDescending = true;
     private bool                            Advance = false;
     private List<Move>                      Moves = new List<Move>();
@@ -34,26 +37,26 @@ public class FightCanvas : MonoBehaviour
 
     public void ConfigureFightWindowForAttackers(MoveEvent moveEvent)
     {
-        int team = moveEvent.GetFighters()[0].GetTeam();
+        int team = moveEvent.GetTargetTeam();
         if (team == 1)
         {
-            Background.sprite = MapArt.GetBackground_1();
+            FightBackground.sprite = MapArt.GetBackground_1();
         }
         else if (team == 2)
         {
-            Background.sprite = MapArt.GetBackground_2();
+            FightBackground.sprite = MapArt.GetBackground_2();
         }
         else
         {
-            Background.sprite = MapArt.GetBackground_3();
+            FightBackground.sprite = MapArt.GetBackground_3();
         }
 
-        Vector2 position = Background.rectTransform.anchoredPosition;
+        Vector2 position = FightBackground.rectTransform.anchoredPosition;
         position.x = 0f;
-        Background.rectTransform.anchoredPosition = position;
+        FightBackground.rectTransform.anchoredPosition = position;
     }
 
-    public void ConfigureForFighter(Fighter fighter)
+    public void ConfigureSelectMovePanelForFighter(Fighter fighter)
     {
         SelectedFighter = fighter;
 
@@ -94,11 +97,11 @@ public class FightCanvas : MonoBehaviour
     public IEnumerator GetUserMoveEvent(Fighter fighter, System.Action<MoveEvent> onMoveEventSelected)
     {
         SelectedFighter = fighter;
-        ConfigureForFighter(fighter);
+        DynamicPanel.SetActive(false);
+        SelectMovePanel.SetActive(true);
+        ConfigureSelectMovePanelForFighter(fighter);
 
         Advance = false;
-        //SelectedMove = null;
-        //SelectedTarget = null;
         yield return WaitForSelection();
 
         MoveEvent moveEvent = new MoveEvent();
@@ -524,6 +527,13 @@ public class FightCanvas : MonoBehaviour
     void Start()
     {
         
+    }
+
+    public IEnumerator TransitionToDynamicPanel()
+    {
+        SelectMovePanel.SetActive(false);
+        DynamicPanel.SetActive(true);
+        yield return new WaitForSeconds(.1f);
     }
 
     public IEnumerator WaitForSelection()

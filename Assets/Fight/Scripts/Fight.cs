@@ -2986,6 +2986,8 @@ public class Fight : MonoBehaviour
             List<MoveEvent> moveEventList = null;
             yield return GetMoveEventList(result => moveEventList = result);
 
+            yield return FightCanvas.TransitionToDynamicPanel();
+
             foreach (MoveEvent moveEvent in moveEventList)
             {
                 if (CheckIfShouldExecuteMoveEvent(moveEvent) == true)
