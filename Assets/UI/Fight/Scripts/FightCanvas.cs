@@ -533,7 +533,7 @@ public class FightCanvas : MonoBehaviour
     {
         SelectMovePanel.SetActive(false);
         DynamicPanel.SetActive(true);
-        yield return new WaitForSeconds(.1f);
+        yield return new WaitForSeconds(0f);
     }
 
     public IEnumerator WaitForSelection()
