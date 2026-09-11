@@ -3,15 +3,14 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class MoveRowUI : MonoBehaviour
+public class TargetRowUI : MonoBehaviour
 {
     [SerializeField] private Button button;
     [SerializeField] private Image background;
     [SerializeField] private TMP_Text NameText;
     [SerializeField] private TMP_Text LevelText;
+    [SerializeField] private TMP_Text HealthText;
     [SerializeField] private TMP_Text ManaText;
-    [SerializeField] private TMP_Text TargetText;
-    [SerializeField] private TMP_Text TypeText;
 
     [SerializeField] private Color normalColor =
         new Color(0.15f, 0.15f, 0.15f, 1f);
@@ -19,25 +18,24 @@ public class MoveRowUI : MonoBehaviour
     [SerializeField] private Color selectedColor =
         new Color(0.2f, 0.45f, 0.8f, 1f);
 
-    public Move Move { get; private set; }
+    public Target Target { get; private set; }
 
-    private Action<MoveRowUI> onSelected;
+    private Action<TargetRowUI> onSelected;
 
     private void Awake()
     {
         button.onClick.AddListener(HandleClick);
     }
 
-    public void Bind(Move move, Action<MoveRowUI> selectionCallback)
+    public void Bind(Target target, Action<TargetRowUI> selectionCallback)
     {
-        Move = move;
+        Target = target;
         onSelected = selectionCallback;
 
-        NameText.text = move.GetName();
-        LevelText.text = move.GetLevel().ToString();
-        ManaText.text = move.GetMana().ToString();
-        TargetText.text = move.GetTargetType().ToString();
-        TypeText.text = move.GetMoveType().ToString();
+        NameText.text = target.GetName();
+        LevelText.text = target.GetLevel().ToString();
+        HealthText.text = target.GetHealth().ToString();
+        ManaText.text = target.GetMana().ToString();
 
         SetSelected(false);
     }

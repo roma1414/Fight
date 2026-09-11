@@ -15,15 +15,20 @@ public class FightCanvas : MonoBehaviour
     [SerializeField] private ToggleGroup    BottomTabs, TopTabs;
     [SerializeField] private RectTransform  MovesContent;
     [SerializeField] private MoveRowUI      MoveRowPrefab;
-    //private Move                            SelectedMove;
-    private List<Move>                      Moves = new List<Move>();
-    private List<Target>                    Targets;
-    private bool                            Advance = false;
+    [SerializeField] private RectTransform  TargetsContent;
+    [SerializeField] private TargetRowUI    TargetRowPrefab;
     private bool                            SortDescending = true;
+    private bool                            Advance = false;
+    private List<Move>                      Moves = new List<Move>();
     private MoveRowUI                       SelectedMoveRow;
     public Move                             SelectedMove { get; private set; }
-    public event Action<Move>               SelectionChanged;
+    public event Action<Move>               MoveSelectionChanged;
     private readonly List<MoveRowUI>        MoveRows = new List<MoveRowUI>();
+    private TargetRowUI                     SelectedTargetRow;
+    public Target                           SelectedTarget { get; private set; }
+    private List<Target>                    Targets = new List<Target>();
+    public event Action<Target>             TargetSelectionChanged;
+    private readonly List<TargetRowUI>      TargetRows = new List<TargetRowUI>();
 
     public void ConfigureForFighter(Fighter fighter)
     {
@@ -64,7 +69,7 @@ public class FightCanvas : MonoBehaviour
 
         Advance = false;
         SelectedMove = null;
-        //SelectedTarget = null;
+        SelectedTarget = null;
         yield return WaitForSelection();
 
         MoveEvent moveEvent = new MoveEvent();
@@ -74,7 +79,7 @@ public class FightCanvas : MonoBehaviour
         moveEvent.SetMoveType(SelectedMove.GetMoveType());
 
         moveEvent.SetTargetType(SelectedMove.GetTargetType());
-        /*switch (SelectedTarget.GetTargetType())
+        switch (SelectedTarget.GetTargetType())
         {
             case Enums.TargetType.OneEnemy:
             case Enums.TargetType.EnemiesWithStatuses:
@@ -109,16 +114,45 @@ public class FightCanvas : MonoBehaviour
             default:
                 Debug.LogError("Error! Unexpected SelectedTarget.GetTargetType() in GetUserMoveEvent!");
                 break;
-        }*/
+        }
 
         onMoveEventSelected(moveEvent);
     }
 
-    /*void MoveSelectionChanged(IEnumerable<object> selectedItems)
+    public void OnAdvanceClickEvent()
     {
-        if (MovesListView.selectedItem != null)
+        if (SelectedMove != null && SelectedTarget != null)
         {
-            SelectedMove = (Move)MovesListView.selectedItem;
+            Advance = true;
+        }
+    }
+
+    public void OnBottomTabClickEvent(string tabName)
+    {
+        Toggle selected = BottomTabs.ActiveToggles().FirstOrDefault();
+        if (tabName == selected.name)
+        {
+            SortDescending = !SortDescending;
+        }
+
+        SortMoves();
+    }
+
+    private void OnDisable()
+    {
+        MoveSelectionChanged -= OnMoveSelected;
+    }
+
+    private void OnEnable()
+    {
+        MoveSelectionChanged += OnMoveSelected;
+    }
+
+    void OnMoveSelected(Move move)
+    {
+        if (move != null)
+        {
+            SelectedMove = move;
             Targets = new List<Target>();
             List<Fighter> FighterTargets = new List<Fighter>();
 
@@ -243,36 +277,17 @@ public class FightCanvas : MonoBehaviour
                 Targets.Add(targetInfo);
             }
 
-            TargetsListView.itemsSource = Targets;
-            TargetsListView.Rebuild();
+            //TargetsListView.itemsSource = Targets;
+            //TargetsListView.Rebuild();
+            PopulateTargets(Targets);
         }
         else
         {
             Targets = new List<Target>();
-            TargetsListView.itemsSource = Targets;
-            TargetsListView.Rebuild();
+            //TargetsListView.itemsSource = Targets;
+            //TargetsListView.Rebuild();
+            PopulateTargets(Targets);
         }
-    }
-
-    public void OnAdvanceClickEvent()
-    {
-        if (MovesListView.selectedItem != null && TargetsListView.selectedItem != null)
-        {
-            SelectedMove = (Move)MovesListView.selectedItem;
-            SelectedTarget = (Target)TargetsListView.selectedItem;
-            Advance = true;
-        }
-    }*/
-
-    public void OnBottomTabClickEvent(string tabName)
-    {
-        Toggle selected = BottomTabs.ActiveToggles().FirstOrDefault();
-        if (tabName == selected.name)
-        {
-            SortDescending = !SortDescending;
-        }
-
-        SortMoves();
     }
 
     public void OnTopTabClickEvent(string tabName)
@@ -338,7 +353,38 @@ public class FightCanvas : MonoBehaviour
         if (MoveRows.Count > 0)
             SelectMoveRow(MoveRows[0]);
         else
-            SelectionChanged?.Invoke(null);
+            MoveSelectionChanged?.Invoke(null);
+    }
+
+    public void PopulateTargets(IEnumerable<Target> targets)
+    {
+        SelectedTargetRow = null;
+        SelectedTarget = null;
+
+        foreach (TargetRowUI row in TargetRows)
+        {
+            // Hide immediately; Destroy runs at the end of the frame.
+            row.gameObject.SetActive(false);
+            Destroy(row.gameObject);
+        }
+
+        TargetRows.Clear();
+
+        foreach (Target target in targets)
+        {
+            if (target == null)
+                continue;
+
+            TargetRowUI row = Instantiate(TargetRowPrefab, TargetsContent);
+            row.Bind(target, SelectTargetRow);
+            TargetRows.Add(row);
+        }
+
+        // Select the first row automatically when the list isn't empty.
+        if (TargetRows.Count > 0)
+            SelectTargetRow(TargetRows[0]);
+        else
+            TargetSelectionChanged?.Invoke(null);
     }
 
     private void SelectMoveRow(MoveRowUI row)
@@ -353,7 +399,22 @@ public class FightCanvas : MonoBehaviour
         SelectedMove = row.Move;
         SelectedMoveRow.SetSelected(true);
 
-        SelectionChanged?.Invoke(SelectedMove);
+        MoveSelectionChanged?.Invoke(SelectedMove);
+    }
+
+    private void SelectTargetRow(TargetRowUI row)
+    {
+        if (SelectedTargetRow == row)
+            return;
+
+        if (SelectedTargetRow != null)
+            SelectedTargetRow.SetSelected(false);
+
+        SelectedTargetRow = row;
+        SelectedTarget = row.Target;
+        SelectedTargetRow.SetSelected(true);
+
+        TargetSelectionChanged?.Invoke(SelectedTarget);
     }
 
     public void SortMoves()
