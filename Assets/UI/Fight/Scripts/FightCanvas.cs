@@ -38,6 +38,11 @@ public class FightCanvas : MonoBehaviour
     public void ConfigureFightWindowForAttackers(MoveEvent moveEvent)
     {
         int team = moveEvent.GetTargetTeam();
+        if (team == 0)
+        {
+            team = moveEvent.GetFighters()[0].GetTeam();
+        }
+
         if (team == 1)
         {
             FightBackground.sprite = MapArt.GetBackground_1();
