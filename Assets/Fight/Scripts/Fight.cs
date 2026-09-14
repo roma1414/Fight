@@ -12,6 +12,11 @@ public class Fight : MonoBehaviour
     [SerializeField] bool                       NarutoMode;
     [SerializeField] protected int              Teams;
     [SerializeField] protected List<Fighter>    Team1, Team2, Team3;
+    [SerializeField] protected MapArt           MapArt;
+    [SerializeField] private GameObject         SelectMovePanel;
+    [SerializeField] private SelectMoveWindow   SelectMoveWindow;
+    [SerializeField] private GameObject         DynamicPanel;
+    [SerializeField] private DynamicWindow      DynamicWindow;
     protected List<Clone>                       Clones;
     protected List<Fighter>                     Fighters, OriginalFighters, OriginalTeam1, OriginalTeam2, OriginalTeam3;
     protected List<Protection>                  Protections;
@@ -1247,11 +1252,7 @@ public class Fight : MonoBehaviour
         List<float> attackerRandomAdds = moveEvent.GetRandomAdds();
         List<Fighter> targets = moveEvent.GetTargets();
 
-        /*if (fighters[0].GetName() == "Fire Mage")
-        {
-            yield return SelectMoveUI.AnimatePortrait(fighters[0]);
-        }*/
-        yield return FightCanvas.DisplayMovePreview(moveEvent);
+        yield return DynamicWindow.DisplayMovePreview(moveEvent);
 
         foreach (Fighter target in targets)
         {
@@ -2277,6 +2278,8 @@ public class Fight : MonoBehaviour
         return rangedHit;
     }
 
+    public MapArt GetMapArt() { return MapArt; }
+
     public IEnumerator GetMoveEvent(Fighter fighter, System.Action<MoveEvent> onMoveEventReady)
     {
         if (fighter.GetControlType() == Enums.ControlType.CPU)
@@ -2285,7 +2288,7 @@ public class Fight : MonoBehaviour
             yield break;
         }
 
-        yield return FightCanvas.GetUserMoveEvent(fighter, onMoveEventReady);
+        yield return SelectMoveWindow.GetUserMoveEvent(fighter, onMoveEventReady);
     }
 
     public IEnumerator GetMoveEventList(System.Action<List<MoveEvent>> onMoveEventListReady)
@@ -2983,10 +2986,14 @@ public class Fight : MonoBehaviour
             mWriter.WriteLine("Round " + RoundNumber + "\n");
             DisplayTeamsText();
 
+            DynamicPanel.SetActive(false);
+            SelectMovePanel.SetActive(true);
             List<MoveEvent> moveEventList = null;
             yield return GetMoveEventList(result => moveEventList = result);
 
-            yield return FightCanvas.TransitionToDynamicPanel();
+            //yield return FightCanvas.TransitionToDynamicPanel();
+            SelectMovePanel.SetActive(false);
+            DynamicPanel.SetActive(true);
 
             foreach (MoveEvent moveEvent in moveEventList)
             {
