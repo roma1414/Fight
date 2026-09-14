@@ -1,0 +1,71 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &477560759737417052
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3946022457539215962}
+  - component: {fileID: 3090061917713705068}
+  m_Layer: 0
+  m_Name: MysticAssassin
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3946022457539215962
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 477560759737417052}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3090061917713705068
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 477560759737417052}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4feff7ba81aada2428e3ed14f8e11b54, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Fighter
+  Name: Mystic Assassin
+  Spellcraft: 7
+  Melee: 8
+  Psychic: 5
+  Speed: 9
+  Strength: 5
+  Intelligence: 7
+  DamageResistance: 0.15
+  Mana: 140
+  MaxMana: 140
+  Health: 100
+  Level: 10
+  Team: 2
+  ControlType: 1
+  FightingStyle: 0
+  AI: {fileID: 11400000, guid: f2884b357371e4ace93371c27330be7a, type: 2}
+  ID: 2
+  Art: {fileID: 11400000, guid: 5a2a035a47e7c420b8d4c4260931a8fe, type: 2}
+  Weapon: {fileID: 0}
+  Natures: 0f00
+  Traits: 0000
+  Moves:
+  - {fileID: 11400000, guid: 3b2e4194d981746b7811ed2235b6baf9, type: 2}
+  - {fileID: 11400000, guid: 5e2a6cc19aa20486d9724a52e244134d, type: 2}
+  - {fileID: 11400000, guid: d4524c7d97981474f90d29d5ec441f1e, type: 2}

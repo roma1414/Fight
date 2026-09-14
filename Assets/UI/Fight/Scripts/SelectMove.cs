@@ -24,7 +24,7 @@ public class SelectMove : MonoBehaviour
     protected bool                      Advance = false;
     protected Image                     Portrait;
 
-    public IEnumerator AnimatePortrait(Fighter fighter)
+    /*public IEnumerator AnimatePortrait(Fighter fighter)
     {
         Portrait.RemoveFromClassList("PortraitQuote");
         yield return null;
@@ -35,7 +35,7 @@ public class SelectMove : MonoBehaviour
 
         Portrait.RemoveFromClassList("PortraitQuote");
         Portrait.image = null;
-    }
+    }*/
 
     void BindMoveItem(VisualElement element, int index)
     {

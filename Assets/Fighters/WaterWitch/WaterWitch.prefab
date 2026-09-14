@@ -1,0 +1,74 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1456250450688340999
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4744322312229774273}
+  - component: {fileID: 1244770245388760594}
+  m_Layer: 0
+  m_Name: WaterWitch
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4744322312229774273
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1456250450688340999}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1244770245388760594
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1456250450688340999}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4feff7ba81aada2428e3ed14f8e11b54, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Fighter
+  Name: Water Witch
+  Spellcraft: 9
+  Melee: 1
+  Psychic: 6
+  Speed: 2
+  Strength: 1
+  Intelligence: 6
+  DamageResistance: 0
+  Mana: 180
+  MaxMana: 180
+  Health: 100
+  Level: 10
+  Team: 1
+  ControlType: 1
+  FightingStyle: 3
+  AI: {fileID: 11400000, guid: a63555b92f11f0f42a9184aa4c97ab4c, type: 2}
+  ID: 2
+  Art: {fileID: 11400000, guid: e483221fba7ea426fa820b8ad97e0fae, type: 2}
+  Weapon: {fileID: 0}
+  Natures: 1000
+  Traits: 
+  Moves:
+  - {fileID: 11400000, guid: 3b2e4194d981746b7811ed2235b6baf9, type: 2}
+  - {fileID: 11400000, guid: d5c261949d4dbe740a33d1e39b3ff7e8, type: 2}
+  - {fileID: 11400000, guid: d397757c00c4045f18074db5fa48fe68, type: 2}
+  - {fileID: 11400000, guid: 4ad11e5da2c2044df9988fb0bd9b211a, type: 2}
+  - {fileID: 11400000, guid: 5e2a6cc19aa20486d9724a52e244134d, type: 2}
+  - {fileID: 11400000, guid: 7d6b9412efb6c4176add8840f9a888d2, type: 2}

@@ -6,7 +6,7 @@ using UnityEngine;
 public class FighterArt : ScriptableObject
 {
     [SerializeField]
-    protected Texture2D Portrait;
+    protected Sprite Body;
 
-    public Texture2D GetPortrait() { return Portrait; }
+    public Sprite GetBody() { return Body; }
 }

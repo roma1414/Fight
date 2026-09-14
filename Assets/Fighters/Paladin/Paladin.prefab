@@ -1,0 +1,72 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5739171581492376101
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5664951683968972860}
+  - component: {fileID: 4246504691402231654}
+  m_Layer: 0
+  m_Name: Paladin
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5664951683968972860
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5739171581492376101}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4246504691402231654
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5739171581492376101}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4feff7ba81aada2428e3ed14f8e11b54, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Fighter
+  Name: Paladin
+  Spellcraft: 5
+  Melee: 8
+  Psychic: 0
+  Speed: 5
+  Strength: 8
+  Intelligence: 3
+  DamageResistance: 0.2
+  Mana: 100
+  MaxMana: 100
+  Health: 100
+  Level: 10
+  Team: 1
+  ControlType: 0
+  FightingStyle: 1
+  AI: {fileID: 11400000, guid: 56eb54d9b48509c4db48b26ccde66167, type: 2}
+  ID: 1
+  Art: {fileID: 11400000, guid: 2fc2e18ba97e046a8bd3413e97bcb231, type: 2}
+  Weapon: {fileID: 0}
+  Natures: 
+  Traits: 
+  Moves:
+  - {fileID: 11400000, guid: 3b2e4194d981746b7811ed2235b6baf9, type: 2}
+  - {fileID: 11400000, guid: 5e2a6cc19aa20486d9724a52e244134d, type: 2}
+  - {fileID: 11400000, guid: d4524c7d97981474f90d29d5ec441f1e, type: 2}
+  - {fileID: 11400000, guid: 97b4d939c16024819b71cdfd0610d3fd, type: 2}

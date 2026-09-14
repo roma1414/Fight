@@ -22,6 +22,7 @@ public class FightCanvas : MonoBehaviour
     [SerializeField] private GameObject     DynamicPanel;
     [SerializeField] private Image          SelectMoveBackground;
     [SerializeField] private Image          FightBackground;
+    [SerializeField] private Image          Attacker;
     private bool                            SortDescending = true;
     private bool                            Advance = false;
     private List<Move>                      Moves = new List<Move>();
@@ -37,12 +38,7 @@ public class FightCanvas : MonoBehaviour
 
     public void ConfigureFightWindowForAttackers(MoveEvent moveEvent)
     {
-        int team = moveEvent.GetTargetTeam();
-        if (team == 0)
-        {
-            team = moveEvent.GetFighters()[0].GetTeam();
-        }
-
+        int team = moveEvent.GetFighters()[0].GetTeam();
         if (team == 1)
         {
             FightBackground.sprite = MapArt.GetBackground_1();
@@ -59,6 +55,17 @@ public class FightCanvas : MonoBehaviour
         Vector2 position = FightBackground.rectTransform.anchoredPosition;
         position.x = 0f;
         FightBackground.rectTransform.anchoredPosition = position;
+
+        Attacker.sprite = null;
+        Sprite attackerSprite = moveEvent.GetFighters()[0].GetArt().GetBody();
+        if (attackerSprite != null)
+        {
+            Attacker.sprite = attackerSprite;
+        }
+        else
+        {
+            Debug.LogError($"Error! Fighter {moveEvent.GetFighters()[0].GetName()} has no body sprite!");
+        }
     }
 
     public void ConfigureSelectMovePanelForFighter(Fighter fighter)

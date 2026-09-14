@@ -1,0 +1,75 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3477936110841682139
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6111213159849210603}
+  - component: {fileID: 1384330528907906549}
+  m_Layer: 0
+  m_Name: FireMage
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6111213159849210603
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3477936110841682139}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1384330528907906549
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3477936110841682139}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4feff7ba81aada2428e3ed14f8e11b54, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Fighter
+  Name: Fire Mage
+  Spellcraft: 9
+  Melee: 1
+  Psychic: 6
+  Speed: 2
+  Strength: 1
+  Intelligence: 6
+  DamageResistance: 0
+  Mana: 180
+  MaxMana: 180
+  Health: 100
+  Level: 10
+  Team: 2
+  ControlType: 0
+  FightingStyle: 3
+  AI: {fileID: 11400000, guid: 5c4a98beb2d344374be1a5d6f13f9ea4, type: 2}
+  ID: 2
+  Art: {fileID: 11400000, guid: 6e79f7bc8bb854c60b03461919014328, type: 2}
+  Weapon: {fileID: 0}
+  Natures: 0400
+  Traits: 
+  Moves:
+  - {fileID: 11400000, guid: 3b2e4194d981746b7811ed2235b6baf9, type: 2}
+  - {fileID: 11400000, guid: d5c261949d4dbe740a33d1e39b3ff7e8, type: 2}
+  - {fileID: 11400000, guid: 3a9d010988cade8489beef962a949ca9, type: 2}
+  - {fileID: 11400000, guid: 28c53b5eb0f824e3cb1d959ec13c4b4e, type: 2}
+  - {fileID: 11400000, guid: 5c7dcfc142d5a4211a2025e7ebe7e6fe, type: 2}
+  - {fileID: 11400000, guid: 4a9543fa68a7a4a77913fa8a8a13b6e9, type: 2}
+  - {fileID: 11400000, guid: 5e2a6cc19aa20486d9724a52e244134d, type: 2}
