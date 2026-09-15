@@ -2477,7 +2477,11 @@ public class Fight : MonoBehaviour
     public void InitFight()
     {
         string debugOutputPath = "/Users/vincentroma/Fight/DebugOutput.txt"; //Application.persistentDataPath + " / DebugOutput.txt"; // "C:/Users/Asus/Documents/Unity/Fight/DebugOutput.txt";
-        mWriter = new StreamWriter(debugOutputPath, false);
+        //mWriter = new StreamWriter(debugOutputPath, false);
+        mWriter = new StreamWriter(debugOutputPath, false)
+        {
+            AutoFlush = true
+        };
         RoundNumber = 1;
         Fighters = new List<Fighter>();
         Clones = new List<Clone>();
@@ -2794,6 +2798,11 @@ public class Fight : MonoBehaviour
         }
 
         return Mathf.Max(damageCo, 0.0f); // We don't want anything negative.
+    }
+
+    private void OnDestroy()
+    {
+        mWriter?.Dispose();
     }
 
     /*public List<MoveEvent> PlacePsychicMoveEvents(List<MoveEvent> moveEvents)

@@ -247,7 +247,7 @@ public class DynamicWindow : MonoBehaviour
         else
         {
             ConfigureFightWindowForAttacker(0, moveEvent, true);
-            FightersPanel.SetActive(true);
+            FighterPanel.SetActive(true);
         }
 
         DynamicTextPanel.SetActive(true);
