@@ -7,17 +7,18 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New AI", menuName = "Assets/AIs/New AI")]
 public class AI : ScriptableObject
 {
-    [SerializeField] protected float SpellFraction;
-    [SerializeField] protected float MeleeFraction;
-    [SerializeField] protected float PsychicFraction;
-    [SerializeField] protected float CloneFraction;
-    [SerializeField] protected float MedicalFraction;
-    [SerializeField] protected float NinTaiFraction;
-    [SerializeField] protected float ProjectileFraction;
-    [SerializeField] protected float SubFraction;
-    [SerializeField] protected float SummonFraction;
-    [SerializeField] protected bool  CustomAI;
-    [SerializeField] protected float StatementFraction;
+    [SerializeField] protected float        SpellFraction;
+    [SerializeField] protected float        MeleeFraction;
+    [SerializeField] protected float        PsychicFraction;
+    [SerializeField] protected float        CloneFraction;
+    [SerializeField] protected float        MedicalFraction;
+    [SerializeField] protected float        NinTaiFraction;
+    [SerializeField] protected float        ProjectileFraction;
+    [SerializeField] protected float        SubFraction;
+    [SerializeField] protected float        SummonFraction;
+    [SerializeField] protected bool         CustomAI;
+    [SerializeField] protected float        StatementFraction;
+    [SerializeField] protected DialogueData Dialogue;
     [SerializeField] protected ulong ID;
 
     public const int    MIN_HEALTH_TO_STILL_PROTECT_TEAMMATE_NEAR_DEATH = 55;
@@ -1138,7 +1139,7 @@ public class AI : ScriptableObject
     {
         if (CheckGetStatement() == true)
         {
-            
+            return Dialogue.GetAttackingStatement();
         }
         
         return null;

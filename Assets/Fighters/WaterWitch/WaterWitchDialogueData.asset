@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2062f618c0946478a98164a1059809fc, type: 3}
+  m_Name: WaterWitchDialogueData
+  m_EditorClassIdentifier: Assembly-CSharp::DialogueData
+  AttackingStatements:
+  - Let's see if you can outrun my waves!
+  - There is more energy in water than you know, but you're about to learn that!
+  - I won't take it easy on you!
+  AngryStatements: []
+  BlockedStatements: []
+  DeflectedStatements: []
+  HurtStatements: []
+  TauntingStatements: []
+  VictoryStatements: []
+  StatementsWithRequirements: []
