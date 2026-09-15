@@ -12,4 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1837d8fddf9d4fb4bbe7620dd4b1ce89, type: 3}
   m_Name: MysticAssassinArt
   m_EditorClassIdentifier: Assembly-CSharp::FighterArt
-  Body: {fileID: 0}
+  Body: {fileID: -4700418250113659817, guid: 70c08fdc5d1bc4d50927aeac7695cb3b, type: 3}
+  Back: {fileID: -8619601499134224223, guid: 293f8d857476549ef99bdaf0599556ff, type: 3}
+  TalkingSprites:
+  - {fileID: 7081037132824805177, guid: 77871c724307d44d58fde6f75f8381e6, type: 3}
+  TalkingAngry: {fileID: 4079796771584589416, guid: 11fd33999bbed495e9cd7cc6ed9401bb, type: 3}

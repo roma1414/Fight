@@ -11,14 +11,14 @@ Mystic Assassin   Overall: 7.15  Health: 100  Mana: 140  Health Co = 1
 ###################################################################
 ###################################################################
 
-Paladin uses Slash against Mystic Assassin!
+Paladin uses Straight Punch against Mystic Assassin!
 It misses Mystic Assassin!
+Water Witch uses Water Dragon against Mystic Assassin!
+It hits Mystic Assassin and does 89 damage!
 Mystic Assassin uses Slash against Paladin!
 Paladin deflects it!
-Fire Mage uses Fireball against Water Witch!
-It hits Water Witch and does 45 damage!
-Water Witch uses Magic Missile against Mystic Assassin!
-It misses Mystic Assassin!
+Fire Mage uses Magic Missile against Water Witch!
+Water Witch blocks it with Wall of Water!
 
 
 Round 2
@@ -26,6 +26,6 @@ Round 2
 Paladin  +  Water Witch  vs  Fire Mage  +  Mystic Assassin
 
 Paladin   Overall: 6.78  Health: 100  Mana: 100  Health Co = 1
-Water Witch   Overall: 7.9072  Health: 55  Mana: 170  Health Co = 0.7866667
+Water Witch   Overall: 7.596  Health: 100  Mana: 134  Health Co = 1
 
-Fire Mage   Overall: 7.785  Health:
+Fire Mage  

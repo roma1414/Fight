@@ -12,4 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1837d8fddf9d4fb4bbe7620dd4b1ce89, type: 3}
   m_Name: PaladinArt
   m_EditorClassIdentifier: Assembly-CSharp::FighterArt
-  Body: {fileID: 0}
+  Body: {fileID: -1442688132119780070, guid: c3e4b8603a4be4259b031ce6cb8f5801, type: 3}
+  Back: {fileID: -1652639271264899135, guid: 8e27bc0fcaaca42478b0bf82f3e6547b, type: 3}
+  TalkingSprites:
+  - {fileID: 5283487019809902379, guid: e4330dab07d4d4f1fa793dc0262b41b8, type: 3}
+  TalkingAngry: {fileID: -5870682422526605009, guid: b4f4bdfb6dab44353b5d306df945b94f, type: 3}

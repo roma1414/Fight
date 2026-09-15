@@ -17,6 +17,7 @@ public class AI : ScriptableObject
     [SerializeField] protected float SubFraction;
     [SerializeField] protected float SummonFraction;
     [SerializeField] protected bool  CustomAI;
+    [SerializeField] protected float StatementFraction;
     [SerializeField] protected ulong ID;
 
     public const int    MIN_HEALTH_TO_STILL_PROTECT_TEAMMATE_NEAR_DEATH = 55;
@@ -32,6 +33,16 @@ public class AI : ScriptableObject
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     public bool CheckCustomAI() { return CustomAI; }
+
+    public bool CheckGetStatement()
+    {
+        if (UnityEngine.Random.Range(0f, 1f) > StatementFraction)
+        {
+            return true;
+        }
+
+        return false;
+    }
 
     public bool CheckForUsableMoves(Fight fight, Fighter fighter, Enums.MoveType moveType)
     {
@@ -1122,6 +1133,18 @@ public class AI : ScriptableObject
 
         return GetMoveEventOfType(fight, fighter, moveType);
     }
+
+    public string GetStatement(Fight fight, Fighter fighter, MoveEvent moveEvent)
+    {
+        if (CheckGetStatement() == true)
+        {
+            
+        }
+        
+        return null;
+    }
+
+    public float GetStatementFraction() { return StatementFraction; }
 
     public virtual MoveEvent GetSubMoveEvent(Fight fight, Fighter fighter)
     {

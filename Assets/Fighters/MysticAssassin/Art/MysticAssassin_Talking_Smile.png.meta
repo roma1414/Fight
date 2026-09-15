@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 10db963d9de1b422e9a9e30e5d097c84
+guid: 77871c724307d44d58fde6f75f8381e6
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 4392769698581556265
-    second: FireMage_Back_0
+      213: 7081037132824805177
+    second: MysticAssassin_Talking_Smile_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -126,13 +126,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: FireMage_Back_0
+      name: MysticAssassin_Talking_Smile_0
       rect:
         serializedVersion: 2
-        x: 279
-        y: 42
-        width: 526
-        height: 982
+        x: 0
+        y: 0
+        width: 1254
+        height: 1254
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -141,8 +141,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 92cad0854c046fc30800000000000000
-      internalID: 4392769698581556265
+      spriteID: 93f7f5f51c5e44260800000000000000
+      internalID: 7081037132824805177
       vertices: []
       indices: 
       edges: []
@@ -161,7 +161,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      FireMage_Back_0: 4392769698581556265
+      MysticAssassin_Talking_Smile_0: 7081037132824805177
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

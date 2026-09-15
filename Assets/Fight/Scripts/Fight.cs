@@ -861,9 +861,18 @@ public class Fight : MonoBehaviour
         fighter.AddUsedMove(medicalMove, RoundNumber);
     }
 
-    public IEnumerator ExecuteMoveEvent(MoveEvent moveEvent)
+    public IEnumerator ExecuteMoveEvent(MoveEvent originalMoveEvent)
     {
+        MoveEvent moveEvent = GetMoveEventWithActualAttackersAndTargets(originalMoveEvent);
+        
+        List<string> statementTexts = new List<string>();
+        List<Fighter> statementFighters = new List<Fighter>();
+        GetStatements(moveEvent, statementTexts, statementFighters);
+
+        yield return DynamicWindow.DisplayStatements(statementTexts, statementFighters);
+        
         PrintAttackString(moveEvent);
+        yield return DynamicWindow.DisplayMovePreview(moveEvent);
 
         Enums.MoveType moveType = moveEvent.GetMoveType();
         switch (moveType)
@@ -1241,10 +1250,8 @@ public class Fight : MonoBehaviour
         }
     }
 
-    public IEnumerator ExecuteOffensiveMoveEvent(MoveEvent originalMoveEvent)
+    public IEnumerator ExecuteOffensiveMoveEvent(MoveEvent moveEvent)
     {
-        MoveEvent moveEvent = GetMoveEventWithActualAttackersAndTargets(originalMoveEvent);
-
         float movePower = MoveEventPower(moveEvent);
         List<Enums.Nature> moveNatures = GetFinalNaturesInMoveEvent(moveEvent);
         List<Fighter> fighters = moveEvent.GetFighters();
@@ -2408,6 +2415,19 @@ public class Fight : MonoBehaviour
     }
 
     public int GetRoundNumber() { return RoundNumber;}
+
+    public void GetStatements(MoveEvent moveEvent, List<string> statementTexts, List<Fighter> statementFighters)
+    {
+        foreach (Fighter fighter in moveEvent.GetFighters())
+        {
+            string statementText = fighter.GetAI().GetStatement(this, fighter, moveEvent);
+            if (statementText != null && statementText.Length > 0)
+            {
+                statementTexts.Add(statementText);
+                statementFighters.Add(fighter);
+            }
+        }
+    }
 
     public List<Fighter> GetTeamList(int team)
     {
