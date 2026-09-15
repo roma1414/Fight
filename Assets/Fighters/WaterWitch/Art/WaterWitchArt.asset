@@ -16,4 +16,5 @@ MonoBehaviour:
   Back: {fileID: 3460103464364800527, guid: f816d4d52a1734717aaee2970a6e27a9, type: 3}
   TalkingSprites:
   - {fileID: -4132654183963366688, guid: 4aac047f919b44ee4ae162442443f5dd, type: 3}
+  - {fileID: 8446790065978274107, guid: dfb8fd81c7a82466a963ed4afb657ffe, type: 3}
   TalkingAngry: {fileID: -3666393524980278277, guid: 428c04e382cfd49eda911aa7c4b911e2, type: 3}

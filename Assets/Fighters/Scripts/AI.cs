@@ -37,7 +37,7 @@ public class AI : ScriptableObject
 
     public bool CheckGetStatement()
     {
-        if (UnityEngine.Random.Range(0f, 1f) > StatementFraction)
+        if (UnityEngine.Random.Range(0f, 1f) < StatementFraction)
         {
             return true;
         }

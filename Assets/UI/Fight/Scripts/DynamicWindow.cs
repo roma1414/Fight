@@ -10,13 +10,14 @@ public class DynamicWindow : MonoBehaviour
     [SerializeField] private Fight          Fight;
     [SerializeField] private GameObject     AttackerPanel, AttackersPanel, DynamicTextPanel, StatementPanel, StatementTextPanel;
     [SerializeField] private Image          Attacker, AttackerBackground, AttackersBackground, Attackers, StatementBackground, StatementFighter;
-    [SerializeField] private TMP_Text       StatementText, StatementFighterName;
+    [SerializeField] private TMP_Text       DynamicText, StatementText, StatementFighterName;
     public const float ATTACKER_BACKGROUND_MAX_OFFSET = 1330f;
     public const float STATEMENT_BACKGROUND_MAX_OFFSET = 3706;
 
-    public void ConfigureFightWindowForAttacker(MoveEvent moveEvent)
+    public void ConfigureFightWindowForAttacker(int index, MoveEvent moveEvent, bool includeTargets = false)
     {
-        int team = moveEvent.GetFighters()[0].GetTeam();
+        Fighter fighter = moveEvent.GetFighters()[index];
+        int team = fighter.GetTeam();
         if (team == 1)
         {
             AttackerBackground.sprite = Fight.GetMapArt().GetBackground_1();
@@ -37,23 +38,93 @@ public class DynamicWindow : MonoBehaviour
         {
             offsetPerFighter = ATTACKER_BACKGROUND_MAX_OFFSET / (teamSize - 1);
         }
-        int fighterIndex = teamList.IndexOf(moveEvent.GetFighters()[0]);
-        float offset = offsetPerFighter * fighterIndex * -1f; // Multiply by -1 to move left for higher index fighters
+        int fighterTeamIndex = teamList.IndexOf(fighter);
+        float offset = offsetPerFighter * fighterTeamIndex * -1f; // Multiply by -1 to move left for higher index fighters
 
         Vector2 position = AttackerBackground.rectTransform.anchoredPosition;
         position.x = offset;
         AttackerBackground.rectTransform.anchoredPosition = position;
 
         Attacker.sprite = null;
-        Sprite attackerSprite = moveEvent.GetFighters()[0].GetArt().GetBody();
+        Sprite attackerSprite = fighter.GetArt().GetBody();
         if (attackerSprite != null)
         {
             Attacker.sprite = attackerSprite;
         }
         else
         {
-            Debug.LogError($"Error! Fighter {moveEvent.GetFighters()[0].GetName()} has no body sprite in ConfigureFightWindowForAttacker!");
+            Debug.LogError($"Error! Fighter {fighter.GetName()} has no body sprite in ConfigureFightWindowForAttacker!");
         }
+
+        Move move = moveEvent.GetMoves()[index];
+        string text = fighter.GetName() + " uses " + move.GetName();
+
+        if (includeTargets)
+        {
+            List<Fighter> targets = moveEvent.GetTargets();
+
+            Enums.TargetType targetType = moveEvent.GetTargetType();
+            if (targetType == Enums.TargetType.Self)
+                {
+                    text += "!";
+                }
+            else
+            {
+                Enums.MoveType moveType = moveEvent.GetMoveType();
+
+                if (moveType == Enums.MoveType.Medical)
+                {
+                    text += " on ";
+                }
+                else
+                {
+                    text += " against ";
+                }
+
+                switch (targetType)
+                {
+                    case Enums.TargetType.Enemy:
+                    case Enums.TargetType.TeamMember:
+                        {
+                            Fighter target = targets[0];
+                            text += target.GetName() + "!";
+                            break;
+                        }
+                    case Enums.TargetType.EnemyTeam:
+                        {
+                            int targetTeam = moveEvent.GetTargetTeam();
+                            text += "Team " + targetTeam + "!";
+                            break;
+                        }
+                    case Enums.TargetType.AllEnemies:
+                        {
+                            text += "all enemies!";
+                            break;
+                        }
+                    case Enums.TargetType.EnemiesWithStatuses:
+                    case Enums.TargetType.TeamMembersWithStatuses:
+                        {
+                            text += Util.ListString(targets) + "!";
+                            break;
+                        }
+                    case Enums.TargetType.Team:
+                        {
+                            int targetTeam = moveEvent.GetTargetTeam();
+                            text += "all members of Team " + targetTeam + "!";
+                            break;
+                        }
+                    default:
+                        Debug.LogError("Error! Unexpected TargetType [" + targetType + "] in Fight.PrintAttackString!");
+                        break;
+                }
+            }
+        }
+        else
+        {
+            text += "!";
+        }
+        
+        DynamicText.text = text;
     }
 
     public void ConfigureFightWindowForAttackers(MoveEvent moveEvent)
@@ -143,13 +214,14 @@ public class DynamicWindow : MonoBehaviour
         if (numberOfFighters > 1)
         {
             ConfigureFightWindowForAttackers(moveEvent);
+            AttackersPanel.SetActive(true);
         }
         else
         {
-            ConfigureFightWindowForAttacker(moveEvent);
+            ConfigureFightWindowForAttacker(0, moveEvent, true);
+            AttackerPanel.SetActive(true);
         }
 
-        AttackersPanel.SetActive(true);
         DynamicTextPanel.SetActive(true);
 
         yield return new WaitForSeconds(1f);

@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: c3e4b8603a4be4259b031ce6cb8f5801
+guid: dfb8fd81c7a82466a963ed4afb657ffe
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -1442688132119780070
-    second: Paladin_Body_0
+      213: 8446790065978274107
+    second: WaterWitch_Talking_1_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -126,12 +126,12 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Paladin_Body_0
+      name: WaterWitch_Talking_1_0
       rect:
         serializedVersion: 2
-        x: 22
+        x: 0
         y: 0
-        width: 1212
+        width: 1254
         height: 1254
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -141,8 +141,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: a15245b99ca8afbe0800000000000000
-      internalID: -1442688132119780070
+      spriteID: b31feeedfc6093570800000000000000
+      internalID: 8446790065978274107
       vertices: []
       indices: 
       edges: []
@@ -161,7 +161,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Paladin_Body_0: -1442688132119780070
+      WaterWitch_Talking_1_0: 8446790065978274107
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

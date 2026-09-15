@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DialogueData
   AttackingStatements:
   - Let's see if you can outrun my waves!
-  - There is more energy in water than you know, but you're about to learn that!
+  - There is more energy in water than you know, but you'll understand soon!
   - I won't take it easy on you!
   AngryStatements: []
   BlockedStatements: []

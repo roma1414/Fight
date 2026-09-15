@@ -330,6 +330,7 @@ MonoBehaviour:
   Attackers: {fileID: 1915284942}
   StatementBackground: {fileID: 2117376438}
   StatementFighter: {fileID: 1708588147}
+  DynamicText: {fileID: 1481937695}
   StatementText: {fileID: 154405117}
   StatementFighterName: {fileID: 1542622631}
 --- !u!1001 &40965476
