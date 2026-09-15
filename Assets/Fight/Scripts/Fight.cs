@@ -869,6 +869,11 @@ public class Fight : MonoBehaviour
 
     public IEnumerator ExecuteMoveEvent(MoveEvent originalMoveEvent)
     {
+        if (originalMoveEvent.GetMoveType() == Enums.MoveType.Protect)
+        {
+            yield break;
+        }
+        
         MoveEvent moveEvent = GetMoveEventWithActualAttackersAndTargets(originalMoveEvent);
         
         List<string> statementTexts = new List<string>();
@@ -1265,7 +1270,7 @@ public class Fight : MonoBehaviour
         List<float> attackerRandomAdds = moveEvent.GetRandomAdds();
         List<Fighter> targets = moveEvent.GetTargets();
 
-        yield return DynamicWindow.DisplayMovePreview(moveEvent);
+        //yield return DynamicWindow.DisplayMovePreview(moveEvent);
 
         foreach (Fighter target in targets)
         {

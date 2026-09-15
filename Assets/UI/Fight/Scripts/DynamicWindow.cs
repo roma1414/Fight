@@ -8,11 +8,16 @@ using System.Linq;
 public class DynamicWindow : MonoBehaviour
 {
     [SerializeField] private Fight          Fight;
-    [SerializeField] private GameObject     AttackerPanel, AttackersPanel, DynamicTextPanel, StatementPanel, StatementTextPanel;
-    [SerializeField] private Image          Attacker, AttackerBackground, AttackersBackground, Attackers, StatementBackground, StatementFighter;
+    [SerializeField] private GameObject     FighterPanel, FightersPanel, DynamicTextPanel, StatementPanel, StatementTextPanel;
+    [SerializeField] private Image          Fighter, FighterBackground, FightersBackground, StatementBackground, 
+                                            StatementFighter, FightersPrefab;
     [SerializeField] private TMP_Text       DynamicText, StatementText, StatementFighterName;
-    public const float ATTACKER_BACKGROUND_MAX_OFFSET = 1330f;
+    [SerializeField] private RectTransform  FightersContainer;
+    private List<Image>                     SpawnedFighterImages = new List<Image>();
+    public const float FIGHTER_BACKGROUND_MAX_OFFSET = 1330f;
     public const float STATEMENT_BACKGROUND_MAX_OFFSET = 3706;
+    public const float FIGHTER_ZERO_FOR_PREFBABS = 240f; 
+    public const float FIGHTERS_BACKGROUND_MAX_OFFSET = 1040f;
 
     public void ConfigureFightWindowForAttacker(int index, MoveEvent moveEvent, bool includeTargets = false)
     {
@@ -20,15 +25,15 @@ public class DynamicWindow : MonoBehaviour
         int team = fighter.GetTeam();
         if (team == 1)
         {
-            AttackerBackground.sprite = Fight.GetMapArt().GetBackground_1();
+            FighterBackground.sprite = Fight.GetMapArt().GetBackground_1();
         }
         else if (team == 2)
         {
-            AttackerBackground.sprite = Fight.GetMapArt().GetBackground_2();
+            FighterBackground.sprite = Fight.GetMapArt().GetBackground_2();
         }
         else
         {
-            AttackerBackground.sprite = Fight.GetMapArt().GetBackground_3();
+            FighterBackground.sprite = Fight.GetMapArt().GetBackground_3();
         }
 
         List<Fighter> teamList = Fight.GetTeamList(team);
@@ -36,20 +41,20 @@ public class DynamicWindow : MonoBehaviour
         float offsetPerFighter = 0f;
         if (teamSize > 1)
         {
-            offsetPerFighter = ATTACKER_BACKGROUND_MAX_OFFSET / (teamSize - 1);
+            offsetPerFighter = FIGHTER_BACKGROUND_MAX_OFFSET / (teamSize - 1);
         }
         int fighterTeamIndex = teamList.IndexOf(fighter);
         float offset = offsetPerFighter * fighterTeamIndex * -1f; // Multiply by -1 to move left for higher index fighters
 
-        Vector2 position = AttackerBackground.rectTransform.anchoredPosition;
+        Vector2 position = FighterBackground.rectTransform.anchoredPosition;
         position.x = offset;
-        AttackerBackground.rectTransform.anchoredPosition = position;
+        FighterBackground.rectTransform.anchoredPosition = position;
 
-        Attacker.sprite = null;
-        Sprite attackerSprite = fighter.GetArt().GetBody();
-        if (attackerSprite != null)
+        Fighter.sprite = null;
+        Sprite fighterSprite = fighter.GetArt().GetBody();
+        if (fighterSprite != null)
         {
-            Attacker.sprite = attackerSprite;
+            Fighter.sprite = fighterSprite;
         }
         else
         {
@@ -132,31 +137,49 @@ public class DynamicWindow : MonoBehaviour
         int team = moveEvent.GetFighters()[0].GetTeam();
         if (team == 1)
         {
-            AttackersBackground.sprite = Fight.GetMapArt().GetBackground_1();
+            FightersBackground.sprite = Fight.GetMapArt().GetBackground_1();
         }
         else if (team == 2)
         {
-            AttackersBackground.sprite = Fight.GetMapArt().GetBackground_2();
+            FightersBackground.sprite = Fight.GetMapArt().GetBackground_2();
         }
         else
         {
-            AttackersBackground.sprite = Fight.GetMapArt().GetBackground_3();
+            FightersBackground.sprite = Fight.GetMapArt().GetBackground_3();
         }
 
-        Vector2 position = AttackersBackground.rectTransform.anchoredPosition;
-        position.x = 0f;
-        AttackersBackground.rectTransform.anchoredPosition = position;
+        List<Fighter> fighters = moveEvent.GetFighters();
+        
+        for (int i = 0; i < fighters.Count; i++)
+        {
+            Fighter fighter = fighters[i];
+            
+            Image spawnedFighterImage = Instantiate(
+                FightersPrefab,
+                FightersContainer,
+                false
+            );
+            SpawnedFighterImages.Add(spawnedFighterImage);
 
-        Attackers.sprite = null;
-        Sprite attackerSprite = moveEvent.GetFighters()[0].GetArt().GetBody();
-        if (attackerSprite != null)
-        {
-            Attackers.sprite = attackerSprite;
+            spawnedFighterImage.sprite = null;
+            Sprite attackerSprite = fighter.GetArt().GetBody();
+            if (attackerSprite != null)
+            {
+                spawnedFighterImage.sprite = attackerSprite;
+            }
+            else
+            {
+                Debug.LogError($"Error! Fighter {fighter.GetName()} has no body sprite!");
+            }
         }
-        else
-        {
-            Debug.LogError($"Error! Fighter {moveEvent.GetFighters()[0].GetName()} has no body sprite!");
-        }
+
+        List<Fighter> targets = moveEvent.GetTargets();
+        DynamicText.text = Util.ListString(fighters) + " attack " + Util.ListString(targets) + "!";
+    }
+
+    public void ConfigureFightWindowForTarget(int index, MoveEvent moveEvent, bool includeTargets = false)
+    {
+        
     }
 
     public void ConfigureFightWindowForStatement(string statement, Fighter fighter)
@@ -209,22 +232,27 @@ public class DynamicWindow : MonoBehaviour
 
     public IEnumerator DisplayMovePreview(MoveEvent moveEvent)
     {
+        if (moveEvent.GetMoveType() == Enums.MoveType.Protect)
+        {
+            yield break;
+        }
+        
         HidePanels();
         int numberOfFighters = moveEvent.GetFighters().Count;
         if (numberOfFighters > 1)
         {
             ConfigureFightWindowForAttackers(moveEvent);
-            AttackersPanel.SetActive(true);
+            FightersPanel.SetActive(true);
         }
         else
         {
             ConfigureFightWindowForAttacker(0, moveEvent, true);
-            AttackerPanel.SetActive(true);
+            FightersPanel.SetActive(true);
         }
 
         DynamicTextPanel.SetActive(true);
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(2.5f);
     }
 
     public IEnumerator DisplayStatement(string statement, Fighter fighter)
@@ -249,10 +277,19 @@ public class DynamicWindow : MonoBehaviour
 
     public void HidePanels()
     {
-        AttackerPanel.SetActive(false);
-        AttackersPanel.SetActive(false);
+        FighterPanel.SetActive(false);
+        FightersPanel.SetActive(false);
         StatementPanel.SetActive(false);
         DynamicTextPanel.SetActive(false);
         StatementTextPanel.SetActive(false);
+
+        foreach (Image spawnedFighterImage in SpawnedFighterImages)
+        {
+            if (spawnedFighterImage != null)
+            {
+                Destroy(spawnedFighterImage.gameObject);
+            }
+        }
+        SpawnedFighterImages.Clear();
     }
 }
