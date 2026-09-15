@@ -436,7 +436,7 @@ PrefabInstance:
     - target: {fileID: 3847063870867560233, guid: c005fea4d21df4a93b5385f64270e0fc, type: 3}
       propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 646679253}
     - target: {fileID: 3847063870867560233, guid: c005fea4d21df4a93b5385f64270e0fc, type: 3}
       propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
@@ -447,7 +447,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3847063870867560233, guid: c005fea4d21df4a93b5385f64270e0fc, type: 3}
       propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: FightCanvas, Assembly-CSharp
+      value: SelectMoveWindow, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 3847063870867560233, guid: c005fea4d21df4a93b5385f64270e0fc, type: 3}
       propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
@@ -759,7 +759,7 @@ PrefabInstance:
     - target: {fileID: 3847063870867560233, guid: c005fea4d21df4a93b5385f64270e0fc, type: 3}
       propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 646679253}
     - target: {fileID: 3847063870867560233, guid: c005fea4d21df4a93b5385f64270e0fc, type: 3}
       propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
@@ -770,7 +770,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3847063870867560233, guid: c005fea4d21df4a93b5385f64270e0fc, type: 3}
       propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: FightCanvas, Assembly-CSharp
+      value: SelectMoveWindow, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 3847063870867560233, guid: c005fea4d21df4a93b5385f64270e0fc, type: 3}
       propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
@@ -1322,7 +1322,7 @@ PrefabInstance:
     - target: {fileID: 3847063870867560233, guid: c005fea4d21df4a93b5385f64270e0fc, type: 3}
       propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 646679253}
     - target: {fileID: 3847063870867560233, guid: c005fea4d21df4a93b5385f64270e0fc, type: 3}
       propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
@@ -1333,7 +1333,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3847063870867560233, guid: c005fea4d21df4a93b5385f64270e0fc, type: 3}
       propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: FightCanvas, Assembly-CSharp
+      value: SelectMoveWindow, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 3847063870867560233, guid: c005fea4d21df4a93b5385f64270e0fc, type: 3}
       propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
@@ -1539,7 +1539,7 @@ PrefabInstance:
     - target: {fileID: 3847063870867560233, guid: c005fea4d21df4a93b5385f64270e0fc, type: 3}
       propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 646679253}
     - target: {fileID: 3847063870867560233, guid: c005fea4d21df4a93b5385f64270e0fc, type: 3}
       propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
@@ -1550,7 +1550,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3847063870867560233, guid: c005fea4d21df4a93b5385f64270e0fc, type: 3}
       propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: FightCanvas, Assembly-CSharp
+      value: SelectMoveWindow, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 3847063870867560233, guid: c005fea4d21df4a93b5385f64270e0fc, type: 3}
       propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
@@ -2259,7 +2259,7 @@ PrefabInstance:
     - target: {fileID: 3847063870867560233, guid: c005fea4d21df4a93b5385f64270e0fc, type: 3}
       propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 646679253}
     - target: {fileID: 3847063870867560233, guid: c005fea4d21df4a93b5385f64270e0fc, type: 3}
       propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
@@ -2270,7 +2270,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3847063870867560233, guid: c005fea4d21df4a93b5385f64270e0fc, type: 3}
       propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: FightCanvas, Assembly-CSharp
+      value: SelectMoveWindow, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 3847063870867560233, guid: c005fea4d21df4a93b5385f64270e0fc, type: 3}
       propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
@@ -3286,7 +3286,7 @@ PrefabInstance:
     - target: {fileID: 3847063870867560233, guid: c005fea4d21df4a93b5385f64270e0fc, type: 3}
       propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 646679253}
     - target: {fileID: 3847063870867560233, guid: c005fea4d21df4a93b5385f64270e0fc, type: 3}
       propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
@@ -3297,7 +3297,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3847063870867560233, guid: c005fea4d21df4a93b5385f64270e0fc, type: 3}
       propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: FightCanvas, Assembly-CSharp
+      value: SelectMoveWindow, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 3847063870867560233, guid: c005fea4d21df4a93b5385f64270e0fc, type: 3}
       propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
@@ -4108,7 +4108,7 @@ PrefabInstance:
     - target: {fileID: 3847063870867560233, guid: c005fea4d21df4a93b5385f64270e0fc, type: 3}
       propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 646679253}
     - target: {fileID: 3847063870867560233, guid: c005fea4d21df4a93b5385f64270e0fc, type: 3}
       propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
@@ -4119,7 +4119,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3847063870867560233, guid: c005fea4d21df4a93b5385f64270e0fc, type: 3}
       propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: FightCanvas, Assembly-CSharp
+      value: SelectMoveWindow, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 3847063870867560233, guid: c005fea4d21df4a93b5385f64270e0fc, type: 3}
       propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
@@ -6544,7 +6544,7 @@ PrefabInstance:
     - target: {fileID: 3847063870867560233, guid: c005fea4d21df4a93b5385f64270e0fc, type: 3}
       propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 646679253}
     - target: {fileID: 3847063870867560233, guid: c005fea4d21df4a93b5385f64270e0fc, type: 3}
       propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
@@ -6555,7 +6555,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3847063870867560233, guid: c005fea4d21df4a93b5385f64270e0fc, type: 3}
       propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: FightCanvas, Assembly-CSharp
+      value: SelectMoveWindow, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 3847063870867560233, guid: c005fea4d21df4a93b5385f64270e0fc, type: 3}
       propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
@@ -6846,7 +6846,7 @@ PrefabInstance:
     - target: {fileID: 3847063870867560233, guid: c005fea4d21df4a93b5385f64270e0fc, type: 3}
       propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 646679253}
     - target: {fileID: 3847063870867560233, guid: c005fea4d21df4a93b5385f64270e0fc, type: 3}
       propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
@@ -6857,7 +6857,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3847063870867560233, guid: c005fea4d21df4a93b5385f64270e0fc, type: 3}
       propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: FightCanvas, Assembly-CSharp
+      value: SelectMoveWindow, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 3847063870867560233, guid: c005fea4d21df4a93b5385f64270e0fc, type: 3}
       propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
@@ -7519,7 +7519,7 @@ PrefabInstance:
     - target: {fileID: 3847063870867560233, guid: c005fea4d21df4a93b5385f64270e0fc, type: 3}
       propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 646679253}
     - target: {fileID: 3847063870867560233, guid: c005fea4d21df4a93b5385f64270e0fc, type: 3}
       propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
@@ -7530,7 +7530,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3847063870867560233, guid: c005fea4d21df4a93b5385f64270e0fc, type: 3}
       propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: FightCanvas, Assembly-CSharp
+      value: SelectMoveWindow, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 3847063870867560233, guid: c005fea4d21df4a93b5385f64270e0fc, type: 3}
       propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument

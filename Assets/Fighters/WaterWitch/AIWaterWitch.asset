@@ -22,6 +22,6 @@ MonoBehaviour:
   SubFraction: 0
   SummonFraction: 0.1
   CustomAI: 1
-  StatementFraction: 1
+  StatementFraction: 0.5
   Dialogue: {fileID: 11400000, guid: 6aefd808a7bca4e0ea1842f360bb366d, type: 2}
   ID: 0
