@@ -17,6 +17,12 @@ public class Fight : MonoBehaviour
     [SerializeField] private SelectMoveWindow   SelectMoveWindow;
     [SerializeField] private GameObject         DynamicPanel;
     [SerializeField] private DynamicWindow      DynamicWindow;
+    [SerializeField] private Color              Team1Color =
+        new Color(0.15f, 0.15f, 0.15f, 1f);
+    [SerializeField] private Color              Team2Color =
+        new Color(0.15f, 0.15f, 0.15f, 1f);
+    [SerializeField] private Color              Team3Color =
+        new Color(0.15f, 0.15f, 0.15f, 1f);
     protected List<Clone>                       Clones;
     protected List<Fighter>                     Fighters, OriginalFighters, OriginalTeam1, OriginalTeam2, OriginalTeam3;
     protected List<Protection>                  Protections;
@@ -2427,6 +2433,22 @@ public class Fight : MonoBehaviour
                 statementFighters.Add(fighter);
             }
         }
+    }
+
+    public Color GetTeamColor(int team)
+    {
+        switch (team)
+        {
+            case 1:
+                return Team1Color;
+            case 2:
+                return Team2Color;
+            case 3:
+                return Team3Color;
+        }
+
+        Debug.LogError("Error! Unknown team[" + team + "] in Fight.GetTeamColor. Returning white.");
+        return Color.white;
     }
 
     public List<Fighter> GetTeamList(int team)

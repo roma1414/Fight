@@ -8,15 +8,9 @@ using System.Linq;
 public class DynamicWindow : MonoBehaviour
 {
     [SerializeField] private Fight          Fight;
-    [SerializeField] private GameObject     AttackerPanel;
-    [SerializeField] private Image          AttackerBackground;
-    [SerializeField] private Image          Attacker;
-    [SerializeField] private GameObject     AttackersPanel;
-    [SerializeField] private Image          AttackersBackground;
-    [SerializeField] private Image          Attackers;
-    [SerializeField] private Image          StatementBackground;
-    [SerializeField] private Image          StatementFighter;
-    [SerializeField] private GameObject     StatementPanel;
+    [SerializeField] private GameObject     AttackerPanel, AttackersPanel, DynamicTextPanel, StatementPanel, StatementTextPanel;
+    [SerializeField] private Image          Attacker, AttackerBackground, AttackersBackground, Attackers, StatementBackground, StatementFighter;
+    [SerializeField] private TMP_Text       StatementText, StatementFighterName;
     public const float ATTACKER_BACKGROUND_MAX_OFFSET = 1330f;
     public const float STATEMENT_BACKGROUND_MAX_OFFSET = 3706;
 
@@ -94,20 +88,23 @@ public class DynamicWindow : MonoBehaviour
         }
     }
 
-    public void ConfigureFightWindowForStatement(Text statement, Fighter fighter)
+    public void ConfigureFightWindowForStatement(string statement, Fighter fighter)
     {
         int team = fighter.GetTeam();
         if (team == 1)
         {
             StatementBackground.sprite = Fight.GetMapArt().GetBackground_1();
+            StatementFighterName.color = Fight.GetTeamColor(1);
         }
         else if (team == 2)
         {
             StatementBackground.sprite = Fight.GetMapArt().GetBackground_2();
+            StatementFighterName.color = Fight.GetTeamColor(2);
         }
         else
         {
             StatementBackground.sprite = Fight.GetMapArt().GetBackground_3();
+            StatementFighterName.color = Fight.GetTeamColor(3);
         }
 
         List<Fighter> teamList = Fight.GetTeamList(team);
@@ -118,7 +115,7 @@ public class DynamicWindow : MonoBehaviour
             offsetPerFighter = STATEMENT_BACKGROUND_MAX_OFFSET / (teamSize - 1);
         }
         int fighterIndex = teamList.IndexOf(fighter);
-        float offset = offsetPerFighter * fighterIndex * -1f; // Multiply by -1 to move left for higher index fighters
+        float offset = offsetPerFighter * fighterIndex * -1f; // Multiply by -1 to move the background left for higher index fighters
 
         Vector2 position = StatementBackground.rectTransform.anchoredPosition;
         position.x = offset;
@@ -134,6 +131,9 @@ public class DynamicWindow : MonoBehaviour
         {
             Debug.LogError($"Error! Fighter {fighter.GetName()} has no talking sprite in ConfigureFightWindowForStatement!");
         }
+
+        StatementFighterName.text = $"{fighter.GetName()}:";
+        StatementText.text = statement;
     }
 
     public IEnumerator DisplayMovePreview(MoveEvent moveEvent)
@@ -143,24 +143,36 @@ public class DynamicWindow : MonoBehaviour
         if (numberOfFighters > 1)
         {
             ConfigureFightWindowForAttackers(moveEvent);
-            AttackersPanel.SetActive(true);
         }
         else
         {
             ConfigureFightWindowForAttacker(moveEvent);
-            AttackerPanel.SetActive(true);
         }
+
+        AttackersPanel.SetActive(true);
+        DynamicTextPanel.SetActive(true);
 
         yield return new WaitForSeconds(1f);
     }
 
-    public IEnumerator DisplayStatement(Text statement, Fighter fighter)
+    public IEnumerator DisplayStatement(string statement, Fighter fighter)
     {
         HidePanels();
         ConfigureFightWindowForStatement(statement, fighter);
         StatementPanel.SetActive(true);
+        StatementTextPanel.SetActive(true);
 
         yield return new WaitForSeconds(3f);
+    }
+
+    public IEnumerator DisplayStatements(List<string> statements, List<Fighter> fighters)
+    {
+        for (int i = 0; i < statements.Count; i++)
+        {
+            yield return DisplayStatement(statements[i], fighters[i]);
+        }
+
+        yield break;
     }
 
     public void HidePanels()
@@ -168,5 +180,7 @@ public class DynamicWindow : MonoBehaviour
         AttackerPanel.SetActive(false);
         AttackersPanel.SetActive(false);
         StatementPanel.SetActive(false);
+        DynamicTextPanel.SetActive(false);
+        StatementTextPanel.SetActive(false);
     }
 }

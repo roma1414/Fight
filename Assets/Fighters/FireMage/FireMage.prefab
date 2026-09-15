@@ -56,7 +56,7 @@ MonoBehaviour:
   MaxMana: 180
   Health: 100
   Level: 10
-  Team: 2
+  Team: 1
   ControlType: 0
   FightingStyle: 3
   AI: {fileID: 11400000, guid: 5c4a98beb2d344374be1a5d6f13f9ea4, type: 2}
