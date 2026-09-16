@@ -21,11 +21,25 @@ public class DynamicWindow : MonoBehaviour
     [SerializeField] private List<string>   StatementAnimations;
     private int                             PreviousStatementAnimation = -1;
     private List<Image>                     SpawnedFighterImages = new List<Image>();
+    private Coroutine                       TalkingCoroutine;
     public const float FIGHTER_BACKGROUND_MAX_OFFSET = 1330f;
     public const float STATEMENT_BACKGROUND_MAX_OFFSET = 3698;
     public const float STATEMENT_BACKGROUND_PANEL_MAX_ANIMATION_OFFSET = 8f;
     public const float STATEMENT_FIGHTER_MAX_ANIMATION_OFFSET = 16f;
 
+    private IEnumerator AnimateTalking(Sprite[] frames)
+    {
+        int index = 0;
+
+        while (true)
+        {
+            StatementFighter.sprite = frames[index];
+            index = (index + 1) % frames.Length;
+
+            yield return new WaitForSeconds(0.15f);
+        }
+    }
+    
     public void ConfigureFightWindowForAttacker(int index, MoveEvent moveEvent, bool includeTargets = false)
     {
         Fighter fighter = moveEvent.GetFighters()[index];
@@ -189,7 +203,7 @@ public class DynamicWindow : MonoBehaviour
         
     }
 
-    public void ConfigureFightWindowForStatement(string statement, Fighter fighter, string animation)
+    TalkingFrames ConfigureFightWindowForStatement(string statement, Fighter fighter, string animation)
     {
         int team = fighter.GetTeam();
         if (team == 1)
@@ -222,15 +236,8 @@ public class DynamicWindow : MonoBehaviour
         backgroundPosition.x = backgroundOffset;
         StatementBackground.rectTransform.anchoredPosition = backgroundPosition;
 
-        Vector2 fighterPosition = StatementFighter.rectTransform.anchoredPosition;
-        //fighterPosition.x = STATEMENT_FIGHTER_MAX_ANIMATION_OFFSET;
-        //StatementFighter.rectTransform.anchoredPosition = fighterPosition;
-
+        /*Vector2 fighterPosition = StatementFighter.rectTransform.anchoredPosition;
         Vector2 backgroundPanelPosition = StatementBackgroundPanel.GetComponent<RectTransform>().anchoredPosition;
-        //StatementBackgroundPanel.GetComponent<RectTransform>().anchoredPosition = new Vector2(STATEMENT_BACKGROUND_PANEL_MAX_ANIMATION_OFFSET, 345f);
-        //backgroundPanelPosition.x = STATEMENT_BACKGROUND_PANEL_MAX_ANIMATION_OFFSET;
-        //StatementBackgroundPanel.GetComponent<RectTransform>().anchoredPosition = backgroundPanelPosition;
-
         switch (animation)
         {
             case "Statement_Left":
@@ -245,23 +252,43 @@ public class DynamicWindow : MonoBehaviour
                 Debug.LogError($"Error! Unknown animation {animation} in ConfigureFightWindowForStatement!");
                 break;
         }
-
         StatementFighter.rectTransform.anchoredPosition = fighterPosition;
-        StatementBackgroundPanel.GetComponent<RectTransform>().anchoredPosition = backgroundPanelPosition;
+        StatementBackgroundPanel.GetComponent<RectTransform>().anchoredPosition = backgroundPanelPosition;*/
 
         StatementFighter.sprite = null;
-        Sprite attackerSprite = fighter.GetArt().GetTalkingSprite();
-        if (attackerSprite != null)
+        //Sprite attackerSprite = fighter.GetArt().GetTalkingSprite();
+        TalkingFrames talkingFrames = fighter.GetArt().GetTalkingFrames();
+        if (talkingFrames != null)
         {
-            StatementFighter.sprite = attackerSprite;
+            StatementFighter.sprite = talkingFrames.GetFrames()[0];
         }
         else
         {
-            Debug.LogError($"Error! Fighter {fighter.GetName()} has no talking sprite in ConfigureFightWindowForStatement!");
+            Debug.LogError($"Error! Fighter {fighter.GetName()} has no talking frames in ConfigureFightWindowForStatement!");
         }
 
         StatementFighterName.text = $"{fighter.GetName()}:";
         StatementText.text = statement;
+
+        return talkingFrames;
+    }
+
+    public IEnumerator DisplayAttackerMovePreview(MoveEvent moveEvent)
+    {
+        ConfigureFightWindowForAttacker(0, moveEvent, true);
+        FighterPanel.SetActive(true);
+        DynamicTextPanel.SetActive(true);
+
+        yield return new WaitForSeconds(2.5f);
+    }
+
+    public IEnumerator DisplayAttackersMovePreview(MoveEvent moveEvent)
+    {
+        ConfigureFightWindowForAttackers(moveEvent);
+        FightersPanel.SetActive(true);
+        DynamicTextPanel.SetActive(true);
+
+        yield return new WaitForSeconds(2.5f);
     }
 
     public IEnumerator DisplayMovePreview(MoveEvent moveEvent)
@@ -275,30 +302,27 @@ public class DynamicWindow : MonoBehaviour
         int numberOfFighters = moveEvent.GetFighters().Count;
         if (numberOfFighters > 1)
         {
-            ConfigureFightWindowForAttackers(moveEvent);
-            FightersPanel.SetActive(true);
+            yield return DisplayAttackersMovePreview(moveEvent);
         }
         else
         {
-            ConfigureFightWindowForAttacker(0, moveEvent, true);
-            FighterPanel.SetActive(true);
+            yield return DisplayAttackerMovePreview(moveEvent);
         }
-
-        DynamicTextPanel.SetActive(true);
-
-        yield return new WaitForSeconds(2.5f);
     }
 
     public IEnumerator DisplayStatement(string statement, Fighter fighter)
     {
         HidePanels();
         string animation = GetStatementAnimation();
-        ConfigureFightWindowForStatement(statement, fighter, animation);
+        TalkingFrames talkingFrames = ConfigureFightWindowForStatement(statement, fighter, animation);
         StatementPanel.SetActive(true);
         StatementTextPanel.SetActive(true);
         StatementAnimator.Play(animation, 0, 0f);
+        StartTalking(talkingFrames.GetFrames());
+        yield return new WaitForSeconds(1.5f);
+        StopTalking(talkingFrames.GetFrames());
 
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(1.5f);
     }
 
     public IEnumerator DisplayStatements(List<string> statements, List<Fighter> fighters)
@@ -356,5 +380,37 @@ public class DynamicWindow : MonoBehaviour
             }
         }
         SpawnedFighterImages.Clear();
+    }
+
+    private void OnDisable()
+    {
+        Sprite[] emptySpriteArray = new Sprite[0];
+        StopTalking(emptySpriteArray);
+    }
+
+    private void StartTalking(Sprite[] frames)
+    {
+        StopTalking(frames);
+
+        if (frames == null || frames.Length == 0)
+            return;
+
+        TalkingCoroutine = StartCoroutine(
+            AnimateTalking(frames)
+        );
+    }
+
+    private void StopTalking(Sprite[] frames)
+    {
+        if (TalkingCoroutine != null)
+        {
+            StopCoroutine(TalkingCoroutine);
+            TalkingCoroutine = null;
+            // First frame should be the resting frame.
+            if (frames.Length > 0)
+            {
+                StatementFighter.sprite = frames[0];
+            }
+        }
     }
 }

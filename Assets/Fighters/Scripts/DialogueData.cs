@@ -7,7 +7,8 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New DialogueData", menuName = "Assets/AI/New DialogueData")]
 public class DialogueData : ScriptableObject
 {
-    [SerializeField] protected List<string> AttackingStatements, AngryStatements, BlockedStatements, DeflectedStatements, HurtStatements, TauntingStatements, VictoryStatements;
+    [SerializeField] protected List<string> AttackingStatements, AngryStatements, BlockedStatements, DeflectedStatements,
+                                            HurtStatements, TauntingStatements, VictoryStatements;
     [SerializeField] protected List<Statement> StatementsWithRequirements;
     protected HashSet<int> SpokenAttackingStatements = new HashSet<int>();
     protected HashSet<int> SpokenAngryStatements = new HashSet<int>();
