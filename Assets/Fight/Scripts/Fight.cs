@@ -380,6 +380,19 @@ public class Fight : MonoBehaviour
         return result;
     }
 
+    public bool CheckUsers()
+    {
+        foreach (Fighter fighter in Fighters)
+        {
+            if (fighter.GetControlType() == Enums.ControlType.User)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     public List<MoveEvent> CombineMoveEvents(List<MoveEvent> moveEvents)
     {
         foreach (MoveEvent moveEvent in moveEvents) // Checking moveEvents list passed into function
@@ -2306,6 +2319,8 @@ public class Fight : MonoBehaviour
             yield break;
         }
 
+        DynamicPanel.SetActive(false);
+        SelectMovePanel.SetActive(true);
         yield return SelectMoveWindow.GetUserMoveEvent(fighter, onMoveEventReady);
     }
 
@@ -2512,6 +2527,9 @@ public class Fight : MonoBehaviour
         {
             fighter.InitFighter();
         }
+
+        DynamicPanel.SetActive(false);
+        SelectMovePanel.SetActive(false);
     }
     public void InsertCombinedTargetMoveEvents(List<MoveEvent> listToInsert, List<MoveEvent> moveEventList)
     {
@@ -3041,8 +3059,6 @@ public class Fight : MonoBehaviour
             mWriter.WriteLine("Round " + RoundNumber + "\n");
             DisplayTeamsText();
 
-            DynamicPanel.SetActive(false);
-            SelectMovePanel.SetActive(true);
             List<MoveEvent> moveEventList = null;
             yield return GetMoveEventList(result => moveEventList = result);
 
