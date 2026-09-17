@@ -256,7 +256,6 @@ public class DynamicWindow : MonoBehaviour
         StatementBackgroundPanel.GetComponent<RectTransform>().anchoredPosition = backgroundPanelPosition;*/
 
         StatementFighter.sprite = null;
-        //Sprite attackerSprite = fighter.GetArt().GetTalkingSprite();
         TalkingFrames talkingFrames = fighter.GetArt().GetTalkingFrames();
         if (talkingFrames != null)
         {
@@ -275,6 +274,7 @@ public class DynamicWindow : MonoBehaviour
 
     public IEnumerator DisplayAttackerMovePreview(MoveEvent moveEvent)
     {
+        HidePanels();
         ConfigureFightWindowForAttacker(0, moveEvent, true);
         FighterPanel.SetActive(true);
         DynamicTextPanel.SetActive(true);
@@ -284,11 +284,20 @@ public class DynamicWindow : MonoBehaviour
 
     public IEnumerator DisplayAttackersMovePreview(MoveEvent moveEvent)
     {
+        HidePanels();
         ConfigureFightWindowForAttackers(moveEvent);
         FightersPanel.SetActive(true);
-        DynamicTextPanel.SetActive(true);
+        DynamicTextPanel.SetActive(true);        
+        yield return new WaitForSeconds(2f);
 
-        yield return new WaitForSeconds(2.5f);
+        for (int i = 0; i < moveEvent.GetFighters().Count; i++)
+        {
+            HidePanels();
+            ConfigureFightWindowForAttacker(i, moveEvent, false);
+            FighterPanel.SetActive(true);
+            DynamicTextPanel.SetActive(true);
+            yield return new WaitForSeconds(2f);
+        }
     }
 
     public IEnumerator DisplayMovePreview(MoveEvent moveEvent)
@@ -298,7 +307,6 @@ public class DynamicWindow : MonoBehaviour
             yield break;
         }
         
-        HidePanels();
         int numberOfFighters = moveEvent.GetFighters().Count;
         if (numberOfFighters > 1)
         {
