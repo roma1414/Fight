@@ -53,7 +53,8 @@ public class MoveEvent
     {
         if (EffectiveMoveEventCastingSpeed == 0f) // If EffectiveMoveEventSpeed has not been set
         {
-            return GetMoveEventCastingSpeed();
+            EffectiveMoveEventCastingSpeed = GetMoveEventCastingSpeed();
+            return EffectiveMoveEventCastingSpeed;
         }
         return EffectiveMoveEventCastingSpeed; 
     }

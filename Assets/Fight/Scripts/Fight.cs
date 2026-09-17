@@ -2547,9 +2547,9 @@ public class Fight : MonoBehaviour
 
         int index = 0;
         int moveEventListCount = moveEventList.Count;
-        bool foundInsertIndex = false;
-
-        while (index < moveEventListCount && foundInsertIndex == false)   // Iterate through moveEventList until you find a slower effective move event speed.
+        
+        //bool foundInsertIndex = false;
+        /*while (index < moveEventListCount && foundInsertIndex == false)   // Iterate through moveEventList until you find a slower effective move event speed.
         {
             float effectiveMoveEventCastingSpeed = moveEventList[index].GetEffectiveMoveEventCastingSpeed();
 
@@ -2557,6 +2557,17 @@ public class Fight : MonoBehaviour
             {
                 foundInsertIndex = true;
             }
+            ++index;
+        }*/
+
+        while (index < moveEventListCount)
+        {
+            float effectiveSpeed =
+                moveEventList[index].GetEffectiveMoveEventCastingSpeed();
+
+            if (moveEventCastingSpeed > effectiveSpeed)
+                break;
+
             ++index;
         }
 
