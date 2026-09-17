@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: FireMageDialogueData
   m_EditorClassIdentifier: Assembly-CSharp::DialogueData
   AttackingStatements:
-  - Let's see if you can handle my fire!
+  - Let's see if you can handle this heat!
   - Can you survive this?
   - Prepare yourself. I'm not holding back!
   - This will probably destroy you!

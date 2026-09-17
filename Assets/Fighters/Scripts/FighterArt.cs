@@ -7,7 +7,6 @@ public class FighterArt : ScriptableObject
 {
     [SerializeField] protected Sprite           Body;
     [SerializeField] protected Sprite           Back;
-    [SerializeField] protected List<Sprite>     TalkingSprites;
     [SerializeField] protected Sprite           TalkingAngry;
     [SerializeField] protected TalkingFrames[]  TalkingFrameList;
     protected int                               PreviousTalkingFrames = -1;
@@ -15,34 +14,6 @@ public class FighterArt : ScriptableObject
     public Sprite GetBack() { return Back; }
     public Sprite GetBody() { return Body; }
     public Sprite GetTalkingAngry() { return TalkingAngry; }
-
-    // orig
-    /*public Sprite GetTalkingSprite()
-    {
-        if (TalkingSprites.Count == 0)
-        {
-            return null;
-        }
-
-        List<Sprite> possibleSprites = new List<Sprite>();
-        for (int i = 0; i < TalkingSprites.Count; i++)
-        {
-            if (i != PreviousTalkingSprite)
-            {
-                possibleSprites.Add(TalkingSprites[i]);
-            }
-        }
-        
-        if (possibleSprites.Count > 0)
-        {
-            int randomIndex = Random.Range(0, possibleSprites.Count);
-            Sprite selectedSprite = possibleSprites[randomIndex];
-            PreviousTalkingSprite = TalkingSprites.IndexOf(selectedSprite);
-            return selectedSprite;
-        }
-        
-        return TalkingSprites[0];
-    }*/
 
     public TalkingFrames GetTalkingFrames()
     {
@@ -70,6 +41,4 @@ public class FighterArt : ScriptableObject
         
         return TalkingFrameList[0];
     }
-
-    public List<Sprite> GetTalkingSprites() { return TalkingSprites; }
 }

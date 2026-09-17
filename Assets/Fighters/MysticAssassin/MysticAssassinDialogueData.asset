@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: MysticAssassinDialogueData
   m_EditorClassIdentifier: Assembly-CSharp::DialogueData
   AttackingStatements:
-  - ...
+  - Let's see you how good your reflexes are.
   - You're lucky to see me before I've struck.
   - I'd prefer to strike you down from the shadows, but I won't run away from a fight!
   AngryStatements: []

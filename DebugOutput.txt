@@ -1,31 +1,21 @@
 Round 1
 
-Fire Mage  vs  Fire Mage
+Fire Mage  +  Mystic Assassin  vs  Paladin  +  Water Witch
 
 Fire Mage   Overall: 8.01  Health: 100  Mana: 180  Health Co = 1
+Mystic Assassin   Overall: 7.15  Health: 100  Mana: 140  Health Co = 1
 
-Fire Mage   Overall: 8.01  Health: 100  Mana: 180  Health Co = 1
+Paladin   Overall: 6.81  Health: 100  Mana: 100  Health Co = 1
+Water Witch   Overall: 8.01  Health: 100  Mana: 180  Health Co = 1
 
 ###################################################################
 ###################################################################
 
 Fire Mage uses Fire Storm against Team 2!
-It hits Fire Mage and does 45 damage!
-Fire Mage uses Fire Storm against Team 1!
-It hits Fire Mage and does 47 damage!
-
-
-Round 2
-
-Fire Mage  vs  Fire Mage
-
-Fire Mage   Overall: 7.54592  Health: 53  Mana: 130  Health Co = 0.7653334
-
-Fire Mage   Overall: 7.5472  Health: 55  Mana: 130  Health Co = 0.7866667
-
-###################################################################
-###################################################################
-
-Fire Mage uses Fire Storm against Team 2!
-It hits Fire Mage and does 45 damage!
-Fire Mage uses Wild Inferno against all enemies!
+It hits Paladin and does 60 damage!
+It hits Water Witch and does 50 damage!
+Mystic Assassin uses Slash against Paladin!
+Paladin blocks it with Shield!
+Paladin uses Slash against Mystic Assassin!
+It misses Mystic Assassin!
+Water Witch uses Magic Missile against Fire Mage!

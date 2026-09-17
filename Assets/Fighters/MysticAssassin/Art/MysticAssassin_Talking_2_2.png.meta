@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: dfb8fd81c7a82466a963ed4afb657ffe
+guid: 7d949b35588514153900000488626cc3
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 8446790065978274107
-    second: WaterWitch_Talking_1_0
+      213: -3395310490499296344
+    second: MysticAssassin_Talking_2_2_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -126,13 +126,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: WaterWitch_Talking_1_0
+      name: MysticAssassin_Talking_2_2_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 1254
-        height: 1254
+        width: 1080
+        height: 1080
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -141,8 +141,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: b31feeedfc6093570800000000000000
-      internalID: 8446790065978274107
+      spriteID: 8a3d1a7191f61e0d0800000000000000
+      internalID: -3395310490499296344
       vertices: []
       indices: 
       edges: []
@@ -161,7 +161,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      WaterWitch_Talking_1_0: 8446790065978274107
+      MysticAssassin_Talking_2_2_0: -3395310490499296344
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

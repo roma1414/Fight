@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbf29160547f84b66a0c694f1f8d44c5, type: 3}
+  m_Name: FireMageTalkingFrames_2
+  m_EditorClassIdentifier: Assembly-CSharp::TalkingFrames
+  Frames:
+  - {fileID: -8098194771960935009, guid: 01e71e1929a6f4a02996309e4e5e809a, type: 3}
+  - {fileID: 5707023840765197562, guid: d00a2190e414c413bb81ec46a6186f32, type: 3}
+  - {fileID: 7414570651606391592, guid: 53a8a7ce7381944f8b3c1ed6036d7aee, type: 3}

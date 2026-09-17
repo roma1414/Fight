@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbf29160547f84b66a0c694f1f8d44c5, type: 3}
+  m_Name: PaladinTalkingFrames_2
+  m_EditorClassIdentifier: Assembly-CSharp::TalkingFrames
+  Frames:
+  - {fileID: -4108419152233567711, guid: 4266d842f99fd48df9e9cf0f6d15d5e8, type: 3}
+  - {fileID: -5417510139081969276, guid: 23e03f34378b74a589a2c3fc2f912f94, type: 3}
+  - {fileID: -1558548490810586383, guid: 675ed56c3f42a498f9c56b3ca9122f35, type: 3}
