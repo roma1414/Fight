@@ -129,12 +129,12 @@ TextureImporter:
       name: Paladin_Body_0
       rect:
         serializedVersion: 2
-        x: 22
+        x: 0
         y: 0
-        width: 1212
+        width: 1254
         height: 1254
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -151,7 +151,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: da3c20c9e1a984a55999cbd61b10f389
     internalID: 0
     vertices: []
     indices: 
