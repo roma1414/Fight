@@ -1205,6 +1205,9 @@ public class Fight : MonoBehaviour
         }
 
         mWriter.WriteLine(resultString);
+        //(Enums.MoveType moveType, float movePower, List<Enums.Nature> moveNatures, List<Move> offensiveMoves, List<float> attackerRandomAdds, List<Fighter> attackers, Fighter target)
+etg
+        DynamicWindow.DisplayAttack(moveType, offensiveMoves, attackers, target);
 
         switch (result)     // Removes UnderPsychic and Trapped statuses before applying attack statuses. The attack landed or partially landed.
         {
@@ -1282,8 +1285,6 @@ public class Fight : MonoBehaviour
         List<Move> offensiveMoves = moveEvent.GetMoves();
         List<float> attackerRandomAdds = moveEvent.GetRandomAdds();
         List<Fighter> targets = moveEvent.GetTargets();
-
-        //yield return DynamicWindow.DisplayMovePreview(moveEvent);
 
         foreach (Fighter target in targets)
         {
@@ -2547,7 +2548,7 @@ public class Fight : MonoBehaviour
 
         int index = 0;
         int moveEventListCount = moveEventList.Count;
-        
+
         //bool foundInsertIndex = false;
         /*while (index < moveEventListCount && foundInsertIndex == false)   // Iterate through moveEventList until you find a slower effective move event speed.
         {
