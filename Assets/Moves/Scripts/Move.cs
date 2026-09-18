@@ -19,7 +19,7 @@ public class Move : ScriptableObject
     [SerializeField] protected Enums.TargetType     TargetType;
     [SerializeField] protected Enums.MoveType       MoveType;
     [SerializeField] protected Enums.Nature[]       Natures;
-    [SerializeField] protected MoveAnimations       MoveAnimations;
+    [SerializeField] protected AnimationData        AnimationData, PreviewAnimationData;
 
     [Header("CloneMove Fields")]
     [SerializeField] protected int                  Number;
@@ -83,7 +83,7 @@ public class Move : ScriptableObject
     public bool CheckTouchFail() { return TouchFail; }
     public bool CheckTouchSuccess() { return TouchSuccess; }
     public float GetAccuracy() { return Accuracy; }
-    public MoveAnimations GetAnimations() { return MoveAnimations; }
+    public AnimationData GetAnimationData() { return AnimationData; }
     public BonusData GetBonusData() { return BonusData; }
     public float GetCastingSpeed() { return CastingSpeed; }
     public float GetCloneStrength() { return CloneStrength; }
@@ -103,6 +103,7 @@ public class Move : ScriptableObject
     public List<Enums.Nature> GetNaturesList() { return new List<Enums.Nature>(Natures); }
     public Enums.TargetType GetTargetType() { return TargetType; }
     public Enums.MoveType GetMoveType() { return MoveType; }
+    public AnimationData GetPreviewAnimationData() { return PreviewAnimationData; }
     public Enums.StatusType[] GetRequiredTargetStatuses() { return RequiredTargetStatuses; }
     public List<Enums.StatusType> GetRequiredTargetStatusesList() { return new List<Enums.StatusType>(RequiredTargetStatuses); }
     public Enums.StatusType[] GetStatusTypes() { return StatusTypes; }

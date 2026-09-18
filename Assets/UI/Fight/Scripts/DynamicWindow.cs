@@ -14,15 +14,17 @@ public class DynamicWindow : MonoBehaviour
     [SerializeField] private GameObject     FighterPanel, FightersPanel, DynamicTextPanel, StatementPanel, StatementTextPanel,
                                             StatementBackgroundPanel;
     [SerializeField] private Image          Fighter, FighterBackground, FightersBackground, StatementBackground, 
-                                            StatementFighter, FightersPrefab, AttackersPrefab;
+                                            StatementFighter, FightersPrefab, AttackersPrefab, AttacksPrefab;
     [SerializeField] private TMP_Text       DynamicText, StatementText, StatementFighterName;
-    [SerializeField] private RectTransform  FightersContainer, AttackersContainer;
+    [SerializeField] private RectTransform  FightersContainer, AttackersContainer, AttacksContainer;
     [SerializeField] private Animator       StatementAnimator, FighterAnimator;
     [SerializeField] private List<string>   StatementAnimations, FighterAnimations;
     private int                             PreviousStatementAnimation = -1, PreviousFighterAnimation = -1;
     private List<Image>                     SpawnedFighterImages = new List<Image>();
     private List<Image>                     SpawnedAttackerImages = new List<Image>();
+    private List<Image>                     SpawnedAttackImages = new List<Image>();
     private Coroutine                       TalkingCoroutine;
+    private List<Coroutine>                 AttackCoroutines = new List<Coroutine>();
     public const float FIGHTER_BACKGROUND_MAX_OFFSET = 1330f;
     public const float STATEMENT_BACKGROUND_MAX_OFFSET = -3350f;
     public const float STATEMENT_FIGHTER_MAX_ANIMATION_OFFSET = 16f;
@@ -313,7 +315,11 @@ public class DynamicWindow : MonoBehaviour
         FightersPanel.SetActive(true);
         DynamicTextPanel.SetActive(true);
 
-        yield return new WaitForSeconds(3f);
+        StartAttacks(moveEvent.GetMoves());
+        yield return new WaitUntil(() => SpawnedAttackImages.Count == 0);
+        AttackCoroutines.Clear();
+
+        yield return new WaitForSeconds(2f);
     }
 
     public IEnumerator DisplayAttackerMovePreview(MoveEvent moveEvent)
@@ -475,12 +481,58 @@ public class DynamicWindow : MonoBehaviour
             }
         }
         SpawnedAttackerImages.Clear();
+
+        StopAttacks();
     }
 
     private void OnDisable()
     {
         Sprite[] emptySpriteArray = new Sprite[0];
         StopTalking(emptySpriteArray);
+    }
+
+    private IEnumerator PlayAttack(Image image, AnimationData animation)
+    {
+        Sprite[] frames = animation.GetFrames();
+        float frameDuration = 1f / animation.GetFramesPerSecond();
+
+        for (int i = 0; i < frames.Length; i++)
+        {
+            image.sprite = frames[i];
+
+            // Trigger visual impact feedback here if appropriate.
+            // if (i == animation.GetImpactFrame()) { ... }
+
+            yield return new WaitForSeconds(frameDuration);
+        }
+
+        SpawnedAttackImages.Remove(image);
+        Destroy(image.gameObject);
+    }
+
+    public void StartAttacks(List<Move> moves)
+    {
+        StopAttacks();
+
+        foreach (Move move in moves)
+        {
+            AnimationData animation = move.GetAnimationData();
+
+            if (animation == null ||
+                animation.GetFrames() == null ||
+                animation.GetFrames().Length == 0 ||
+                animation.GetFramesPerSecond() <= 0f)
+            {
+                continue;
+            }
+
+            Image image = Instantiate(AttacksPrefab, AttacksContainer, false);
+            image.raycastTarget = false;
+            SpawnedAttackImages.Add(image);
+
+            Coroutine coroutine = StartCoroutine(PlayAttack(image, animation));
+            AttackCoroutines.Add(coroutine);
+        }
     }
 
     private void StartTalking(Sprite[] frames)
@@ -493,6 +545,24 @@ public class DynamicWindow : MonoBehaviour
         TalkingCoroutine = StartCoroutine(
             AnimateTalking(frames)
         );
+    }
+
+    public void StopAttacks()
+    {
+        foreach (Coroutine coroutine in AttackCoroutines)
+        {
+            StopCoroutine(coroutine);
+        }
+
+        AttackCoroutines.Clear();
+
+        foreach (Image image in SpawnedAttackImages)
+        {
+            if (image != null)
+                Destroy(image.gameObject);
+        }
+
+        SpawnedAttackImages.Clear();
     }
 
     private void StopTalking(Sprite[] frames)

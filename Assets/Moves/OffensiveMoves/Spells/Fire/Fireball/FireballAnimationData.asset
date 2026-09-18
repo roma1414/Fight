@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d5d2916c73314bb89a1ff80a53f5c6a, type: 3}
+  m_Name: FireballAnimationData
+  m_EditorClassIdentifier: Assembly-CSharp::AnimationData
+  Frames:
+  - {fileID: -6607481912129624618, guid: e6b5532ca1cc4459c800b9bf2c1114d4, type: 3}
+  - {fileID: 1345511635, guid: e6b5532ca1cc4459c800b9bf2c1114d4, type: 3}
+  - {fileID: -1276474577, guid: e6b5532ca1cc4459c800b9bf2c1114d4, type: 3}
+  - {fileID: 394294626, guid: e6b5532ca1cc4459c800b9bf2c1114d4, type: 3}
+  - {fileID: 1679777363, guid: e6b5532ca1cc4459c800b9bf2c1114d4, type: 3}
+  - {fileID: 1894187569, guid: e6b5532ca1cc4459c800b9bf2c1114d4, type: 3}
+  - {fileID: 386887700, guid: e6b5532ca1cc4459c800b9bf2c1114d4, type: 3}
+  - {fileID: 474429466, guid: e6b5532ca1cc4459c800b9bf2c1114d4, type: 3}
+  - {fileID: -292846766, guid: e6b5532ca1cc4459c800b9bf2c1114d4, type: 3}
+  - {fileID: 262328416, guid: e6b5532ca1cc4459c800b9bf2c1114d4, type: 3}
+  - {fileID: 1495404493, guid: e6b5532ca1cc4459c800b9bf2c1114d4, type: 3}
+  - {fileID: -1017653556, guid: e6b5532ca1cc4459c800b9bf2c1114d4, type: 3}
+  FramesPerSecond: 8
+  ImpactFrame: 6

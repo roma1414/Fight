@@ -12,17 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f22992ffeb079114cabf4a66b094a39c, type: 3}
   m_Name: FireTempestWall
   m_EditorClassIdentifier: Assembly-CSharp::Move
-  Name: 
-  Level: 0
-  Mana: 0
+  Name: Fire Tempest Wall
+  Level: 9
+  Mana: 25
   RoundsToCast: 0
   UsesPerFight: 0
-  CastingSpeed: 0
+  CastingSpeed: 6
   ID: 0
   Occular: 0
   UseMeleSkill: 0
   RequiredTargetStatuses: 
-  TargetType: 0
+  TargetType: 5
   MoveType: 0
   Natures: 
   MoveAnimations: {fileID: 0}
