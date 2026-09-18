@@ -12,7 +12,21 @@ public class MapArt : ScriptableObject
     [SerializeField]
     protected Sprite Background_3;
 
-    public Sprite GetBackground_1() { return Background_1; }
-    public Sprite GetBackground_2() { return Background_2; }
-    public Sprite GetBackground_3() { return Background_3; }
+    public Sprite GetBackground(int team) 
+    { 
+        switch (team)
+        {
+            case 1:
+                return Background_1;
+            case 2:
+                return Background_2;
+            case 3:
+                return Background_3;
+            default:
+                Debug.LogError($"Unknown team {team} in GetBackground!");
+                break;
+        }
+
+        return null;
+    }
 }

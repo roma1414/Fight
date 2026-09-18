@@ -933,8 +933,16 @@ public class Fight : MonoBehaviour
         }
     }
 
-    public void ExecuteOffensiveMoveAgainstTarget(Enums.MoveType moveType, float movePower, List<Enums.Nature> moveNatures, List<Move> offensiveMoves, List<float> attackerRandomAdds, List<Fighter> attackers, Fighter target)
+    public IEnumerator ExecuteOffensiveMoveAgainstTarget(MoveEvent moveEvent, Fighter target)
     {
+        Enums.MoveType moveType = moveEvent.GetMoveType();
+        float movePower = MoveEventPower(moveEvent);
+        List<Enums.Nature> moveNatures = GetFinalNaturesInMoveEvent(moveEvent);
+        List<Fighter> attackers = moveEvent.GetFighters();
+        List<Move> offensiveMoves = moveEvent.GetMoves();
+        List<float> attackerRandomAdds = moveEvent.GetRandomAdds();
+        List<Fighter> targets = moveEvent.GetTargets();
+        
         Hit hit = new Hit();
         float targetRandomAdd = RandomAdd();    // Each target gets a new RandomAdd each time they are attacked.
 
@@ -968,7 +976,6 @@ public class Fight : MonoBehaviour
         int damage = hit.GetDamage();
 
         string resultString = "";
-
         switch (result)
         {
             case Enums.HitResult.Miss:
@@ -1205,9 +1212,21 @@ public class Fight : MonoBehaviour
         }
 
         mWriter.WriteLine(resultString);
-        //(Enums.MoveType moveType, float movePower, List<Enums.Nature> moveNatures, List<Move> offensiveMoves, List<float> attackerRandomAdds, List<Fighter> attackers, Fighter target)
-etg
-        DynamicWindow.DisplayAttack(moveType, offensiveMoves, attackers, target);
+        if (targets.Count > 1)
+        {
+            if (targets.IndexOf(target) == 0) // First target to be attacked
+            {
+                
+            }
+            else
+            {
+                
+            }
+        }
+        else
+        {
+            yield return DynamicWindow.DisplayAttackAgainstTarget(moveEvent, target);
+        }
 
         switch (result)     // Removes UnderPsychic and Trapped statuses before applying attack statuses. The attack landed or partially landed.
         {
@@ -1279,16 +1298,13 @@ etg
 
     public IEnumerator ExecuteOffensiveMoveEvent(MoveEvent moveEvent)
     {
-        float movePower = MoveEventPower(moveEvent);
-        List<Enums.Nature> moveNatures = GetFinalNaturesInMoveEvent(moveEvent);
         List<Fighter> fighters = moveEvent.GetFighters();
         List<Move> offensiveMoves = moveEvent.GetMoves();
-        List<float> attackerRandomAdds = moveEvent.GetRandomAdds();
         List<Fighter> targets = moveEvent.GetTargets();
 
         foreach (Fighter target in targets)
         {
-            ExecuteOffensiveMoveAgainstTarget(moveEvent.GetMoveType(), movePower, moveNatures, offensiveMoves, attackerRandomAdds, fighters, target);
+            yield return ExecuteOffensiveMoveAgainstTarget(moveEvent, target);
             RemoveDefeatedFighters();
         }
 
