@@ -50,7 +50,6 @@ public class DialogueData : ScriptableObject
                 SpokenAttackingStatements.Clear();
                 return GetAttackingStatement();
             }
-            SpokenAttackingStatements.Clear();
         }
 
         return "";
