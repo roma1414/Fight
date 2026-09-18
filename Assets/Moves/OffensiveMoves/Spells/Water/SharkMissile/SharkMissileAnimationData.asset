@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d5d2916c73314bb89a1ff80a53f5c6a, type: 3}
+  m_Name: SharkMissileAnimationData
+  m_EditorClassIdentifier: Assembly-CSharp::AnimationData
+  Frames:
+  - {fileID: 8460416806299160432, guid: 4e7e59927452b48f2933e1314d79a573, type: 3}
+  - {fileID: -2738280662761306655, guid: 4e7e59927452b48f2933e1314d79a573, type: 3}
+  - {fileID: 4002402733498615868, guid: 4e7e59927452b48f2933e1314d79a573, type: 3}
+  - {fileID: -8753072573611191081, guid: 4e7e59927452b48f2933e1314d79a573, type: 3}
+  - {fileID: -182227974757815621, guid: 4e7e59927452b48f2933e1314d79a573, type: 3}
+  - {fileID: 8663089942304984356, guid: 4e7e59927452b48f2933e1314d79a573, type: 3}
+  - {fileID: -1848717001896345705, guid: 4e7e59927452b48f2933e1314d79a573, type: 3}
+  - {fileID: -4284073905345011499, guid: 4e7e59927452b48f2933e1314d79a573, type: 3}
+  - {fileID: -6997515877662716044, guid: 4e7e59927452b48f2933e1314d79a573, type: 3}
+  - {fileID: 2165176653035279693, guid: 4e7e59927452b48f2933e1314d79a573, type: 3}
+  - {fileID: 4614623603130815897, guid: 4e7e59927452b48f2933e1314d79a573, type: 3}
+  - {fileID: 7783147187512373664, guid: 4e7e59927452b48f2933e1314d79a573, type: 3}
+  - {fileID: 7629635246200591618, guid: 4e7e59927452b48f2933e1314d79a573, type: 3}
+  - {fileID: 904928771179173485, guid: 4e7e59927452b48f2933e1314d79a573, type: 3}
+  - {fileID: 7116449767376165627, guid: 4e7e59927452b48f2933e1314d79a573, type: 3}
+  - {fileID: -2621961633929263062, guid: 4e7e59927452b48f2933e1314d79a573, type: 3}
+  - {fileID: 6766220250597103696, guid: 4e7e59927452b48f2933e1314d79a573, type: 3}
+  - {fileID: -4056521794668013880, guid: 4e7e59927452b48f2933e1314d79a573, type: 3}
+  - {fileID: -6212262940574821978, guid: 4e7e59927452b48f2933e1314d79a573, type: 3}
+  - {fileID: -2415804336074488313, guid: 4e7e59927452b48f2933e1314d79a573, type: 3}
+  FramesPerSecond: 12
+  ImpactFrame: 13

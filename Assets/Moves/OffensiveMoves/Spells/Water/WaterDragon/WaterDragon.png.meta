@@ -1,0 +1,1032 @@
+fileFormatVersion: 2
+guid: ed52c16496b914a209cad7a3a864c8ee
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -848108733984840072
+    second: WaterDragon_0
+  - first:
+      213: -2866951217304662462
+    second: WaterDragon_1
+  - first:
+      213: 1301228831392408219
+    second: WaterDragon_2
+  - first:
+      213: 468430627101274202
+    second: WaterDragon_3
+  - first:
+      213: -2584323035865922606
+    second: WaterDragon_4
+  - first:
+      213: 3031652836999182467
+    second: WaterDragon_5
+  - first:
+      213: 977921529868623878
+    second: WaterDragon_6
+  - first:
+      213: -7097805719247500245
+    second: WaterDragon_7
+  - first:
+      213: -2474550988810017997
+    second: WaterDragon_8
+  - first:
+      213: 315906795479033950
+    second: WaterDragon_9
+  - first:
+      213: 5993429622623290796
+    second: WaterDragon_10
+  - first:
+      213: 549239668967746280
+    second: WaterDragon_11
+  - first:
+      213: 4996098926950707662
+    second: WaterDragon_12
+  - first:
+      213: 1558527482387912004
+    second: WaterDragon_13
+  - first:
+      213: 8212033603216967457
+    second: WaterDragon_14
+  - first:
+      213: -3152864044861146759
+    second: WaterDragon_15
+  - first:
+      213: -6102011360435216497
+    second: WaterDragon_16
+  - first:
+      213: -2257197791494071911
+    second: WaterDragon_17
+  - first:
+      213: -3959693005748232795
+    second: WaterDragon_18
+  - first:
+      213: 1647713855043739857
+    second: WaterDragon_19
+  - first:
+      213: 8091604027580576849
+    second: WaterDragon_20
+  - first:
+      213: -2490973539021966768
+    second: WaterDragon_21
+  - first:
+      213: 7852014230014959376
+    second: WaterDragon_22
+  - first:
+      213: 6584198148016665766
+    second: WaterDragon_23
+  - first:
+      213: 5436806374913104902
+    second: WaterDragon_24
+  - first:
+      213: 4308146968691985392
+    second: WaterDragon_25
+  - first:
+      213: -1995914829704912739
+    second: WaterDragon_26
+  - first:
+      213: 6446574573522272518
+    second: WaterDragon_27
+  - first:
+      213: 5342594301988144163
+    second: WaterDragon_28
+  - first:
+      213: 7115238329642680416
+    second: WaterDragon_29
+  - first:
+      213: 1934116725866952184
+    second: WaterDragon_30
+  - first:
+      213: 185974287401311058
+    second: WaterDragon_31
+  - first:
+      213: 3060603406786442731
+    second: WaterDragon_32
+  - first:
+      213: -3242640135265711329
+    second: WaterDragon_33
+  - first:
+      213: -7266403264624869519
+    second: WaterDragon_34
+  - first:
+      213: -7614305390481478374
+    second: WaterDragon_35
+  - first:
+      213: 5001602680670015533
+    second: WaterDragon_36
+  - first:
+      213: 2085353784502717980
+    second: WaterDragon_37
+  - first:
+      213: 7349903147068104180
+    second: WaterDragon_38
+  - first:
+      213: 6816052787557649775
+    second: WaterDragon_39
+  - first:
+      213: -2173577033567435673
+    second: WaterDragon_40
+  - first:
+      213: -7929044618345271022
+    second: WaterDragon_41
+  - first:
+      213: 3521453431976947446
+    second: WaterDragon_42
+  - first:
+      213: 5703882704157831520
+    second: WaterDragon_43
+  - first:
+      213: -9188336222655386748
+    second: WaterDragon_44
+  - first:
+      213: 7095880834132246541
+    second: WaterDragon_45
+  - first:
+      213: -1012455751682003163
+    second: WaterDragon_46
+  - first:
+      213: -4561802662604403431
+    second: WaterDragon_47
+  - first:
+      213: -4733440737985120340
+    second: WaterDragon_48
+  - first:
+      213: -293912140227331991
+    second: WaterDragon_49
+  - first:
+      213: -6393460422919978817
+    second: WaterDragon_50
+  - first:
+      213: 1991088036933141943
+    second: WaterDragon_51
+  - first:
+      213: -4402701203174499739
+    second: WaterDragon_52
+  - first:
+      213: 9212099158494254663
+    second: WaterDragon_53
+  - first:
+      213: 7096799374043539613
+    second: WaterDragon_54
+  - first:
+      213: 1384638570178574588
+    second: WaterDragon_55
+  - first:
+      213: -5819930906083458498
+    second: WaterDragon_56
+  - first:
+      213: -882187971505818308
+    second: WaterDragon_57
+  - first:
+      213: 4617026003962327712
+    second: WaterDragon_58
+  - first:
+      213: -9032230982173425924
+    second: WaterDragon_59
+  - first:
+      213: -5616907673391058711
+    second: WaterDragon_60
+  - first:
+      213: -9051458107865604309
+    second: WaterDragon_61
+  - first:
+      213: 2958356060387474743
+    second: WaterDragon_62
+  - first:
+      213: 7081423744608353592
+    second: WaterDragon_63
+  - first:
+      213: 7611626673221245569
+    second: WaterDragon_64
+  - first:
+      213: 3425803508496985001
+    second: WaterDragon_65
+  - first:
+      213: -6077275580464245108
+    second: WaterDragon_66
+  - first:
+      213: 5440193108811917098
+    second: WaterDragon_67
+  - first:
+      213: 888658000147672364
+    second: WaterDragon_68
+  - first:
+      213: -2798384724531463552
+    second: WaterDragon_69
+  - first:
+      213: -4337329944551798049
+    second: WaterDragon_70
+  - first:
+      213: 9114386051182294799
+    second: WaterDragon_71
+  - first:
+      213: -6863266822322775849
+    second: WaterDragon_72
+  - first:
+      213: -4091074435531165388
+    second: WaterDragon_73
+  - first:
+      213: -2490963899899886741
+    second: WaterDragon_74
+  - first:
+      213: 94995285678694694
+    second: WaterDragon_75
+  - first:
+      213: -7833704172578354992
+    second: WaterDragon_76
+  - first:
+      213: 6825675764499293576
+    second: WaterDragon_77
+  - first:
+      213: 6029672138608936806
+    second: WaterDragon_78
+  - first:
+      213: 505478745514658320
+    second: WaterDragon_79
+  - first:
+      213: 7201958501445416608
+    second: WaterDragon_80
+  - first:
+      213: 4957937378695378376
+    second: WaterDragon_81
+  - first:
+      213: -503027714045181636
+    second: WaterDragon_82
+  - first:
+      213: 2010320702434561567
+    second: WaterDragon_83
+  - first:
+      213: -6673848017616661279
+    second: WaterDragon_84
+  - first:
+      213: -9124849604637543024
+    second: WaterDragon_85
+  - first:
+      213: 7693312201942430688
+    second: WaterDragon_86
+  - first:
+      213: -2917857654460606641
+    second: WaterDragon_87
+  - first:
+      213: 3952248795840273889
+    second: WaterDragon_88
+  - first:
+      213: -2405310870571835696
+    second: WaterDragon_89
+  - first:
+      213: 1027220711459663019
+    second: WaterDragon_90
+  - first:
+      213: 294617002085035008
+    second: WaterDragon_91
+  - first:
+      213: -6195190385675450103
+    second: WaterDragon_92
+  - first:
+      213: -7350600887054838246
+    second: WaterDragon_93
+  - first:
+      213: -7945446350036368480
+    second: WaterDragon_94
+  - first:
+      213: 1594066113445816847
+    second: WaterDragon_95
+  - first:
+      213: 1029151205494339231
+    second: WaterDragon_96
+  - first:
+      213: 8821886369184692065
+    second: WaterDragon_97
+  - first:
+      213: 1831338126656534568
+    second: WaterDragon_98
+  - first:
+      213: -1648170570111861594
+    second: WaterDragon_99
+  - first:
+      213: 480019206916792260
+    second: WaterDragon_100
+  - first:
+      213: -574156185261156517
+    second: WaterDragon_101
+  - first:
+      213: -5933748801443751405
+    second: WaterDragon_102
+  - first:
+      213: -5063531719243071988
+    second: WaterDragon_103
+  - first:
+      213: 6699630221837953680
+    second: WaterDragon_104
+  - first:
+      213: 1222836251558888187
+    second: WaterDragon_105
+  - first:
+      213: 7370171908911563838
+    second: WaterDragon_106
+  - first:
+      213: -7533140169062730213
+    second: WaterDragon_107
+  - first:
+      213: -6982071455288567123
+    second: WaterDragon_108
+  - first:
+      213: -2587447104892300027
+    second: WaterDragon_109
+  - first:
+      213: 3247157800143795911
+    second: WaterDragon_110
+  - first:
+      213: 8335647644693318505
+    second: WaterDragon_111
+  - first:
+      213: -4608498807750491783
+    second: WaterDragon_112
+  - first:
+      213: -4238211003579317403
+    second: WaterDragon_113
+  - first:
+      213: 3722134327326206067
+    second: WaterDragon_114
+  - first:
+      213: -6447186714549794114
+    second: WaterDragon_115
+  - first:
+      213: 6506544708958059034
+    second: WaterDragon_116
+  - first:
+      213: 1059271444744120448
+    second: WaterDragon_117
+  - first:
+      213: 5523350676430917829
+    second: WaterDragon_118
+  - first:
+      213: -1413728962259299768
+    second: WaterDragon_119
+  - first:
+      213: -3561758979547866378
+    second: WaterDragon_120
+  - first:
+      213: -2842302478218445742
+    second: WaterDragon_121
+  - first:
+      213: -5046165988653195486
+    second: WaterDragon_122
+  - first:
+      213: 1907624783869271276
+    second: WaterDragon_123
+  - first:
+      213: 8443256753321939479
+    second: WaterDragon_124
+  - first:
+      213: 118014036052256996
+    second: WaterDragon_125
+  - first:
+      213: -4211557695804741609
+    second: WaterDragon_126
+  - first:
+      213: -9095329773242005948
+    second: WaterDragon_127
+  - first:
+      213: 1938143663944690904
+    second: WaterDragon_128
+  - first:
+      213: -8635662706664655140
+    second: WaterDragon_129
+  - first:
+      213: -3878124426878674096
+    second: WaterDragon_130
+  - first:
+      213: -426673001686725607
+    second: WaterDragon_131
+  - first:
+      213: 1602449371230602332
+    second: WaterDragon_132
+  - first:
+      213: -7029856865662770922
+    second: WaterDragon_133
+  - first:
+      213: -5846229601782804433
+    second: WaterDragon_134
+  - first:
+      213: 5996993210758979938
+    second: WaterDragon_135
+  - first:
+      213: 7528574268213458845
+    second: WaterDragon_136
+  - first:
+      213: 1453307176933895861
+    second: WaterDragon_137
+  - first:
+      213: 8905379775578764073
+    second: WaterDragon_138
+  - first:
+      213: 6741544701768967149
+    second: WaterDragon_139
+  - first:
+      213: -1868507214160511213
+    second: WaterDragon_140
+  - first:
+      213: 729694929518329981
+    second: WaterDragon_141
+  - first:
+      213: 7462531611496087422
+    second: WaterDragon_142
+  - first:
+      213: -4706410984106053686
+    second: WaterDragon_143
+  - first:
+      213: -2262920123576482296
+    second: WaterDragon_144
+  - first:
+      213: -6989691228218666423
+    second: WaterDragon_145
+  - first:
+      213: -1957501262070420330
+    second: WaterDragon_146
+  - first:
+      213: -3149734619503962824
+    second: WaterDragon_147
+  - first:
+      213: 7718725271822101702
+    second: WaterDragon_148
+  - first:
+      213: 6314555514592958511
+    second: WaterDragon_149
+  - first:
+      213: -5847964497034372585
+    second: WaterDragon_150
+  - first:
+      213: 2022380157781374915
+    second: WaterDragon_151
+  - first:
+      213: -7859970054909656868
+    second: WaterDragon_152
+  - first:
+      213: 7883456832143267251
+    second: WaterDragon_153
+  - first:
+      213: -3414728639948943208
+    second: WaterDragon_154
+  - first:
+      213: -1301714032012171751
+    second: WaterDragon_155
+  - first:
+      213: 210241069468152759
+    second: WaterDragon_156
+  - first:
+      213: 1934626646295951464
+    second: WaterDragon_157
+  - first:
+      213: -5867998706289299981
+    second: WaterDragon_158
+  - first:
+      213: 8328342559917136870
+    second: WaterDragon_159
+  - first:
+      213: -3865204785964894206
+    second: WaterDragon_160
+  - first:
+      213: -2669546273868578526
+    second: WaterDragon_161
+  - first:
+      213: 9111533749784049158
+    second: WaterDragon_162
+  - first:
+      213: 4822777881869487990
+    second: WaterDragon_163
+  - first:
+      213: -4702143937100329671
+    second: WaterDragon_164
+  - first:
+      213: -6496524976473750510
+    second: WaterDragon_165
+  - first:
+      213: 8723918498544978347
+    second: WaterDragon_166
+  - first:
+      213: -1391974509812606345
+    second: WaterDragon_167
+  - first:
+      213: -4015758052745299155
+    second: WaterDragon_168
+  - first:
+      213: -1340025183600910624
+    second: WaterDragon_169
+  - first:
+      213: 5537688020210846799
+    second: WaterDragon_170
+  - first:
+      213: -6324005073998130701
+    second: WaterDragon_171
+  - first:
+      213: 690705176769022474
+    second: WaterDragon_172
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: WaterDragon_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 941
+        width: 313
+        height: 313
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8766de39999ea34f0800000000000000
+      internalID: -848108733984840072
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WaterDragon_1
+      rect:
+        serializedVersion: 2
+        x: 313
+        y: 941
+        width: 313
+        height: 313
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 24e8e20ce0b8638d0800000000000000
+      internalID: -2866951217304662462
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WaterDragon_2
+      rect:
+        serializedVersion: 2
+        x: 626
+        y: 941
+        width: 313
+        height: 313
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b9224aa5ab4ee0210800000000000000
+      internalID: 1301228831392408219
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WaterDragon_3
+      rect:
+        serializedVersion: 2
+        x: 939
+        y: 941
+        width: 313
+        height: 313
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a50f84a6c23308600800000000000000
+      internalID: 468430627101274202
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WaterDragon_4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 628
+        width: 313
+        height: 313
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2d34a5624e3a22cd0800000000000000
+      internalID: -2584323035865922606
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WaterDragon_5
+      rect:
+        serializedVersion: 2
+        x: 313
+        y: 628
+        width: 313
+        height: 313
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 38834af5138921a20800000000000000
+      internalID: 3031652836999182467
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WaterDragon_6
+      rect:
+        serializedVersion: 2
+        x: 626
+        y: 628
+        width: 313
+        height: 313
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 600a60e3376429d00800000000000000
+      internalID: 977921529868623878
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WaterDragon_7
+      rect:
+        serializedVersion: 2
+        x: 939
+        y: 628
+        width: 313
+        height: 313
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b2c448bdd478f7d90800000000000000
+      internalID: -7097805719247500245
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WaterDragon_8
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 315
+        width: 313
+        height: 313
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 33323658cf0a8add0800000000000000
+      internalID: -2474550988810017997
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WaterDragon_9
+      rect:
+        serializedVersion: 2
+        x: 313
+        y: 315
+        width: 313
+        height: 313
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e58e8a68e83526400800000000000000
+      internalID: 315906795479033950
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WaterDragon_10
+      rect:
+        serializedVersion: 2
+        x: 626
+        y: 315
+        width: 313
+        height: 313
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ca5c3cabc70fc2350800000000000000
+      internalID: 5993429622623290796
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WaterDragon_11
+      rect:
+        serializedVersion: 2
+        x: 939
+        y: 315
+        width: 313
+        height: 313
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8ea2065a19a4f9700800000000000000
+      internalID: 549239668967746280
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WaterDragon_12
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 2
+        width: 313
+        height: 313
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ec17b9be085b55540800000000000000
+      internalID: 4996098926950707662
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WaterDragon_13
+      rect:
+        serializedVersion: 2
+        x: 313
+        y: 2
+        width: 313
+        height: 313
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4455a60ec7001a510800000000000000
+      internalID: 1558527482387912004
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WaterDragon_14
+      rect:
+        serializedVersion: 2
+        x: 626
+        y: 2
+        width: 313
+        height: 313
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 127815b8d0107f170800000000000000
+      internalID: 8212033603216967457
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WaterDragon_15
+      rect:
+        serializedVersion: 2
+        x: 939
+        y: 2
+        width: 313
+        height: 313
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 97933f41bd6ce34d0800000000000000
+      internalID: -3152864044861146759
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 34c679b74dfdb452bba0a250e83ff998
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":4.0,"y":4.0},"gridSpriteSize":{"x":313.0,"y":313.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":2,"keepEmptyRects":false,"isAlternate":false}'
+    nameFileIdTable:
+      WaterDragon_0: -848108733984840072
+      WaterDragon_1: -2866951217304662462
+      WaterDragon_10: 5993429622623290796
+      WaterDragon_11: 549239668967746280
+      WaterDragon_12: 4996098926950707662
+      WaterDragon_13: 1558527482387912004
+      WaterDragon_14: 8212033603216967457
+      WaterDragon_15: -3152864044861146759
+      WaterDragon_2: 1301228831392408219
+      WaterDragon_3: 468430627101274202
+      WaterDragon_4: -2584323035865922606
+      WaterDragon_5: 3031652836999182467
+      WaterDragon_6: 977921529868623878
+      WaterDragon_7: -7097805719247500245
+      WaterDragon_8: -2474550988810017997
+      WaterDragon_9: 315906795479033950
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

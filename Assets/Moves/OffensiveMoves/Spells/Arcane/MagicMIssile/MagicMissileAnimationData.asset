@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d5d2916c73314bb89a1ff80a53f5c6a, type: 3}
+  m_Name: MagicMissileAnimationData
+  m_EditorClassIdentifier: Assembly-CSharp::AnimationData
+  Frames:
+  - {fileID: 6705810157222835970, guid: 71e1cab1d56d645a988a00a656f5e91a, type: 3}
+  - {fileID: 538740977833997149, guid: 71e1cab1d56d645a988a00a656f5e91a, type: 3}
+  - {fileID: 4192443689685964524, guid: 71e1cab1d56d645a988a00a656f5e91a, type: 3}
+  - {fileID: 8407079520703156106, guid: 71e1cab1d56d645a988a00a656f5e91a, type: 3}
+  - {fileID: 3534522550716398318, guid: 71e1cab1d56d645a988a00a656f5e91a, type: 3}
+  - {fileID: 7051356633014805663, guid: 71e1cab1d56d645a988a00a656f5e91a, type: 3}
+  - {fileID: -8842360225646632615, guid: 71e1cab1d56d645a988a00a656f5e91a, type: 3}
+  - {fileID: -7026601791164811290, guid: 71e1cab1d56d645a988a00a656f5e91a, type: 3}
+  - {fileID: 1763340695617148901, guid: 71e1cab1d56d645a988a00a656f5e91a, type: 3}
+  - {fileID: 1580743326444095442, guid: 71e1cab1d56d645a988a00a656f5e91a, type: 3}
+  - {fileID: 511770496487325979, guid: 71e1cab1d56d645a988a00a656f5e91a, type: 3}
+  - {fileID: -7539651702855124646, guid: 71e1cab1d56d645a988a00a656f5e91a, type: 3}
+  - {fileID: 4769313011053405665, guid: 71e1cab1d56d645a988a00a656f5e91a, type: 3}
+  - {fileID: 2078392838513675068, guid: 71e1cab1d56d645a988a00a656f5e91a, type: 3}
+  - {fileID: 7337740694344644055, guid: 71e1cab1d56d645a988a00a656f5e91a, type: 3}
+  - {fileID: -5320906751746151244, guid: 71e1cab1d56d645a988a00a656f5e91a, type: 3}
+  FramesPerSecond: 12
+  ImpactFrame: 8

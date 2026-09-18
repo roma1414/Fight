@@ -25,7 +25,8 @@ MonoBehaviour:
   TargetType: 0
   MoveType: 0
   Natures: 0f00
-  MoveAnimations: {fileID: 0}
+  AnimationData: {fileID: 0}
+  PreviewAnimationData: {fileID: 0}
   Number: 0
   CloneStrength: 0
   UsesPerRound: 0
@@ -38,7 +39,7 @@ MonoBehaviour:
   HealthAmount: 0
   ManaRestoreAmount: 0
   HealType: 0
-  Damage: 86
+  Damage: 75
   Duration: 0
   Accuracy: 0.25
   Absorbed: 0

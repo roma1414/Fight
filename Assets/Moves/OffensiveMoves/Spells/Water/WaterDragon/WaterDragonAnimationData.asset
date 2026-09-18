@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d5d2916c73314bb89a1ff80a53f5c6a, type: 3}
+  m_Name: WaterDragonAnimationData
+  m_EditorClassIdentifier: Assembly-CSharp::AnimationData
+  Frames:
+  - {fileID: -848108733984840072, guid: ed52c16496b914a209cad7a3a864c8ee, type: 3}
+  - {fileID: -2866951217304662462, guid: ed52c16496b914a209cad7a3a864c8ee, type: 3}
+  - {fileID: 1301228831392408219, guid: ed52c16496b914a209cad7a3a864c8ee, type: 3}
+  - {fileID: 468430627101274202, guid: ed52c16496b914a209cad7a3a864c8ee, type: 3}
+  - {fileID: -2584323035865922606, guid: ed52c16496b914a209cad7a3a864c8ee, type: 3}
+  - {fileID: 3031652836999182467, guid: ed52c16496b914a209cad7a3a864c8ee, type: 3}
+  - {fileID: 977921529868623878, guid: ed52c16496b914a209cad7a3a864c8ee, type: 3}
+  - {fileID: -7097805719247500245, guid: ed52c16496b914a209cad7a3a864c8ee, type: 3}
+  - {fileID: -2474550988810017997, guid: ed52c16496b914a209cad7a3a864c8ee, type: 3}
+  - {fileID: 315906795479033950, guid: ed52c16496b914a209cad7a3a864c8ee, type: 3}
+  - {fileID: 5993429622623290796, guid: ed52c16496b914a209cad7a3a864c8ee, type: 3}
+  - {fileID: 549239668967746280, guid: ed52c16496b914a209cad7a3a864c8ee, type: 3}
+  - {fileID: 4996098926950707662, guid: ed52c16496b914a209cad7a3a864c8ee, type: 3}
+  - {fileID: 1558527482387912004, guid: ed52c16496b914a209cad7a3a864c8ee, type: 3}
+  - {fileID: 8212033603216967457, guid: ed52c16496b914a209cad7a3a864c8ee, type: 3}
+  - {fileID: -3152864044861146759, guid: ed52c16496b914a209cad7a3a864c8ee, type: 3}
+  FramesPerSecond: 12
+  ImpactFrame: 8

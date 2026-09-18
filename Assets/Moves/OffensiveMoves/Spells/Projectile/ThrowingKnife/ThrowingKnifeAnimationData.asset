@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d5d2916c73314bb89a1ff80a53f5c6a, type: 3}
+  m_Name: ThrowingKnifeAnimationData
+  m_EditorClassIdentifier: Assembly-CSharp::AnimationData
+  Frames:
+  - {fileID: -8160568097255961017, guid: 66d1ed81534d54c3394c44e212a3071c, type: 3}
+  - {fileID: -2492688658035854130, guid: 66d1ed81534d54c3394c44e212a3071c, type: 3}
+  - {fileID: 7518173626384939469, guid: 66d1ed81534d54c3394c44e212a3071c, type: 3}
+  - {fileID: 2526416097997793289, guid: 66d1ed81534d54c3394c44e212a3071c, type: 3}
+  - {fileID: -4883150871042810411, guid: 66d1ed81534d54c3394c44e212a3071c, type: 3}
+  - {fileID: -2612245266785597806, guid: 66d1ed81534d54c3394c44e212a3071c, type: 3}
+  - {fileID: 8422302281960218781, guid: 66d1ed81534d54c3394c44e212a3071c, type: 3}
+  - {fileID: -652045936918840792, guid: 66d1ed81534d54c3394c44e212a3071c, type: 3}
+  - {fileID: 5465405921214744408, guid: 66d1ed81534d54c3394c44e212a3071c, type: 3}
+  - {fileID: -5313051480397523504, guid: 66d1ed81534d54c3394c44e212a3071c, type: 3}
+  - {fileID: 5701266490149644, guid: 66d1ed81534d54c3394c44e212a3071c, type: 3}
+  - {fileID: 6904885786951290251, guid: 66d1ed81534d54c3394c44e212a3071c, type: 3}
+  - {fileID: -7291706680649576201, guid: 66d1ed81534d54c3394c44e212a3071c, type: 3}
+  - {fileID: 817780070407414441, guid: 66d1ed81534d54c3394c44e212a3071c, type: 3}
+  - {fileID: 926370869384715609, guid: 66d1ed81534d54c3394c44e212a3071c, type: 3}
+  FramesPerSecond: 12
+  ImpactFrame: 10

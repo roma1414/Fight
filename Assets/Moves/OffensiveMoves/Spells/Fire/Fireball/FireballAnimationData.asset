@@ -14,16 +14,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::AnimationData
   Frames:
   - {fileID: -6607481912129624618, guid: e6b5532ca1cc4459c800b9bf2c1114d4, type: 3}
-  - {fileID: 1345511635, guid: e6b5532ca1cc4459c800b9bf2c1114d4, type: 3}
-  - {fileID: -1276474577, guid: e6b5532ca1cc4459c800b9bf2c1114d4, type: 3}
-  - {fileID: 394294626, guid: e6b5532ca1cc4459c800b9bf2c1114d4, type: 3}
-  - {fileID: 1679777363, guid: e6b5532ca1cc4459c800b9bf2c1114d4, type: 3}
-  - {fileID: 1894187569, guid: e6b5532ca1cc4459c800b9bf2c1114d4, type: 3}
-  - {fileID: 386887700, guid: e6b5532ca1cc4459c800b9bf2c1114d4, type: 3}
-  - {fileID: 474429466, guid: e6b5532ca1cc4459c800b9bf2c1114d4, type: 3}
-  - {fileID: -292846766, guid: e6b5532ca1cc4459c800b9bf2c1114d4, type: 3}
-  - {fileID: 262328416, guid: e6b5532ca1cc4459c800b9bf2c1114d4, type: 3}
-  - {fileID: 1495404493, guid: e6b5532ca1cc4459c800b9bf2c1114d4, type: 3}
-  - {fileID: -1017653556, guid: e6b5532ca1cc4459c800b9bf2c1114d4, type: 3}
-  FramesPerSecond: 8
-  ImpactFrame: 6
+  - {fileID: -7250195882505504687, guid: e6b5532ca1cc4459c800b9bf2c1114d4, type: 3}
+  - {fileID: 4403933487624526528, guid: e6b5532ca1cc4459c800b9bf2c1114d4, type: 3}
+  - {fileID: 8927358698389672400, guid: e6b5532ca1cc4459c800b9bf2c1114d4, type: 3}
+  - {fileID: 2250600637640065238, guid: e6b5532ca1cc4459c800b9bf2c1114d4, type: 3}
+  - {fileID: -4701697456131926120, guid: e6b5532ca1cc4459c800b9bf2c1114d4, type: 3}
+  - {fileID: -1711208824211276139, guid: e6b5532ca1cc4459c800b9bf2c1114d4, type: 3}
+  - {fileID: -3769374411695510437, guid: e6b5532ca1cc4459c800b9bf2c1114d4, type: 3}
+  - {fileID: 2335414765099883281, guid: e6b5532ca1cc4459c800b9bf2c1114d4, type: 3}
+  - {fileID: 5467872547263643923, guid: e6b5532ca1cc4459c800b9bf2c1114d4, type: 3}
+  - {fileID: 7865523673118177332, guid: e6b5532ca1cc4459c800b9bf2c1114d4, type: 3}
+  - {fileID: 5609376815085826905, guid: e6b5532ca1cc4459c800b9bf2c1114d4, type: 3}
+  - {fileID: 6785216056351099214, guid: e6b5532ca1cc4459c800b9bf2c1114d4, type: 3}
+  - {fileID: -3442395235638600575, guid: e6b5532ca1cc4459c800b9bf2c1114d4, type: 3}
+  - {fileID: 7387481953171491385, guid: e6b5532ca1cc4459c800b9bf2c1114d4, type: 3}
+  - {fileID: -2223868357131864047, guid: e6b5532ca1cc4459c800b9bf2c1114d4, type: 3}
+  FramesPerSecond: 12
+  ImpactFrame: 2

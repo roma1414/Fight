@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d5d2916c73314bb89a1ff80a53f5c6a, type: 3}
+  m_Name: FireStormAnimationData
+  m_EditorClassIdentifier: Assembly-CSharp::AnimationData
+  Frames:
+  - {fileID: 57531984068065345, guid: 9efd1356be64b490280b6e0b8314c8c9, type: 3}
+  - {fileID: -1022946306760046299, guid: 9efd1356be64b490280b6e0b8314c8c9, type: 3}
+  - {fileID: 5180912725485014176, guid: 9efd1356be64b490280b6e0b8314c8c9, type: 3}
+  - {fileID: -7742149589745935092, guid: 9efd1356be64b490280b6e0b8314c8c9, type: 3}
+  - {fileID: 1770686309200119880, guid: 9efd1356be64b490280b6e0b8314c8c9, type: 3}
+  - {fileID: -600744239478820201, guid: 9efd1356be64b490280b6e0b8314c8c9, type: 3}
+  - {fileID: 8225354000324632386, guid: 9efd1356be64b490280b6e0b8314c8c9, type: 3}
+  - {fileID: 56476185816070516, guid: 9efd1356be64b490280b6e0b8314c8c9, type: 3}
+  - {fileID: -5445679021947292805, guid: 9efd1356be64b490280b6e0b8314c8c9, type: 3}
+  - {fileID: 2795755346520967839, guid: 9efd1356be64b490280b6e0b8314c8c9, type: 3}
+  - {fileID: -5445679021947292805, guid: 9efd1356be64b490280b6e0b8314c8c9, type: 3}
+  - {fileID: 2795755346520967839, guid: 9efd1356be64b490280b6e0b8314c8c9, type: 3}
+  - {fileID: 289958709478916236, guid: 9efd1356be64b490280b6e0b8314c8c9, type: 3}
+  - {fileID: 2294725638788338513, guid: 9efd1356be64b490280b6e0b8314c8c9, type: 3}
+  - {fileID: -8997027334716073607, guid: 9efd1356be64b490280b6e0b8314c8c9, type: 3}
+  - {fileID: 6941180411053972923, guid: 9efd1356be64b490280b6e0b8314c8c9, type: 3}
+  - {fileID: 2533198017465683544, guid: 9efd1356be64b490280b6e0b8314c8c9, type: 3}
+  FramesPerSecond: 12
+  ImpactFrame: 7

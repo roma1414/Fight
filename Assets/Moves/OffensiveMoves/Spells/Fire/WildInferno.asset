@@ -22,10 +22,11 @@ MonoBehaviour:
   Occular: 0
   UseMeleSkill: 0
   RequiredTargetStatuses: 
-  TargetType: 2
+  TargetType: 1
   MoveType: 1
   Natures: 0200
-  MoveAnimations: {fileID: 0}
+  AnimationData: {fileID: 0}
+  PreviewAnimationData: {fileID: 0}
   Number: 0
   CloneStrength: 0
   UsesPerRound: 0

@@ -10,22 +10,23 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f22992ffeb079114cabf4a66b094a39c, type: 3}
-  m_Name: MagicMissile
+  m_Name: SharkMissile
   m_EditorClassIdentifier: Assembly-CSharp::Move
-  Name: Magic Missile
-  Level: 3
-  Mana: 10
+  Name: Shark Missile
+  Level: 5
+  Mana: 16
   RoundsToCast: 0
   UsesPerFight: 0
-  CastingSpeed: 0
+  CastingSpeed: 6
   ID: 0
   Occular: 0
   UseMeleSkill: 0
   RequiredTargetStatuses: 
   TargetType: 0
   MoveType: 1
-  Natures: 0000
-  MoveAnimations: {fileID: 0}
+  Natures: 0c00
+  AnimationData: {fileID: 11400000, guid: 43db470ccfb5e4f59bf3b36f35aebfc5, type: 2}
+  PreviewAnimationData: {fileID: 0}
   Number: 0
   CloneStrength: 0
   UsesPerRound: 0
@@ -38,9 +39,9 @@ MonoBehaviour:
   HealthAmount: 0
   ManaRestoreAmount: 0
   HealType: 0
-  Damage: 24
+  Damage: 25
   Duration: 0
-  Accuracy: 4
+  Accuracy: 6
   Absorbed: 1
   TouchSuccess: 0
   DamageType: 0

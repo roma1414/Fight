@@ -10,22 +10,23 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f22992ffeb079114cabf4a66b094a39c, type: 3}
-  m_Name: WaterDragon
+  m_Name: MagicMissile
   m_EditorClassIdentifier: Assembly-CSharp::Move
-  Name: Water Dragon
-  Level: 8
-  Mana: 28
+  Name: Magic Missile
+  Level: 3
+  Mana: 10
   RoundsToCast: 0
   UsesPerFight: 0
-  CastingSpeed: 4
+  CastingSpeed: 0
   ID: 0
   Occular: 0
   UseMeleSkill: 0
   RequiredTargetStatuses: 
   TargetType: 0
   MoveType: 1
-  Natures: 
-  MoveAnimations: {fileID: 0}
+  Natures: 0000
+  AnimationData: {fileID: 11400000, guid: dfe557cc9df5a44129aba519154a610e, type: 2}
+  PreviewAnimationData: {fileID: 0}
   Number: 0
   CloneStrength: 0
   UsesPerRound: 0
@@ -38,9 +39,9 @@ MonoBehaviour:
   HealthAmount: 0
   ManaRestoreAmount: 0
   HealType: 0
-  Damage: 100
+  Damage: 24
   Duration: 0
-  Accuracy: 8
+  Accuracy: 4
   Absorbed: 1
   TouchSuccess: 0
   DamageType: 0
