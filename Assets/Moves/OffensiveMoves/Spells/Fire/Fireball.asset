@@ -24,7 +24,7 @@ MonoBehaviour:
   RequiredTargetStatuses: 
   TargetType: 0
   MoveType: 1
-  Natures: 0400
+  Natures: 0200
   MoveAnimations: {fileID: 0}
   Number: 0
   CloneStrength: 0

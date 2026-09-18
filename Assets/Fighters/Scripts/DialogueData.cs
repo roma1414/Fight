@@ -10,6 +10,7 @@ public class DialogueData : ScriptableObject
     [SerializeField] protected List<string> AttackingStatements, AngryStatements, BlockedStatements, DeflectedStatements,
                                             HurtStatements, TauntingStatements, VictoryStatements;
     [SerializeField] protected List<Statement> StatementsWithRequirements;
+    [SerializeField] protected bool LoopDialogue = true;
     protected HashSet<int> SpokenAttackingStatements = new HashSet<int>();
     protected HashSet<int> SpokenAngryStatements = new HashSet<int>();
     protected HashSet<int> SpokenBlockedStatements = new HashSet<int>();
@@ -44,8 +45,14 @@ public class DialogueData : ScriptableObject
         else
         {
             // All statements have been spoken, reset the spoken set and choose again
+            if (LoopDialogue == true)
+            {
+                SpokenAttackingStatements.Clear();
+                return GetAttackingStatement();
+            }
             SpokenAttackingStatements.Clear();
-            return GetAttackingStatement();
         }
+
+        return "";
     }
 }

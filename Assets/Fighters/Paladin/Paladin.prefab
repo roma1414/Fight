@@ -50,7 +50,7 @@ MonoBehaviour:
   Psychic: 0
   Speed: 5
   Strength: 8
-  Intelligence: 3
+  Intelligence: 4
   DamageResistance: 0.2
   Mana: 100
   MaxMana: 100
@@ -70,3 +70,5 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 5e2a6cc19aa20486d9724a52e244134d, type: 2}
   - {fileID: 11400000, guid: d4524c7d97981474f90d29d5ec441f1e, type: 2}
   - {fileID: 11400000, guid: 97b4d939c16024819b71cdfd0610d3fd, type: 2}
+  - {fileID: 11400000, guid: abba7dda5b71b41ecb55bcdccb361cfd, type: 2}
+  - {fileID: 11400000, guid: a634dfe3a13b54269a1eec4820522ee7, type: 2}

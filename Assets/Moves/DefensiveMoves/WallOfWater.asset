@@ -17,14 +17,14 @@ MonoBehaviour:
   Mana: 18
   RoundsToCast: 0
   UsesPerFight: 0
-  CastingSpeed: 0
+  CastingSpeed: 6
   ID: 0
   Occular: 0
   UseMeleSkill: 0
   RequiredTargetStatuses: 
   TargetType: 4
   MoveType: 8
-  Natures: 1000
+  Natures: 0c00
   MoveAnimations: {fileID: 0}
   Number: 0
   CloneStrength: 0

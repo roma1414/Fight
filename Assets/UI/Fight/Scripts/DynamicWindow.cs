@@ -24,9 +24,9 @@ public class DynamicWindow : MonoBehaviour
     private List<Image>                     SpawnedAttackerImages = new List<Image>();
     private Coroutine                       TalkingCoroutine;
     public const float FIGHTER_BACKGROUND_MAX_OFFSET = 1330f;
-    public const float STATEMENT_BACKGROUND_MAX_OFFSET = 3698;
-    public const float STATEMENT_BACKGROUND_PANEL_MAX_ANIMATION_OFFSET = 8f;
+    public const float STATEMENT_BACKGROUND_MAX_OFFSET = -3350f;
     public const float STATEMENT_FIGHTER_MAX_ANIMATION_OFFSET = 16f;
+    public const float STATEMENT_FIGHTER_X_ZERO_POINT = -128f;
 
     private IEnumerator AnimateTalking(Sprite[] frames)
     {
@@ -261,10 +261,10 @@ public class DynamicWindow : MonoBehaviour
         float offsetPerFighter = 0f;
         if (teamSize > 1)
         {
-            offsetPerFighter = (STATEMENT_BACKGROUND_MAX_OFFSET - STATEMENT_BACKGROUND_PANEL_MAX_ANIMATION_OFFSET) / (teamSize - 1);
+            offsetPerFighter = (STATEMENT_BACKGROUND_MAX_OFFSET - STATEMENT_FIGHTER_X_ZERO_POINT) / (teamSize - 1);
         }
         int fighterIndex = teamList.IndexOf(fighter);
-        float backgroundOffset = -STATEMENT_BACKGROUND_PANEL_MAX_ANIMATION_OFFSET - offsetPerFighter * fighterIndex;
+        float backgroundOffset = STATEMENT_FIGHTER_X_ZERO_POINT + offsetPerFighter * fighterIndex;
 
         Vector2 backgroundPosition = StatementBackground.rectTransform.anchoredPosition;
         backgroundPosition.x = backgroundOffset;

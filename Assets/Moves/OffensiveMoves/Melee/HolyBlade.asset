@@ -10,37 +10,37 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f22992ffeb079114cabf4a66b094a39c, type: 3}
-  m_Name: Shield
+  m_Name: HolyBlade
   m_EditorClassIdentifier: Assembly-CSharp::Move
-  Name: Shield
-  Level: 4
-  Mana: 0
+  Name: Holy Blade
+  Level: 8
+  Mana: 24
   RoundsToCast: 0
   UsesPerFight: 0
-  CastingSpeed: 10
+  CastingSpeed: 7
   ID: 0
   Occular: 0
-  UseMeleSkill: 1
+  UseMeleSkill: 0
   RequiredTargetStatuses: 
-  TargetType: 4
-  MoveType: 8
-  Natures: 
+  TargetType: 0
+  MoveType: 0
+  Natures: 0f00
   MoveAnimations: {fileID: 0}
   Number: 0
   CloneStrength: 0
   UsesPerRound: 0
   MaxLevelAvoided: 0
-  WorksAgaintsMelee: 1
-  WorksAgainstRanged: 1
+  WorksAgaintsMelee: 0
+  WorksAgainstRanged: 0
   Absorbing: 0
   OccularSuccess: 0
-  TouchFail: 1
+  TouchFail: 0
   HealthAmount: 0
   ManaRestoreAmount: 0
   HealType: 0
-  Damage: 0
+  Damage: 86
   Duration: 0
-  Accuracy: 0
+  Accuracy: 0.25
   Absorbed: 0
   TouchSuccess: 0
   DamageType: 0
