@@ -22,16 +22,17 @@ MonoBehaviour:
   Occular: 0
   UseMeleSkill: 0
   RequiredTargetStatuses: 
-  TargetType: 5
-  MoveType: 0
+  TargetType: 4
+  MoveType: 8
   Natures: 
-  MoveAnimations: {fileID: 0}
+  AnimationData: {fileID: 0}
+  PreviewAnimationData: {fileID: 0}
   Number: 0
   CloneStrength: 0
   UsesPerRound: 0
   MaxLevelAvoided: 0
-  WorksAgaintsMelee: 0
-  WorksAgainstRanged: 0
+  WorksAgaintsMelee: 1
+  WorksAgainstRanged: 1
   Absorbing: 0
   OccularSuccess: 0
   TouchFail: 0

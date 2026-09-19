@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d5d2916c73314bb89a1ff80a53f5c6a, type: 3}
+  m_Name: StraightPunchAnimationData
+  m_EditorClassIdentifier: Assembly-CSharp::AnimationData
+  Frames:
+  - {fileID: -9050841585063784553, guid: b2c983021357541088462038e66907a7, type: 3}
+  - {fileID: 574674459376642763, guid: b2c983021357541088462038e66907a7, type: 3}
+  - {fileID: 5222361683108504170, guid: b2c983021357541088462038e66907a7, type: 3}
+  - {fileID: 6248949215664033384, guid: b2c983021357541088462038e66907a7, type: 3}
+  - {fileID: -3525668592957911668, guid: b2c983021357541088462038e66907a7, type: 3}
+  - {fileID: -6104302407543615557, guid: b2c983021357541088462038e66907a7, type: 3}
+  - {fileID: 3665645446576036878, guid: b2c983021357541088462038e66907a7, type: 3}
+  - {fileID: -496265875580428763, guid: b2c983021357541088462038e66907a7, type: 3}
+  - {fileID: -3788529903343338150, guid: b2c983021357541088462038e66907a7, type: 3}
+  - {fileID: 8672801731655072523, guid: b2c983021357541088462038e66907a7, type: 3}
+  - {fileID: -1153760372999075176, guid: b2c983021357541088462038e66907a7, type: 3}
+  - {fileID: -535844321007841409, guid: b2c983021357541088462038e66907a7, type: 3}
+  FramesPerSecond: 12
+  ImpactFrame: 6

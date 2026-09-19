@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Move
   Name: Holy Blade
   Level: 8
-  Mana: 24
+  Mana: 33
   RoundsToCast: 0
   UsesPerFight: 0
   CastingSpeed: 7
@@ -25,7 +25,7 @@ MonoBehaviour:
   TargetType: 0
   MoveType: 0
   Natures: 0f00
-  AnimationData: {fileID: 0}
+  AnimationData: {fileID: 11400000, guid: 11b2f2895e06649999105f5e592bc021, type: 2}
   PreviewAnimationData: {fileID: 0}
   Number: 0
   CloneStrength: 0

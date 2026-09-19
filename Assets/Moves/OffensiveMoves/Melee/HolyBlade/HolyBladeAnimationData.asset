@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d5d2916c73314bb89a1ff80a53f5c6a, type: 3}
+  m_Name: HolyBladeAnimationData
+  m_EditorClassIdentifier: Assembly-CSharp::AnimationData
+  Frames:
+  - {fileID: -5686982952176143693, guid: eea730517ab17403882196ac0203a0f4, type: 3}
+  - {fileID: -1129089252, guid: eea730517ab17403882196ac0203a0f4, type: 3}
+  - {fileID: 1241676010, guid: eea730517ab17403882196ac0203a0f4, type: 3}
+  - {fileID: 1025713559, guid: eea730517ab17403882196ac0203a0f4, type: 3}
+  - {fileID: -1028969101, guid: eea730517ab17403882196ac0203a0f4, type: 3}
+  - {fileID: 2120130560, guid: eea730517ab17403882196ac0203a0f4, type: 3}
+  - {fileID: 1735576430, guid: eea730517ab17403882196ac0203a0f4, type: 3}
+  - {fileID: -1588996049, guid: eea730517ab17403882196ac0203a0f4, type: 3}
+  - {fileID: -1042896933, guid: eea730517ab17403882196ac0203a0f4, type: 3}
+  - {fileID: -1202416380, guid: eea730517ab17403882196ac0203a0f4, type: 3}
+  - {fileID: -1042896933, guid: eea730517ab17403882196ac0203a0f4, type: 3}
+  - {fileID: -1202416380, guid: eea730517ab17403882196ac0203a0f4, type: 3}
+  - {fileID: -1042896933, guid: eea730517ab17403882196ac0203a0f4, type: 3}
+  - {fileID: -1202416380, guid: eea730517ab17403882196ac0203a0f4, type: 3}
+  - {fileID: -341561118, guid: eea730517ab17403882196ac0203a0f4, type: 3}
+  - {fileID: -1909854483, guid: eea730517ab17403882196ac0203a0f4, type: 3}
+  FramesPerSecond: 12
+  ImpactFrame: 7
