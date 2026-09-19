@@ -959,10 +959,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1384330528907906549, guid: 8b9807a644ceb409d9021bb32fcba309, type: 3}
-      propertyPath: ControlType
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3477936110841682139, guid: 8b9807a644ceb409d9021bb32fcba309, type: 3}
       propertyPath: m_Name
       value: FireMage
@@ -1194,7 +1190,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: -128, y: 140}
+  m_AnchoredPosition: {x: -128, y: 16}
   m_SizeDelta: {x: 3800, y: 1068.75}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &236652871
@@ -5236,10 +5232,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1244770245388760594, guid: fe1bfce988ba04d04ad76f9b731d71e1, type: 3}
-      propertyPath: ControlType
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1456250450688340999, guid: fe1bfce988ba04d04ad76f9b731d71e1, type: 3}
       propertyPath: m_Name
       value: WaterWitch
@@ -6929,6 +6921,10 @@ PrefabInstance:
     - target: {fileID: 477560759737417052, guid: 8696b875ec2f94bfca85204a54ec1bc0, type: 3}
       propertyPath: m_Name
       value: MysticAssassin
+      objectReference: {fileID: 0}
+    - target: {fileID: 3090061917713705068, guid: 8696b875ec2f94bfca85204a54ec1bc0, type: 3}
+      propertyPath: ControlType
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3946022457539215962, guid: 8696b875ec2f94bfca85204a54ec1bc0, type: 3}
       propertyPath: m_LocalPosition.x
