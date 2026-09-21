@@ -1,41 +1,31 @@
 Round 1
 
-Fire Mage  +  Mystic Assassin  vs  Paladin  +  Water Witch
-
-Fire Mage   Overall: 8.01  Health: 100  Mana: 180  Health Co = 1
-Mystic Assassin   Overall: 7.15  Health: 100  Mana: 140  Health Co = 1
+Paladin  +  Mystic Assassin  vs  Fire Mage  +  Water Witch
 
 Paladin   Overall: 6.81  Health: 100  Mana: 100  Health Co = 1
+Mystic Assassin   Overall: 7.15  Health: 100  Mana: 140  Health Co = 1
+
+Fire Mage   Overall: 8.01  Health: 100  Mana: 180  Health Co = 1
 Water Witch   Overall: 8.01  Health: 100  Mana: 180  Health Co = 1
 
 ###################################################################
 ###################################################################
 
-Mystic Assassin uses Straight Punch against Paladin!
-Paladin deflects it!
-Fire Mage uses Fireball against Water Witch!
-Water Witch blocks it with Wall of Water!
-Paladin uses Straight Punch against Mystic Assassin!
+Fire Mage uses Fireball against Mystic Assassin!
 It misses Mystic Assassin!
-Water Witch uses Water Dragon against Mystic Assassin!
-It misses Mystic Assassin!
+Paladin and Mystic Assassin use Holy Blade and Slash against Fire Mage!
+Fire Mage blocks it with Fire Tempest Wall!
+Water Witch uses Water Dragon against Paladin!
+It hits Paladin and does 86 damage!
 
 
 Round 2
 
-Fire Mage  +  Mystic Assassin  vs  Paladin  +  Water Witch
+Paladin  +  Mystic Assassin  vs  Fire Mage  +  Water Witch
 
-Fire Mage   Overall: 7.785  Health: 100  Mana: 155  Health Co = 1
+Paladin   Overall: 2.61784  Health: 14  Mana: 67  Health Co = 0.3493333
 Mystic Assassin   Overall: 7.15  Health: 100  Mana: 140  Health Co = 1
 
-Paladin   Overall: 6.81  Health: 100  Mana: 100  Health Co = 1
-Water Witch   Overall: 7.578  Health: 100  Mana: 132  Health Co = 1
+Fire Mage   Overall: 7.56  Health: 100  Mana: 130  Health Co = 1
+Water Witch   Overall: 7.74  Health: 100  Mana: 150  Health Co = 1
 
-###################################################################
-###################################################################
-
-Mystic Assassin uses Straight Punch against Paladin!
-Paladin deflects it!
-Paladin uses Straight Punch against Mystic Assassin!
-It misses Mystic Assassin!
-Water Witch uses Water Dragon against Mystic Assassin!

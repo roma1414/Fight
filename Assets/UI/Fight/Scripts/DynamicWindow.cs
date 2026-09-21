@@ -17,7 +17,7 @@ public class DynamicWindow : MonoBehaviour
                                             StatementFighter, FightersPrefab, AttackersPrefab, AttacksPrefab;
     [SerializeField] private TMP_Text       DynamicText, StatementText, StatementFighterName;
     [SerializeField] private RectTransform  FightersContainer, AttackersContainer, AttacksContainer;
-    [SerializeField] private Animator       StatementAnimator, FighterAnimator;
+    [SerializeField] private Animator       StatementAnimator, FighterAnimator, FightersAnimator;
     [SerializeField] private List<string>   StatementAnimations, FighterAnimations;
     private int                             PreviousStatementAnimation = -1, PreviousFighterAnimation = -1;
     private List<Image>                     SpawnedFighterImages = new List<Image>();
@@ -314,12 +314,19 @@ public class DynamicWindow : MonoBehaviour
         ConfigureFightWindowForAttackAgainstTargets(moveEvent);
         FightersPanel.SetActive(true);
         DynamicTextPanel.SetActive(true);
-
+        yield return new WaitForSeconds(.25f);
+        
+        Enums.MoveType moveType = moveEvent.GetMoveType();
+        if (moveType == Enums.MoveType.Melee || moveType == Enums.MoveType.NinTai)
+        {
+            FightersAnimator.Play("Attackers_Melee", 0, 0f);
+            yield return new WaitForSeconds(.2f);
+        }
         StartAttacks(moveEvent.GetMoves());
         yield return new WaitUntil(() => SpawnedAttackImages.Count == 0);
         AttackCoroutines.Clear();
 
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1.25f);
     }
 
     public IEnumerator DisplayAttackerMovePreview(MoveEvent moveEvent)

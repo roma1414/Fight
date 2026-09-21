@@ -341,6 +341,7 @@ MonoBehaviour:
   AttacksContainer: {fileID: 2019851333}
   StatementAnimator: {fileID: 1979487810}
   FighterAnimator: {fileID: 525911628}
+  FightersAnimator: {fileID: 1781531717}
   StatementAnimations:
   - Statement_Left
   - Statement_Right
@@ -6299,6 +6300,7 @@ GameObject:
   - component: {fileID: 1781531714}
   - component: {fileID: 1781531716}
   - component: {fileID: 1781531715}
+  - component: {fileID: 1781531717}
   m_Layer: 5
   m_Name: FightersPanel
   m_TagString: Untagged
@@ -6367,6 +6369,28 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1781531713}
   m_CullTransparentMesh: 1
+--- !u!95 &1781531717
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1781531713}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 0f05e163f95fa4fbcbeb68046e9e16c3, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1829046165
 GameObject:
   m_ObjectHideFlags: 0
@@ -7308,7 +7332,7 @@ MonoBehaviour:
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 0
   m_ChildControlWidth: 0
-  m_ChildControlHeight: 0
+  m_ChildControlHeight: 1
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
@@ -7462,10 +7486,10 @@ MonoBehaviour:
   NarutoMode: 0
   Teams: 2
   Team1:
-  - {fileID: 175420731}
+  - {fileID: 1089934233}
   - {fileID: 1979974254}
   Team2:
-  - {fileID: 1089934233}
+  - {fileID: 175420731}
   - {fileID: 1465857194}
   Team3: []
   MapArt: {fileID: 11400000, guid: d2dea80629c404fd1be252fe0953eacc, type: 2}
