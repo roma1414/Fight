@@ -12,24 +12,28 @@ public class DynamicWindow : MonoBehaviour
 {
     [SerializeField] private Fight          Fight;
     [SerializeField] private GameObject     FighterPanel, FightersPanel, DynamicTextPanel, StatementPanel, StatementTextPanel,
-                                            StatementBackgroundPanel;
+                                            StatementBackgroundPanel, TargetPanel;
     [SerializeField] private Image          Fighter, FighterBackground, FightersBackground, StatementBackground, 
-                                            StatementFighter, FightersPrefab, AttackersPrefab, AttacksPrefab;
+                                            StatementFighter, FightersPrefab, AttackersPrefab, AttacksPrefab, TargetBackground;
     [SerializeField] private TMP_Text       DynamicText, StatementText, StatementFighterName;
     [SerializeField] private RectTransform  FightersContainer, AttackersContainer, AttacksContainer;
-    [SerializeField] private Animator       StatementAnimator, FighterAnimator, FightersAnimator;
-    [SerializeField] private List<string>   StatementAnimations, FighterAnimations;
+    [SerializeField] private Animator       StatementAnimator, FighterAnimator, FightersAnimator, TargetAnimator;
+    [SerializeField] private List<string>   StatementAnimations, FighterAnimations, TargetAnimations;
     private int                             PreviousStatementAnimation = -1, PreviousFighterAnimation = -1;
     private List<Image>                     SpawnedFighterImages = new List<Image>();
     private List<Image>                     SpawnedAttackerImages = new List<Image>();
     private List<Image>                     SpawnedAttackImages = new List<Image>();
     private Coroutine                       TalkingCoroutine;
     private List<Coroutine>                 AttackCoroutines = new List<Coroutine>();
-    public const float FIGHTER_BACKGROUND_MAX_OFFSET = -2044;
-    public const float FIGHTER_FIGHTER_X_ZERO_POINT = -256f;
+    public const float FIGHTER_BACKGROUND_MAX_OFFSET = -3950;
+    public const float FIGHTER_X_ZERO_POINT = -128f;
     public const float STATEMENT_BACKGROUND_MAX_OFFSET = -3350f;
     public const float STATEMENT_FIGHTER_MAX_ANIMATION_OFFSET = 16f;
     public const float STATEMENT_FIGHTER_X_ZERO_POINT = -128f;
+    public const float FIGHTERS_BACKGROUND_MAX_OFFSET = -2150;
+    public const float FIGHTERS_X_ZERO_POINT = -128f;
+    public const float TARGET_BACKGROUND_MAX_OFFSET = -2050;
+    public const float TARGET_X_ZERO_POINT = -128f;
 
     private IEnumerator AnimateTalking(Sprite[] frames)
     {
@@ -49,6 +53,20 @@ public class DynamicWindow : MonoBehaviour
         List<Fighter> targets = moveEvent.GetTargets();
         int targetTeam = targets[0].GetTeam();
         FightersBackground.sprite = Fight.GetMapArt().GetBackground(targetTeam);
+
+        List<Fighter> targetTeamList = Fight.GetTeamList(targetTeam);
+        int targetTeamSize = targetTeamList.Count;
+        float offsetPerFighter = 0f;
+        if (targetTeamSize > 1)
+        {
+            offsetPerFighter = (FIGHTERS_BACKGROUND_MAX_OFFSET - FIGHTERS_X_ZERO_POINT) / (targetTeamSize - 1);
+        }
+        int fighterTeamIndex = targetTeamList.IndexOf(targets[0]);
+        float offset = FIGHTERS_X_ZERO_POINT + offsetPerFighter * fighterTeamIndex;
+
+        Vector2 position = FightersBackground.rectTransform.anchoredPosition;
+        position.x = offset;
+        FightersBackground.rectTransform.anchoredPosition = position;
 
         for (int i = 0; i < targets.Count; i++)
         {
@@ -97,18 +115,31 @@ public class DynamicWindow : MonoBehaviour
             }
         }
 
-        HorizontalLayoutGroup layoutGroup = AttackersContainer.GetComponent<HorizontalLayoutGroup>();
-        float availableWidth = FightersContainer.rect.width - layoutGroup.padding.left - layoutGroup.padding.right;
-        float totalImageWidths = 0f;
+        HorizontalLayoutGroup attackersLayoutGroup = AttackersContainer.GetComponent<HorizontalLayoutGroup>();
+        float availableWidthAttackers = AttackersContainer.rect.width - attackersLayoutGroup.padding.left - attackersLayoutGroup.padding.right;
+        float totalAttackerImageWidths = 0f;
         foreach (Image image in SpawnedAttackerImages)
         {
-            totalImageWidths += image.rectTransform.rect.width;
+            totalAttackerImageWidths += image.rectTransform.rect.width;
         }
         float attackerLayoutGroupSpacing = SpawnedAttackerImages.Count > 1
-            ? Mathf.Min(0f, (availableWidth - totalImageWidths) / (SpawnedAttackerImages.Count - 1))
+            ? Mathf.Min(0f, (availableWidthAttackers - totalAttackerImageWidths) / (SpawnedAttackerImages.Count - 1))
             : 0f;
 
-        layoutGroup.spacing = attackerLayoutGroupSpacing;
+        attackersLayoutGroup.spacing = attackerLayoutGroupSpacing;
+
+        HorizontalLayoutGroup targetsLayoutGroup = FightersContainer.GetComponent<HorizontalLayoutGroup>();
+        float availableWidthTargets = FightersContainer.rect.width - targetsLayoutGroup.padding.left - targetsLayoutGroup.padding.right;
+        float totalTargetImageWidths = 0f;
+        foreach (Image image in SpawnedFighterImages)
+        {
+            totalTargetImageWidths += image.rectTransform.rect.width;
+        }
+        float targetLayoutGroupSpacing = SpawnedFighterImages.Count > 1
+            ? Mathf.Min(0f, (availableWidthTargets - totalTargetImageWidths) / (SpawnedFighterImages.Count - 1))
+            : 0f;
+
+        targetsLayoutGroup.spacing = targetLayoutGroupSpacing;
 
         DynamicText.text = "";
     }
@@ -124,10 +155,10 @@ public class DynamicWindow : MonoBehaviour
         float offsetPerFighter = 0f;
         if (teamSize > 1)
         {
-            offsetPerFighter = (FIGHTER_BACKGROUND_MAX_OFFSET - FIGHTER_FIGHTER_X_ZERO_POINT) / (teamSize - 1);
+            offsetPerFighter = (FIGHTER_BACKGROUND_MAX_OFFSET - FIGHTER_X_ZERO_POINT) / (teamSize - 1);
         }
         int fighterTeamIndex = teamList.IndexOf(fighter);
-        float offset = FIGHTER_FIGHTER_X_ZERO_POINT + offsetPerFighter * fighterTeamIndex;
+        float offset = FIGHTER_X_ZERO_POINT + offsetPerFighter * fighterTeamIndex;
 
         Vector2 position = FighterBackground.rectTransform.anchoredPosition;
         position.x = offset;
@@ -217,10 +248,24 @@ public class DynamicWindow : MonoBehaviour
 
     public void ConfigureFightWindowForAttackers(MoveEvent moveEvent)
     {
-        int team = moveEvent.GetFighters()[0].GetTeam();
+        List<Fighter> fighters = moveEvent.GetFighters();
+        int team = fighters[0].GetTeam();
         FightersBackground.sprite = Fight.GetMapArt().GetBackground(team);
 
-        List<Fighter> fighters = moveEvent.GetFighters();
+        List<Fighter> teamList = Fight.GetTeamList(team);
+        int teamSize = teamList.Count;
+        float offsetPerFighter = 0f;
+        if (teamSize > 1)
+        {
+            offsetPerFighter = (FIGHTERS_BACKGROUND_MAX_OFFSET - FIGHTERS_X_ZERO_POINT) / (teamSize - 1);
+        }
+        int fighterTeamIndex = teamList.IndexOf(fighters[0]);
+        float offset = FIGHTERS_X_ZERO_POINT + offsetPerFighter * fighterTeamIndex;
+
+        Vector2 position = FightersBackground.rectTransform.anchoredPosition;
+        position.x = offset;
+        FightersBackground.rectTransform.anchoredPosition = position;
+
         for (int i = 0; i < fighters.Count; i++)
         {
             Fighter fighter = fighters[i];
@@ -243,6 +288,19 @@ public class DynamicWindow : MonoBehaviour
                 Debug.LogError($"Error! Fighter {fighter.GetName()} has no body sprite in ConfigureFightWindowForAttackers!");
             }
         }
+
+        HorizontalLayoutGroup attackersLayoutGroup = AttackersContainer.GetComponent<HorizontalLayoutGroup>();
+        float availableWidthAttackers = AttackersContainer.rect.width - attackersLayoutGroup.padding.left - attackersLayoutGroup.padding.right;
+        float totalAttackerImageWidths = 0f;
+        foreach (Image image in SpawnedAttackerImages)
+        {
+            totalAttackerImageWidths += image.rectTransform.rect.width;
+        }
+        float attackerLayoutGroupSpacing = SpawnedAttackerImages.Count > 1
+            ? Mathf.Min(0f, (availableWidthAttackers - totalAttackerImageWidths) / (SpawnedAttackerImages.Count - 1))
+            : 0f;
+
+        attackersLayoutGroup.spacing = attackerLayoutGroupSpacing;
 
         List<Fighter> targets = moveEvent.GetTargets();
         DynamicText.text = Util.ListString(fighters) + " attack " + Util.ListString(targets) + "!";
@@ -469,6 +527,7 @@ public class DynamicWindow : MonoBehaviour
         FighterPanel.SetActive(false);
         FightersPanel.SetActive(false);
         StatementPanel.SetActive(false);
+        TargetPanel.SetActive(false);
         DynamicTextPanel.SetActive(false);
         StatementTextPanel.SetActive(false);
 
