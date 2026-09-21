@@ -12,16 +12,16 @@ public class DynamicWindow : MonoBehaviour
 {
     [SerializeField] private Fight          Fight;
     [SerializeField] private GameObject     FighterPanel, FightersPanel, DynamicTextPanel, StatementPanel, StatementTextPanel,
-                                            StatementBackgroundPanel, TargetPanel;
+                                            StatementBackgroundPanel, TargetPanel, AttackersPrefab;
     [SerializeField] private Image          Fighter, FighterBackground, FightersBackground, StatementBackground, 
-                                            StatementFighter, FightersPrefab, AttackersPrefab, AttacksPrefab, TargetBackground;
+                                            StatementFighter, FightersPrefab, AttacksPrefab, TargetBackground;
     [SerializeField] private TMP_Text       DynamicText, StatementText, StatementFighterName;
     [SerializeField] private RectTransform  FightersContainer, AttackersContainer, AttacksContainer;
     [SerializeField] private Animator       StatementAnimator, FighterAnimator, FightersAnimator, TargetAnimator;
     [SerializeField] private List<string>   StatementAnimations, FighterAnimations, TargetAnimations;
     private int                             PreviousStatementAnimation = -1, PreviousFighterAnimation = -1;
     private List<Image>                     SpawnedFighterImages = new List<Image>();
-    private List<Image>                     SpawnedAttackerImages = new List<Image>();
+    private List<GameObject>                SpawnedAttackerPanels = new List<GameObject>();
     private List<Image>                     SpawnedAttackImages = new List<Image>();
     private Coroutine                       TalkingCoroutine;
     private List<Coroutine>                 AttackCoroutines = new List<Coroutine>();
@@ -96,13 +96,15 @@ public class DynamicWindow : MonoBehaviour
         {
             Fighter attacker = attackers[i];
             
-            Image spawnedAttackerImage = Instantiate(
+            GameObject spawnedAttackerPanel = Instantiate(
                 AttackersPrefab,
                 AttackersContainer,
                 false
             );
-            SpawnedAttackerImages.Add(spawnedAttackerImage);
 
+            SpawnedAttackerPanels.Add(spawnedAttackerPanel);
+
+            Image spawnedAttackerImage = spawnedAttackerPanel.transform.Find("Attackers").GetComponent<Image>();
             spawnedAttackerImage.sprite = null;
             Sprite attackerSprite = attacker.GetArt().GetBack();
             if (attackerSprite != null)
@@ -117,13 +119,15 @@ public class DynamicWindow : MonoBehaviour
 
         HorizontalLayoutGroup attackersLayoutGroup = AttackersContainer.GetComponent<HorizontalLayoutGroup>();
         float availableWidthAttackers = AttackersContainer.rect.width - attackersLayoutGroup.padding.left - attackersLayoutGroup.padding.right;
-        float totalAttackerImageWidths = 0f;
-        foreach (Image image in SpawnedAttackerImages)
+        float totalAttackerPanelWidths = 0f;
+        
+        foreach (GameObject panel in SpawnedAttackerPanels)
         {
-            totalAttackerImageWidths += image.rectTransform.rect.width;
+            RectTransform rectTransform = panel.GetComponent<RectTransform>();            
+            totalAttackerPanelWidths += rectTransform.rect.width;
         }
-        float attackerLayoutGroupSpacing = SpawnedAttackerImages.Count > 1
-            ? Mathf.Min(0f, (availableWidthAttackers - totalAttackerImageWidths) / (SpawnedAttackerImages.Count - 1))
+        float attackerLayoutGroupSpacing = SpawnedAttackerPanels.Count > 1
+            ? Mathf.Min(0f, (availableWidthAttackers - totalAttackerPanelWidths) / (SpawnedAttackerPanels.Count - 1))
             : 0f;
 
         attackersLayoutGroup.spacing = attackerLayoutGroupSpacing;
@@ -289,15 +293,15 @@ public class DynamicWindow : MonoBehaviour
             }
         }
 
-        HorizontalLayoutGroup attackersLayoutGroup = AttackersContainer.GetComponent<HorizontalLayoutGroup>();
-        float availableWidthAttackers = AttackersContainer.rect.width - attackersLayoutGroup.padding.left - attackersLayoutGroup.padding.right;
+        HorizontalLayoutGroup attackersLayoutGroup = FightersContainer.GetComponent<HorizontalLayoutGroup>();
+        float availableWidthAttackers = FightersContainer.rect.width - attackersLayoutGroup.padding.left - attackersLayoutGroup.padding.right;
         float totalAttackerImageWidths = 0f;
-        foreach (Image image in SpawnedAttackerImages)
+        foreach (Image image in SpawnedFighterImages)
         {
             totalAttackerImageWidths += image.rectTransform.rect.width;
         }
-        float attackerLayoutGroupSpacing = SpawnedAttackerImages.Count > 1
-            ? Mathf.Min(0f, (availableWidthAttackers - totalAttackerImageWidths) / (SpawnedAttackerImages.Count - 1))
+        float attackerLayoutGroupSpacing = SpawnedFighterImages.Count > 1
+            ? Mathf.Min(0f, (availableWidthAttackers - totalAttackerImageWidths) / (SpawnedFighterImages.Count - 1))
             : 0f;
 
         attackersLayoutGroup.spacing = attackerLayoutGroupSpacing;
@@ -540,14 +544,14 @@ public class DynamicWindow : MonoBehaviour
         }
         SpawnedFighterImages.Clear();
 
-        foreach (Image spawnedAttackerImage in SpawnedAttackerImages)
+        foreach (GameObject spawnedAttackerPanel in SpawnedAttackerPanels)
         {
-            if (spawnedAttackerImage != null)
+            if (spawnedAttackerPanel != null)
             {
-                Destroy(spawnedAttackerImage.gameObject);
+                Destroy(spawnedAttackerPanel);
             }
         }
-        SpawnedAttackerImages.Clear();
+        SpawnedAttackerPanels.Clear();
 
         StopAttacks();
     }

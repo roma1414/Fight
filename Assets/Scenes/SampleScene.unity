@@ -326,13 +326,13 @@ MonoBehaviour:
   StatementTextPanel: {fileID: 1449506299}
   StatementBackgroundPanel: {fileID: 1952267615}
   TargetPanel: {fileID: 885807819}
+  AttackersPrefab: {fileID: 1843017654043904583, guid: fcea7f72da5354b7c867ed50a5cd6f88, type: 3}
   Fighter: {fileID: 239655135}
   FighterBackground: {fileID: 236652871}
   FightersBackground: {fileID: 1085380415}
   StatementBackground: {fileID: 2117376438}
   StatementFighter: {fileID: 1708588147}
   FightersPrefab: {fileID: 920485799604959565, guid: d1cb5ee3723234aedba49bc970192be1, type: 3}
-  AttackersPrefab: {fileID: 4854778748815581648, guid: ef8155e024948469392c78992b4d1528, type: 3}
   AttacksPrefab: {fileID: 5564402477147803579, guid: a7fe4bae21c4749c1a9deb858efb44be, type: 3}
   TargetBackground: {fileID: 1741015471}
   DynamicText: {fileID: 1481937695}
@@ -1040,6 +1040,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1384330528907906549, guid: 8b9807a644ceb409d9021bb32fcba309, type: 3}
+      propertyPath: ControlType
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3477936110841682139, guid: 8b9807a644ceb409d9021bb32fcba309, type: 3}
       propertyPath: m_Name
       value: FireMage
@@ -5391,6 +5395,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1244770245388760594, guid: fe1bfce988ba04d04ad76f9b731d71e1, type: 3}
+      propertyPath: ControlType
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1456250450688340999, guid: fe1bfce988ba04d04ad76f9b731d71e1, type: 3}
       propertyPath: m_Name
       value: WaterWitch
@@ -7375,6 +7383,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MysticAssassin
       objectReference: {fileID: 0}
+    - target: {fileID: 3090061917713705068, guid: 8696b875ec2f94bfca85204a54ec1bc0, type: 3}
+      propertyPath: ControlType
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3946022457539215962, guid: 8696b875ec2f94bfca85204a54ec1bc0, type: 3}
       propertyPath: m_LocalPosition.x
       value: 997.67236
@@ -7908,10 +7920,10 @@ MonoBehaviour:
   Teams: 2
   Team1:
   - {fileID: 1089934233}
-  - {fileID: 1979974254}
   Team2:
   - {fileID: 175420731}
   - {fileID: 1465857194}
+  - {fileID: 1979974254}
   Team3: []
   MapArt: {fileID: 11400000, guid: d2dea80629c404fd1be252fe0953eacc, type: 2}
   SelectMovePanel: {fileID: 646679249}
