@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Slash
   m_EditorClassIdentifier: Assembly-CSharp::Move
   Name: Slash
-  Level: 4
+  Level: 6
   Mana: 0
   RoundsToCast: 0
   UsesPerFight: 0

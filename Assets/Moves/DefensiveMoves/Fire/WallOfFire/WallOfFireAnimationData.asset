@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d5d2916c73314bb89a1ff80a53f5c6a, type: 3}
+  m_Name: WallOfFireAnimationData
+  m_EditorClassIdentifier: Assembly-CSharp::AnimationData
+  Frames:
+  - {fileID: 3157693274441219899, guid: 4201e6f41f0d742faac0a160b614b40b, type: 3}
+  - {fileID: 5715269774641957843, guid: 4201e6f41f0d742faac0a160b614b40b, type: 3}
+  - {fileID: 4757039545034063724, guid: 4201e6f41f0d742faac0a160b614b40b, type: 3}
+  - {fileID: -116753133840977281, guid: 4201e6f41f0d742faac0a160b614b40b, type: 3}
+  - {fileID: -1665760568363927964, guid: 4201e6f41f0d742faac0a160b614b40b, type: 3}
+  - {fileID: 5033467639765734882, guid: 4201e6f41f0d742faac0a160b614b40b, type: 3}
+  - {fileID: -6736598851953795219, guid: 4201e6f41f0d742faac0a160b614b40b, type: 3}
+  - {fileID: 7239571584201968263, guid: 4201e6f41f0d742faac0a160b614b40b, type: 3}
+  - {fileID: 2991228813013521423, guid: 4201e6f41f0d742faac0a160b614b40b, type: 3}
+  - {fileID: 3465313404989886184, guid: 4201e6f41f0d742faac0a160b614b40b, type: 3}
+  - {fileID: -6809610277047220398, guid: 4201e6f41f0d742faac0a160b614b40b, type: 3}
+  - {fileID: -7396938031965188720, guid: 4201e6f41f0d742faac0a160b614b40b, type: 3}
+  - {fileID: -7859310008284069381, guid: 4201e6f41f0d742faac0a160b614b40b, type: 3}
+  - {fileID: -7952543495614151079, guid: 4201e6f41f0d742faac0a160b614b40b, type: 3}
+  - {fileID: -6888644395678953320, guid: 4201e6f41f0d742faac0a160b614b40b, type: 3}
+  - {fileID: -8739103230670747555, guid: 4201e6f41f0d742faac0a160b614b40b, type: 3}
+  - {fileID: -6884409516332127558, guid: 4201e6f41f0d742faac0a160b614b40b, type: 3}
+  - {fileID: -1247679888953181965, guid: 4201e6f41f0d742faac0a160b614b40b, type: 3}
+  - {fileID: 3745540087835802644, guid: 4201e6f41f0d742faac0a160b614b40b, type: 3}
+  - {fileID: 6131221071996385419, guid: 4201e6f41f0d742faac0a160b614b40b, type: 3}
+  FramesPerSecond: 12
+  ImpactFrame: 3

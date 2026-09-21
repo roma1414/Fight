@@ -7,7 +7,8 @@ using UnityEngine;
 public class Fighter : MonoBehaviour
 {
     [SerializeField] protected string               Name;
-    [SerializeField] protected float                Spellcraft, Melee, Psychic, Speed, Strength, Intelligence, DamageResistance;
+    [SerializeField] protected float                Spellcraft, Melee, Psychic, Speed, Strength, Intelligence, Projectile,
+                                                    DamageResistance;
     [SerializeField] protected int                  Mana, MaxMana, Health, Level, Team;
     [SerializeField] protected Enums.ControlType    ControlType;
     [SerializeField] protected Enums.FightingStyle  FightingStyle;
@@ -286,6 +287,10 @@ public class Fighter : MonoBehaviour
                     skill = GetSpellcraft();
                 }
                 break;
+            case Enums.MoveType.Projectile:
+                skill = GetProjectile();
+                break;
+
             default:
                 skill = GetSpellcraft();
                 break;
@@ -556,6 +561,7 @@ public class Fighter : MonoBehaviour
 
     public float GetMelee() { return Melee + GetTotalAttributeBonus(Enums.Attribute.Melee); }
     public float GetMeleeDefenseSkill(float randomAdd) { return (GetMelee() + GetStrength()) * 0.5f * GetHealthCo() + randomAdd; }
+    public float GetProjectile() { return Projectile + GetTotalAttributeBonus(Enums.Attribute.Projectile); }
     public int GetTeam() { return Team; }
 
     public float GetTotalAttributeBonus(Enums.Attribute attribute)

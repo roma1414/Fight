@@ -11,6 +11,7 @@
         Spellcraft,
         Melee,
         Psychic,
-        DamageResistance
+        DamageResistance,
+        Projectile
     }
 }

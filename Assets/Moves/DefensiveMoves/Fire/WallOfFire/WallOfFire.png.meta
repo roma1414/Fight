@@ -1,0 +1,812 @@
+fileFormatVersion: 2
+guid: 4201e6f41f0d742faac0a160b614b40b
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 3157693274441219899
+    second: WallOfFire_0
+  - first:
+      213: 5715269774641957843
+    second: WallOfFire_1
+  - first:
+      213: 4757039545034063724
+    second: WallOfFire_2
+  - first:
+      213: -116753133840977281
+    second: WallOfFire_3
+  - first:
+      213: -1665760568363927964
+    second: WallOfFire_4
+  - first:
+      213: 5033467639765734882
+    second: WallOfFire_5
+  - first:
+      213: -6736598851953795219
+    second: WallOfFire_6
+  - first:
+      213: 7239571584201968263
+    second: WallOfFire_7
+  - first:
+      213: 2991228813013521423
+    second: WallOfFire_8
+  - first:
+      213: 3465313404989886184
+    second: WallOfFire_9
+  - first:
+      213: -6809610277047220398
+    second: WallOfFire_10
+  - first:
+      213: -7396938031965188720
+    second: WallOfFire_11
+  - first:
+      213: -7859310008284069381
+    second: WallOfFire_12
+  - first:
+      213: -7952543495614151079
+    second: WallOfFire_13
+  - first:
+      213: -6888644395678953320
+    second: WallOfFire_14
+  - first:
+      213: -8739103230670747555
+    second: WallOfFire_15
+  - first:
+      213: -6884409516332127558
+    second: WallOfFire_16
+  - first:
+      213: -1247679888953181965
+    second: WallOfFire_17
+  - first:
+      213: 3745540087835802644
+    second: WallOfFire_18
+  - first:
+      213: 6131221071996385419
+    second: WallOfFire_19
+  - first:
+      213: 2334129825309896395
+    second: WallOfFire_20
+  - first:
+      213: 8125746204130504100
+    second: WallOfFire_21
+  - first:
+      213: -4385603715221108865
+    second: WallOfFire_22
+  - first:
+      213: -6686500682299256037
+    second: WallOfFire_23
+  - first:
+      213: -1674924746627267772
+    second: WallOfFire_24
+  - first:
+      213: -6012617869359096518
+    second: WallOfFire_25
+  - first:
+      213: 901948153582691757
+    second: WallOfFire_26
+  - first:
+      213: 7227720686726521215
+    second: WallOfFire_27
+  - first:
+      213: 620684877258271817
+    second: WallOfFire_28
+  - first:
+      213: -6452727846089031311
+    second: WallOfFire_29
+  - first:
+      213: 2455717484208410864
+    second: WallOfFire_30
+  - first:
+      213: -989052417272675543
+    second: WallOfFire_31
+  - first:
+      213: 6329613654696569423
+    second: WallOfFire_32
+  - first:
+      213: -7973067585183928178
+    second: WallOfFire_33
+  - first:
+      213: 4318391170102935569
+    second: WallOfFire_34
+  - first:
+      213: 1729014400578317933
+    second: WallOfFire_35
+  - first:
+      213: -3519371341481443678
+    second: WallOfFire_36
+  - first:
+      213: -6310727734413498524
+    second: WallOfFire_37
+  - first:
+      213: 838376829791354133
+    second: WallOfFire_38
+  - first:
+      213: 3350895636946686419
+    second: WallOfFire_39
+  - first:
+      213: -6959887871440137325
+    second: WallOfFire_40
+  - first:
+      213: 6260011306749318954
+    second: WallOfFire_41
+  - first:
+      213: 2880355189361181564
+    second: WallOfFire_42
+  - first:
+      213: 4813575978030486290
+    second: WallOfFire_43
+  - first:
+      213: -6455264070783870499
+    second: WallOfFire_44
+  - first:
+      213: -2709523976431773661
+    second: WallOfFire_45
+  - first:
+      213: -7632931712138804965
+    second: WallOfFire_46
+  - first:
+      213: -9093097943979705587
+    second: WallOfFire_47
+  - first:
+      213: -3051327140442493647
+    second: WallOfFire_48
+  - first:
+      213: -3156792214120338610
+    second: WallOfFire_49
+  - first:
+      213: 1244513287269670380
+    second: WallOfFire_50
+  - first:
+      213: -6788226449332082806
+    second: WallOfFire_51
+  - first:
+      213: 9166016763577585963
+    second: WallOfFire_52
+  - first:
+      213: 6208719428625833109
+    second: WallOfFire_53
+  - first:
+      213: 7978835367202282365
+    second: WallOfFire_54
+  - first:
+      213: 7389201035012403268
+    second: WallOfFire_55
+  - first:
+      213: -5215094835275855611
+    second: WallOfFire_56
+  - first:
+      213: 5735571679393968524
+    second: WallOfFire_57
+  - first:
+      213: -677050836592668551
+    second: WallOfFire_58
+  - first:
+      213: -4220044274756516792
+    second: WallOfFire_59
+  - first:
+      213: 1831346554315934239
+    second: WallOfFire_60
+  - first:
+      213: -1380961767858327653
+    second: WallOfFire_61
+  - first:
+      213: -6755420735359223115
+    second: WallOfFire_62
+  - first:
+      213: 2144158713890783939
+    second: WallOfFire_63
+  - first:
+      213: 112988851302389028
+    second: WallOfFire_64
+  - first:
+      213: 6514245854548795971
+    second: WallOfFire_65
+  - first:
+      213: -7392484143644234566
+    second: WallOfFire_66
+  - first:
+      213: 8383072447005627851
+    second: WallOfFire_67
+  - first:
+      213: 1134464797290570031
+    second: WallOfFire_68
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: WallOfFire_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1536
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b3f75bc8d4162db20800000000000000
+      internalID: 3157693274441219899
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WallOfFire_1
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 1536
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3db8f094497b05f40800000000000000
+      internalID: 5715269774641957843
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WallOfFire_2
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 1536
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c6fbd382346640240800000000000000
+      internalID: 4757039545034063724
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WallOfFire_3
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 1536
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f72bef2b4a5316ef0800000000000000
+      internalID: -116753133840977281
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WallOfFire_4
+      rect:
+        serializedVersion: 2
+        x: 2048
+        y: 1536
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 466b0d1b69702e8e0800000000000000
+      internalID: -1665760568363927964
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WallOfFire_5
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1024
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2e519a066287ad540800000000000000
+      internalID: 5033467639765734882
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WallOfFire_6
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 1024
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d6f5df2490bc282a0800000000000000
+      internalID: -6736598851953795219
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WallOfFire_7
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 1024
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 78ace5abfff187460800000000000000
+      internalID: 7239571584201968263
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WallOfFire_8
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 1024
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f049599d1caf28920800000000000000
+      internalID: 2991228813013521423
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WallOfFire_9
+      rect:
+        serializedVersion: 2
+        x: 2048
+        y: 1024
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8ee42db8e24471030800000000000000
+      internalID: 3465313404989886184
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WallOfFire_10
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 512
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 25740c928876f71a0800000000000000
+      internalID: -6809610277047220398
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WallOfFire_11
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 512
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 09d4323fc0cc85990800000000000000
+      internalID: -7396938031965188720
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WallOfFire_12
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 512
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bf14e88103f1ee290800000000000000
+      internalID: -7859310008284069381
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WallOfFire_13
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 512
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 956431b33d3e2a190800000000000000
+      internalID: -7952543495614151079
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WallOfFire_14
+      rect:
+        serializedVersion: 2
+        x: 2048
+        y: 512
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 89012937b6e9660a0800000000000000
+      internalID: -6888644395678953320
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WallOfFire_15
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d58c668d9e778b680800000000000000
+      internalID: -8739103230670747555
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WallOfFire_16
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 0
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aba64b2250aa570a0800000000000000
+      internalID: -6884409516332127558
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WallOfFire_17
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 0
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3f8fb8160c95faee0800000000000000
+      internalID: -1247679888953181965
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WallOfFire_18
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 0
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 41c307b7dd4daf330800000000000000
+      internalID: 3745540087835802644
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WallOfFire_19
+      rect:
+        serializedVersion: 2
+        x: 2048
+        y: 0
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b88fbb39419761550800000000000000
+      internalID: 6131221071996385419
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5b98f8a1954f948b0807278f39014d4e
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":5.0,"y":4.0},"gridSpriteSize":{"x":512.0,"y":512.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":2,"keepEmptyRects":false,"isAlternate":false}'
+    nameFileIdTable:
+      WallOfFire_0: 3157693274441219899
+      WallOfFire_1: 5715269774641957843
+      WallOfFire_10: -6809610277047220398
+      WallOfFire_11: -7396938031965188720
+      WallOfFire_12: -7859310008284069381
+      WallOfFire_13: -7952543495614151079
+      WallOfFire_14: -6888644395678953320
+      WallOfFire_15: -8739103230670747555
+      WallOfFire_16: -6884409516332127558
+      WallOfFire_17: -1247679888953181965
+      WallOfFire_18: 3745540087835802644
+      WallOfFire_19: 6131221071996385419
+      WallOfFire_2: 4757039545034063724
+      WallOfFire_3: -116753133840977281
+      WallOfFire_4: -1665760568363927964
+      WallOfFire_5: 5033467639765734882
+      WallOfFire_6: -6736598851953795219
+      WallOfFire_7: 7239571584201968263
+      WallOfFire_8: 2991228813013521423
+      WallOfFire_9: 3465313404989886184
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

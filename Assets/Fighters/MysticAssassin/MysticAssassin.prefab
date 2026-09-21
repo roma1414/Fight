@@ -51,6 +51,7 @@ MonoBehaviour:
   Speed: 9
   Strength: 5
   Intelligence: 7
+  Projectile: 9
   DamageResistance: 0.15
   Mana: 140
   MaxMana: 140
@@ -67,6 +68,5 @@ MonoBehaviour:
   Traits: 0000
   Moves:
   - {fileID: 11400000, guid: 3b2e4194d981746b7811ed2235b6baf9, type: 2}
-  - {fileID: 11400000, guid: 5e2a6cc19aa20486d9724a52e244134d, type: 2}
-  - {fileID: 11400000, guid: d4524c7d97981474f90d29d5ec441f1e, type: 2}
   - {fileID: 11400000, guid: d866fa33696e44ff18f6d7035f88c571, type: 2}
+  - {fileID: 11400000, guid: d4524c7d97981474f90d29d5ec441f1e, type: 2}

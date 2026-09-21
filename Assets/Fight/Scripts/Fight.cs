@@ -1225,7 +1225,7 @@ public class Fight : MonoBehaviour
         }
         else
         {
-            yield return DynamicWindow.DisplayAttackAgainstTarget(moveEvent, target);
+            yield return DynamicWindow.DisplayAttackAgainstTarget(moveEvent, target, resultString);
         }
 
         switch (result)     // Removes UnderPsychic and Trapped statuses before applying attack statuses. The attack landed or partially landed.
@@ -2723,6 +2723,9 @@ public class Fight : MonoBehaviour
                 {
                     movePower = .15f * fighter.GetSpellcraft() + .85f * move.GetLevel() + randomAdd; // Default
                 }
+                break;
+            case Enums.MoveType.Projectile:
+                movePower = .15f * fighter.GetProjectile() + .85f * move.GetLevel() + randomAdd;
                 break;
             default:
                 movePower = .15f * fighter.GetSpellcraft() + .85f * move.GetLevel() + randomAdd;

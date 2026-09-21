@@ -48,9 +48,10 @@ MonoBehaviour:
   Spellcraft: 9
   Melee: 1
   Psychic: 6
-  Speed: 2
+  Speed: 3
   Strength: 1
   Intelligence: 6
+  Projectile: 3
   DamageResistance: 0
   Mana: 180
   MaxMana: 180
@@ -70,6 +71,5 @@ MonoBehaviour:
   - {fileID: 11400000, guid: d5c261949d4dbe740a33d1e39b3ff7e8, type: 2}
   - {fileID: 11400000, guid: d397757c00c4045f18074db5fa48fe68, type: 2}
   - {fileID: 11400000, guid: 4ad11e5da2c2044df9988fb0bd9b211a, type: 2}
-  - {fileID: 11400000, guid: 5e2a6cc19aa20486d9724a52e244134d, type: 2}
-  - {fileID: 11400000, guid: 7d6b9412efb6c4176add8840f9a888d2, type: 2}
   - {fileID: 11400000, guid: d866fa33696e44ff18f6d7035f88c571, type: 2}
+  - {fileID: 11400000, guid: 7d6b9412efb6c4176add8840f9a888d2, type: 2}

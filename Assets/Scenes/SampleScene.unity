@@ -5395,10 +5395,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1244770245388760594, guid: fe1bfce988ba04d04ad76f9b731d71e1, type: 3}
-      propertyPath: ControlType
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1456250450688340999, guid: fe1bfce988ba04d04ad76f9b731d71e1, type: 3}
       propertyPath: m_Name
       value: WaterWitch
@@ -7383,10 +7379,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: MysticAssassin
       objectReference: {fileID: 0}
-    - target: {fileID: 3090061917713705068, guid: 8696b875ec2f94bfca85204a54ec1bc0, type: 3}
-      propertyPath: ControlType
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3946022457539215962, guid: 8696b875ec2f94bfca85204a54ec1bc0, type: 3}
       propertyPath: m_LocalPosition.x
       value: 997.67236
@@ -7919,9 +7911,9 @@ MonoBehaviour:
   NarutoMode: 0
   Teams: 2
   Team1:
+  - {fileID: 175420731}
   - {fileID: 1089934233}
   Team2:
-  - {fileID: 175420731}
   - {fileID: 1465857194}
   - {fileID: 1979974254}
   Team3: []

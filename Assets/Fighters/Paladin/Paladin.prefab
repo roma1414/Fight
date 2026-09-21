@@ -46,11 +46,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Fighter
   Name: Paladin
   Spellcraft: 7
-  Melee: 8
+  Melee: 9
   Psychic: 0
   Speed: 5
   Strength: 8
-  Intelligence: 4
+  Intelligence: 5
+  Projectile: 3
   DamageResistance: 0.2
   Mana: 100
   MaxMana: 100
@@ -67,7 +68,7 @@ MonoBehaviour:
   Traits: 
   Moves:
   - {fileID: 11400000, guid: 3b2e4194d981746b7811ed2235b6baf9, type: 2}
-  - {fileID: 11400000, guid: 5e2a6cc19aa20486d9724a52e244134d, type: 2}
+  - {fileID: 11400000, guid: 11aab36560ab4438ab7d1ed255225a7f, type: 2}
   - {fileID: 11400000, guid: d4524c7d97981474f90d29d5ec441f1e, type: 2}
   - {fileID: 11400000, guid: 97b4d939c16024819b71cdfd0610d3fd, type: 2}
   - {fileID: 11400000, guid: abba7dda5b71b41ecb55bcdccb361cfd, type: 2}

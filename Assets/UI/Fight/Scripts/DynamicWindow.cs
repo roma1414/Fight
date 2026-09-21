@@ -371,7 +371,7 @@ public class DynamicWindow : MonoBehaviour
         return talkingFrames;
     }
 
-    public IEnumerator DisplayAttackAgainstTarget(MoveEvent moveEvent, Fighter target)
+    public IEnumerator DisplayAttackAgainstTarget(MoveEvent moveEvent, Fighter target, string resultString)
     {
         HidePanels();
         ConfigureFightWindowForAttackAgainstTargets(moveEvent);
@@ -386,6 +386,7 @@ public class DynamicWindow : MonoBehaviour
             yield return new WaitForSeconds(.2f);
         }
         StartAttacks(moveEvent.GetMoves());
+        DynamicText.text = resultString;
         yield return new WaitUntil(() => SpawnedAttackImages.Count == 0);
         AttackCoroutines.Clear();
 
