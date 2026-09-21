@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Fighter
   Name: Paladin
-  Spellcraft: 5
+  Spellcraft: 7
   Melee: 8
   Psychic: 0
   Speed: 5

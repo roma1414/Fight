@@ -25,7 +25,8 @@ public class DynamicWindow : MonoBehaviour
     private List<Image>                     SpawnedAttackImages = new List<Image>();
     private Coroutine                       TalkingCoroutine;
     private List<Coroutine>                 AttackCoroutines = new List<Coroutine>();
-    public const float FIGHTER_BACKGROUND_MAX_OFFSET = 1330f;
+    public const float FIGHTER_BACKGROUND_MAX_OFFSET = -2044;
+    public const float FIGHTER_FIGHTER_X_ZERO_POINT = -256f;
     public const float STATEMENT_BACKGROUND_MAX_OFFSET = -3350f;
     public const float STATEMENT_FIGHTER_MAX_ANIMATION_OFFSET = 16f;
     public const float STATEMENT_FIGHTER_X_ZERO_POINT = -128f;
@@ -123,10 +124,10 @@ public class DynamicWindow : MonoBehaviour
         float offsetPerFighter = 0f;
         if (teamSize > 1)
         {
-            offsetPerFighter = FIGHTER_BACKGROUND_MAX_OFFSET / (teamSize - 1);
+            offsetPerFighter = (FIGHTER_BACKGROUND_MAX_OFFSET - FIGHTER_FIGHTER_X_ZERO_POINT) / (teamSize - 1);
         }
         int fighterTeamIndex = teamList.IndexOf(fighter);
-        float offset = offsetPerFighter * fighterTeamIndex * -1f; // Multiply by -1 to move left for higher index fighters
+        float offset = FIGHTER_FIGHTER_X_ZERO_POINT + offsetPerFighter * fighterTeamIndex;
 
         Vector2 position = FighterBackground.rectTransform.anchoredPosition;
         position.x = offset;
