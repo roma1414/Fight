@@ -20,7 +20,7 @@ MonoBehaviour:
   CastingSpeed: 9
   ID: 0
   Occular: 0
-  UseMeleSkill: 0
+  UseMeleSkill: 1
   RequiredTargetStatuses: 
   TargetType: 4
   MoveType: 8
@@ -34,7 +34,7 @@ MonoBehaviour:
   WorksAgaintsMelee: 1
   WorksAgainstRanged: 1
   Absorbing: 0
-  OccularSuccess: 1
+  OccularSuccess: 0
   TouchFail: 1
   HealthAmount: 0
   ManaRestoreAmount: 0

@@ -7912,10 +7912,10 @@ MonoBehaviour:
   Teams: 2
   Team1:
   - {fileID: 175420731}
-  - {fileID: 1089934233}
+  - {fileID: 1979974254}
   Team2:
   - {fileID: 1465857194}
-  - {fileID: 1979974254}
+  - {fileID: 1089934233}
   Team3: []
   MapArt: {fileID: 11400000, guid: d2dea80629c404fd1be252fe0953eacc, type: 2}
   SelectMovePanel: {fileID: 646679249}

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Move
   Name: Wild Inferno
   Level: 8
-  Mana: 56
+  Mana: 40
   RoundsToCast: 0
   UsesPerFight: 0
   CastingSpeed: 2

@@ -1,324 +1,160 @@
 Round 1
 
-Fire Mage  +  Paladin  vs  Water Witch  +  Mystic Assassin
+Fire Mage  +  Mystic Assassin  vs  Water Witch  +  Paladin
 
 Fire Mage   Overall: 8.03  Health: 100  Mana: 180  Health Co = 1
-Paladin   Overall: 7.26  Health: 100  Mana: 100  Health Co = 1
-
-Water Witch   Overall: 8.03  Health: 100  Mana: 180  Health Co = 1
 Mystic Assassin   Overall: 7.15  Health: 100  Mana: 140  Health Co = 1
 
+Water Witch   Overall: 8.03  Health: 100  Mana: 180  Health Co = 1
+Paladin   Overall: 7.26  Health: 100  Mana: 100  Health Co = 1
+
 ###################################################################
 ###################################################################
 
-Mystic Assassin uses Throwing Knife against Fire Mage!
-Fire Mage blocks it with Wall of Fire!
-Water Witch uses Shark Missile against Paladin!
-It hits Paladin and does 22 damage!
-Paladin uses Slash against Mystic Assassin!
-It misses Mystic Assassin!
-Fire Mage uses Wild Inferno against Water Witch!
-Water Witch partially blocks it with Wall of Water and it does 1 damage!
+Mystic Assassin uses Throwing Knife against Water Witch!
+Water Witch blocks it with Wall of Water!
+Paladin uses Holy Blade against Fire Mage!
+Fire Mage blocks it with Fire Tempest Wall!
+Water Witch uses Water Dragon against Fire Mage!
+Fire Mage blocks it with Fire Tempest Wall!
+Fire Mage uses Fire Storm against Paladin!
+Paladin blocks it with Holy Shield!
 
 
 Round 2
 
-Fire Mage  +  Paladin  vs  Water Witch  +  Mystic Assassin
+Fire Mage  +  Mystic Assassin  vs  Water Witch  +  Paladin
 
-Fire Mage   Overall: 7.364  Health: 100  Mana: 106  Health Co = 1
-Paladin   Overall: 7.26  Health: 78  Mana: 100  Health Co = 1
-
-Water Witch   Overall: 7.724  Health: 99  Mana: 146  Health Co = 1
+Fire Mage   Overall: 7.22  Health: 100  Mana: 90  Health Co = 1
 Mystic Assassin   Overall: 7.15  Health: 100  Mana: 140  Health Co = 1
 
+Water Witch   Overall: 7.598  Health: 100  Mana: 132  Health Co = 1
+Paladin   Overall: 6.996  Health: 100  Mana: 34  Health Co = 1
+
 ###################################################################
 ###################################################################
 
-Mystic Assassin uses Throwing Knife against Fire Mage!
-Fire Mage blocks it with Wall of Fire!
-Paladin uses Holy Blade against Water Witch!
-It hits Water Witch and does 170 damage!
-Water Witch is defeated!
-Fire Mage uses Wild Inferno against Mystic Assassin!
+Paladin uses Slash against Mystic Assassin!
 It misses Mystic Assassin!
+Water Witch uses Shark Missile against Mystic Assassin!
+It misses Mystic Assassin!
+Fire Mage and Mystic Assassin use Wild Inferno and Throwing Knife against Paladin!
+Paladin blocks it with Holy Shield!
 
 
 Round 3
 
-Fire Mage  +  Paladin  vs  Mystic Assassin
+Fire Mage  +  Mystic Assassin  vs  Water Witch  +  Paladin
 
-Fire Mage   Overall: 6.698  Health: 100  Mana: 32  Health Co = 1
-Paladin   Overall: 7.128  Health: 78  Mana: 67  Health Co = 1
-
+Fire Mage   Overall: 6.86  Health: 100  Mana: 50  Health Co = 1
 Mystic Assassin   Overall: 7.15  Health: 100  Mana: 140  Health Co = 1
 
+Water Witch   Overall: 7.454  Health: 100  Mana: 116  Health Co = 1
+Paladin   Overall: 6.864  Health: 100  Mana: 1  Health Co = 1
+
 ###################################################################
 ###################################################################
 
+Water Witch uses Water Dragon against Mystic Assassin!
+It hits Mystic Assassin and does 85 damage!
+Paladin uses Slash against Fire Mage!
+Fire Mage blocks it with Fire Tempest Wall!
 Mystic Assassin uses Slash against Paladin!
-Paladin deflects it!
-Paladin uses Holy Orb against Mystic Assassin!
-It misses Mystic Assassin!
-Fire Mage uses Magic Missile against Mystic Assassin!
-It misses Mystic Assassin!
+It misses Paladin!
 
 
 Round 4
 
-Fire Mage  +  Paladin  vs  Mystic Assassin
+Fire Mage  +  Mystic Assassin  vs  Water Witch  +  Paladin
 
-Fire Mage   Overall: 6.608  Health: 100  Mana: 22  Health Co = 1
-Paladin   Overall: 7.056  Health: 78  Mana: 49  Health Co = 1
+Fire Mage   Overall: 6.635  Health: 100  Mana: 25  Health Co = 1
+Mystic Assassin   Overall: 4.974  Health: 15  Mana: 140  Health Co = 0.36
 
-Mystic Assassin   Overall: 7.15  Health: 100  Mana: 140  Health Co = 1
+Water Witch   Overall: 7.184  Health: 100  Mana: 86  Health Co = 1
+Paladin   Overall: 6.864  Health: 100  Mana: 1  Health Co = 1
 
 ###################################################################
 ###################################################################
 
+Paladin uses Slash against Fire Mage!
+Fire Mage blocks it with Fire Tempest Wall!
+Water Witch uses Shark Missile against Fire Mage!
+It hits Fire Mage and does 26 damage!
 Mystic Assassin uses Slash against Paladin!
-Paladin deflects it!
-Fire Mage uses Magic Missile against Mystic Assassin!
-It misses Mystic Assassin!
+It misses Paladin!
+Fire Mage uses Throwing Knife against Paladin!
+Paladin blocks it with Shield!
 
 
 Round 5
 
-Fire Mage  +  Paladin  vs  Mystic Assassin
+Fire Mage  +  Mystic Assassin  vs  Water Witch  +  Paladin
 
-Fire Mage   Overall: 6.518  Health: 100  Mana: 12  Health Co = 1
-Paladin   Overall: 7.056  Health: 78  Mana: 49  Health Co = 1
+Fire Mage   Overall: 6.409146  Health: 74  Mana: 0  Health Co = 0.9893333
+Mystic Assassin   Overall: 4.974  Health: 15  Mana: 140  Health Co = 0.36
 
-Mystic Assassin   Overall: 7.15  Health: 100  Mana: 140  Health Co = 1
+Water Witch   Overall: 7.04  Health: 100  Mana: 70  Health Co = 1
+Paladin   Overall: 6.864  Health: 100  Mana: 1  Health Co = 1
 
 ###################################################################
 ###################################################################
 
-Mystic Assassin uses Throwing Knife against Fire Mage!
-It hits Fire Mage and does 57 damage!
-Paladin uses Holy Blade against Mystic Assassin!
-It misses Mystic Assassin!
-Fire Mage uses Magic Missile against Mystic Assassin!
-It misses Mystic Assassin!
+Paladin uses Slash against Fire Mage!
+It hits Fire Mage and does 43 damage!
+Water Witch uses Shark Missile against Fire Mage!
+It hits Fire Mage and does 30 damage!
+Mystic Assassin uses Slash against Water Witch!
+Water Witch blocks it with Wall of Water!
+Fire Mage uses Throwing Knife against Water Witch!
+Water Witch blocks it with Wall of Water!
 
 
 Round 6
 
-Fire Mage  +  Paladin  vs  Mystic Assassin
+Fire Mage  +  Mystic Assassin  vs  Water Witch  +  Paladin
 
-Fire Mage   Overall: 6.400693  Health: 43  Mana: 2  Health Co = 0.6586667
-Paladin   Overall: 6.924  Health: 78  Mana: 16  Health Co = 1
+Fire Mage   Overall: 6.346853  Health: 1  Mana: 0  Health Co = 0.2106667
+Mystic Assassin   Overall: 4.974  Health: 15  Mana: 140  Health Co = 0.36
 
-Mystic Assassin   Overall: 7.15  Health: 100  Mana: 140  Health Co = 1
+Water Witch   Overall: 6.572  Health: 100  Mana: 18  Health Co = 1
+Paladin   Overall: 6.864  Health: 100  Mana: 1  Health Co = 1
 
 ###################################################################
 ###################################################################
 
-Mystic Assassin uses Throwing Knife against Fire Mage!
-It hits Fire Mage and does 69 damage!
+Fire Mage uses Throwing Knife against Paladin!
+Paladin blocks it with Shield!
+Mystic Assassin uses Throwing Knife against Water Witch!
+Water Witch blocks it with Wall of Water!
+Paladin uses Slash against Fire Mage!
+It hits Fire Mage and does 39 damage!
 Fire Mage is defeated!
-Paladin uses Slash against Mystic Assassin!
-It misses Mystic Assassin!
 
 
 Round 7
 
-Paladin  vs  Mystic Assassin
+Mystic Assassin  vs  Water Witch  +  Paladin
 
-Paladin   Overall: 6.924  Health: 78  Mana: 16  Health Co = 1
+Mystic Assassin   Overall: 4.974  Health: 15  Mana: 140  Health Co = 0.36
 
-Mystic Assassin   Overall: 7.15  Health: 100  Mana: 140  Health Co = 1
+Water Witch   Overall: 6.41  Health: 100  Mana: 0  Health Co = 1
+Paladin   Overall: 6.864  Health: 100  Mana: 1  Health Co = 1
 
 ###################################################################
 ###################################################################
 
-Mystic Assassin uses Throwing Knife against Paladin!
-Paladin partially blocks it with Shield and it does 21 damage!
 Paladin uses Slash against Mystic Assassin!
-It misses Mystic Assassin!
-
-
-Round 8
-
-Paladin  vs  Mystic Assassin
-
-Paladin   Overall: 5.64912  Health: 57  Mana: 16  Health Co = 0.808
-
-Mystic Assassin   Overall: 7.15  Health: 100  Mana: 140  Health Co = 1
+It hits Mystic Assassin and does 36 damage!
+Mystic Assassin is defeated!
 
 ###################################################################
 ###################################################################
 
-Mystic Assassin uses Throwing Knife against Paladin!
-Paladin blocks it with Shield!
-Paladin uses Slash against Mystic Assassin!
-It misses Mystic Assassin!
+The fight is over!
+Team 2 wins!
+Number of rounds: 7
+Surviving fighters:
 
+Water Witch  Health: 100  Mana: 0
+Paladin  Health: 100  Mana: 1
 
-Round 9
-
-Paladin  vs  Mystic Assassin
-
-Paladin   Overall: 5.64912  Health: 57  Mana: 16  Health Co = 0.808
-
-Mystic Assassin   Overall: 7.15  Health: 100  Mana: 140  Health Co = 1
-
-###################################################################
-###################################################################
-
-Mystic Assassin uses Throwing Knife against Paladin!
-Paladin partially blocks it with Shield and it does 10 damage!
-Paladin uses Slash against Mystic Assassin!
-It misses Mystic Assassin!
-
-
-Round 10
-
-Paladin  vs  Mystic Assassin
-
-Paladin   Overall: 4.940854  Health: 47  Mana: 16  Health Co = 0.7013333
-
-Mystic Assassin   Overall: 7.15  Health: 100  Mana: 140  Health Co = 1
-
-###################################################################
-###################################################################
-
-Mystic Assassin uses Slash against Paladin!
-Paladin partially blocks it with Shield and it does 16 damage!
-Paladin uses Slash against Mystic Assassin!
-It misses Mystic Assassin!
-
-
-Round 11
-
-Paladin  vs  Mystic Assassin
-
-Paladin   Overall: 3.807626  Health: 31  Mana: 16  Health Co = 0.5306666
-
-Mystic Assassin   Overall: 7.15  Health: 100  Mana: 140  Health Co = 1
-
-###################################################################
-###################################################################
-
-Mystic Assassin uses Slash against Paladin!
-Paladin partially blocks it with Shield and it does 0 damage!
-Paladin uses Slash against Mystic Assassin!
-It misses Mystic Assassin!
-
-
-Round 12
-
-Paladin  vs  Mystic Assassin
-
-Paladin   Overall: 3.807626  Health: 31  Mana: 16  Health Co = 0.5306666
-
-Mystic Assassin   Overall: 7.15  Health: 100  Mana: 140  Health Co = 1
-
-###################################################################
-###################################################################
-
-Mystic Assassin uses Slash against Paladin!
-Paladin blocks it with Shield!
-Paladin uses Slash against Mystic Assassin!
-It misses Mystic Assassin!
-
-
-Round 13
-
-Paladin  vs  Mystic Assassin
-
-Paladin   Overall: 3.807626  Health: 31  Mana: 16  Health Co = 0.5306666
-
-Mystic Assassin   Overall: 7.15  Health: 100  Mana: 140  Health Co = 1
-
-###################################################################
-###################################################################
-
-Mystic Assassin uses Throwing Knife against Paladin!
-Paladin blocks it with Shield!
-Paladin uses Slash against Mystic Assassin!
-It misses Mystic Assassin!
-
-
-Round 14
-
-Paladin  vs  Mystic Assassin
-
-Paladin   Overall: 3.807626  Health: 31  Mana: 16  Health Co = 0.5306666
-
-Mystic Assassin   Overall: 7.15  Health: 100  Mana: 140  Health Co = 1
-
-###################################################################
-###################################################################
-
-Mystic Assassin uses Slash against Paladin!
-Paladin partially blocks it with Shield and it does 5 damage!
-Paladin uses Slash against Mystic Assassin!
-It misses Mystic Assassin!
-
-
-Round 15
-
-Paladin  vs  Mystic Assassin
-
-Paladin   Overall: 3.453493  Health: 26  Mana: 16  Health Co = 0.4773333
-
-Mystic Assassin   Overall: 7.15  Health: 100  Mana: 140  Health Co = 1
-
-###################################################################
-###################################################################
-
-Mystic Assassin uses Throwing Knife against Paladin!
-Paladin partially blocks it with Shield and it does 22 damage!
-Paladin uses Slash against Mystic Assassin!
-It misses Mystic Assassin!
-
-
-Round 16
-
-Paladin  vs  Mystic Assassin
-
-Paladin   Overall: 1.895307  Health: 4  Mana: 16  Health Co = 0.2426667
-
-Mystic Assassin   Overall: 7.15  Health: 100  Mana: 140  Health Co = 1
-
-###################################################################
-###################################################################
-
-Mystic Assassin uses Throwing Knife against Paladin!
-Paladin blocks it with Shield!
-Paladin uses Slash against Mystic Assassin!
-It misses Mystic Assassin!
-
-
-Round 17
-
-Paladin  vs  Mystic Assassin
-
-Paladin   Overall: 1.895307  Health: 4  Mana: 16  Health Co = 0.2426667
-
-Mystic Assassin   Overall: 7.15  Health: 100  Mana: 140  Health Co = 1
-
-###################################################################
-###################################################################
-
-Mystic Assassin uses Throwing Knife against Paladin!
-Paladin blocks it with Shield!
-Paladin uses Slash against Mystic Assassin!
-It misses Mystic Assassin!
-
-
-Round 18
-
-Paladin  vs  Mystic Assassin
-
-Paladin   Overall: 1.895307  Health: 4  Mana: 16  Health Co = 0.2426667
-
-Mystic Assassin   Overall: 7.15  Health: 100  Mana: 140  Health Co = 1
-
-###################################################################
-###################################################################
-
-Mystic Assassin uses Throwing Knife against Paladin!
-Paladin blocks it with Shield!
-Paladin uses Slash against Mystic Assassin!
-It misses Mystic Assassin!
