@@ -20,6 +20,7 @@ public class Fighter : MonoBehaviour
     [SerializeField] protected List<Enums.Trait>    Traits;
 
     [SerializeField] protected List<Move>           Moves;
+    [SerializeField] private Color                  DodgeColor = new Color(0.15f, 0.15f, 0.15f, 1f);
 
     protected List<AttributeBonus>                  AttributeBonuses;
     protected List<Enums.Nature>                    BonusNatures;
@@ -454,6 +455,7 @@ public class Fighter : MonoBehaviour
         return defensiveMoves;
     }
 
+    public Color GetDodgeColor() { return DodgeColor; }
     public Enums.FightingStyle GetFightingStyle() { return FightingStyle; }
     public int GetHealth() { return Health; }
     public float GetHealthCo() { return .2f + .8f * Mathf.Min(1.0f, Health / 75.0f); } //+ .4f * Mathf.Min(1.0f, Mana / 75.0f); } Not considering mana anymore since it's not chakra

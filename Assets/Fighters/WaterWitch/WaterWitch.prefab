@@ -73,3 +73,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 4ad11e5da2c2044df9988fb0bd9b211a, type: 2}
   - {fileID: 11400000, guid: d866fa33696e44ff18f6d7035f88c571, type: 2}
   - {fileID: 11400000, guid: 7d6b9412efb6c4176add8840f9a888d2, type: 2}
+  DodgeColor: {r: 0.1176471, g: 0.5647059, b: 1, a: 1}

@@ -14,7 +14,7 @@ public class DynamicWindow : MonoBehaviour
     [SerializeField] private GameObject     FighterPanel, FightersPanel, DynamicTextPanel, StatementPanel, StatementTextPanel,
                                             StatementBackgroundPanel, TargetPanel, AttackersPrefab;
     [SerializeField] private Image          Fighter, FighterBackground, FightersBackground, StatementBackground, 
-                                            StatementFighter, FightersPrefab, AttacksPrefab, TargetBackground;
+                                            StatementFighter, FightersPrefab, AttacksPrefab, TargetBackground, FightersDodge;
     [SerializeField] private TMP_Text       DynamicText, StatementText, StatementFighterName;
     [SerializeField] private RectTransform  FightersContainer, AttackersContainer, AttacksContainer;
     [SerializeField] private Animator       StatementAnimator, FighterAnimator, FightersAnimator, TargetAnimator;
@@ -38,7 +38,6 @@ public class DynamicWindow : MonoBehaviour
     private IEnumerator AnimateTalking(Sprite[] frames)
     {
         int index = 0;
-
         while (true)
         {
             StatementFighter.sprite = frames[index];
@@ -53,6 +52,22 @@ public class DynamicWindow : MonoBehaviour
         List<Fighter> targets = moveEvent.GetTargets();
         int targetTeam = targets[0].GetTeam();
         FightersBackground.sprite = Fight.GetMapArt().GetBackground(targetTeam);
+        
+        FightersContainer.gameObject.SetActive(true);
+        FightersContainer.anchoredPosition = new Vector2(0f, FightersContainer.anchoredPosition.y);
+
+        FightersDodge.color = targets[0].GetDodgeColor();
+        FightersDodge.gameObject.SetActive(false);
+        Vector3 dodgeScale = FightersDodge.rectTransform.localScale;
+        if (UnityEngine.Random.Range(0, 2) == 0)
+        {
+            dodgeScale.x = -1f;
+        }
+        else
+        {
+            dodgeScale.x = 1f;
+        }
+        FightersDodge.rectTransform.localScale = dodgeScale;
 
         List<Fighter> targetTeamList = Fight.GetTeamList(targetTeam);
         int targetTeamSize = targetTeamList.Count;
@@ -120,7 +135,6 @@ public class DynamicWindow : MonoBehaviour
         HorizontalLayoutGroup attackersLayoutGroup = AttackersContainer.GetComponent<HorizontalLayoutGroup>();
         float availableWidthAttackers = AttackersContainer.rect.width - attackersLayoutGroup.padding.left - attackersLayoutGroup.padding.right;
         float totalAttackerPanelWidths = 0f;
-        
         foreach (GameObject panel in SpawnedAttackerPanels)
         {
             RectTransform rectTransform = panel.GetComponent<RectTransform>();            
@@ -256,6 +270,11 @@ public class DynamicWindow : MonoBehaviour
         int team = fighters[0].GetTeam();
         FightersBackground.sprite = Fight.GetMapArt().GetBackground(team);
 
+        //FightersDodge.enabled = false;
+        FightersDodge.gameObject.SetActive(false);
+        FightersContainer.gameObject.SetActive(true);
+        FightersContainer.anchoredPosition = new Vector2(0f, FightersContainer.anchoredPosition.y);
+
         List<Fighter> teamList = Fight.GetTeamList(team);
         int teamSize = teamList.Count;
         float offsetPerFighter = 0f;
@@ -371,12 +390,14 @@ public class DynamicWindow : MonoBehaviour
         return talkingFrames;
     }
 
-    public IEnumerator DisplayAttackAgainstTarget(MoveEvent moveEvent, Fighter target, string resultString)
+    public IEnumerator DisplayAttackAgainstTarget(MoveEvent moveEvent, Fighter target, string resultString, Hit hit)
     {
         HidePanels();
+        AnimationTimes animationTimes = moveEvent.GetAnimationTimes(hit);
         ConfigureFightWindowForAttackAgainstTargets(moveEvent);
         FightersPanel.SetActive(true);
         DynamicTextPanel.SetActive(true);
+
         yield return new WaitForSeconds(.25f);
         
         Enums.MoveType moveType = moveEvent.GetMoveType();
@@ -385,8 +406,23 @@ public class DynamicWindow : MonoBehaviour
             FightersAnimator.Play("Attackers_Melee", 0, 0f);
             yield return new WaitForSeconds(.2f);
         }
+
         StartAttacks(moveEvent.GetMoves());
         DynamicText.text = resultString;
+
+        Enums.HitResult hitResult = hit.GetResult();
+        if (hitResult == Enums.HitResult.Miss || hitResult == Enums.HitResult.PartialHit)
+        {
+            if (FightersDodge.rectTransform.localScale.x < 0)
+            {
+                FightersAnimator.Play("Fighters_Dodge_Left", 0, 0f);
+            }
+            else
+            {
+                FightersAnimator.Play("Fighters_Dodge_Right", 0, 0f);
+            }
+        }
+
         yield return new WaitUntil(() => SpawnedAttackImages.Count == 0);
         AttackCoroutines.Clear();
 

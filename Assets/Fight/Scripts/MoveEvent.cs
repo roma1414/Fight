@@ -49,6 +49,97 @@ public class MoveEvent
         return true;
     }
 
+    public AnimationTimes GetAnimationTimes(Hit hit)
+    {
+        AnimationTimes result = new AnimationTimes();
+
+        float maxImpactTime = 0f;
+        float maxAttackDuration = 0f;
+        float maxDefenseDuration = 0f;
+        List<float> attackDelays = new List<float>();
+        List<float> defenseDelays = new List<float>();
+
+        // First iteration through attacking moves
+        foreach (Move move in GetMoves())
+        {
+            AnimationData animationData = move.GetAnimationData();
+
+            if (animationData != null)
+            {
+                float duration = animationData.GetDuration();
+                if (duration > maxAttackDuration)
+                {
+                    maxAttackDuration = duration;
+                }
+
+                float impactTime = animationData.GetImpactTime();
+                if (impactTime > maxImpactTime)
+                {
+                    maxImpactTime = impactTime;
+                }
+            }
+            else
+            {
+                Debug.LogError($"Error! {move.GetName()} has no AnimationData in GetAnimationTimes!");
+            }
+        }
+
+        // First iteration through defensive moves
+        foreach (Move move in hit.GetDefensiveMoves())
+        {
+            AnimationData animationData = move.GetAnimationData();
+
+            if (animationData != null)
+            {
+                float duration = animationData.GetDuration();
+                if (duration > maxDefenseDuration)
+                {
+                    maxDefenseDuration = duration;
+                }
+
+                float impactTime = animationData.GetImpactTime();
+                if (impactTime > maxImpactTime)
+                {
+                    maxImpactTime = impactTime;
+                }
+            }
+            else
+            {
+                Debug.LogError($"Error! {move.GetName()} has no AnimationData in GetAnimationTimes!");
+            }
+        }
+
+        // Second iteration through attacking moves
+        foreach (Move move in GetMoves())
+        {
+            AnimationData animationData = move.GetAnimationData();
+            if (animationData != null)
+            {
+                float delay = maxImpactTime - animationData.GetImpactTime();
+                attackDelays.Add(delay);
+            }
+        }
+
+        // Second iteration through defensive moves
+        foreach (Move move in hit.GetDefensiveMoves())
+        {
+            AnimationData animationData = move.GetAnimationData();
+            if (animationData != null)
+            {
+                float delay = maxImpactTime - animationData.GetImpactTime();
+                defenseDelays.Add(delay);
+            }
+        }
+        
+        result.SetImpactTime(maxImpactTime);
+        result.SetMaxAttackDuration(maxAttackDuration);
+        result.SetMaxDefenseDuration(maxDefenseDuration);
+        result.SetAttackDelays(attackDelays);
+        result.SetDefenseDelays(defenseDelays);
+
+        return result;
+    }
+
     public float GetEffectiveMoveEventCastingSpeed() 
     {
         if (EffectiveMoveEventCastingSpeed == 0f) // If EffectiveMoveEventSpeed has not been set

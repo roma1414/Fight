@@ -39,9 +39,9 @@ MonoBehaviour:
   HealthAmount: 0
   ManaRestoreAmount: 0
   HealType: 0
-  Damage: 48
+  Damage: 45
   Duration: 0
-  Accuracy: 6
+  Accuracy: 5
   Absorbed: 0
   TouchSuccess: 0
   DamageType: 0

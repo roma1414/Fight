@@ -22,5 +22,6 @@ public class AnimationData : ScriptableObject
 
     public Sprite[] GetFrames() { return Frames; }
     public float GetFramesPerSecond() { return FramesPerSecond; }
+    public float GetImpactTime() { return ImpactFrame / FramesPerSecond; }
     public int GetImpactFrame() { return ImpactFrame; }
 }

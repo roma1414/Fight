@@ -1225,7 +1225,7 @@ public class Fight : MonoBehaviour
         }
         else
         {
-            yield return DynamicWindow.DisplayAttackAgainstTarget(moveEvent, target, resultString);
+            yield return DynamicWindow.DisplayAttackAgainstTarget(moveEvent, target, resultString, hit);
         }
 
         switch (result)     // Removes UnderPsychic and Trapped statuses before applying attack statuses. The attack landed or partially landed.

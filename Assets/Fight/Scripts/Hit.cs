@@ -5,8 +5,8 @@ using UnityEngine;
 public class Hit
 {
     protected int                   mDamage;
-    protected List<Fighter>         mDefenders;
-    protected List<Move>            mDefensiveMoves;
+    protected List<Fighter>         mDefenders = new List<Fighter>();
+    protected List<Move>            mDefensiveMoves = new List<Move>();
     protected Enums.HitResult       mResult;
     protected bool                  mWasEasy;
     protected bool                  mWasProtected;
