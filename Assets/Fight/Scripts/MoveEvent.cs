@@ -118,6 +118,10 @@ public class MoveEvent
                 float delay = maxImpactTime - animationData.GetImpactTime();
                 attackDelays.Add(delay);
             }
+            else
+            {
+                attackDelays.Add(0f);
+            }
         }
 
         // Second iteration through defensive moves
@@ -128,6 +132,10 @@ public class MoveEvent
             {
                 float delay = maxImpactTime - animationData.GetImpactTime();
                 defenseDelays.Add(delay);
+            }
+            else
+            {
+                defenseDelays.Add(0f);
             }
         }
         

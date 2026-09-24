@@ -409,13 +409,13 @@ public class DynamicWindow : MonoBehaviour
         }
 
         Enums.HitResult hitResult = hit.GetResult();
-        StartAttacks(moveEvent.GetMoves());
+        StartAttacks(moveEvent.GetMoves(), animationTimes.GetAttackDelays());
         if (hitResult == Enums.HitResult.Blocked || hitResult == Enums.HitResult.PartiallyBlocked)
         {
-            StartDefenses(hit.GetDefensiveMoves());
+            StartDefenses(hit.GetDefensiveMoves(), animationTimes.GetDefenseDelays());
         }
         DynamicText.text = resultString;
-
+        
         if (hitResult == Enums.HitResult.Miss || hitResult == Enums.HitResult.PartialHit)
         {
             if (FightersDodge.rectTransform.localScale.x < 0)
@@ -426,6 +426,15 @@ public class DynamicWindow : MonoBehaviour
             {
                 FightersAnimator.Play("Fighters_Dodge_Right", 0, 0f);
             }
+        }
+
+        // Play successful hit animation
+        if (hitResult == Enums.HitResult.Hit || hitResult == Enums.HitResult.PartialHit
+        || hitResult == Enums.HitResult.PartiallyAvoided || hitResult == Enums.HitResult.PartiallyBlocked
+        || hitResult == Enums.HitResult.PartiallyDeflected || hitResult == Enums.HitResult.PartiallyAvoided)
+        {
+            yield return new WaitForSeconds(.25f);
+            FightersAnimator.Play("Fighters_Hit", 0, 0f);
         }
 
         yield return new WaitUntil(() => (SpawnedAttackImages.Count == 0 && SpawnedDefenseImages.Count == 0));
@@ -605,8 +614,15 @@ public class DynamicWindow : MonoBehaviour
         StopTalking(emptySpriteArray);
     }
 
-    private IEnumerator PlayAttack(Image image, AnimationData animation)
+    private IEnumerator PlayAttack(Image image, AnimationData animation, float delay)
     {
+        // Hide the image during its delay, but keep its place in the layout.
+        image.enabled = false;
+        if (delay > 0f)
+        {
+            yield return new WaitForSeconds(delay);
+        }
+        image.enabled = true;
         Sprite[] frames = animation.GetFrames();
         float frameDuration = 1f / animation.GetFramesPerSecond();
 
@@ -624,8 +640,15 @@ public class DynamicWindow : MonoBehaviour
         Destroy(image.gameObject);
     }
 
-    private IEnumerator PlayDefense(Image image, AnimationData animation)
+    private IEnumerator PlayDefense(Image image, AnimationData animation, float delay)
     {
+        // Hide the image during its delay, but keep its place in the layout.
+        image.enabled = false;
+        if (delay > 0f)
+        {
+            yield return new WaitForSeconds(delay);
+        }
+        image.enabled = true;
         Sprite[] frames = animation.GetFrames();
         float frameDuration = 1f / animation.GetFramesPerSecond();
 
@@ -643,13 +666,13 @@ public class DynamicWindow : MonoBehaviour
         Destroy(image.gameObject);
     }
 
-    public void StartAttacks(List<Move> moves)
+    public void StartAttacks(List<Move> moves, List<float> delays = null)
     {
         StopAttacks();
 
-        foreach (Move move in moves)
+        for (int i = 0; i < moves.Count; i++)
         {
-            AnimationData animation = move.GetAnimationData();
+            AnimationData animation = moves[i].GetAnimationData();
 
             if (animation == null ||
                 animation.GetFrames() == null ||
@@ -663,7 +686,8 @@ public class DynamicWindow : MonoBehaviour
             image.raycastTarget = false;
             SpawnedAttackImages.Add(image);
 
-            Coroutine coroutine = StartCoroutine(PlayAttack(image, animation));
+            float delay = delays != null && i < delays.Count ? Mathf.Max(0f, delays[i]) : 0f;
+            Coroutine coroutine = StartCoroutine(PlayAttack(image, animation, delay));
             AttackCoroutines.Add(coroutine);
         }
 
@@ -681,13 +705,13 @@ public class DynamicWindow : MonoBehaviour
         attacksLayoutGroup.spacing = attacksLayoutGroupSpacing;
     }
 
-    public void StartDefenses(List<Move> moves)
+    public void StartDefenses(List<Move> moves, List<float> delays = null)
     {
         StopDefenses();
 
-        foreach (Move move in moves)
+        for (int i = 0; i < moves.Count; i++)
         {
-            AnimationData animation = move.GetAnimationData();
+            AnimationData animation = moves[i].GetAnimationData();
 
             if (animation == null ||
                 animation.GetFrames() == null ||
@@ -701,7 +725,8 @@ public class DynamicWindow : MonoBehaviour
             image.raycastTarget = false;
             SpawnedDefenseImages.Add(image);
 
-            Coroutine coroutine = StartCoroutine(PlayDefense(image, animation));
+            float delay = delays != null && i < delays.Count ? Mathf.Max(0f, delays[i]) : 0f;
+            Coroutine coroutine = StartCoroutine(PlayDefense(image, animation, delay));
             DefenseCoroutines.Add(coroutine);
         }
 
