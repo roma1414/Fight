@@ -3389,6 +3389,7 @@ GameObject:
   - component: {fileID: 821776310}
   - component: {fileID: 821776312}
   - component: {fileID: 821776313}
+  - component: {fileID: 821776314}
   m_Layer: 5
   m_Name: FightersContainer
   m_TagString: Untagged
@@ -3449,6 +3450,18 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!225 &821776314
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 821776309}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &832303407
 GameObject:
   m_ObjectHideFlags: 0
@@ -5544,6 +5557,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1244770245388760594, guid: fe1bfce988ba04d04ad76f9b731d71e1, type: 3}
+      propertyPath: ControlType
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1456250450688340999, guid: fe1bfce988ba04d04ad76f9b731d71e1, type: 3}
       propertyPath: m_Name
       value: WaterWitch
@@ -8090,10 +8107,10 @@ MonoBehaviour:
   Teams: 2
   Team1:
   - {fileID: 175420731}
-  - {fileID: 1979974254}
+  - {fileID: 1465857194}
   Team2:
   - {fileID: 1089934233}
-  - {fileID: 1465857194}
+  - {fileID: 1979974254}
   Team3: []
   MapArt: {fileID: 11400000, guid: d2dea80629c404fd1be252fe0953eacc, type: 2}
   SelectMovePanel: {fileID: 646679249}

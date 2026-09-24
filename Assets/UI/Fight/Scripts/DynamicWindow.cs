@@ -433,7 +433,8 @@ public class DynamicWindow : MonoBehaviour
         || hitResult == Enums.HitResult.PartiallyAvoided || hitResult == Enums.HitResult.PartiallyBlocked
         || hitResult == Enums.HitResult.PartiallyDeflected || hitResult == Enums.HitResult.PartiallyAvoided)
         {
-            yield return new WaitForSeconds(.25f);
+            yield return new WaitForSeconds(animationTimes.GetImpactTime());
+            yield return new WaitForSeconds(.35f);
             FightersAnimator.Play("Fighters_Hit", 0, 0f);
         }
 
