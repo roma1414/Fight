@@ -14,17 +14,18 @@ public class DynamicWindow : MonoBehaviour
     [SerializeField] private GameObject     FighterPanel, FightersPanel, DynamicTextPanel, StatementPanel, StatementTextPanel,
                                             StatementBackgroundPanel, TargetPanel, AttackersPrefab;
     [SerializeField] private Image          Fighter, FighterBackground, FightersBackground, StatementBackground, 
-                                            StatementFighter, FightersPrefab, AttacksPrefab, TargetBackground, FightersDodge;
+                                            StatementFighter, FightersPrefab, AttacksPrefab, TargetBackground, FightersDodge,
+                                            DefensesPrefab;
     [SerializeField] private TMP_Text       DynamicText, StatementText, StatementFighterName;
-    [SerializeField] private RectTransform  FightersContainer, AttackersContainer, AttacksContainer;
+    [SerializeField] private RectTransform  FightersContainer, AttackersContainer, AttacksContainer, DefensesContainer;
     [SerializeField] private Animator       StatementAnimator, FighterAnimator, FightersAnimator, TargetAnimator;
     [SerializeField] private List<string>   StatementAnimations, FighterAnimations, TargetAnimations;
     private int                             PreviousStatementAnimation = -1, PreviousFighterAnimation = -1;
     private List<Image>                     SpawnedFighterImages = new List<Image>();
     private List<GameObject>                SpawnedAttackerPanels = new List<GameObject>();
-    private List<Image>                     SpawnedAttackImages = new List<Image>();
+    private List<Image>                     SpawnedAttackImages = new List<Image>(), SpawnedDefenseImages = new List<Image>();
     private Coroutine                       TalkingCoroutine;
-    private List<Coroutine>                 AttackCoroutines = new List<Coroutine>();
+    private List<Coroutine>                 AttackCoroutines = new List<Coroutine>(), DefenseCoroutines = new List<Coroutine>();
     public const float FIGHTER_BACKGROUND_MAX_OFFSET = -3950;
     public const float FIGHTER_X_ZERO_POINT = -128f;
     public const float STATEMENT_BACKGROUND_MAX_OFFSET = -3350f;
@@ -407,10 +408,14 @@ public class DynamicWindow : MonoBehaviour
             yield return new WaitForSeconds(.2f);
         }
 
+        Enums.HitResult hitResult = hit.GetResult();
         StartAttacks(moveEvent.GetMoves());
+        if (hitResult == Enums.HitResult.Blocked || hitResult == Enums.HitResult.PartiallyBlocked)
+        {
+            StartDefenses(hit.GetDefensiveMoves());
+        }
         DynamicText.text = resultString;
 
-        Enums.HitResult hitResult = hit.GetResult();
         if (hitResult == Enums.HitResult.Miss || hitResult == Enums.HitResult.PartialHit)
         {
             if (FightersDodge.rectTransform.localScale.x < 0)
@@ -423,8 +428,9 @@ public class DynamicWindow : MonoBehaviour
             }
         }
 
-        yield return new WaitUntil(() => SpawnedAttackImages.Count == 0);
+        yield return new WaitUntil(() => (SpawnedAttackImages.Count == 0 && SpawnedDefenseImages.Count == 0));
         AttackCoroutines.Clear();
+        DefenseCoroutines.Clear();
 
         yield return new WaitForSeconds(1.25f);
     }
@@ -618,6 +624,25 @@ public class DynamicWindow : MonoBehaviour
         Destroy(image.gameObject);
     }
 
+    private IEnumerator PlayDefense(Image image, AnimationData animation)
+    {
+        Sprite[] frames = animation.GetFrames();
+        float frameDuration = 1f / animation.GetFramesPerSecond();
+
+        for (int i = 0; i < frames.Length; i++)
+        {
+            image.sprite = frames[i];
+
+            // Trigger visual impact feedback here if appropriate.
+            // if (i == animation.GetImpactFrame()) { ... }
+
+            yield return new WaitForSeconds(frameDuration);
+        }
+
+        SpawnedDefenseImages.Remove(image);
+        Destroy(image.gameObject);
+    }
+
     public void StartAttacks(List<Move> moves)
     {
         StopAttacks();
@@ -656,6 +681,44 @@ public class DynamicWindow : MonoBehaviour
         attacksLayoutGroup.spacing = attacksLayoutGroupSpacing;
     }
 
+    public void StartDefenses(List<Move> moves)
+    {
+        StopDefenses();
+
+        foreach (Move move in moves)
+        {
+            AnimationData animation = move.GetAnimationData();
+
+            if (animation == null ||
+                animation.GetFrames() == null ||
+                animation.GetFrames().Length == 0 ||
+                animation.GetFramesPerSecond() <= 0f)
+            {
+                continue;
+            }
+
+            Image image = Instantiate(DefensesPrefab, DefensesContainer, false);
+            image.raycastTarget = false;
+            SpawnedDefenseImages.Add(image);
+
+            Coroutine coroutine = StartCoroutine(PlayDefense(image, animation));
+            DefenseCoroutines.Add(coroutine);
+        }
+
+        HorizontalLayoutGroup defensesLayoutGroup = DefensesContainer.GetComponent<HorizontalLayoutGroup>();
+        float availableWidthDefenses = DefensesContainer.rect.width - defensesLayoutGroup.padding.left - defensesLayoutGroup.padding.right;
+        float totalDefenseImageWidths = 0f;
+        foreach (Image image in SpawnedDefenseImages)
+        {
+            totalDefenseImageWidths += image.rectTransform.rect.width;
+        }
+        float defensesLayoutGroupSpacing = SpawnedDefenseImages.Count > 1
+            ? Mathf.Min(0f, (availableWidthDefenses - totalDefenseImageWidths) / (SpawnedDefenseImages.Count - 1))
+            : 0f;
+
+        defensesLayoutGroup.spacing = defensesLayoutGroupSpacing;
+    }
+
     private void StartTalking(Sprite[] frames)
     {
         StopTalking(frames);
@@ -684,6 +747,24 @@ public class DynamicWindow : MonoBehaviour
         }
 
         SpawnedAttackImages.Clear();
+    }
+
+    public void StopDefenses()
+    {
+        foreach (Coroutine coroutine in DefenseCoroutines)
+        {
+            StopCoroutine(coroutine);
+        }
+
+        DefenseCoroutines.Clear();
+
+        foreach (Image image in SpawnedDefenseImages)
+        {
+            if (image != null)
+                Destroy(image.gameObject);
+        }
+
+        SpawnedDefenseImages.Clear();
     }
 
     private void StopTalking(Sprite[] frames)

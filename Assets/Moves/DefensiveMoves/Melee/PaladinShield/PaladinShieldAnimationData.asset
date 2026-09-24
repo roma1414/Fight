@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d5d2916c73314bb89a1ff80a53f5c6a, type: 3}
+  m_Name: PaladinShieldAnimationData
+  m_EditorClassIdentifier: Assembly-CSharp::AnimationData
+  Frames:
+  - {fileID: -862580208601831599, guid: 7c5e32f57df9949928710afd9a448e2e, type: 3}
+  - {fileID: 2378892036597779930, guid: 7c5e32f57df9949928710afd9a448e2e, type: 3}
+  - {fileID: -5055258853830333487, guid: 7c5e32f57df9949928710afd9a448e2e, type: 3}
+  - {fileID: -483710522769551930, guid: 7c5e32f57df9949928710afd9a448e2e, type: 3}
+  - {fileID: 358955828203205636, guid: 7c5e32f57df9949928710afd9a448e2e, type: 3}
+  - {fileID: -5085069385566471237, guid: 7c5e32f57df9949928710afd9a448e2e, type: 3}
+  - {fileID: 1441750833998954777, guid: 7c5e32f57df9949928710afd9a448e2e, type: 3}
+  - {fileID: 3264871212751218146, guid: 7c5e32f57df9949928710afd9a448e2e, type: 3}
+  - {fileID: 7285029750511606814, guid: 7c5e32f57df9949928710afd9a448e2e, type: 3}
+  - {fileID: 8966999787594825717, guid: 7c5e32f57df9949928710afd9a448e2e, type: 3}
+  - {fileID: 8037477711033745829, guid: 7c5e32f57df9949928710afd9a448e2e, type: 3}
+  - {fileID: 1744060935837759146, guid: 7c5e32f57df9949928710afd9a448e2e, type: 3}
+  FramesPerSecond: 12
+  ImpactFrame: 3

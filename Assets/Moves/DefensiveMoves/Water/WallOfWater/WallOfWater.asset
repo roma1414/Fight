@@ -25,7 +25,8 @@ MonoBehaviour:
   TargetType: 4
   MoveType: 8
   Natures: 0c00
-  MoveAnimations: {fileID: 0}
+  AnimationData: {fileID: 11400000, guid: c91c2e3316de54c22ba5feffe8ac5de6, type: 2}
+  PreviewAnimationData: {fileID: 0}
   Number: 0
   CloneStrength: 0
   UsesPerRound: 0

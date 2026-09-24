@@ -10,28 +10,28 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f22992ffeb079114cabf4a66b094a39c, type: 3}
-  m_Name: HolyShield
+  m_Name: PaladinShield
   m_EditorClassIdentifier: Assembly-CSharp::Move
-  Name: Holy Shield
-  Level: 8
-  Mana: 33
+  Name: Shield
+  Level: 4
+  Mana: 0
   RoundsToCast: 0
   UsesPerFight: 0
-  CastingSpeed: 9
+  CastingSpeed: 10
   ID: 0
   Occular: 0
   UseMeleSkill: 1
   RequiredTargetStatuses: 
   TargetType: 4
   MoveType: 8
-  Natures: 0f00
-  AnimationData: {fileID: 0}
+  Natures: 
+  AnimationData: {fileID: 11400000, guid: b4392bba851f847c6a3d1fba3f5aa298, type: 2}
   PreviewAnimationData: {fileID: 0}
   Number: 0
   CloneStrength: 0
   UsesPerRound: 0
   MaxLevelAvoided: 0
-  WorksAgaintsMelee: 1
+  WorksAgaintsMelee: 0
   WorksAgainstRanged: 1
   Absorbing: 0
   OccularSuccess: 0
