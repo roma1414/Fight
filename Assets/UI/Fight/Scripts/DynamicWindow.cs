@@ -641,6 +641,19 @@ public class DynamicWindow : MonoBehaviour
             Coroutine coroutine = StartCoroutine(PlayAttack(image, animation));
             AttackCoroutines.Add(coroutine);
         }
+
+        HorizontalLayoutGroup attacksLayoutGroup = AttacksContainer.GetComponent<HorizontalLayoutGroup>();
+        float availableWidthAttacks = AttacksContainer.rect.width - attacksLayoutGroup.padding.left - attacksLayoutGroup.padding.right;
+        float totalAttackImageWidths = 0f;
+        foreach (Image image in SpawnedAttackImages)
+        {
+            totalAttackImageWidths += image.rectTransform.rect.width;
+        }
+        float attacksLayoutGroupSpacing = SpawnedAttackImages.Count > 1
+            ? Mathf.Min(0f, (availableWidthAttacks - totalAttackImageWidths) / (SpawnedAttackImages.Count - 1))
+            : 0f;
+
+        attacksLayoutGroup.spacing = attacksLayoutGroupSpacing;
     }
 
     private void StartTalking(Sprite[] frames)
