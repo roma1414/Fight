@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d5d2916c73314bb89a1ff80a53f5c6a, type: 3}
+  m_Name: FireTempestWallAnimationData
+  m_EditorClassIdentifier: Assembly-CSharp::AnimationData
+  Frames:
+  - {fileID: 2606583394933302910, guid: 02f47dfbbe9764816aaac0d3aa0c6c11, type: 3}
+  - {fileID: -7755364322778290731, guid: 02f47dfbbe9764816aaac0d3aa0c6c11, type: 3}
+  - {fileID: 1558210394342778995, guid: 02f47dfbbe9764816aaac0d3aa0c6c11, type: 3}
+  - {fileID: 680705929764306551, guid: 02f47dfbbe9764816aaac0d3aa0c6c11, type: 3}
+  - {fileID: 6558511304693658279, guid: 02f47dfbbe9764816aaac0d3aa0c6c11, type: 3}
+  - {fileID: 3633560313064056197, guid: 02f47dfbbe9764816aaac0d3aa0c6c11, type: 3}
+  - {fileID: 6558511304693658279, guid: 02f47dfbbe9764816aaac0d3aa0c6c11, type: 3}
+  - {fileID: 680705929764306551, guid: 02f47dfbbe9764816aaac0d3aa0c6c11, type: 3}
+  - {fileID: 6558511304693658279, guid: 02f47dfbbe9764816aaac0d3aa0c6c11, type: 3}
+  - {fileID: 3633560313064056197, guid: 02f47dfbbe9764816aaac0d3aa0c6c11, type: 3}
+  - {fileID: 6558511304693658279, guid: 02f47dfbbe9764816aaac0d3aa0c6c11, type: 3}
+  - {fileID: 680705929764306551, guid: 02f47dfbbe9764816aaac0d3aa0c6c11, type: 3}
+  - {fileID: 6558511304693658279, guid: 02f47dfbbe9764816aaac0d3aa0c6c11, type: 3}
+  - {fileID: 3633560313064056197, guid: 02f47dfbbe9764816aaac0d3aa0c6c11, type: 3}
+  - {fileID: -3259649774841327272, guid: 02f47dfbbe9764816aaac0d3aa0c6c11, type: 3}
+  - {fileID: 8058864657799979505, guid: 02f47dfbbe9764816aaac0d3aa0c6c11, type: 3}
+  - {fileID: -1627848884, guid: 02f47dfbbe9764816aaac0d3aa0c6c11, type: 3}
+  - {fileID: 458562895, guid: 02f47dfbbe9764816aaac0d3aa0c6c11, type: 3}
+  - {fileID: 1127061266, guid: 02f47dfbbe9764816aaac0d3aa0c6c11, type: 3}
+  - {fileID: -91087694, guid: 02f47dfbbe9764816aaac0d3aa0c6c11, type: 3}
+  FramesPerSecond: 12
+  ImpactFrame: 3

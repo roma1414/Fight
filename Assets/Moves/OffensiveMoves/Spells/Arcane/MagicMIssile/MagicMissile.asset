@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: MagicMissile
   m_EditorClassIdentifier: Assembly-CSharp::Move
   Name: Magic Missile
-  Level: 3
-  Mana: 10
+  Level: 2
+  Mana: 9
   RoundsToCast: 0
   UsesPerFight: 0
   CastingSpeed: 0

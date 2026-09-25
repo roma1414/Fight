@@ -30,4 +30,4 @@ MonoBehaviour:
   - {fileID: -341561118, guid: eea730517ab17403882196ac0203a0f4, type: 3}
   - {fileID: -1909854483, guid: eea730517ab17403882196ac0203a0f4, type: 3}
   FramesPerSecond: 12
-  ImpactFrame: 7
+  ImpactFrame: 3
