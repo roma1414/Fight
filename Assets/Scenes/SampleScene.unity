@@ -1043,6 +1043,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1384330528907906549, guid: 8b9807a644ceb409d9021bb32fcba309, type: 3}
+      propertyPath: ControlType
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3477936110841682139, guid: 8b9807a644ceb409d9021bb32fcba309, type: 3}
       propertyPath: m_Name
       value: FireMage
@@ -4165,10 +4169,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4246504691402231654, guid: 1111c416372bb4b02a672e8ca46dbb49, type: 3}
-      propertyPath: ControlType
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5664951683968972860, guid: 1111c416372bb4b02a672e8ca46dbb49, type: 3}
       propertyPath: m_LocalPosition.x
       value: 997.67236
@@ -5557,10 +5557,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1244770245388760594, guid: fe1bfce988ba04d04ad76f9b731d71e1, type: 3}
-      propertyPath: ControlType
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1456250450688340999, guid: fe1bfce988ba04d04ad76f9b731d71e1, type: 3}
       propertyPath: m_Name
       value: WaterWitch
@@ -5610,17 +5606,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fe1bfce988ba04d04ad76f9b731d71e1, type: 3}
---- !u!114 &1465857194 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1244770245388760594, guid: fe1bfce988ba04d04ad76f9b731d71e1, type: 3}
-  m_PrefabInstance: {fileID: 1465857193}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4feff7ba81aada2428e3ed14f8e11b54, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Fighter
 --- !u!1 &1476686209
 GameObject:
   m_ObjectHideFlags: 0
@@ -7592,17 +7577,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8696b875ec2f94bfca85204a54ec1bc0, type: 3}
---- !u!114 &1979974254 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3090061917713705068, guid: 8696b875ec2f94bfca85204a54ec1bc0, type: 3}
-  m_PrefabInstance: {fileID: 1979974253}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4feff7ba81aada2428e3ed14f8e11b54, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Fighter
 --- !u!1 &2019851332
 GameObject:
   m_ObjectHideFlags: 0
@@ -8107,10 +8081,8 @@ MonoBehaviour:
   Teams: 2
   Team1:
   - {fileID: 175420731}
-  - {fileID: 1465857194}
   Team2:
   - {fileID: 1089934233}
-  - {fileID: 1979974254}
   Team3: []
   MapArt: {fileID: 11400000, guid: d2dea80629c404fd1be252fe0953eacc, type: 2}
   SelectMovePanel: {fileID: 646679249}

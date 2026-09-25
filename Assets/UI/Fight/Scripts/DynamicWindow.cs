@@ -428,19 +428,19 @@ public class DynamicWindow : MonoBehaviour
             }
         }
 
+        yield return new WaitUntil(() => (SpawnedAttackImages.Count == 0 && SpawnedDefenseImages.Count == 0));
+        AttackCoroutines.Clear();
+        DefenseCoroutines.Clear();
+
         // Play successful hit animation
         if (hitResult == Enums.HitResult.Hit || hitResult == Enums.HitResult.PartialHit
         || hitResult == Enums.HitResult.PartiallyAvoided || hitResult == Enums.HitResult.PartiallyBlocked
         || hitResult == Enums.HitResult.PartiallyDeflected || hitResult == Enums.HitResult.PartiallyAvoided)
         {
-            yield return new WaitForSeconds(animationTimes.GetImpactTime());
-            yield return new WaitForSeconds(.35f);
+            //yield return new WaitForSeconds(animationTimes.GetImpactTime());
+            //yield return new WaitForSeconds(.35f);
             FightersAnimator.Play("Fighters_Hit", 0, 0f);
         }
-
-        yield return new WaitUntil(() => (SpawnedAttackImages.Count == 0 && SpawnedDefenseImages.Count == 0));
-        AttackCoroutines.Clear();
-        DefenseCoroutines.Clear();
 
         yield return new WaitForSeconds(1.25f);
     }

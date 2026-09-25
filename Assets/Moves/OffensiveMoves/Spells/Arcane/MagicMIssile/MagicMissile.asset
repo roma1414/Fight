@@ -41,7 +41,7 @@ MonoBehaviour:
   HealType: 0
   Damage: 24
   Duration: 0
-  Accuracy: 4
+  Accuracy: 5
   Absorbed: 1
   TouchSuccess: 0
   DamageType: 0

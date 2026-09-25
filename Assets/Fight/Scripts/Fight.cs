@@ -2302,7 +2302,6 @@ public class Fight : MonoBehaviour
                 if (rangedHit.GetResult() == Enums.HitResult.PartialHit)
                 {
                     float damageCo = attackSpeedDiff;
-
                     if (damageCo < MIN_DAMAGE_CO_FROM_PARTIAL_HIT)
                     {
                         damageCo = MIN_DAMAGE_CO_FROM_PARTIAL_HIT;
