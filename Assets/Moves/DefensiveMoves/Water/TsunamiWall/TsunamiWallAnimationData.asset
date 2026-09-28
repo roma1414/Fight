@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d5d2916c73314bb89a1ff80a53f5c6a, type: 3}
+  m_Name: TsunamiWallAnimationData
+  m_EditorClassIdentifier: Assembly-CSharp::AnimationData
+  Frames:
+  - {fileID: -7690561973402866025, guid: df1fc2d4abf414f53a6d16666bea84f7, type: 3}
+  - {fileID: 1327278464, guid: df1fc2d4abf414f53a6d16666bea84f7, type: 3}
+  - {fileID: -1496535066, guid: df1fc2d4abf414f53a6d16666bea84f7, type: 3}
+  - {fileID: 920025879, guid: df1fc2d4abf414f53a6d16666bea84f7, type: 3}
+  - {fileID: -487932922, guid: df1fc2d4abf414f53a6d16666bea84f7, type: 3}
+  - {fileID: 1279482473, guid: df1fc2d4abf414f53a6d16666bea84f7, type: 3}
+  - {fileID: -149210614, guid: df1fc2d4abf414f53a6d16666bea84f7, type: 3}
+  - {fileID: 1279482473, guid: df1fc2d4abf414f53a6d16666bea84f7, type: 3}
+  - {fileID: -487932922, guid: df1fc2d4abf414f53a6d16666bea84f7, type: 3}
+  - {fileID: 1279482473, guid: df1fc2d4abf414f53a6d16666bea84f7, type: 3}
+  - {fileID: -149210614, guid: df1fc2d4abf414f53a6d16666bea84f7, type: 3}
+  - {fileID: 1279482473, guid: df1fc2d4abf414f53a6d16666bea84f7, type: 3}
+  - {fileID: -487932922, guid: df1fc2d4abf414f53a6d16666bea84f7, type: 3}
+  - {fileID: 1279482473, guid: df1fc2d4abf414f53a6d16666bea84f7, type: 3}
+  - {fileID: -149210614, guid: df1fc2d4abf414f53a6d16666bea84f7, type: 3}
+  - {fileID: 1423983280, guid: df1fc2d4abf414f53a6d16666bea84f7, type: 3}
+  - {fileID: 871425911, guid: df1fc2d4abf414f53a6d16666bea84f7, type: 3}
+  - {fileID: -272540431, guid: df1fc2d4abf414f53a6d16666bea84f7, type: 3}
+  - {fileID: -1601247299, guid: df1fc2d4abf414f53a6d16666bea84f7, type: 3}
+  - {fileID: -354456488, guid: df1fc2d4abf414f53a6d16666bea84f7, type: 3}
+  FramesPerSecond: 12
+  ImpactFrame: 4

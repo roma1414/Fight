@@ -15,7 +15,7 @@ public class DynamicWindow : MonoBehaviour
                                             StatementBackgroundPanel, TargetPanel, AttackersPrefab;
     [SerializeField] private Image          Fighter, FighterBackground, FightersBackground, StatementBackground, 
                                             StatementFighter, FightersPrefab, AttacksPrefab, TargetBackground, FightersDodge,
-                                            DefensesPrefab;
+                                            DefensesPrefab, FightersDeflect;
     [SerializeField] private TMP_Text       DynamicText, StatementText, StatementFighterName;
     [SerializeField] private RectTransform  FightersContainer, AttackersContainer, AttacksContainer, DefensesContainer;
     [SerializeField] private Animator       StatementAnimator, FighterAnimator, FightersAnimator, TargetAnimator;
@@ -69,6 +69,20 @@ public class DynamicWindow : MonoBehaviour
             dodgeScale.x = 1f;
         }
         FightersDodge.rectTransform.localScale = dodgeScale;
+
+        FightersDeflect.gameObject.SetActive(false);
+        Sprite targetDeflectSprite = targets[0].GetArt().GetDeflect();
+        FightersDeflect.sprite = targetDeflectSprite;
+        Vector3 deflectScale = FightersDeflect.rectTransform.localScale;
+        if (UnityEngine.Random.Range(0, 2) == 0)
+        {
+            dodgeScale.x = -1f;
+        }
+        else
+        {
+            dodgeScale.x = 1f;
+        }
+        FightersDeflect.rectTransform.localScale = dodgeScale;
 
         List<Fighter> targetTeamList = Fight.GetTeamList(targetTeam);
         int targetTeamSize = targetTeamList.Count;
@@ -271,8 +285,8 @@ public class DynamicWindow : MonoBehaviour
         int team = fighters[0].GetTeam();
         FightersBackground.sprite = Fight.GetMapArt().GetBackground(team);
 
-        //FightersDodge.enabled = false;
         FightersDodge.gameObject.SetActive(false);
+        FightersDeflect.gameObject.SetActive(false);
         FightersContainer.gameObject.SetActive(true);
         FightersContainer.anchoredPosition = new Vector2(0f, FightersContainer.anchoredPosition.y);
 
@@ -428,14 +442,35 @@ public class DynamicWindow : MonoBehaviour
             }
         }
 
+        bool playHitAnimation = false;
+        if (hitResult == Enums.HitResult.Hit || hitResult == Enums.HitResult.PartialHit
+        || hitResult == Enums.HitResult.PartiallyAvoided || hitResult == Enums.HitResult.PartiallyBlocked
+        || hitResult == Enums.HitResult.PartiallyDeflected || hitResult == Enums.HitResult.PartiallyAvoided)
+        {
+            playHitAnimation = true;
+        }
+
+        yield return new WaitForSeconds(animationTimes.GetImpactTime());
+        if (playHitAnimation)
+        {
+            FightersAnimator.Play("Fighters_Hit_Immediate", 0, 0f);
+        }
+        if (hitResult == Enums.HitResult.Deflected || hitResult == Enums.HitResult.PartiallyDeflected)
+        {
+            FightersAnimator.Play("Fighters_Deflect", 0, 0f);
+
+            if (hitResult == Enums.HitResult.Deflected)
+            {
+                StopAttacks();
+            }
+        }
+
         yield return new WaitUntil(() => (SpawnedAttackImages.Count == 0 && SpawnedDefenseImages.Count == 0));
         AttackCoroutines.Clear();
         DefenseCoroutines.Clear();
 
         // Play successful hit animation
-        if (hitResult == Enums.HitResult.Hit || hitResult == Enums.HitResult.PartialHit
-        || hitResult == Enums.HitResult.PartiallyAvoided || hitResult == Enums.HitResult.PartiallyBlocked
-        || hitResult == Enums.HitResult.PartiallyDeflected || hitResult == Enums.HitResult.PartiallyAvoided)
+        if (playHitAnimation)
         {
             //yield return new WaitForSeconds(animationTimes.GetImpactTime());
             //yield return new WaitForSeconds(.35f);

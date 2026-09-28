@@ -5,14 +5,14 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Fighter Art", menuName = "Assets/Fighters/New Fighter Art")]
 public class FighterArt : ScriptableObject
 {
-    [SerializeField] protected Sprite           Body;
-    [SerializeField] protected Sprite           Back;
+    [SerializeField] protected Sprite           Body, Back, Deflect;
     [SerializeField] protected Sprite           TalkingAngry;
     [SerializeField] protected TalkingFrames[]  TalkingFrameList;
     protected int                               PreviousTalkingFrames = -1;
 
     public Sprite GetBack() { return Back; }
     public Sprite GetBody() { return Body; }
+    public Sprite GetDeflect() { return Deflect; }
     public Sprite GetTalkingAngry() { return TalkingAngry; }
 
     public TalkingFrames GetTalkingFrames()

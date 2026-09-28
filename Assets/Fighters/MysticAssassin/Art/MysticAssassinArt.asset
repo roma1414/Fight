@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FighterArt
   Body: {fileID: -4700418250113659817, guid: 70c08fdc5d1bc4d50927aeac7695cb3b, type: 3}
   Back: {fileID: -8619601499134224223, guid: 293f8d857476549ef99bdaf0599556ff, type: 3}
+  Deflect: {fileID: -1967787778782182729, guid: 8effb636be7674779a37c563b5db724e, type: 3}
   TalkingAngry: {fileID: 4079796771584589416, guid: 11fd33999bbed495e9cd7cc6ed9401bb, type: 3}
   TalkingFrameList:
   - {fileID: 11400000, guid: 36fcb686f25d04b3d97471adb3494829, type: 2}
