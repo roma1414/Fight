@@ -21,6 +21,7 @@ MonoBehaviour:
   BlockedStatements: []
   DeflectedStatements: []
   HurtStatements: []
-  TauntingStatements: []
+  TooFastStatements:
+  - I'm faster than that!
   VictoryStatements: []
-  StatementsWithRequirements: []
+  LoopDialogue: 1

@@ -15,7 +15,7 @@ public class DynamicWindow : MonoBehaviour
                                             StatementBackgroundPanel, TargetPanel, AttackersPrefab;
     [SerializeField] private Image          Fighter, FighterBackground, FightersBackground, StatementBackground, 
                                             StatementFighter, FightersPrefab, AttacksPrefab, TargetBackground, FightersDodge,
-                                            DefensesPrefab, FightersDeflect;
+                                            DefensesPrefab, FightersDeflect, StatementMotionBackground;
     [SerializeField] private TMP_Text       DynamicText, StatementText, StatementFighterName;
     [SerializeField] private RectTransform  FightersContainer, AttackersContainer, AttacksContainer, DefensesContainer;
     [SerializeField] private Animator       StatementAnimator, FighterAnimator, FightersAnimator, TargetAnimator;
@@ -24,7 +24,7 @@ public class DynamicWindow : MonoBehaviour
     private List<Image>                     SpawnedFighterImages = new List<Image>();
     private List<GameObject>                SpawnedAttackerPanels = new List<GameObject>();
     private List<Image>                     SpawnedAttackImages = new List<Image>(), SpawnedDefenseImages = new List<Image>();
-    private Coroutine                       TalkingCoroutine;
+    private Coroutine                       TalkingCoroutine, MotionCoroutine;
     private List<Coroutine>                 AttackCoroutines = new List<Coroutine>(), DefenseCoroutines = new List<Coroutine>();
     public const float FIGHTER_BACKGROUND_MAX_OFFSET = -3950;
     public const float FIGHTER_X_ZERO_POINT = -128f;
@@ -35,6 +35,18 @@ public class DynamicWindow : MonoBehaviour
     public const float FIGHTERS_X_ZERO_POINT = -128f;
     public const float TARGET_BACKGROUND_MAX_OFFSET = -2050;
     public const float TARGET_X_ZERO_POINT = -128f;
+
+    private IEnumerator AnimateMotionStatement(Sprite[] frames)
+    {
+        int index = 0;
+        while (true)
+        {
+            StatementMotionBackground.sprite = frames[index];
+            index = (index + 1) % frames.Length;
+
+            yield return new WaitForSeconds(0.12f);
+        }
+    }
 
     private IEnumerator AnimateTalking(Sprite[] frames)
     {
@@ -349,7 +361,7 @@ public class DynamicWindow : MonoBehaviour
         
     }
 
-    TalkingFrames ConfigureFightWindowForStatement(string statement, Fighter fighter, string animation)
+    AnimationFrames ConfigureFightWindowForStatement(string statement, Fighter fighter, Enums.StatementType statementType)
     {
         int team = fighter.GetTeam();
         StatementBackground.sprite = Fight.GetMapArt().GetBackground(team);
@@ -388,8 +400,14 @@ public class DynamicWindow : MonoBehaviour
         StatementFighter.rectTransform.anchoredPosition = fighterPosition;
         StatementBackgroundPanel.GetComponent<RectTransform>().anchoredPosition = backgroundPanelPosition;*/
 
+        StatementMotionBackground.gameObject.SetActive(false);
+        if (statementType == Enums.StatementType.TooFast)
+        {
+            StatementMotionBackground.gameObject.SetActive(true);
+        }
+
         StatementFighter.sprite = null;
-        TalkingFrames talkingFrames = fighter.GetArt().GetTalkingFrames();
+        AnimationFrames talkingFrames = fighter.GetArt().GetTalkingFrames();
         if (talkingFrames != null)
         {
             StatementFighter.sprite = talkingFrames.GetFrames()[0];
@@ -472,8 +490,6 @@ public class DynamicWindow : MonoBehaviour
         // Play successful hit animation
         if (playHitAnimation)
         {
-            //yield return new WaitForSeconds(animationTimes.GetImpactTime());
-            //yield return new WaitForSeconds(.35f);
             FightersAnimator.Play("Fighters_Hit", 0, 0f);
         }
 
@@ -531,26 +547,32 @@ public class DynamicWindow : MonoBehaviour
         }
     }
 
-    public IEnumerator DisplayStatement(string statement, Fighter fighter)
+    public IEnumerator DisplayStatement(string statement, Fighter fighter, Enums.StatementType statementType, MapArt mapArt)
     {
         HidePanels();
-        string animation = GetStatementAnimation();
-        TalkingFrames talkingFrames = ConfigureFightWindowForStatement(statement, fighter, animation);
+        AnimationFrames talkingFrames = ConfigureFightWindowForStatement(statement, fighter, statementType);
         StatementPanel.SetActive(true);
         StatementTextPanel.SetActive(true);
+        string animation = GetStatementAnimation();
         StatementAnimator.Play(animation, 0, 0f);
         StartTalking(talkingFrames.GetFrames());
+        if (statementType == Enums.StatementType.TooFast)
+        {
+            AnimationFrames motionFrames = mapArt.GetMotionFrames();
+            StartMotionStatement(motionFrames.GetFrames());
+        }
         yield return new WaitForSeconds(1.5f);
         StopTalking(talkingFrames.GetFrames());
 
         yield return new WaitForSeconds(1.5f);
+        StopMotionStatement();
     }
 
-    public IEnumerator DisplayStatements(List<string> statements, List<Fighter> fighters)
+    public IEnumerator DisplayStatements(List<string> statements, List<Fighter> fighters, Enums.StatementType statementType, MapArt mapArt)
     {
         for (int i = 0; i < statements.Count; i++)
         {
-            yield return DisplayStatement(statements[i], fighters[i]);
+            yield return DisplayStatement(statements[i], fighters[i], statementType, mapArt);
         }
 
         yield break;
@@ -792,6 +814,18 @@ public class DynamicWindow : MonoBehaviour
         );
     }
 
+    private void StartMotionStatement(Sprite[] frames)
+    {
+        StopMotionStatement();
+
+        if (frames == null || frames.Length == 0)
+            return;
+
+        MotionCoroutine = StartCoroutine(
+            AnimateMotionStatement(frames)
+        );
+    }
+
     public void StopAttacks()
     {
         foreach (Coroutine coroutine in AttackCoroutines)
@@ -826,6 +860,15 @@ public class DynamicWindow : MonoBehaviour
         }
 
         SpawnedDefenseImages.Clear();
+    }
+
+    private void StopMotionStatement()
+    {
+        if (MotionCoroutine != null)
+        {
+            StopCoroutine(MotionCoroutine);
+            MotionCoroutine = null;
+        }
     }
 
     private void StopTalking(Sprite[] frames)

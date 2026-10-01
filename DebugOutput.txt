@@ -1,117 +1,36 @@
 Round 1
 
-Mystic Assassin  vs  Paladin
+Fire Mage  +  Paladin  +  Water Witch  vs  Mystic Assassin
 
-Mystic Assassin   Overall: 6.75  Health: 100  Mana: 140  Health Co = 1
-
+Fire Mage   Overall: 8.03  Health: 100  Mana: 180  Health Co = 1
 Paladin   Overall: 7.26  Health: 100  Mana: 100  Health Co = 1
+Water Witch   Overall: 8.03  Health: 100  Mana: 180  Health Co = 1
+
+Mystic Assassin   Overall: 7.15  Health: 100  Mana: 140  Health Co = 1
 
 ###################################################################
 ###################################################################
 
-Paladin uses Holy Orb against Mystic Assassin!
-It misses Mystic Assassin!
 Mystic Assassin uses Slash against Paladin!
 Paladin deflects it!
+Paladin uses Slash against Mystic Assassin!
+It misses Mystic Assassin!
+Fire Mage and Water Witch use Fire Storm and Shark Missile against Mystic Assassin!
+It misses Mystic Assassin!
 
 
 Round 2
 
-Mystic Assassin  vs  Paladin
+Fire Mage  +  Paladin  +  Water Witch  vs  Mystic Assassin
 
-Mystic Assassin   Overall: 6.75  Health: 100  Mana: 140  Health Co = 1
+Fire Mage   Overall: 7.67  Health: 100  Mana: 140  Health Co = 1
+Paladin   Overall: 7.26  Health: 100  Mana: 100  Health Co = 1
+Water Witch   Overall: 7.886  Health: 100  Mana: 164  Health Co = 1
 
-Paladin   Overall: 7.188  Health: 100  Mana: 82  Health Co = 1
-
-###################################################################
-###################################################################
-
-Paladin uses Slash against Mystic Assassin!
-It hits Mystic Assassin and does 37 damage!
-Mystic Assassin uses Slash against Paladin!
-Paladin deflects it!
-
-
-Round 3
-
-Mystic Assassin  vs  Paladin
-
-Mystic Assassin   Overall: 6.366  Health: 63  Mana: 140  Health Co = 0.872
-
-Paladin   Overall: 7.188  Health: 100  Mana: 82  Health Co = 1
+Mystic Assassin   Overall: 7.15  Health: 100  Mana: 140  Health Co = 1
 
 ###################################################################
 ###################################################################
 
-Paladin uses Holy Orb against Mystic Assassin!
-Mystic Assassin deflects it!
-Mystic Assassin uses Slash against Paladin!
-It misses Paladin!
-
-
-Round 4
-
-Mystic Assassin  vs  Paladin
-
-Mystic Assassin   Overall: 6.366  Health: 63  Mana: 140  Health Co = 0.872
-
-Paladin   Overall: 7.116  Health: 100  Mana: 64  Health Co = 1
-
-###################################################################
-###################################################################
-
-Paladin uses Holy Orb against Mystic Assassin!
-It misses Mystic Assassin!
-Mystic Assassin uses Slash against Paladin!
-Paladin deflects it!
-
-
-Round 5
-
-Mystic Assassin  vs  Paladin
-
-Mystic Assassin   Overall: 6.366  Health: 63  Mana: 140  Health Co = 0.872
-
-Paladin   Overall: 7.044  Health: 100  Mana: 46  Health Co = 1
-
-###################################################################
-###################################################################
-
-Paladin uses Holy Orb against Mystic Assassin!
-Mystic Assassin deflects it!
-Mystic Assassin uses Slash against Paladin!
-Paladin deflects it!
-
-
-Round 6
-
-Mystic Assassin  vs  Paladin
-
-Mystic Assassin   Overall: 6.366  Health: 63  Mana: 140  Health Co = 0.872
-
-Paladin   Overall: 6.972  Health: 100  Mana: 28  Health Co = 1
-
-###################################################################
-###################################################################
-
-Paladin uses Holy Orb against Mystic Assassin!
-Mystic Assassin deflects it!
-Mystic Assassin uses Slash against Paladin!
-It misses Paladin!
-
-
-Round 7
-
-Mystic Assassin  vs  Paladin
-
-Mystic Assassin   Overall: 6.366  Health: 63  Mana: 140  Health Co = 0.872
-
-Paladin   Overall: 6.9  Health: 100  Mana: 10  Health Co = 1
-
-###################################################################
-###################################################################
-
-Paladin uses Slash against Mystic Assassin!
-It hits Mystic Assassin and does 34 damage!
-Mystic Assassin uses Slash against Paladin!
-It misses Paladin!
+Mystic Assassin uses Slash against Fire Mage!
+Fire Mage blocks it with Wall of Fire!

@@ -20,6 +20,9 @@ MonoBehaviour:
   BlockedStatements: []
   DeflectedStatements: []
   HurtStatements: []
-  TauntingStatements: []
+  TooFastStatements:
+  - Not nearly quick enough!
+  - You won't hit me with that!
+  - Not even close!
   VictoryStatements: []
-  StatementsWithRequirements: []
+  LoopDialogue: 1

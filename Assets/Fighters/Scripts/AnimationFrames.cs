@@ -2,8 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Talking Frames", menuName = "Assets/Fighters/New Talking Frames")]
-public class TalkingFrames : ScriptableObject
+[CreateAssetMenu(fileName = "New Animation Frames", menuName = "Assets/Fighters/New Animation Frames")]
+public class AnimationFrames : ScriptableObject
 {
     [SerializeField] private Sprite[] Frames;
     

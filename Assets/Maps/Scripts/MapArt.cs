@@ -5,12 +5,9 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Map Art", menuName = "Assets/Maps/New Map Art")]
 public class MapArt : ScriptableObject
 {
-    [SerializeField]
-    protected Sprite Background_1;
-    [SerializeField]
-    protected Sprite Background_2;
-    [SerializeField]
-    protected Sprite Background_3;
+    [SerializeField] protected Sprite               Background_1, Background_2, Background_3;
+    [SerializeField] protected AnimationFrames[]    MotionFrameList;
+    protected int                                   PreviousMotionFrames = -1;
 
     public Sprite GetBackground(int team) 
     { 
@@ -28,5 +25,32 @@ public class MapArt : ScriptableObject
         }
 
         return null;
+    }
+
+    public AnimationFrames GetMotionFrames()
+    {
+        if (MotionFrameList.Length == 0)
+        {
+            return null;
+        }
+
+        List<AnimationFrames> possibleSpriteFrames = new List<AnimationFrames>();
+        for (int i = 0; i < MotionFrameList.Length; i++)
+        {
+            if (i != PreviousMotionFrames)
+            {
+                possibleSpriteFrames.Add(MotionFrameList[i]);
+            }
+        }
+        
+        if (possibleSpriteFrames.Count > 0)
+        {
+            int randomIndex = Random.Range(0, possibleSpriteFrames.Count);
+            AnimationFrames selectedSpriteFrames = possibleSpriteFrames[randomIndex];
+            PreviousMotionFrames = System.Array.IndexOf(MotionFrameList, selectedSpriteFrames);
+            return selectedSpriteFrames;
+        }
+        
+        return MotionFrameList[0];
     }
 }

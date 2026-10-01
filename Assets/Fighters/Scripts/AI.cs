@@ -1135,11 +1135,11 @@ public class AI : ScriptableObject
         return GetMoveEventOfType(fight, fighter, moveType);
     }
 
-    public string GetStatement(Fight fight, Fighter fighter, MoveEvent moveEvent)
+    public string GetStatement(Enums.StatementType statementType)
     {
         if (CheckGetStatement() == true)
         {
-            return Dialogue.GetAttackingStatement();
+            return Dialogue.GetStatement(statementType);
         }
         
         return null;

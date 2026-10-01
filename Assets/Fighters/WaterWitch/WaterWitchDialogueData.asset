@@ -13,13 +13,14 @@ MonoBehaviour:
   m_Name: WaterWitchDialogueData
   m_EditorClassIdentifier: Assembly-CSharp::DialogueData
   AttackingStatements:
-  - Let's see if you can outrun my waves!
-  - There is more energy in water than you know, but you'll understand soon!
+  - I wonder if you can outrun my waves?
+  - There is more energy in water than you know!
   - I won't take it easy on you!
   AngryStatements: []
   BlockedStatements: []
   DeflectedStatements: []
   HurtStatements: []
-  TauntingStatements: []
+  TooFastStatements:
+  - You'll have to be faster than that!
   VictoryStatements: []
-  StatementsWithRequirements: []
+  LoopDialogue: 1

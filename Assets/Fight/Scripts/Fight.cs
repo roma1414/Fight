@@ -891,9 +891,9 @@ public class Fight : MonoBehaviour
         
         List<string> statementTexts = new List<string>();
         List<Fighter> statementFighters = new List<Fighter>();
-        GetStatements(moveEvent, statementTexts, statementFighters);
+        GetStatements(moveEvent, statementTexts, statementFighters, Enums.StatementType.Attacking);
 
-        yield return DynamicWindow.DisplayStatements(statementTexts, statementFighters);
+        yield return DynamicWindow.DisplayStatements(statementTexts, statementFighters, Enums.StatementType.Attacking, GetMapArt());
         
         PrintAttackString(moveEvent);
         yield return DynamicWindow.DisplayMovePreview(moveEvent);
@@ -1291,6 +1291,19 @@ public class Fight : MonoBehaviour
                             }
                         }
                     }
+                    break;
+                }
+        }
+
+        // Display a statement after the move
+        List<string> statementTexts = new List<string>();
+        List<Fighter> statementFighters = new List<Fighter>();
+        switch(result)
+        {
+            case Enums.HitResult.Miss:
+                {
+                    GetStatement(statementTexts, statementFighters, Enums.StatementType.TooFast, target);
+                    yield return DynamicWindow.DisplayStatements(statementTexts, statementFighters, Enums.StatementType.TooFast, GetMapArt());
                     break;
                 }
         }
@@ -2458,16 +2471,33 @@ public class Fight : MonoBehaviour
 
     public int GetRoundNumber() { return RoundNumber;}
 
-    public void GetStatements(MoveEvent moveEvent, List<string> statementTexts, List<Fighter> statementFighters)
+    public void GetStatement(List<string> statementTexts, List<Fighter> statementFighters, Enums.StatementType statementType, Fighter fighter)
     {
-        foreach (Fighter fighter in moveEvent.GetFighters())
+        string statementText = fighter.GetAI().GetStatement(statementType);
+        if (statementText != null && statementText.Length > 0)
         {
-            string statementText = fighter.GetAI().GetStatement(this, fighter, moveEvent);
-            if (statementText != null && statementText.Length > 0)
-            {
-                statementTexts.Add(statementText);
-                statementFighters.Add(fighter);
-            }
+            statementTexts.Add(statementText);
+            statementFighters.Add(fighter);
+        }
+    }
+
+    public void GetStatements(MoveEvent moveEvent, List<string> statementTexts, List<Fighter> statementFighters, Enums.StatementType statementType)
+    {
+        switch (statementType)
+        {
+            case Enums.StatementType.Attacking:
+                {
+                    foreach (Fighter fighter in moveEvent.GetFighters())
+                    {
+                        string statementText = fighter.GetAI().GetStatement(statementType);
+                        if (statementText != null && statementText.Length > 0)
+                        {
+                            statementTexts.Add(statementText);
+                            statementFighters.Add(fighter);
+                        }
+                    }
+                    break;
+                }
         }
     }
 
