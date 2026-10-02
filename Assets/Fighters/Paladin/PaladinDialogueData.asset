@@ -21,7 +21,6 @@ MonoBehaviour:
   BlockedStatements: []
   DeflectedStatements: []
   HurtStatements: []
-  TooFastStatements:
-  - 
+  TooFastStatements: []
   VictoryStatements: []
   LoopDialogue: 1

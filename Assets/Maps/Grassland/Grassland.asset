@@ -16,4 +16,6 @@ MonoBehaviour:
   Background_2: {fileID: 5980447865194789551, guid: 2c505156b7be3420aa7a4f009858900a, type: 3}
   Background_3: {fileID: -5781249754181073588, guid: 7cddd4ebeb4f84c9ab900ee9b52cde04, type: 3}
   MotionFrameList:
+  - {fileID: 11400000, guid: 9a7c04e0b660042fcac3f64b965813e1, type: 2}
   - {fileID: 11400000, guid: 5cccc9beca7ad42dfbd61bc26a19692c, type: 2}
+  - {fileID: 11400000, guid: 72621b64ad8e64a58b0ade4aab3f9dfa, type: 2}

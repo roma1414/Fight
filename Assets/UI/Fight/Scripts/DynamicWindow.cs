@@ -493,7 +493,14 @@ public class DynamicWindow : MonoBehaviour
             FightersAnimator.Play("Fighters_Hit", 0, 0f);
         }
 
-        yield return new WaitForSeconds(1.25f);
+        if (hitResult == Enums.HitResult.Deflected)
+        {
+            yield return new WaitForSeconds(1.5f);
+        }
+        else
+        {
+            yield return new WaitForSeconds(1f);
+        }
     }
 
     public IEnumerator DisplayAttackerMovePreview(MoveEvent moveEvent)
