@@ -1216,7 +1216,7 @@ public class Fight : MonoBehaviour
         {
             if (targets.IndexOf(target) == 0) // First target to be attacked
             {
-                yield return DynamicWindow.DisplayAttackAgainstTargets(moveEvent, target, resultString, hit);
+                
             }
             else
             {
@@ -1225,7 +1225,7 @@ public class Fight : MonoBehaviour
         }
         else
         {
-            yield return DynamicWindow.DisplayAttackAgainstTarget(moveEvent, target, resultString, hit);
+            yield return DynamicWindow.DisplayAttackAgainstFightersTarget(moveEvent, target, resultString, hit);
         }
 
         switch (result)     // Removes UnderPsychic and Trapped statuses before applying attack statuses. The attack landed or partially landed.
@@ -1315,7 +1315,10 @@ public class Fight : MonoBehaviour
         List<Move> offensiveMoves = moveEvent.GetMoves();
         List<Fighter> targets = moveEvent.GetTargets();
 
-        yield return DynamicWindow.DisplayAttackAgainstTargets(moveEvent);
+        if (targets.Count > 1)
+        {
+            yield return DynamicWindow.DisplayAttackAgainstTargets(moveEvent);
+        }
 
         foreach (Fighter target in targets)
         {

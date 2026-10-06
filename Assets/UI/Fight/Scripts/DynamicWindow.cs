@@ -566,9 +566,9 @@ public class DynamicWindow : MonoBehaviour
         return talkingFrames;
     }
 
-    public IEnumerator DisplayAttackAgainstTarget(MoveEvent moveEvent, Fighter target, string resultString, Hit hit)
+    public IEnumerator DisplayAttackAgainstFightersTarget(MoveEvent moveEvent, Fighter target, string resultString, Hit hit)
     {
-        HidePanels();/////
+        HidePanels();
         AnimationTimes animationTimes = moveEvent.GetAnimationTimes(hit);
         ConfigureFightWindowForAttackAgainstTarget(moveEvent, hit);
         FightersPanel.SetActive(true);
@@ -576,30 +576,30 @@ public class DynamicWindow : MonoBehaviour
 
         yield return new WaitForSeconds(.25f);
         
-        /*Enums.MoveType moveType = moveEvent.GetMoveType();
+        Enums.MoveType moveType = moveEvent.GetMoveType();
         if (moveType == Enums.MoveType.Melee || moveType == Enums.MoveType.NinTai)
         {
             FightersAnimator.Play("Attackers_Melee", 0, 0f);
             yield return new WaitForSeconds(.2f);
-        }*/
+        }
 
         Enums.HitResult hitResult = hit.GetResult();
-        StartTargetAttacks(moveEvent.GetMoves(), animationTimes.GetAttackDelays());
+        StartAttacks(moveEvent.GetMoves(), animationTimes.GetAttackDelays());
         if (hitResult == Enums.HitResult.Blocked || hitResult == Enums.HitResult.PartiallyBlocked)
         {
-            StartTargetDefenses(hit.GetDefensiveMoves(), animationTimes.GetDefenseDelays());
+            StartDefenses(hit.GetDefensiveMoves(), animationTimes.GetDefenseDelays());
         }
         DynamicText.text = resultString;
         
         if (hitResult == Enums.HitResult.Miss || hitResult == Enums.HitResult.PartialHit)
         {
-            if (TargetDodge.rectTransform.localScale.x < 0)
+            if (FightersDodge.rectTransform.localScale.x < 0)
             {
-                TargetAnimator.Play("Target_Dodge_Left", 0, 0f);
+                FightersAnimator.Play("Fighters_Dodge_Left", 0, 0f);
             }
             else
             {
-                TargetAnimator.Play("Target_Dodge_Right", 0, 0f);
+                FightersAnimator.Play("Fighters_Dodge_Right", 0, 0f);
             }
         }
 
@@ -614,19 +614,19 @@ public class DynamicWindow : MonoBehaviour
         yield return new WaitForSeconds(animationTimes.GetImpactTime());
         if (playHitAnimation)
         {
-            TargetAnimator.Play("Target_Hit_Immediate", 0, 0f);
+            FightersAnimator.Play("Fighters_Hit_Immediate", 0, 0f);
         }
         if (hitResult == Enums.HitResult.Deflected || hitResult == Enums.HitResult.PartiallyDeflected)
         {
-            TargetAnimator.Play("Target_Deflect", 0, 0f);
+            FightersAnimator.Play("Fighters_Deflect", 0, 0f);
 
             if (hitResult == Enums.HitResult.Deflected)
             {
-                StopTargetAttacks();
+                StopAttacks();
             }
         }
 
-        yield return new WaitUntil(() => (SpawnedTargetAttackImages.Count == 0 && SpawnedTargetDefenseImages.Count == 0));
+        yield return new WaitUntil(() => (SpawnedAttackImages.Count == 0 && SpawnedDefenseImages.Count == 0));
         AttackCoroutines.Clear();
         DefenseCoroutines.Clear();
 
@@ -666,23 +666,12 @@ public class DynamicWindow : MonoBehaviour
         StartAttacks(moveEvent.GetMoves(), animationTimes.GetAttackDelays());
 
         yield return new WaitForSeconds(animationTimes.GetImpactTime());
-        ////////
-        /// 
-        StopAttacks();
 
-        List<Fighter> targets = moveEvent.GetTargets();
-        for (int i = 0; i < targets.Count; i++)
-        {
-            
-        }
-
-        //DynamicText.text = resultString;
-
-        yield return new WaitForSeconds(animationTimes.GetImpactTime());
-        
         StopAttacks();
         AttackCoroutines.Clear();
         DefenseCoroutines.Clear();
+
+        yield break;
     }
 
     public IEnumerator DisplayAttackerMovePreview(MoveEvent moveEvent)
@@ -1182,23 +1171,5 @@ public class DynamicWindow : MonoBehaviour
                 StatementFighter.sprite = frames[0];
             }
         }
-    }
-
-    public void StopTargetAttacks()
-    {
-        foreach (Coroutine coroutine in AttackCoroutines)
-        {
-            StopCoroutine(coroutine);
-        }
-
-        AttackCoroutines.Clear();
-
-        foreach (Image image in SpawnedTargetAttackImages)
-        {
-            if (image != null)
-                Destroy(image.gameObject);
-        }
-
-        SpawnedTargetAttackImages.Clear();
     }
 }
