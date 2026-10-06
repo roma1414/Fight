@@ -1216,7 +1216,7 @@ public class Fight : MonoBehaviour
         {
             if (targets.IndexOf(target) == 0) // First target to be attacked
             {
-                
+                yield return DynamicWindow.DisplayAttackAgainstTargets(moveEvent, target, resultString, hit);
             }
             else
             {
@@ -1314,6 +1314,8 @@ public class Fight : MonoBehaviour
         List<Fighter> fighters = moveEvent.GetFighters();
         List<Move> offensiveMoves = moveEvent.GetMoves();
         List<Fighter> targets = moveEvent.GetTargets();
+
+        yield return DynamicWindow.DisplayAttackAgainstTargets(moveEvent);
 
         foreach (Fighter target in targets)
         {

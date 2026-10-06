@@ -85,27 +85,30 @@ public class MoveEvent
         }
 
         // First iteration through defensive moves
-        foreach (Move move in hit.GetDefensiveMoves())
+        if (hit != null)
         {
-            AnimationData animationData = move.GetAnimationData();
-
-            if (animationData != null)
+            foreach (Move move in hit.GetDefensiveMoves())
             {
-                float duration = animationData.GetDuration();
-                if (duration > maxDefenseDuration)
-                {
-                    maxDefenseDuration = duration;
-                }
+                AnimationData animationData = move.GetAnimationData();
 
-                float impactTime = animationData.GetImpactTime();
-                if (impactTime > maxImpactTime)
+                if (animationData != null)
                 {
-                    maxImpactTime = impactTime;
+                    float duration = animationData.GetDuration();
+                    if (duration > maxDefenseDuration)
+                    {
+                        maxDefenseDuration = duration;
+                    }
+
+                    float impactTime = animationData.GetImpactTime();
+                    if (impactTime > maxImpactTime)
+                    {
+                        maxImpactTime = impactTime;
+                    }
                 }
-            }
-            else
-            {
-                Debug.LogError($"Error! {move.GetName()} has no AnimationData in GetAnimationTimes!");
+                else
+                {
+                    Debug.LogError($"Error! {move.GetName()} has no AnimationData in GetAnimationTimes!");
+                }
             }
         }
 
@@ -125,17 +128,20 @@ public class MoveEvent
         }
 
         // Second iteration through defensive moves
-        foreach (Move move in hit.GetDefensiveMoves())
+        if (hit != null)
         {
-            AnimationData animationData = move.GetAnimationData();
-            if (animationData != null)
+            foreach (Move move in hit.GetDefensiveMoves())
             {
-                float delay = maxImpactTime - animationData.GetImpactTime();
-                defenseDelays.Add(delay);
-            }
-            else
-            {
-                defenseDelays.Add(0f);
+                AnimationData animationData = move.GetAnimationData();
+                if (animationData != null)
+                {
+                    float delay = maxImpactTime - animationData.GetImpactTime();
+                    defenseDelays.Add(delay);
+                }
+                else
+                {
+                    defenseDelays.Add(0f);
+                }
             }
         }
         
