@@ -9,4 +9,141 @@ Mystic Assassin   Overall: 7.15  Health: 100  Mana: 140  Health Co = 1
 ###################################################################
 ###################################################################
 
+Mystic Assassin uses Throwing Knife against Paladin!
+It misses Paladin!
 Paladin uses Holy Blade against Mystic Assassin!
+It misses Mystic Assassin!
+
+
+Round 2
+
+Paladin  vs  Mystic Assassin
+
+Paladin   Overall: 7.128  Health: 100  Mana: 67  Health Co = 1
+
+Mystic Assassin   Overall: 7.15  Health: 100  Mana: 140  Health Co = 1
+
+###################################################################
+###################################################################
+
+Mystic Assassin uses Slash against Paladin!
+Paladin deflects it!
+Paladin uses Holy Orb against Mystic Assassin!
+It misses Mystic Assassin!
+
+
+Round 3
+
+Paladin  vs  Mystic Assassin
+
+Paladin   Overall: 7.056  Health: 100  Mana: 49  Health Co = 1
+
+Mystic Assassin   Overall: 7.15  Health: 100  Mana: 140  Health Co = 1
+
+###################################################################
+###################################################################
+
+Mystic Assassin uses Throwing Knife against Paladin!
+It misses Paladin!
+Paladin uses Holy Blade against Mystic Assassin!
+It misses Mystic Assassin!
+
+
+Round 4
+
+Paladin  vs  Mystic Assassin
+
+Paladin   Overall: 6.924  Health: 100  Mana: 16  Health Co = 1
+
+Mystic Assassin   Overall: 7.15  Health: 100  Mana: 140  Health Co = 1
+
+###################################################################
+###################################################################
+
+Mystic Assassin uses Throwing Knife against Paladin!
+It misses Paladin!
+Paladin uses Slash against Mystic Assassin!
+It misses Mystic Assassin!
+
+
+Round 5
+
+Paladin  vs  Mystic Assassin
+
+Paladin   Overall: 6.924  Health: 100  Mana: 16  Health Co = 1
+
+Mystic Assassin   Overall: 7.15  Health: 100  Mana: 140  Health Co = 1
+
+###################################################################
+###################################################################
+
+Mystic Assassin uses Throwing Knife against Paladin!
+It misses Paladin!
+Paladin uses Slash against Mystic Assassin!
+It misses Mystic Assassin!
+
+
+Round 6
+
+Paladin  vs  Mystic Assassin
+
+Paladin   Overall: 6.924  Health: 100  Mana: 16  Health Co = 1
+
+Mystic Assassin   Overall: 7.15  Health: 100  Mana: 140  Health Co = 1
+
+###################################################################
+###################################################################
+
+Mystic Assassin uses Slash against Paladin!
+Paladin deflects it!
+Paladin uses Slash against Mystic Assassin!
+It misses Mystic Assassin!
+
+
+Round 7
+
+Paladin  vs  Mystic Assassin
+
+Paladin   Overall: 6.924  Health: 100  Mana: 16  Health Co = 1
+
+Mystic Assassin   Overall: 7.15  Health: 100  Mana: 140  Health Co = 1
+
+###################################################################
+###################################################################
+
+Mystic Assassin uses Throwing Knife against Paladin!
+It misses Paladin!
+Paladin uses Slash against Mystic Assassin!
+It misses Mystic Assassin!
+
+
+Round 8
+
+Paladin  vs  Mystic Assassin
+
+Paladin   Overall: 6.924  Health: 100  Mana: 16  Health Co = 1
+
+Mystic Assassin   Overall: 7.15  Health: 100  Mana: 140  Health Co = 1
+
+###################################################################
+###################################################################
+
+Mystic Assassin uses Slash against Paladin!
+Paladin deflects it!
+Paladin uses Slash against Mystic Assassin!
+It misses Mystic Assassin!
+
+
+Round 9
+
+Paladin  vs  Mystic Assassin
+
+Paladin   Overall: 6.924  Health: 100  Mana: 16  Health Co = 1
+
+Mystic Assassin   Overall: 7.15  Health: 100  Mana: 140  Health Co = 1
+
+###################################################################
+###################################################################
+
+Mystic Assassin uses Slash against Paladin!
+Paladin deflects it!

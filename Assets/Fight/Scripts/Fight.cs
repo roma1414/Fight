@@ -1214,14 +1214,7 @@ public class Fight : MonoBehaviour
         mWriter.WriteLine(resultString);
         if (targets.Count > 1)
         {
-            if (targets.IndexOf(target) == 0) // First target to be attacked
-            {
-                
-            }
-            else
-            {
-                
-            }
+            yield return DynamicWindow.DisplayAttackAgainstTarget(moveEvent, target, resultString, hit);
         }
         else
         {
