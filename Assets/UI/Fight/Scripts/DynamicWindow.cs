@@ -23,7 +23,7 @@ public class DynamicWindow : MonoBehaviour
                                             FightersDefendersContainer, TargetDefendersContainer, TargetAttacksContainer,
                                             TargetDefensesContainer;
     [SerializeField] private Animator       StatementAnimator, FighterAnimator, FightersAnimator, TargetAnimator;
-    [SerializeField] private List<string>   StatementAnimations, FighterAnimations, TargetAnimations;
+    [SerializeField] private List<string>   StatementAnimations, FighterAnimations;
     private int                             PreviousStatementAnimation = -1, PreviousFighterAnimation = -1;
     private List<GameObject>                SpawnedAttackerPanels = new List<GameObject>(), SpawnedFightersDefenderPanels = new List<GameObject>(),
                                             SpawnedTargetDefenderPanels = new List<GameObject>();
@@ -66,13 +66,24 @@ public class DynamicWindow : MonoBehaviour
         }
     }
 
-    public void ConfigureFightWindowForAttackAgainstTarget(MoveEvent moveEvent, Hit hit)
+    public void ConfigureFightWindowForAttackAgainstTarget(MoveEvent moveEvent, Hit hit, Fighter target)
     {
-        Fighter target = moveEvent.GetTargets()[0];
         int targetTeam = target.GetTeam();
         TargetBackground.sprite = Fight.GetMapArt().GetBackground(targetTeam);
         
         TargetFighterPanel.gameObject.SetActive(true);
+        RectTransform targetRectTransform = TargetFighterPanel.GetComponent<RectTransform>();
+        targetRectTransform.anchoredPosition = new Vector2(0f, targetRectTransform.anchoredPosition.y);
+        Image targetImage = TargetFighterPanel.transform.Find("Target").GetComponent<Image>();
+        Sprite targetSprite = target.GetArt().GetBody();
+        if (targetSprite != null)
+        {
+            targetImage.sprite = targetSprite;
+        }
+        else
+        {
+            Debug.LogError($"Error! Target fighter {target.GetName()} has no Body sprite!");
+        }
 
         TargetDefendersContainer.gameObject.SetActive(false);
 
@@ -648,11 +659,11 @@ public class DynamicWindow : MonoBehaviour
     {
         HidePanels();
         AnimationTimes animationTimes = moveEvent.GetAnimationTimes(hit);
-        ConfigureFightWindowForAttackAgainstTarget(moveEvent, hit);
+        ConfigureFightWindowForAttackAgainstTarget(moveEvent, hit, target);
         TargetPanel.SetActive(true);
         DynamicTextPanel.SetActive(true);
 
-        yield return new WaitForSeconds(.25f);
+        yield return new WaitForSeconds(.5f);
 
         Enums.HitResult hitResult = hit.GetResult();
         StartTargetAttacks(moveEvent.GetMoves(), animationTimes.GetAttackDelays());

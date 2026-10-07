@@ -343,8 +343,8 @@ MonoBehaviour:
   StatementMotionBackground: {fileID: 2046691391}
   TargetDodge: {fileID: 908108380}
   TargetDeflect: {fileID: 653848207}
-  TargetAttacksPrefab: {fileID: 0}
-  TargetDefensesPrefab: {fileID: 0}
+  TargetAttacksPrefab: {fileID: 8857612504307568762, guid: 581c00c5ee7844febb2a2734897d3009, type: 3}
+  TargetDefensesPrefab: {fileID: 3065465046171959534, guid: ca8a248381d694502a47701756b20e2c, type: 3}
   DynamicText: {fileID: 1481937695}
   StatementText: {fileID: 154405117}
   StatementFighterName: {fileID: 1542622631}
@@ -354,12 +354,12 @@ MonoBehaviour:
   DefensesContainer: {fileID: 793688250}
   FightersDefendersContainer: {fileID: 1204347225}
   TargetDefendersContainer: {fileID: 1079111535}
-  TargetAttacksContainer: {fileID: 0}
-  TargetDefensesContainer: {fileID: 0}
+  TargetAttacksContainer: {fileID: 496184347}
+  TargetDefensesContainer: {fileID: 1093494131}
   StatementAnimator: {fileID: 1979487810}
   FighterAnimator: {fileID: 525911628}
   FightersAnimator: {fileID: 1781531717}
-  TargetAnimator: {fileID: 0}
+  TargetAnimator: {fileID: 885807823}
   StatementAnimations:
   - Statement_Left
   - Statement_Right
@@ -368,7 +368,6 @@ MonoBehaviour:
   FighterAnimations:
   - Fighter_Left
   - Fighter_Right
-  TargetAnimations: []
 --- !u!1001 &40965476
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1047,6 +1046,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 154405115}
   m_CullTransparentMesh: 1
+--- !u!114 &167373288 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1244770245388760594, guid: fe1bfce988ba04d04ad76f9b731d71e1, type: 3}
+  m_PrefabInstance: {fileID: 1465857193}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4feff7ba81aada2428e3ed14f8e11b54, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Fighter
 --- !u!1001 &175420730
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2090,7 +2100,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 955, y: 855}
+  m_SizeDelta: {x: 1400, y: 1200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &496184348
 MonoBehaviour:
@@ -4592,7 +4602,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 955, y: 855}
+  m_SizeDelta: {x: 1200, y: 1000}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1093494132
 MonoBehaviour:
@@ -6072,6 +6082,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1244770245388760594, guid: fe1bfce988ba04d04ad76f9b731d71e1, type: 3}
+      propertyPath: ControlType
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1456250450688340999, guid: fe1bfce988ba04d04ad76f9b731d71e1, type: 3}
       propertyPath: m_Name
       value: WaterWitch
@@ -6835,6 +6849,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1580960455}
   - component: {fileID: 1580960456}
+  - component: {fileID: 1580960457}
   m_Layer: 5
   m_Name: TargetFighterPanel
   m_TagString: Untagged
@@ -6870,6 +6885,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1580960454}
   m_CullTransparentMesh: 1
+--- !u!225 &1580960457
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1580960454}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &1605638238
 GameObject:
   m_ObjectHideFlags: 0
@@ -8759,9 +8786,11 @@ MonoBehaviour:
   NarutoMode: 0
   Teams: 2
   Team1:
-  - {fileID: 1089934233}
-  Team2:
+  - {fileID: 175420731}
   - {fileID: 1979974254}
+  Team2:
+  - {fileID: 167373288}
+  - {fileID: 1089934233}
   Team3: []
   MapArt: {fileID: 11400000, guid: d2dea80629c404fd1be252fe0953eacc, type: 2}
   SelectMovePanel: {fileID: 646679249}

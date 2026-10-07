@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f22992ffeb079114cabf4a66b094a39c, type: 3}
-  m_Name: WildInferno
+  m_Name: TsunamiWave
   m_EditorClassIdentifier: Assembly-CSharp::Move
-  Name: Wild Inferno
+  Name: Tsunami Wave
   Level: 8
-  Mana: 40
+  Mana: 55
   RoundsToCast: 0
   UsesPerFight: 0
   CastingSpeed: 2
@@ -24,8 +24,8 @@ MonoBehaviour:
   RequiredTargetStatuses: 
   TargetType: 1
   MoveType: 1
-  Natures: 0200
-  AnimationData: {fileID: 11400000, guid: c175fbac3dff64080bf536beac7d2412, type: 2}
+  Natures: 0c00
+  AnimationData: {fileID: 11400000, guid: 413f8d1c1da324543b3bf87aa3f6e2b9, type: 2}
   PreviewAnimationData: {fileID: 0}
   Number: 0
   CloneStrength: 0
@@ -39,9 +39,9 @@ MonoBehaviour:
   HealthAmount: 0
   ManaRestoreAmount: 0
   HealType: 0
-  Damage: 75
+  Damage: 80
   Duration: 0
-  Accuracy: 7
+  Accuracy: 8
   Absorbed: 1
   TouchSuccess: 0
   DamageType: 0
