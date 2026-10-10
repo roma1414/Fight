@@ -17,19 +17,19 @@ public class DynamicWindow : MonoBehaviour
     [SerializeField] private Image          Fighter, FighterBackground, FightersBackground, StatementBackground, 
                                             StatementFighter, FightersPrefab, AttacksPrefab, TargetBackground, FightersDodge,
                                             DefensesPrefab, FightersDeflect, StatementMotionBackground, TargetDodge, TargetDeflect,
-                                            TargetAttacksPrefab, TargetDefensesPrefab;
+                                            TargetAttacksPrefab, TargetDefensesPrefab, TeamAttacksPrefab;
     [SerializeField] private TMP_Text       DynamicText, StatementText, StatementFighterName;
     [SerializeField] private RectTransform  FightersContainer, AttackersContainer, AttacksContainer, DefensesContainer,
                                             FightersDefendersContainer, TargetDefendersContainer, TargetAttacksContainer,
-                                            TargetDefensesContainer;
+                                            TargetDefensesContainer, TeamAttacksContainer;
     [SerializeField] private Animator       StatementAnimator, FighterAnimator, FightersAnimator, TargetAnimator;
     [SerializeField] private List<string>   StatementAnimations, FighterAnimations;
     private int                             PreviousStatementAnimation = -1, PreviousFighterAnimation = -1;
     private List<GameObject>                SpawnedAttackerPanels = new List<GameObject>(), SpawnedFightersDefenderPanels = new List<GameObject>(),
                                             SpawnedTargetDefenderPanels = new List<GameObject>();
     private List<Image>                     SpawnedAttackImages = new List<Image>(), SpawnedDefenseImages = new List<Image>(),
-                                            SpawnedFighterImages = new List<Image>(), SpawnedTargetAttackImages = new List<Image>(),
-                                            SpawnedTargetDefenseImages = new List<Image>();
+                                            SpawnedFighterImages = new List<Image>();/*, SpawnedTargetAttackImages = new List<Image>(),
+                                            SpawnedTargetDefenseImages = new List<Image>();*/
     private Coroutine                       TalkingCoroutine, MotionCoroutine;
     private List<Coroutine>                 AttackCoroutines = new List<Coroutine>(), DefenseCoroutines = new List<Coroutine>();
     public const float FIGHTER_BACKGROUND_MAX_OFFSET = -3950;
@@ -593,10 +593,10 @@ public class DynamicWindow : MonoBehaviour
         }
 
         Enums.HitResult hitResult = hit.GetResult();
-        StartAttacks(moveEvent.GetMoves(), animationTimes.GetAttackDelays());
+        StartAttacks(moveEvent.GetMoves(), animationTimes.GetAttackDelays(), AttacksContainer, AttacksPrefab);
         if (hitResult == Enums.HitResult.Blocked || hitResult == Enums.HitResult.PartiallyBlocked)
         {
-            StartDefenses(hit.GetDefensiveMoves(), animationTimes.GetDefenseDelays());
+            StartDefenses(hit.GetDefensiveMoves(), animationTimes.GetDefenseDelays(), DefensesContainer, DefensesPrefab);
         }
         DynamicText.text = resultString;
         
@@ -666,10 +666,10 @@ public class DynamicWindow : MonoBehaviour
         yield return new WaitForSeconds(.5f);
 
         Enums.HitResult hitResult = hit.GetResult();
-        StartTargetAttacks(moveEvent.GetMoves(), animationTimes.GetAttackDelays());
+        StartAttacks(moveEvent.GetMoves(), animationTimes.GetAttackDelays(), TargetAttacksContainer, TargetAttacksPrefab);
         if (hitResult == Enums.HitResult.Blocked || hitResult == Enums.HitResult.PartiallyBlocked)
         {
-            StartTargetDefenses(hit.GetDefensiveMoves(), animationTimes.GetDefenseDelays());
+            StartDefenses(hit.GetDefensiveMoves(), animationTimes.GetDefenseDelays(), TargetDefensesContainer, TargetDefensesPrefab);
         }
         DynamicText.text = resultString;
         
@@ -708,7 +708,7 @@ public class DynamicWindow : MonoBehaviour
             }
         }
 
-        yield return new WaitUntil(() => (SpawnedTargetAttackImages.Count == 0 && SpawnedTargetDefenseImages.Count == 0));
+        yield return new WaitUntil(() => (SpawnedAttackImages.Count == 0 && SpawnedDefenseImages.Count == 0));
         AttackCoroutines.Clear();
         DefenseCoroutines.Clear();
 
@@ -745,7 +745,7 @@ public class DynamicWindow : MonoBehaviour
             yield return new WaitForSeconds(.2f);
         }
 
-        StartAttacks(moveEvent.GetMoves(), animationTimes.GetAttackDelays());
+        StartAttacks(moveEvent.GetMoves(), animationTimes.GetAttackDelays(), TeamAttacksContainer, TeamAttacksPrefab);
 
         yield return new WaitForSeconds(animationTimes.GetImpactTime());
 
@@ -973,7 +973,7 @@ public class DynamicWindow : MonoBehaviour
         }
 
         SpawnedAttackImages.Remove(image);
-        SpawnedTargetAttackImages.Remove(image);
+        //SpawnedTargetAttackImages.Remove(image);
         Destroy(image.gameObject);
     }
 
@@ -1000,11 +1000,11 @@ public class DynamicWindow : MonoBehaviour
         }
 
         SpawnedDefenseImages.Remove(image);
-        SpawnedTargetDefenseImages.Remove(image);
+        //SpawnedTargetDefenseImages.Remove(image);
         Destroy(image.gameObject);
     }
 
-    public void StartAttacks(List<Move> moves, List<float> delays = null)
+    public void StartAttacks(List<Move> moves, List<float> delays, RectTransform container, Image prefab)
     {
         StopAttacks();
 
@@ -1020,7 +1020,7 @@ public class DynamicWindow : MonoBehaviour
                 continue;
             }
 
-            Image image = Instantiate(AttacksPrefab, AttacksContainer, false);
+            Image image = Instantiate(prefab, container, false);
             image.raycastTarget = false;
             SpawnedAttackImages.Add(image);
 
@@ -1029,8 +1029,8 @@ public class DynamicWindow : MonoBehaviour
             AttackCoroutines.Add(coroutine);
         }
 
-        HorizontalLayoutGroup attacksLayoutGroup = AttacksContainer.GetComponent<HorizontalLayoutGroup>();
-        float availableWidthAttacks = AttacksContainer.rect.width - attacksLayoutGroup.padding.left - attacksLayoutGroup.padding.right;
+        HorizontalLayoutGroup attacksLayoutGroup = container.GetComponent<HorizontalLayoutGroup>();
+        float availableWidthAttacks = container.rect.width - attacksLayoutGroup.padding.left - attacksLayoutGroup.padding.right;
         float totalAttackImageWidths = 0f;
         foreach (Image image in SpawnedAttackImages)
         {
@@ -1043,7 +1043,7 @@ public class DynamicWindow : MonoBehaviour
         attacksLayoutGroup.spacing = attacksLayoutGroupSpacing;
     }
 
-    public void StartDefenses(List<Move> moves, List<float> delays = null)
+    public void StartDefenses(List<Move> moves, List<float> delays, RectTransform container, Image prefab)
     {
         StopDefenses();
 
@@ -1059,7 +1059,7 @@ public class DynamicWindow : MonoBehaviour
                 continue;
             }
 
-            Image image = Instantiate(DefensesPrefab, DefensesContainer, false);
+            Image image = Instantiate(prefab, container, false);
             image.raycastTarget = false;
             SpawnedDefenseImages.Add(image);
 
@@ -1068,8 +1068,8 @@ public class DynamicWindow : MonoBehaviour
             DefenseCoroutines.Add(coroutine);
         }
 
-        HorizontalLayoutGroup defensesLayoutGroup = DefensesContainer.GetComponent<HorizontalLayoutGroup>();
-        float availableWidthDefenses = DefensesContainer.rect.width - defensesLayoutGroup.padding.left - defensesLayoutGroup.padding.right;
+        HorizontalLayoutGroup defensesLayoutGroup = container.GetComponent<HorizontalLayoutGroup>();
+        float availableWidthDefenses = container.rect.width - defensesLayoutGroup.padding.left - defensesLayoutGroup.padding.right;
         float totalDefenseImageWidths = 0f;
         foreach (Image image in SpawnedDefenseImages)
         {
@@ -1124,7 +1124,7 @@ public class DynamicWindow : MonoBehaviour
 
             Image image = Instantiate(TargetAttacksPrefab, TargetAttacksContainer, false);
             image.raycastTarget = false;
-            SpawnedTargetAttackImages.Add(image);
+            SpawnedAttackImages.Add(image);
 
             float delay = delays != null && i < delays.Count ? Mathf.Max(0f, delays[i]) : 0f;
             Coroutine coroutine = StartCoroutine(PlayAttack(image, animation, delay));
@@ -1134,12 +1134,12 @@ public class DynamicWindow : MonoBehaviour
         HorizontalLayoutGroup attacksLayoutGroup = TargetAttacksContainer.GetComponent<HorizontalLayoutGroup>();
         float availableWidthAttacks = TargetAttacksContainer.rect.width - attacksLayoutGroup.padding.left - attacksLayoutGroup.padding.right;
         float totalAttackImageWidths = 0f;
-        foreach (Image image in SpawnedTargetAttackImages)
+        foreach (Image image in SpawnedAttackImages)
         {
             totalAttackImageWidths += image.rectTransform.rect.width;
         }
-        float attacksLayoutGroupSpacing = SpawnedTargetAttackImages.Count > 1
-            ? Mathf.Min(0f, (availableWidthAttacks - totalAttackImageWidths) / (SpawnedTargetAttackImages.Count - 1))
+        float attacksLayoutGroupSpacing = SpawnedAttackImages.Count > 1
+            ? Mathf.Min(0f, (availableWidthAttacks - totalAttackImageWidths) / (SpawnedAttackImages.Count - 1))
             : 0f;
 
         attacksLayoutGroup.spacing = attacksLayoutGroupSpacing;
@@ -1163,7 +1163,7 @@ public class DynamicWindow : MonoBehaviour
 
             Image image = Instantiate(TargetDefensesPrefab, TargetDefensesContainer, false);
             image.raycastTarget = false;
-            SpawnedTargetDefenseImages.Add(image);
+            SpawnedDefenseImages.Add(image);
 
             float delay = delays != null && i < delays.Count ? Mathf.Max(0f, delays[i]) : 0f;
             Coroutine coroutine = StartCoroutine(PlayDefense(image, animation, delay));
@@ -1200,12 +1200,12 @@ public class DynamicWindow : MonoBehaviour
         }
         SpawnedAttackImages.Clear();
 
-        foreach (Image image in SpawnedTargetAttackImages)
+        /*foreach (Image image in SpawnedTargetAttackImages)
         {
             if (image != null)
                 Destroy(image.gameObject);
         }
-        SpawnedTargetAttackImages.Clear();
+        SpawnedTargetAttackImages.Clear();*/
     }
 
     public void StopDefenses()
@@ -1224,12 +1224,12 @@ public class DynamicWindow : MonoBehaviour
         }
         SpawnedDefenseImages.Clear();
 
-        foreach (Image image in SpawnedTargetDefenseImages)
+        /*foreach (Image image in SpawnedTargetDefenseImages)
         {
             if (image != null)
                 Destroy(image.gameObject);
         }
-        SpawnedTargetDefenseImages.Clear();
+        SpawnedTargetDefenseImages.Clear();*/
     }
 
     private void StopMotionStatement()
