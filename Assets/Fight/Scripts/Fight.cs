@@ -891,7 +891,7 @@ public class Fight : MonoBehaviour
         
         List<string> statementTexts = new List<string>();
         List<Fighter> statementFighters = new List<Fighter>();
-        GetStatements(moveEvent, statementTexts, statementFighters, Enums.StatementType.Attacking);
+        GetStatements(statementTexts, statementFighters, Enums.StatementType.Attacking, moveEvent.GetFighters());
 
         yield return DynamicWindow.DisplayStatements(statementTexts, statementFighters, Enums.StatementType.Attacking, GetMapArt());
         
@@ -1288,17 +1288,27 @@ public class Fight : MonoBehaviour
                 }
         }
 
-        // Display a statement after the move
-        List<string> statementTexts = new List<string>();
-        List<Fighter> statementFighters = new List<Fighter>();
-        switch(result)
+        // Display a statement after the move, but only for the last target
+        if (target == targets[targets.Count-1])
         {
-            case Enums.HitResult.Miss:
-                {
-                    GetStatement(statementTexts, statementFighters, Enums.StatementType.TooFast, target);
-                    yield return DynamicWindow.DisplayStatements(statementTexts, statementFighters, Enums.StatementType.TooFast, GetMapArt());
-                    break;
-                }
+            List<string> statementTexts = new List<string>();
+            List<Fighter> statementFighters = new List<Fighter>();
+            switch(result)
+            {
+                case Enums.HitResult.Miss:
+                case Enums.HitResult.Avoided:
+                    {
+                        GetStatement(statementTexts, statementFighters, Enums.StatementType.TooFast, target);
+                        yield return DynamicWindow.DisplayStatements(statementTexts, statementFighters, Enums.StatementType.TooFast, GetMapArt());
+                        break;
+                    }
+                case Enums.HitResult.Blocked:
+                    {
+                        GetStatements(statementTexts, statementFighters, Enums.StatementType.Blocked, hit.GetDefenders());
+                        yield return DynamicWindow.DisplayStatements(statementTexts, statementFighters, Enums.StatementType.Blocked, GetMapArt());
+                        break;
+                    }
+            }
         }
     }
 
@@ -2479,23 +2489,16 @@ public class Fight : MonoBehaviour
         }
     }
 
-    public void GetStatements(MoveEvent moveEvent, List<string> statementTexts, List<Fighter> statementFighters, Enums.StatementType statementType)
+    public void GetStatements(List<string> statementTexts, List<Fighter> statementFighters, Enums.StatementType statementType, List<Fighter> fighters)
     {
-        switch (statementType)
+        foreach (Fighter fighter in fighters)
         {
-            case Enums.StatementType.Attacking:
-                {
-                    foreach (Fighter fighter in moveEvent.GetFighters())
-                    {
-                        string statementText = fighter.GetAI().GetStatement(statementType);
-                        if (statementText != null && statementText.Length > 0)
-                        {
-                            statementTexts.Add(statementText);
-                            statementFighters.Add(fighter);
-                        }
-                    }
-                    break;
-                }
+            string statementText = fighter.GetAI().GetStatement(statementType);
+            if (statementText != null && statementText.Length > 0)
+            {
+                statementTexts.Add(statementText);
+                statementFighters.Add(fighter);
+            }
         }
     }
 

@@ -17,7 +17,10 @@ MonoBehaviour:
   - There is more energy in water than you know!
   - I won't take it easy on you!
   AngryStatements: []
-  BlockedStatements: []
+  BlockedStatements:
+  - It will take more than that!
+  - You're underestimating my defenses!
+  - That won't be enough!
   DeflectedStatements: []
   HurtStatements: []
   TooFastStatements:

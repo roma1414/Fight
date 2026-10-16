@@ -18,7 +18,10 @@ MonoBehaviour:
   - 'You stand no chance against my blade or my magic! '
   - My power isn't from this world. Let's see how you handle it.
   AngryStatements: []
-  BlockedStatements: []
+  BlockedStatements:
+  - That won't be enough to stop me!
+  - Far too weak!
+  - My holy shield is almost impenetrable!
   DeflectedStatements: []
   HurtStatements: []
   TooFastStatements: []

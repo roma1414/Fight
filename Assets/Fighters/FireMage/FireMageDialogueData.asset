@@ -18,7 +18,10 @@ MonoBehaviour:
   - Prepare yourself. I'm not holding back!
   - This will probably destroy you!
   AngryStatements: []
-  BlockedStatements: []
+  BlockedStatements:
+  - That won't break through my defenses!
+  - Far too weak!
+  - You'll have to do better than that!
   DeflectedStatements: []
   HurtStatements: []
   TooFastStatements:

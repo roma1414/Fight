@@ -104,6 +104,10 @@ public class DialogueData : ScriptableObject
                 statementArray = TooFastStatements;
                 spokenSet = SpokenTooFastStatements;
                 break;
+            case Enums.StatementType.Blocked:
+                statementArray = BlockedStatements;
+                spokenSet = SpokenBlockedStatements;
+                break;
             default:
                 Debug.LogError($"Error! Unknown StatementType {statementType} in GetStatement!");
                 return null;

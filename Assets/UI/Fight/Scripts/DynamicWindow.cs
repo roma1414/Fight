@@ -32,6 +32,7 @@ public class DynamicWindow : MonoBehaviour
                                             SpawnedTargetDefenseImages = new List<Image>();*/
     private Coroutine                       TalkingCoroutine, MotionCoroutine;
     private List<Coroutine>                 AttackCoroutines = new List<Coroutine>(), DefenseCoroutines = new List<Coroutine>();
+    private bool                            AttacksPaused;
     public const float FIGHTER_BACKGROUND_MAX_OFFSET = -3950;
     public const float FIGHTER_X_ZERO_POINT = -128f;
     public const float STATEMENT_BACKGROUND_MAX_OFFSET = -3350f;
@@ -593,7 +594,16 @@ public class DynamicWindow : MonoBehaviour
         }
 
         Enums.HitResult hitResult = hit.GetResult();
-        StartAttacks(moveEvent.GetMoves(), animationTimes.GetAttackDelays(), AttacksContainer, AttacksPrefab);
+        Enums.TargetType targetType = moveEvent.GetTargetType();
+        if(targetType == Enums.TargetType.EnemyTeam || targetType == Enums.TargetType.AllEnemies)
+        {
+            StartAttacks(moveEvent.GetMoves(), animationTimes.GetAttackDelays(), TeamAttacksContainer, TeamAttacksPrefab);
+        }
+        else
+        {
+            StartAttacks(moveEvent.GetMoves(), animationTimes.GetAttackDelays(), AttacksContainer, AttacksPrefab);
+        }
+        
         if (hitResult == Enums.HitResult.Blocked || hitResult == Enums.HitResult.PartiallyBlocked)
         {
             StartDefenses(hit.GetDefensiveMoves(), animationTimes.GetDefenseDelays(), DefensesContainer, DefensesPrefab);
@@ -736,7 +746,7 @@ public class DynamicWindow : MonoBehaviour
         FightersPanel.SetActive(true);
         DynamicTextPanel.SetActive(true);
 
-        yield return new WaitForSeconds(.25f);
+        yield return new WaitForSeconds(1f);
         
         Enums.MoveType moveType = moveEvent.GetMoveType();
         if (moveType == Enums.MoveType.Melee || moveType == Enums.MoveType.NinTai)
@@ -748,6 +758,9 @@ public class DynamicWindow : MonoBehaviour
         StartAttacks(moveEvent.GetMoves(), animationTimes.GetAttackDelays(), TeamAttacksContainer, TeamAttacksPrefab);
 
         yield return new WaitForSeconds(animationTimes.GetImpactTime());
+
+        PauseAttacks();
+        yield return new WaitForSeconds(.5f);
 
         StopAttacks();
         AttackCoroutines.Clear();
@@ -950,26 +963,28 @@ public class DynamicWindow : MonoBehaviour
         StopTalking(emptySpriteArray);
     }
 
+    public void PauseAttacks()
+    {
+        AttacksPaused = true;
+    }
+
     private IEnumerator PlayAttack(Image image, AnimationData animation, float delay)
     {
         // Hide the image during its delay, but keep its place in the layout.
         image.enabled = false;
-        if (delay > 0f)
-        {
-            yield return new WaitForSeconds(delay);
-        }
-        image.enabled = true;
+        yield return WaitForAttack(delay);
+
         Sprite[] frames = animation.GetFrames();
         float frameDuration = 1f / animation.GetFramesPerSecond();
 
         for (int i = 0; i < frames.Length; i++)
         {
             image.sprite = frames[i];
-
+            image.enabled = true;
             // Trigger visual impact feedback here if appropriate.
             // if (i == animation.GetImpactFrame()) { ... }
 
-            yield return new WaitForSeconds(frameDuration);
+            yield return WaitForAttack(frameDuration);
         }
 
         SpawnedAttackImages.Remove(image);
@@ -981,27 +996,29 @@ public class DynamicWindow : MonoBehaviour
     {
         // Hide the image during its delay, but keep its place in the layout.
         image.enabled = false;
-        if (delay > 0f)
-        {
-            yield return new WaitForSeconds(delay);
-        }
-        image.enabled = true;
+        yield return WaitForAttack(delay);
+
         Sprite[] frames = animation.GetFrames();
         float frameDuration = 1f / animation.GetFramesPerSecond();
 
         for (int i = 0; i < frames.Length; i++)
         {
             image.sprite = frames[i];
-
+            image.enabled = true;
             // Trigger visual impact feedback here if appropriate.
             // if (i == animation.GetImpactFrame()) { ... }
 
-            yield return new WaitForSeconds(frameDuration);
+            yield return WaitForAttack(frameDuration);
         }
 
         SpawnedDefenseImages.Remove(image);
         //SpawnedTargetDefenseImages.Remove(image);
         Destroy(image.gameObject);
+    }
+
+    public void ResumeAttacks()
+    {
+        AttacksPaused = false;
     }
 
     public void StartAttacks(List<Move> moves, List<float> delays, RectTransform container, Image prefab)
@@ -1200,12 +1217,7 @@ public class DynamicWindow : MonoBehaviour
         }
         SpawnedAttackImages.Clear();
 
-        /*foreach (Image image in SpawnedTargetAttackImages)
-        {
-            if (image != null)
-                Destroy(image.gameObject);
-        }
-        SpawnedTargetAttackImages.Clear();*/
+        AttacksPaused = false;
     }
 
     public void StopDefenses()
@@ -1223,13 +1235,6 @@ public class DynamicWindow : MonoBehaviour
                 Destroy(image.gameObject);
         }
         SpawnedDefenseImages.Clear();
-
-        /*foreach (Image image in SpawnedTargetDefenseImages)
-        {
-            if (image != null)
-                Destroy(image.gameObject);
-        }
-        SpawnedTargetDefenseImages.Clear();*/
     }
 
     private void StopMotionStatement()
@@ -1251,6 +1256,21 @@ public class DynamicWindow : MonoBehaviour
             if (frames.Length > 0)
             {
                 StatementFighter.sprite = frames[0];
+            }
+        }
+    }
+
+    private IEnumerator WaitForAttack(float seconds)
+    {
+        float remaining = seconds;
+
+        while (remaining > 0f || AttacksPaused)
+        {
+            yield return null;
+
+            if (!AttacksPaused)
+            {
+                remaining -= Time.deltaTime;
             }
         }
     }
