@@ -458,7 +458,7 @@ public class Fighter : MonoBehaviour
     public Color GetDodgeColor() { return DodgeColor; }
     public Enums.FightingStyle GetFightingStyle() { return FightingStyle; }
     public int GetHealth() { return Health; }
-    public float GetHealthCo() { return .2f + .8f * Mathf.Min(1.0f, Health / 75.0f); } //+ .4f * Mathf.Min(1.0f, Mana / 75.0f); } Not considering mana anymore since it's not chakra
+    public float GetHealthCo() { return .2f + .4f * Mathf.Min(1.0f, Health / 75.0f) + .4f * Mathf.Min(1.0f, Mana / 75.0f); }
     public ulong GetID() { return ID; }
     public float GetIntelligence() { return Intelligence + GetTotalAttributeBonus(Enums.Attribute.Intelligence); }
     public float GetLevel() { return Level; }

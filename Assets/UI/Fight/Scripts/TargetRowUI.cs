@@ -42,7 +42,7 @@ public class TargetRowUI : MonoBehaviour
             NameText.text = target.GetName();
             LevelText.text = $"Level: {target.GetLevel().ToString()}";
             HealthText.text = $"Health: {target.GetHealth().ToString()}";
-            ManaText.text = $"Mana: {target.GetMana().ToString()}";
+            ManaText.text = $"Energy: {target.GetMana().ToString()}";
         }
         else
         {

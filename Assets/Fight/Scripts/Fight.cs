@@ -37,6 +37,7 @@ public class Fight : MonoBehaviour
     public const float  EASY_DODGE_SPEED_DIFF = 1.5f;
     public const float  EASY_GENJUTSU_POWER_DIFF = 1.5f;
     public const float  DEFENSIVE_MOVE_POWER_CHANGE_FROM_NATURE_ADVANTAGE = 2.0f;
+    public const float  DEFLECTED_MANA_COST = 2.0f;
     public const float  MAX_ATTACK_POWER_DIFF_TO_USE_DEFENSIVE_MOVE = 0.9f;
     public const float  MAX_MOVE_POWER_BONUS_FROM_NATURES = 0.75f;
     public const int    MAX_NUMBER_OF_ROUNDS = 100;
@@ -981,6 +982,7 @@ public class Fight : MonoBehaviour
             case Enums.HitResult.Miss:
                 {
                     resultString += "It misses " + target.GetName() + "!";
+                    target.RemoveMana((int)(1f / (float)target.GetMaxMana()));
                     break;
                 }
             case Enums.HitResult.Hit:
@@ -993,6 +995,7 @@ public class Fight : MonoBehaviour
                 {
                     resultString += "It partially hits " + target.GetName() + Util.DamageString(damage, damageType, target, attackers, false);
                     ApplyStandardDamage(damage, damageType, target, attackers);
+                    target.RemoveMana((int)(1f / (float)target.GetMaxMana()));
                     break;
                 }
             case Enums.HitResult.Blocked:
@@ -1087,10 +1090,10 @@ public class Fight : MonoBehaviour
                     }
                     bool wasEasy = hit.CheckWasEasy();
                     // TODO: Decide how much mana it should cost to deflect. Currently it takes none, used to take 25% of incoming attack mana.
-                    //int manaCostPerDefender = (int)(totalAttackMana * (0.25f) * (1f / defendersCount) + 0.5f);   // + .05 is for rounding.
+                    int manaCostPerDefender = (int)(totalAttackMana * (0.25f) * (1f / defendersCount) + 0.5f);   // + .5 is for rounding.
                     foreach (Fighter defender in defenders)
                     {
-                        //defender.RemoveMana(manaCostPerDefender);
+                        defender.RemoveMana(manaCostPerDefender);
                         if (wasEasy == true && defender.CheckTrait(Enums.Trait.TeleportationMarkDeflect) == true)
                         {
                             foreach (Fighter attacker in attackers)
@@ -1123,7 +1126,7 @@ public class Fight : MonoBehaviour
                         totalAttackMana += offensiveMoves[index].GetMana();
                     }
                     // TODO: Decide how much mana it should cost to deflect. Currently it take 25% of incoming attack mana.
-                    int manaCostPerDefender = (int)(totalAttackMana * (0.25f) * (1f / defendersCount) + 0.5f);   // .05 is for rounding.
+                    int manaCostPerDefender = (int)(totalAttackMana * (0.25f) * (1f / defendersCount) + 0.5f);   // +.5 is for rounding.
                     foreach (Fighter defender in defenders)
                     {
                         defender.RemoveMana(manaCostPerDefender);

@@ -38,7 +38,7 @@ public class SelectMoveWindow : MonoBehaviour
         NameText.text = SelectedFighter.GetName();
         RoundText.text = $"Round: {Fight.GetRoundNumber()}";
         HealthText.text = $"Health: {SelectedFighter.GetHealth()}";
-        ManaText.text = $"Mana: {SelectedFighter.GetMana()}";
+        ManaText.text = $"Energy: {100f * ((float)SelectedFighter.GetMana() / (float)SelectedFighter.GetMaxMana()):F0}";
 
         Toggle selectedTopTab = TopTabs.ActiveToggles().FirstOrDefault();
         OnTopTabClickEvent(selectedTopTab.name);
@@ -249,7 +249,7 @@ public class SelectMoveWindow : MonoBehaviour
                         target.SetName("Self");
                         target.SetLevel(SelectedFighter.GetLevel().ToString());
                         target.SetHealth(SelectedFighter.GetHealth().ToString());
-                        target.SetMana(SelectedFighter.GetMana().ToString());
+                        target.SetMana($"{100f * (float)SelectedFighter.GetMana() / (float)SelectedFighter.GetMaxMana():f0}");
                         target.SetTargetType(Enums.TargetType.Self);
                         Targets.Add(target);
                         break;
@@ -265,7 +265,7 @@ public class SelectMoveWindow : MonoBehaviour
                 targetInfo.SetName(target.GetName());
                 targetInfo.SetLevel(target.GetLevel().ToString());
                 targetInfo.SetHealth(target.GetHealth().ToString());
-                targetInfo.SetMana(target.GetMana().ToString());
+                targetInfo.SetMana($"{100f * (float)target.GetMana() / (float)target.GetMaxMana():f0}");
                 targetInfo.SetFighterTarget(target);
                 if (target.GetTeam() == SelectedFighter.GetTeam())
                 {
@@ -346,7 +346,7 @@ public class SelectMoveWindow : MonoBehaviour
                 continue;
 
             MoveRowUI row = Instantiate(MoveRowPrefab, MovesContent);
-            row.Bind(move, SelectMoveRow);
+            row.Bind(move, SelectedFighter, SelectMoveRow);
             MoveRows.Add(row);
         }
 

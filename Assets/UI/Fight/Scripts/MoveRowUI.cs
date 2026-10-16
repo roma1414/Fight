@@ -28,7 +28,7 @@ public class MoveRowUI : MonoBehaviour
         button.onClick.AddListener(HandleClick);
     }
 
-    public void Bind(Move move, Action<MoveRowUI> selectionCallback)
+    public void Bind(Move move, Fighter fighter, Action<MoveRowUI> selectionCallback)
     {
         Move = move;
         onSelected = selectionCallback;
@@ -44,7 +44,7 @@ public class MoveRowUI : MonoBehaviour
         }
 
         NameText.text = move.GetName();
-        ManaText.text = move.GetMana().ToString();
+        ManaText.text = $"{100f * (float)move.GetMana() / (float)fighter.GetMaxMana():F0}";
         TargetText.text = move.GetTargetType().ToString();
         TypeText.text = move.GetMoveType().ToString();
 

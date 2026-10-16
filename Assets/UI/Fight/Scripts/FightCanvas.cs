@@ -378,7 +378,7 @@ public class FightCanvas : MonoBehaviour
                 continue;
 
             MoveRowUI row = Instantiate(MoveRowPrefab, MovesContent);
-            row.Bind(move, SelectMoveRow);
+            row.Bind(move, SelectedFighter, SelectMoveRow);
             MoveRows.Add(row);
         }
 
