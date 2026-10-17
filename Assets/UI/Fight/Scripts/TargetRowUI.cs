@@ -8,7 +8,7 @@ public class TargetRowUI : MonoBehaviour
     [SerializeField] private Button button;
     [SerializeField] private Image background;
     [SerializeField] private TMP_Text NameText;
-    [SerializeField] private TMP_Text LevelText;
+    [SerializeField] private TMP_Text OverallText;
     [SerializeField] private TMP_Text HealthText;
     [SerializeField] private TMP_Text ManaText;
 
@@ -40,14 +40,14 @@ public class TargetRowUI : MonoBehaviour
             targetType == Enums.TargetType.TeamMembersWithStatuses)
         {
             NameText.text = target.GetName();
-            LevelText.text = $"Level: {target.GetLevel().ToString()}";
+            OverallText.text = $"Ovr: {target.GetOverall().ToString()}";
             HealthText.text = $"Health: {target.GetHealth().ToString()}";
             ManaText.text = $"Energy: {target.GetMana().ToString()}";
         }
         else
         {
             NameText.text = target.GetName();
-            LevelText.text = "";
+            OverallText.text = "";
             HealthText.text = "";
             ManaText.text = "";
         }

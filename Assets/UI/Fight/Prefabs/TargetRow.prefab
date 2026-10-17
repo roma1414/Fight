@@ -329,7 +329,7 @@ GameObject:
   - component: {fileID: 7201430180226939314}
   - component: {fileID: 3535751123048517551}
   m_Layer: 5
-  m_Name: LevelTextRow
+  m_Name: OverallTextRow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -662,7 +662,7 @@ MonoBehaviour:
   button: {fileID: 3808326135519724168}
   background: {fileID: 1948394700870482248}
   NameText: {fileID: 5720498658242449589}
-  LevelText: {fileID: 7201430180226939314}
+  OverallText: {fileID: 7201430180226939314}
   HealthText: {fileID: 3875808236781565971}
   ManaText: {fileID: 1955607247374634361}
   normalColor: {r: 0, g: 0, b: 0, a: 1}

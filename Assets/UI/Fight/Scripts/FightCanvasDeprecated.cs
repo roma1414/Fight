@@ -211,7 +211,7 @@ public class FightCanvas : MonoBehaviour
                             {
                                 Target target = new Target();
                                 target.SetName($"Team {i}");
-                                target.SetLevel("");
+                                target.SetOverall("");
                                 target.SetHealth("");
                                 target.SetMana("");
                                 target.SetTargetType(Enums.TargetType.EnemyTeam);
@@ -225,7 +225,7 @@ public class FightCanvas : MonoBehaviour
                     {
                         Target target = new Target();
                         target.SetName("All Enemies");
-                        target.SetLevel("");
+                        target.SetOverall("");
                         target.SetHealth("");
                         target.SetMana("");
                         target.SetTargetType(Enums.TargetType.AllEnemies);
@@ -258,7 +258,7 @@ public class FightCanvas : MonoBehaviour
                     {
                         Target target = new Target();
                         target.SetName($"Team {SelectedFighter.GetTeam()}");
-                        target.SetLevel("");
+                        target.SetOverall("");
                         target.SetHealth("");
                         target.SetMana("");
                         target.SetTargetType(Enums.TargetType.Team);
@@ -279,7 +279,7 @@ public class FightCanvas : MonoBehaviour
                     {
                         Target target = new Target();
                         target.SetName("Self");
-                        target.SetLevel(SelectedFighter.GetLevel().ToString());
+                        target.SetOverall($"{SelectedFighter.GetOverallRating():F1}");
                         target.SetHealth(SelectedFighter.GetHealth().ToString());
                         target.SetMana(SelectedFighter.GetMana().ToString());
                         target.SetTargetType(Enums.TargetType.Self);
@@ -295,7 +295,7 @@ public class FightCanvas : MonoBehaviour
             {
                 Target targetInfo = new Target();
                 targetInfo.SetName(target.GetName());
-                targetInfo.SetLevel(target.GetLevel().ToString());
+                targetInfo.SetOverall($"{target.GetOverallRating():F1}");
                 targetInfo.SetHealth(target.GetHealth().ToString());
                 targetInfo.SetMana(target.GetMana().ToString());
                 targetInfo.SetFighterTarget(target);

@@ -11,13 +11,13 @@ public class SelectMoveWindow : MonoBehaviour
 {
     [SerializeField] private Fight          Fight;
     [SerializeField] private Fighter        SelectedFighter;
-    [SerializeField] private TMP_Text       NameText, RoundText, HealthText, ManaText;
+    [SerializeField] private TMP_Text       NameText, RoundText, HealthText, ManaText, OverallText;
     [SerializeField] private ToggleGroup    BottomTabs, TopTabs;
     [SerializeField] private RectTransform  MovesContent;
     [SerializeField] private MoveRowUI      MoveRowPrefab;
     [SerializeField] private RectTransform  TargetsContent;
     [SerializeField] private TargetRowUI    TargetRowPrefab;
-    [SerializeField] private Image          SelectMoveBackground;
+    [SerializeField] private Image          SelectMoveBackground, Portrait;
     private bool                            SortDescending = true;
     private bool                            Advance = false;
     private List<Move>                      Moves = new List<Move>();
@@ -35,10 +35,16 @@ public class SelectMoveWindow : MonoBehaviour
     {
         SelectedFighter = fighter;
 
+        Color teamColor = Fight.GetTeamColor(SelectedFighter.GetTeam());
+        NameText.color = teamColor;
+
         NameText.text = SelectedFighter.GetName();
         RoundText.text = $"Round: {Fight.GetRoundNumber()}";
         HealthText.text = $"Health: {SelectedFighter.GetHealth()}";
         ManaText.text = $"Energy: {100f * ((float)SelectedFighter.GetMana() / (float)SelectedFighter.GetMaxMana()):F0}";
+        OverallText.text = $"{SelectedFighter.GetOverallRating():F1}";
+
+        Portrait.sprite = SelectedFighter.GetArt().GetBody();
 
         Toggle selectedTopTab = TopTabs.ActiveToggles().FirstOrDefault();
         OnTopTabClickEvent(selectedTopTab.name);
@@ -179,7 +185,7 @@ public class SelectMoveWindow : MonoBehaviour
                             {
                                 Target target = new Target();
                                 target.SetName($"Team {i}");
-                                target.SetLevel("");
+                                target.SetOverall("");
                                 target.SetHealth("");
                                 target.SetMana("");
                                 target.SetTargetType(Enums.TargetType.EnemyTeam);
@@ -193,7 +199,7 @@ public class SelectMoveWindow : MonoBehaviour
                     {
                         Target target = new Target();
                         target.SetName("All Enemies");
-                        target.SetLevel("");
+                        target.SetOverall("");
                         target.SetHealth("");
                         target.SetMana("");
                         target.SetTargetType(Enums.TargetType.AllEnemies);
@@ -226,7 +232,7 @@ public class SelectMoveWindow : MonoBehaviour
                     {
                         Target target = new Target();
                         target.SetName($"Team {SelectedFighter.GetTeam()}");
-                        target.SetLevel("");
+                        target.SetOverall("");
                         target.SetHealth("");
                         target.SetMana("");
                         target.SetTargetType(Enums.TargetType.Team);
@@ -247,7 +253,7 @@ public class SelectMoveWindow : MonoBehaviour
                     {
                         Target target = new Target();
                         target.SetName("Self");
-                        target.SetLevel(SelectedFighter.GetLevel().ToString());
+                        target.SetOverall($"{SelectedFighter.GetOverallRating():F1}");
                         target.SetHealth(SelectedFighter.GetHealth().ToString());
                         target.SetMana($"{100f * (float)SelectedFighter.GetMana() / (float)SelectedFighter.GetMaxMana():f0}");
                         target.SetTargetType(Enums.TargetType.Self);
@@ -263,7 +269,7 @@ public class SelectMoveWindow : MonoBehaviour
             {
                 Target targetInfo = new Target();
                 targetInfo.SetName(target.GetName());
-                targetInfo.SetLevel(target.GetLevel().ToString());
+                targetInfo.SetOverall($"{target.GetOverallRating():F1}");
                 targetInfo.SetHealth(target.GetHealth().ToString());
                 targetInfo.SetMana($"{100f * (float)target.GetMana() / (float)target.GetMaxMana():f0}");
                 targetInfo.SetFighterTarget(target);
