@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d5d2916c73314bb89a1ff80a53f5c6a, type: 3}
+  m_Name: HealMinorWoundsAnimationData
+  m_EditorClassIdentifier: Assembly-CSharp::AnimationData
+  Frames:
+  - {fileID: 2582757031666763945, guid: 022f35fa8871e4748878ae1aa8742c4b, type: 3}
+  - {fileID: 2085601467794073605, guid: 022f35fa8871e4748878ae1aa8742c4b, type: 3}
+  - {fileID: -9135750452731231332, guid: 022f35fa8871e4748878ae1aa8742c4b, type: 3}
+  - {fileID: -2556244851535022037, guid: 022f35fa8871e4748878ae1aa8742c4b, type: 3}
+  - {fileID: -4635682531466034254, guid: 022f35fa8871e4748878ae1aa8742c4b, type: 3}
+  - {fileID: -6224812498902815991, guid: 022f35fa8871e4748878ae1aa8742c4b, type: 3}
+  - {fileID: 2853134328573656381, guid: 022f35fa8871e4748878ae1aa8742c4b, type: 3}
+  - {fileID: 5188276078710274696, guid: 022f35fa8871e4748878ae1aa8742c4b, type: 3}
+  - {fileID: 2602945996664769638, guid: 022f35fa8871e4748878ae1aa8742c4b, type: 3}
+  - {fileID: -821855767545973418, guid: 022f35fa8871e4748878ae1aa8742c4b, type: 3}
+  - {fileID: 2736952458247246540, guid: 022f35fa8871e4748878ae1aa8742c4b, type: 3}
+  - {fileID: 6965014908597254954, guid: 022f35fa8871e4748878ae1aa8742c4b, type: 3}
+  FramesPerSecond: 12
+  ImpactFrame: 3

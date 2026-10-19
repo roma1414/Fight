@@ -130,33 +130,38 @@ public class DynamicWindow : MonoBehaviour
         TargetBackground.rectTransform.anchoredPosition = position;
 
         // Defenders (not target)
-        List<Fighter> defenders = hit.GetDefenders();
-        for (int i = 0; i < defenders.Count; i++)
+        List<Fighter> defenders = new List<Fighter>();
+        if (hit != null)
         {
-            Fighter defender = defenders[i];
-            if (defender != target)
+            defenders = hit.GetDefenders();
+            for (int i = 0; i < defenders.Count; i++)
             {
-                GameObject spawnedDefenderPanel = Instantiate(
-                    TargetDefenderPrefab,
-                    TargetDefendersContainer,
-                    false
-                );
-
-                SpawnedTargetDefenderPanels.Add(spawnedDefenderPanel);
-
-                Image spawnedDefenderImage = spawnedDefenderPanel.transform.Find("Defender").GetComponent<Image>();
-                spawnedDefenderImage.sprite = null;
-                Sprite defenderSprite = defender.GetArt().GetBody();
-                if (defenderSprite != null)
+                Fighter defender = defenders[i];
+                if (defender != target)
                 {
-                    spawnedDefenderImage.sprite = defenderSprite;
-                }
-                else
-                {
-                    Debug.LogError($"Error! Fighter {defender.GetName()} has no body sprite in ConfigureFightWindowForAttackAgainstTarget!");
+                    GameObject spawnedDefenderPanel = Instantiate(
+                        TargetDefenderPrefab,
+                        TargetDefendersContainer,
+                        false
+                    );
+
+                    SpawnedTargetDefenderPanels.Add(spawnedDefenderPanel);
+
+                    Image spawnedDefenderImage = spawnedDefenderPanel.transform.Find("Defender").GetComponent<Image>();
+                    spawnedDefenderImage.sprite = null;
+                    Sprite defenderSprite = defender.GetArt().GetBody();
+                    if (defenderSprite != null)
+                    {
+                        spawnedDefenderImage.sprite = defenderSprite;
+                    }
+                    else
+                    {
+                        Debug.LogError($"Error! Fighter {defender.GetName()} has no body sprite in ConfigureFightWindowForAttackAgainstTarget!");
+                    }
                 }
             }
         }
+        
 
         HorizontalLayoutGroup defendersLayoutGroup = TargetDefendersContainer.GetComponent<HorizontalLayoutGroup>();
         float availableWidthDefenders = TargetDefendersContainer.rect.width - defendersLayoutGroup.padding.left - defendersLayoutGroup.padding.right;
@@ -746,7 +751,7 @@ public class DynamicWindow : MonoBehaviour
         FightersPanel.SetActive(true);
         DynamicTextPanel.SetActive(true);
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(.5f);
         
         Enums.MoveType moveType = moveEvent.GetMoveType();
         if (moveType == Enums.MoveType.Melee || moveType == Enums.MoveType.NinTai)
@@ -759,8 +764,8 @@ public class DynamicWindow : MonoBehaviour
 
         yield return new WaitForSeconds(animationTimes.GetImpactTime());
 
-        PauseAttacks();
-        yield return new WaitForSeconds(.5f);
+        //PauseAttacks();
+        //yield return new WaitForSeconds(0f);
 
         StopAttacks();
         AttackCoroutines.Clear();
@@ -800,6 +805,26 @@ public class DynamicWindow : MonoBehaviour
             yield return new WaitForSeconds(2f);
 
         }
+    }
+
+    public IEnumerator DisplayMedicalMoveOnSelf(MoveEvent moveEvent, string resultString)
+    {
+        HidePanels();
+        AnimationTimes animationTimes = moveEvent.GetAnimationTimes(null);
+        ConfigureFightWindowForAttackAgainstTarget(moveEvent, null, moveEvent.GetFighters()[0]);
+        TargetPanel.SetActive(true);
+        DynamicTextPanel.SetActive(true);
+
+        yield return new WaitForSeconds(.5f);
+
+        StartDefenses(moveEvent.GetMoves(), animationTimes.GetAttackDelays(), TargetDefensesContainer, TargetDefensesPrefab);
+        DynamicText.text = resultString;
+
+        yield return new WaitUntil(() => (SpawnedAttackImages.Count == 0 && SpawnedDefenseImages.Count == 0));
+        AttackCoroutines.Clear();
+        DefenseCoroutines.Clear();
+
+        yield return new WaitForSeconds(1.25f);
     }
 
     public IEnumerator DisplayMovePreview(MoveEvent moveEvent)

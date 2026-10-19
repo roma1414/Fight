@@ -757,7 +757,7 @@ public class Fight : MonoBehaviour
         }
     }
 
-    public void ExecuteMedicalMoveEvent(MoveEvent moveEvent)
+    public IEnumerator ExecuteMedicalMoveEvent(MoveEvent moveEvent)
     {
         List<Fighter> targets = new List<Fighter>();
         Enums.TargetType targetType = moveEvent.GetTargetType();
@@ -805,6 +805,7 @@ public class Fight : MonoBehaviour
         int healthAmount = (int)(medicalMove.GetHealthAmount() * movePowerCo + .5f);    // .5 is for rounding.
         Enums.StatusType[] statusTypes = medicalMove.GetStatusTypes();
 
+        string resultsString = "";
         foreach (Fighter target in targets)
         {
             switch (healType)
@@ -815,7 +816,10 @@ public class Fight : MonoBehaviour
                         target.AddHealth(healthAmount);
                         int actualAmount = target.GetHealth() - initialHealth;
 
-                        mWriter.WriteLine(target.GetName() + " recovers " + actualAmount + " health!");
+                        string line = target.GetName() + " recovers " + actualAmount + " health!";
+                        resultsString += line + " ";
+                        mWriter.WriteLine(line);
+
                         break;
                     }
                 case Enums.HealType.Mana:
@@ -823,7 +827,9 @@ public class Fight : MonoBehaviour
                         if (target != fighter)    // A fighter cannot restore their own mana with a medical move.
                         {
                             target.AddMana(manaRestoreAmount);
-                            mWriter.WriteLine(target.GetName() + " recovers " + manaRestoreAmount + " mana!");
+                            string line = target.GetName() + " recovers " + manaRestoreAmount + " mana!";
+                            resultsString += line + " ";
+                            mWriter.WriteLine(line);
                         }
                         break;
                     }
@@ -835,7 +841,9 @@ public class Fight : MonoBehaviour
                             target.AddHealth(healthAmount);
                             int actualAmount = target.GetHealth() - initialHealth;
 
-                            mWriter.WriteLine(target.GetName() + " recovers " + actualAmount + " health!");
+                            string line = target.GetName() + " recovers " + actualAmount + " health!";
+                            resultsString += line + " ";
+                            mWriter.WriteLine(line);
                         }
                         else
                         {
@@ -845,7 +853,9 @@ public class Fight : MonoBehaviour
                             target.AddHealth(healthAmount);
                             int actualHealthAmount = target.GetHealth() - initialHealth;
 
-                            mWriter.WriteLine(target.GetName() + " recovers " + actualHealthAmount + " health and " + manaRestoreAmount + " mana!");
+                            string line = target.GetName() + " recovers " + actualHealthAmount + " health and " + manaRestoreAmount + " mana!";
+                            resultsString += line + " ";
+                            mWriter.WriteLine(line);
                         }
                         break;
                     }
@@ -872,12 +882,26 @@ public class Fight : MonoBehaviour
             {
                 target.RemoveStatus(Enums.StatusType.PsychicParalysis);
                 target.RemoveStatus(Enums.StatusType.PsychicControl);
-                mWriter.WriteLine(target.GetName() + " is released from psychic control!");
+
+                string line = target.GetName() + " is released from psychic control!";
+                resultsString += line + " ";
+                mWriter.WriteLine(line);
             }
         }
 
         fighter.RemoveMana(medicalMove.GetMana());
         fighter.AddUsedMove(medicalMove, RoundNumber);
+
+        if (moveEvent.GetFighters().Count == 1 && moveEvent.GetTargets().Count == 1 && moveEvent.GetFighters()[0] == moveEvent.GetTargets()[0])  // A fighter is using a medical move on themselves.
+        {
+            yield return DynamicWindow.DisplayMedicalMoveOnSelf(moveEvent, resultsString);
+        }
+        else
+        {
+            //yield return DynamicWindow.DisplayMedicalMoveOnTarget(moveEvent, resultsString);
+        }
+
+        yield break;
     }
 
     public IEnumerator ExecuteMoveEvent(MoveEvent originalMoveEvent)
@@ -891,8 +915,36 @@ public class Fight : MonoBehaviour
         
         List<string> statementTexts = new List<string>();
         List<Fighter> statementFighters = new List<Fighter>();
-        GetStatements(statementTexts, statementFighters, Enums.StatementType.Attacking, moveEvent.GetFighters());
 
+        Enums.StatementType statementType = Enums.StatementType.Attacking;
+        switch (moveEvent.GetMoveType())
+        {
+            case Enums.MoveType.Melee:
+            case Enums.MoveType.Spell:
+            case Enums.MoveType.Psychic:
+            case Enums.MoveType.NinTai:
+            case Enums.MoveType.Projectile:
+            case Enums.MoveType.Offensive:
+                {
+                    statementType = Enums.StatementType.Attacking;
+                    break;
+                }
+            case Enums.MoveType.PowerUp:
+            case Enums.MoveType.Medical:
+            case Enums.MoveType.Protect:
+            case Enums.MoveType.Substitution:
+            case Enums.MoveType.Clone:
+            case Enums.MoveType.Summon:
+                {
+                    statementType = Enums.StatementType.Invalid;
+                    break;
+                }
+            default:
+                Debug.LogError("Error! Unexpected MoveType [" + moveEvent.GetMoveType() + "] in Fight.ExecuteMoveEvent!");
+                break;
+        }
+
+        GetStatements(statementTexts, statementFighters, statementType, moveEvent.GetFighters());
         yield return DynamicWindow.DisplayStatements(statementTexts, statementFighters, Enums.StatementType.Attacking, GetMapArt());
         
         PrintAttackString(moveEvent);
@@ -913,7 +965,7 @@ public class Fight : MonoBehaviour
                 ExecutePowerUpMoveEvent(moveEvent);
                 break;
             case Enums.MoveType.Medical:
-                ExecuteMedicalMoveEvent(moveEvent);
+                yield return ExecuteMedicalMoveEvent(moveEvent);
                 break;
             case Enums.MoveType.Protect:
                 ExecuteProtectMoveEvent(moveEvent);
@@ -1304,6 +1356,7 @@ public class Fight : MonoBehaviour
                         yield return DynamicWindow.DisplayStatements(statementTexts, statementFighters, Enums.StatementType.TooFast, GetMapArt());
                         break;
                     }
+                case Enums.HitResult.Deflected:
                 case Enums.HitResult.Blocked:
                     {
                         GetStatements(statementTexts, statementFighters, Enums.StatementType.Blocked, hit.GetDefenders());

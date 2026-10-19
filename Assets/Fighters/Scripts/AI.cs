@@ -58,93 +58,6 @@ public class AI : ScriptableObject
             }
         }
 
-        /*
-        switch (moveType)
-        {
-            case Enums.MoveType.Melee:
-            case Enums.MoveType.Spell:
-            case Enums.MoveType.Psychic:
-            case Enums.MoveType.NinTai:
-            case Enums.MoveType.Projectile:
-                {
-                    foreach (Move offensiveMove in fighter.GetMoves(Enums.MoveType.Offensive))
-                    {
-                        if (offensiveMove.GetMoveType() == moveType && CheckIfCanPerformMove(fight, fighter, offensiveMove) == true)
-                        {
-                            result = true;
-                            break;
-                        }
-                    }
-                    break;
-                }
-            case Enums.MoveType.PowerUp:
-                {
-                    foreach (Move powerUpMove in fighter.GetMoves(Enums.MoveType.PowerUp))
-                    {
-                        if (CheckIfCanPerformMove(fight, fighter, powerUpMove) == true)
-                        {
-                            result = true;
-                            break;
-                        }
-                    }
-                    break;
-                }
-            case Enums.MoveType.Medical:
-                {
-                    foreach (Move medicalMove in fighter.GetMoves(Enums.MoveType.Medical))
-                    {
-                        if (CheckIfCanPerformMove(fight, fighter, medicalMove) == true)
-                        {
-                            result = true;
-                            break;
-                        }
-                    }
-                    break;
-                }
-            case Enums.MoveType.Substitution:
-                {
-                    foreach (Move submove in fighter.GetMoves(Enums.MoveType.Substitution))
-                    {
-                        if (CheckIfCanPerformMove(fight, fighter, submove) == true)
-                        {
-                            result = true;
-                            break;
-                        }
-                    }
-                    break;
-                }
-            case Enums.MoveType.Clone:
-                {
-                    foreach (Move cloneMove in fighter.GetMoves(Enums.MoveType.Clone))
-                    {
-                        if (CheckIfCanPerformMove(fight, fighter, cloneMove) == true)
-                        {
-                            result = true;
-                            break;
-                        }
-                    }
-                    break;
-                }
-            case Enums.MoveType.Summon:
-                {
-                    foreach (Move summonMove in fighter.GetMoves(Enums.MoveType.Summon))
-                    {
-                        if (CheckIfCanPerformMove(fight, fighter, summonMove) == true)
-                        {
-                            result = true;
-                            break;
-                        }
-                    }
-                    break;
-                }
-            default:
-                {
-                    Debug.LogError("Error! Unexpected MoveType [" + moveType + "] in AI.CheckForUsableMoves!");
-                    result = false;
-                    break;
-                }
-        }*/
-
         return result;
     }
 
@@ -160,66 +73,85 @@ public class AI : ScriptableObject
         return true;
     }
 
-    public bool CheckIfPsychicMoveHasViableTarget(Fight fight, Fighter fighter, Move move)
+    public bool CheckIfMedicalMoveHasGoodTarget(Fight fight, Fighter fighter, Move move)
     {
+        Enums.HealType healType = move.GetHealType();
+        List<Fighter> possibleTargets = new List<Fighter>();
+
         List<Enums.StatusType> requiredStatusList = move.GetRequiredTargetStatusesList();
         if (requiredStatusList.Count == 0)      // Move does not require its targets to have any statuses.
         {
             switch (move.GetTargetType())
             {
-                case Enums.TargetType.Enemy:
-                case Enums.TargetType.EnemyTeam:
-                case Enums.TargetType.AllEnemies:
+                case Enums.TargetType.TeamMember:
+                case Enums.TargetType.Team:
+                    possibleTargets = GetTeammates(fight, fighter);
+                    possibleTargets.Add(fighter); // Caster should be added to the list of potential targets.
+                    break;
+                case Enums.TargetType.Self:
+                    possibleTargets.Add(fighter);
+                    break;
+                default:
                     {
-                        List<Enums.StatusType> psychicParalysisStatusList = new List<Enums.StatusType>();
-                        psychicParalysisStatusList.Add(Enums.StatusType.PsychicParalysis);
-                        List<Enums.StatusType> psychicControlStatusList = new List<Enums.StatusType>();
-                        psychicControlStatusList.Add(Enums.StatusType.PsychicControl);
+                        Debug.LogError("Error! Unexpected target type [" + move.GetTargetType() + "] for medical move [" + move.GetName() + "] with ID [" + move.GetID() + "]!");
+                        return false;
+                    }
+            }
+        }
+        else
+        {
+            // Move does require its targets to have statuses.
+            List<Fighter> teamMembersWithRequiredStatuses = GetTeammatesWithStatuses(fight, fighter, requiredStatusList);
 
-                        List<Fighter> enemiesUnderPsychicParalysis = GetEnemiesWithStatuses(fight, fighter, psychicParalysisStatusList);
-                        List<Fighter> enemiesUnderPsychicControl = GetEnemiesWithStatuses(fight, fighter, psychicControlStatusList);
-                        List<Fighter> enemies = GetEnemies(fight, fighter);
+            bool casterHasRequiredStatuses = fighter.CheckStatuses(requiredStatusList);
+            if (casterHasRequiredStatuses)    // If caster has the required statuses they should be added to the list of potential targets.
+            {
+                teamMembersWithRequiredStatuses.Add(fighter);
+            }
 
-                        return enemies.Count > (enemiesUnderPsychicParalysis.Count + enemiesUnderPsychicControl.Count);
+            possibleTargets = teamMembersWithRequiredStatuses;
+        }
+
+        int requiredMissingHealthAmount = (int)(.75f * move.GetHealthAmount() + .5f); // .5 is for rounding
+        int requiredMissingManaAmount = (int)(.75f * move.GetManaRestoreAmount() + .5f); // .5 is for rounding
+
+        foreach (Fighter possibleTarget in possibleTargets)
+        {
+            switch (healType)
+            {
+                case Enums.HealType.Health:
+                    {
+                        if (possibleTarget.CheckIfMissingXHealth(requiredMissingHealthAmount) == true)
+                        {
+                            return true;
+                        }
+                        break;
+                    }
+                case Enums.HealType.Mana:
+                    {
+                        if (possibleTarget.CheckIfMissingXMana(requiredMissingManaAmount) == true)
+                        {
+                            return true;
+                        }
+                        break;
+                    }
+                case Enums.HealType.HealthAndMana:
+                    {
+                        if (possibleTarget.CheckIfMissingXHealth(requiredMissingHealthAmount) == true || possibleTarget.CheckIfMissingXMana(requiredMissingManaAmount) == true)
+                        {
+                            return true;
+                        }
+                        break;
                     }
                 default:
                     {
-                        Debug.LogError("Error! Unexpected target type [" + move.GetTargetType() + "] for psychic move [" + move.GetName() + "] with ID [" + move.GetID() + "]!");
+                        Debug.LogError("Error! Unexpected heal type [" + healType + "] for medical move [" + move.GetName() + "]!");
                         return false;
                     }
             }
         }
 
-        // Move does require its targets to have statuses
-        List<Fighter> enemiesWithRequiredStatuses = GetEnemiesWithStatuses(fight, fighter, requiredStatusList);
-        List<Fighter> enemiesWithRequiredStatusesNotUnderPsychic = new List<Fighter>();
-
-        foreach (Fighter enemy in enemiesWithRequiredStatuses)
-        {
-            if (enemy.CheckStatus(Enums.StatusType.PsychicParalysis) == false && enemy.CheckStatus(Enums.StatusType.PsychicControl) == false)
-            {
-                enemiesWithRequiredStatusesNotUnderPsychic.Add(enemy);
-            }
-        }
-
-        switch (move.GetTargetType())
-        {
-            case Enums.TargetType.Enemy:
-            case Enums.TargetType.EnemiesWithStatuses:
-                {
-                    if (enemiesWithRequiredStatusesNotUnderPsychic.Count > 0)
-                    {
-                        return true;
-                    }
-
-                    return false;
-                }
-            default:
-                {
-                    Debug.LogError("Error! Unexpected target type [" + move.GetTargetType() + "] for a move requiring its target to have statuses. Move [" + move.GetName() + "] with ID [" + move.GetID() + "]!");
-                    return false;
-                }
-        }
+        return false;
     }
 
     public bool CheckIfMedicalOrPowerUpMoveHasViableTarget(Fight fight, Fighter fighter, Move move)
@@ -247,7 +179,6 @@ public class AI : ScriptableObject
         List<Fighter> teamMembersWithRequiredStatuses = GetTeammatesWithStatuses(fight, fighter, requiredStatusList);
 
         bool casterHasRequiredStatuses = fighter.CheckStatuses(requiredStatusList);
-
         if (casterHasRequiredStatuses)    // If caster has the required statuses they should be added to the list of potential targets.
         {
             teamMembersWithRequiredStatuses.Add(fighter);
@@ -362,6 +293,68 @@ public class AI : ScriptableObject
             case Enums.TargetType.EnemiesWithStatuses:
                 {
                     if (enemiesWithRequiredStatuses.Count > 0)
+                    {
+                        return true;
+                    }
+
+                    return false;
+                }
+            default:
+                {
+                    Debug.LogError("Error! Unexpected target type [" + move.GetTargetType() + "] for a move requiring its target to have statuses. Move [" + move.GetName() + "] with ID [" + move.GetID() + "]!");
+                    return false;
+                }
+        }
+    }
+
+    public bool CheckIfPsychicMoveHasViableTarget(Fight fight, Fighter fighter, Move move)
+    {
+        List<Enums.StatusType> requiredStatusList = move.GetRequiredTargetStatusesList();
+        if (requiredStatusList.Count == 0)      // Move does not require its targets to have any statuses.
+        {
+            switch (move.GetTargetType())
+            {
+                case Enums.TargetType.Enemy:
+                case Enums.TargetType.EnemyTeam:
+                case Enums.TargetType.AllEnemies:
+                    {
+                        List<Enums.StatusType> psychicParalysisStatusList = new List<Enums.StatusType>();
+                        psychicParalysisStatusList.Add(Enums.StatusType.PsychicParalysis);
+                        List<Enums.StatusType> psychicControlStatusList = new List<Enums.StatusType>();
+                        psychicControlStatusList.Add(Enums.StatusType.PsychicControl);
+
+                        List<Fighter> enemiesUnderPsychicParalysis = GetEnemiesWithStatuses(fight, fighter, psychicParalysisStatusList);
+                        List<Fighter> enemiesUnderPsychicControl = GetEnemiesWithStatuses(fight, fighter, psychicControlStatusList);
+                        List<Fighter> enemies = GetEnemies(fight, fighter);
+
+                        return enemies.Count > (enemiesUnderPsychicParalysis.Count + enemiesUnderPsychicControl.Count);
+                    }
+                default:
+                    {
+                        Debug.LogError("Error! Unexpected target type [" + move.GetTargetType() + "] for psychic move [" + move.GetName() + "] with ID [" + move.GetID() + "]!");
+                        return false;
+                    }
+            }
+        }
+
+        // Move does require its targets to have statuses
+        List<Fighter> enemiesWithRequiredStatuses = GetEnemiesWithStatuses(fight, fighter, requiredStatusList);
+        List<Fighter> enemiesWithRequiredStatusesNotUnderPsychic = new List<Fighter>();
+
+        foreach (Fighter enemy in enemiesWithRequiredStatuses)
+        {
+            if (enemy.CheckStatus(Enums.StatusType.PsychicParalysis) == false && enemy.CheckStatus(Enums.StatusType.PsychicControl) == false)
+            {
+                enemiesWithRequiredStatusesNotUnderPsychic.Add(enemy);
+            }
+        }
+
+        switch (move.GetTargetType())
+        {
+            case Enums.TargetType.Enemy:
+            case Enums.TargetType.EnemiesWithStatuses:
+                {
+                    if (enemiesWithRequiredStatusesNotUnderPsychic.Count > 0)
                     {
                         return true;
                     }
@@ -727,7 +720,7 @@ public class AI : ScriptableObject
             return moveEvent;
         }
 
-        Debug.LogError("Error! Unable to find create a medical MoveEvent in AI.GetMedicalMoveEvent! Returning a Skip MoveEvent.");
+        //Debug.LogError("Error! Unable to create a medical MoveEvent in AI.GetMedicalMoveEvent! Returning a Skip MoveEvent.");
         return GetSkipMoveEvent(fighter);
     }
 
@@ -833,7 +826,9 @@ public class AI : ScriptableObject
             currentUpper += PsychicFraction;
             psychicUpper = currentUpper;
         }
-        if (MedicalFraction > 0 && CheckForUsableMoves(fight, fighter, Enums.MoveType.Medical) == true)
+        // If the AI has medical moves but none of them are reasonable, it should not select a medical move.
+        MoveEvent medicalMoveEvent = GetMedicalMoveEvent(fight, fighter);
+        if (MedicalFraction > 0 && CheckForUsableMoves(fight, fighter, Enums.MoveType.Medical) && medicalMoveEvent.GetMoveType() == Enums.MoveType.Skip)
         {
             medicalLower = currentUpper;
             currentUpper += MedicalFraction;

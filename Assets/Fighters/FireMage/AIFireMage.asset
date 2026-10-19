@@ -16,7 +16,7 @@ MonoBehaviour:
   MeleeFraction: 0
   PsychicFraction: 0
   CloneFraction: 0
-  MedicalFraction: 0
+  MedicalFraction: 0.75
   NinTaiFraction: 0
   ProjectileFraction: 0
   SubFraction: 0

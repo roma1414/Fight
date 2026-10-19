@@ -109,7 +109,7 @@ public class DialogueData : ScriptableObject
                 spokenSet = SpokenBlockedStatements;
                 break;
             default:
-                Debug.LogError($"Error! Unknown StatementType {statementType} in GetStatement!");
+                //Debug.LogError($"Error! Unknown StatementType {statementType} in GetStatement!");
                 return null;
         }
 

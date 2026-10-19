@@ -1,0 +1,646 @@
+fileFormatVersion: 2
+guid: 022f35fa8871e4748878ae1aa8742c4b
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 2582757031666763945
+    second: HealMinorWounds_0
+  - first:
+      213: 2085601467794073605
+    second: HealMinorWounds_1
+  - first:
+      213: -9135750452731231332
+    second: HealMinorWounds_2
+  - first:
+      213: -2556244851535022037
+    second: HealMinorWounds_3
+  - first:
+      213: -4635682531466034254
+    second: HealMinorWounds_4
+  - first:
+      213: -6224812498902815991
+    second: HealMinorWounds_5
+  - first:
+      213: 2853134328573656381
+    second: HealMinorWounds_6
+  - first:
+      213: 5188276078710274696
+    second: HealMinorWounds_7
+  - first:
+      213: 2602945996664769638
+    second: HealMinorWounds_8
+  - first:
+      213: -821855767545973418
+    second: HealMinorWounds_9
+  - first:
+      213: 2736952458247246540
+    second: HealMinorWounds_10
+  - first:
+      213: 6965014908597254954
+    second: HealMinorWounds_11
+  - first:
+      213: 8617250507660791910
+    second: HealMinorWounds_12
+  - first:
+      213: 3915541890890858983
+    second: HealMinorWounds_13
+  - first:
+      213: 3275225086911502157
+    second: HealMinorWounds_14
+  - first:
+      213: -1349291307575527732
+    second: HealMinorWounds_15
+  - first:
+      213: -5528729615119926409
+    second: HealMinorWounds_16
+  - first:
+      213: 8297094436926613080
+    second: HealMinorWounds_17
+  - first:
+      213: -1951882286441697563
+    second: HealMinorWounds_18
+  - first:
+      213: -2841166681963736987
+    second: HealMinorWounds_19
+  - first:
+      213: -3466290080137378845
+    second: HealMinorWounds_20
+  - first:
+      213: -8146894962640494686
+    second: HealMinorWounds_21
+  - first:
+      213: 2551387397429130121
+    second: HealMinorWounds_22
+  - first:
+      213: -725414246192311101
+    second: HealMinorWounds_23
+  - first:
+      213: -3063084210814776619
+    second: HealMinorWounds_24
+  - first:
+      213: 5701127505857338696
+    second: HealMinorWounds_25
+  - first:
+      213: -1164870814809566534
+    second: HealMinorWounds_26
+  - first:
+      213: 6548576874379811700
+    second: HealMinorWounds_27
+  - first:
+      213: 1499400819979696014
+    second: HealMinorWounds_28
+  - first:
+      213: -1483571476585437071
+    second: HealMinorWounds_29
+  - first:
+      213: 6696721527229774349
+    second: HealMinorWounds_30
+  - first:
+      213: -2172213868874559396
+    second: HealMinorWounds_31
+  - first:
+      213: -8227116873298259007
+    second: HealMinorWounds_32
+  - first:
+      213: -7430760866554879478
+    second: HealMinorWounds_33
+  - first:
+      213: 7978931491327772626
+    second: HealMinorWounds_34
+  - first:
+      213: 5658232701021930229
+    second: HealMinorWounds_35
+  - first:
+      213: 2609607381218956307
+    second: HealMinorWounds_36
+  - first:
+      213: 7901836261247653482
+    second: HealMinorWounds_37
+  - first:
+      213: 1177954122997878382
+    second: HealMinorWounds_38
+  - first:
+      213: -828235107605750590
+    second: HealMinorWounds_39
+  - first:
+      213: -1811653160167785314
+    second: HealMinorWounds_40
+  - first:
+      213: -6367104238827590730
+    second: HealMinorWounds_41
+  - first:
+      213: -8206854657091127198
+    second: HealMinorWounds_42
+  - first:
+      213: -6414104944217246632
+    second: HealMinorWounds_43
+  - first:
+      213: 7256243158979742847
+    second: HealMinorWounds_44
+  - first:
+      213: -5013797702773862621
+    second: HealMinorWounds_45
+  - first:
+      213: -6103442861862695698
+    second: HealMinorWounds_46
+  - first:
+      213: 4037084385104434015
+    second: HealMinorWounds_47
+  - first:
+      213: -2790003677483883852
+    second: HealMinorWounds_48
+  - first:
+      213: 5880372965395073030
+    second: HealMinorWounds_49
+  - first:
+      213: 700960771743073132
+    second: HealMinorWounds_50
+  - first:
+      213: -1844458126702188947
+    second: HealMinorWounds_51
+  - first:
+      213: 7844308308017202892
+    second: HealMinorWounds_52
+  - first:
+      213: -4655737990318491238
+    second: HealMinorWounds_53
+  - first:
+      213: 3463717109313032119
+    second: HealMinorWounds_54
+  - first:
+      213: 3293107385084165487
+    second: HealMinorWounds_55
+  - first:
+      213: -7398398543602810605
+    second: HealMinorWounds_56
+  - first:
+      213: 6615875694335381495
+    second: HealMinorWounds_57
+  - first:
+      213: -8207859780280718627
+    second: HealMinorWounds_58
+  - first:
+      213: 6367221252067624858
+    second: HealMinorWounds_59
+  - first:
+      213: -6208581135451385542
+    second: HealMinorWounds_60
+  - first:
+      213: 5454570373110464179
+    second: HealMinorWounds_61
+  - first:
+      213: -4982808687086145489
+    second: HealMinorWounds_62
+  - first:
+      213: -8450298191511891136
+    second: HealMinorWounds_63
+  - first:
+      213: -1537727098210538325
+    second: HealMinorWounds_64
+  - first:
+      213: 7830000686497038385
+    second: HealMinorWounds_65
+  - first:
+      213: 749649163584309280
+    second: HealMinorWounds_66
+  - first:
+      213: 33621592930240918
+    second: HealMinorWounds_67
+  - first:
+      213: 9147042930771464626
+    second: HealMinorWounds_68
+  - first:
+      213: -6457935874430297812
+    second: HealMinorWounds_69
+  - first:
+      213: 2053910221793989222
+    second: HealMinorWounds_70
+  - first:
+      213: -1094798779494654014
+    second: HealMinorWounds_71
+  - first:
+      213: 7796496859101594182
+    second: HealMinorWounds_72
+  - first:
+      213: -2358636748195322008
+    second: HealMinorWounds_73
+  - first:
+      213: 890264554118097797
+    second: HealMinorWounds_74
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: HealMinorWounds_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 362
+        width: 362
+        height: 362
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9a8c3a516dbc7d320800000000000000
+      internalID: 2582757031666763945
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HealMinorWounds_1
+      rect:
+        serializedVersion: 2
+        x: 362
+        y: 362
+        width: 362
+        height: 362
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 50826e62c7b81fc10800000000000000
+      internalID: 2085601467794073605
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HealMinorWounds_2
+      rect:
+        serializedVersion: 2
+        x: 724
+        y: 362
+        width: 362
+        height: 362
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c934754dd5b473180800000000000000
+      internalID: -9135750452731231332
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HealMinorWounds_3
+      rect:
+        serializedVersion: 2
+        x: 1086
+        y: 362
+        width: 362
+        height: 362
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b287551e9d4668cd0800000000000000
+      internalID: -2556244851535022037
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HealMinorWounds_4
+      rect:
+        serializedVersion: 2
+        x: 1448
+        y: 362
+        width: 362
+        height: 362
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2b3cb7c6c4fbaafb0800000000000000
+      internalID: -4635682531466034254
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HealMinorWounds_5
+      rect:
+        serializedVersion: 2
+        x: 1810
+        y: 362
+        width: 362
+        height: 362
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 90b6c7143060d99a0800000000000000
+      internalID: -6224812498902815991
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HealMinorWounds_6
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 362
+        height: 362
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d3dfa172e8e589720800000000000000
+      internalID: 2853134328573656381
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HealMinorWounds_7
+      rect:
+        serializedVersion: 2
+        x: 362
+        y: 0
+        width: 362
+        height: 362
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 88abe2cda95700840800000000000000
+      internalID: 5188276078710274696
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HealMinorWounds_8
+      rect:
+        serializedVersion: 2
+        x: 724
+        y: 0
+        width: 362
+        height: 362
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 66c8abcc7958f1420800000000000000
+      internalID: 2602945996664769638
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HealMinorWounds_9
+      rect:
+        serializedVersion: 2
+        x: 1086
+        y: 0
+        width: 362
+        height: 362
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 655f0d6a88e2894f0800000000000000
+      internalID: -821855767545973418
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HealMinorWounds_10
+      rect:
+        serializedVersion: 2
+        x: 1448
+        y: 0
+        width: 362
+        height: 362
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cc295f082cb9bf520800000000000000
+      internalID: 2736952458247246540
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HealMinorWounds_11
+      rect:
+        serializedVersion: 2
+        x: 1810
+        y: 0
+        width: 362
+        height: 362
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a2b3d3a3824b8a060800000000000000
+      internalID: 6965014908597254954
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 585a7756c878f48a79da84ae3e20f34e
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":6.0,"y":2.0},"gridSpriteSize":{"x":362.0,"y":362.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":2,"keepEmptyRects":false,"isAlternate":false}'
+    nameFileIdTable:
+      HealMinorWounds_0: 2582757031666763945
+      HealMinorWounds_1: 2085601467794073605
+      HealMinorWounds_10: 2736952458247246540
+      HealMinorWounds_11: 6965014908597254954
+      HealMinorWounds_2: -9135750452731231332
+      HealMinorWounds_3: -2556244851535022037
+      HealMinorWounds_4: -4635682531466034254
+      HealMinorWounds_5: -6224812498902815991
+      HealMinorWounds_6: 2853134328573656381
+      HealMinorWounds_7: 5188276078710274696
+      HealMinorWounds_8: 2602945996664769638
+      HealMinorWounds_9: -821855767545973418
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
