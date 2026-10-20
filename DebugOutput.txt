@@ -1,25 +1,60 @@
 Round 1
 
-Paladin  vs  Mystic Assassin
+Paladin  +  Fire Mage  +  Water Witch  +  Water Witch  vs  Mystic Assassin
 
-Paladin   Overall: 7.26  Health: 100  Mana: 100  Health Co = 1
+Paladin   Overall: 7.58  Health: 100  Mana: 180  Health Co = 1
+Fire Mage   Overall: 8.03  Health: 100  Mana: 180  Health Co = 1
+Water Witch   Overall: 8.03  Health: 100  Mana: 180  Health Co = 1
+Water Witch   Overall: 8.03  Health: 100  Mana: 180  Health Co = 1
 
 Mystic Assassin   Overall: 7.15  Health: 100  Mana: 140  Health Co = 1
 
 ###################################################################
 ###################################################################
 
-Paladin uses Holy Blade against Mystic Assassin!
+Mystic Assassin uses Throwing Knife against Paladin!
+It misses Paladin!
+Paladin uses Heal Team on all members of team 1!
+Paladin recovers 0 health!
+Fire Mage recovers 0 health!
+Water Witch recovers 0 health!
+Water Witch recovers 0 health!
+Water Witch uses Tsunami Wave against Team 2!
 It misses Mystic Assassin!
-Mystic Assassin uses Slash against Paladin!
-Paladin deflects it!
 
 
 Round 2
 
-Paladin  vs  Mystic Assassin
+Paladin  +  Fire Mage  +  Water Witch  +  Water Witch  vs  Mystic Assassin
 
-Paladin   Overall: 6.844693  Health: 100  Mana: 67  Health Co = 0.9573333
+Paladin   Overall: 7.448  Health: 100  Mana: 147  Health Co = 1
+Fire Mage   Overall: 8.03  Health: 100  Mana: 180  Health Co = 1
+Water Witch   Overall: 7.535  Health: 100  Mana: 125  Health Co = 1
+Water Witch   Overall: 7.535  Health: 100  Mana: 125  Health Co = 1
 
 Mystic Assassin   Overall: 7.15  Health: 100  Mana: 140  Health Co = 1
+
+###################################################################
+###################################################################
+
+Mystic Assassin uses Slash against Fire Mage!
+Fire Mage blocks it with Wall of Fire!
+Paladin uses Heal Minor Wounds on Paladin!
+Paladin recovers 0 health!
+Water Witch and Water Witch use Water Dragon and Water Dragon against Mystic Assassin!
+It hits Mystic Assassin and does 174 damage!
+Mystic Assassin is defeated!
+
+###################################################################
+###################################################################
+
+The fight is over!
+Team 1 wins!
+Number of rounds: 2
+Surviving fighters:
+
+Paladin  Health: 100  Mana: 135
+Fire Mage  Health: 100  Mana: 162
+Water Witch  Health: 100  Mana: 65
+Water Witch  Health: 100  Mana: 65
 

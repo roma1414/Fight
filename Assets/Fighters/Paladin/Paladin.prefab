@@ -53,8 +53,8 @@ MonoBehaviour:
   Intelligence: 5
   Projectile: 3
   DamageResistance: 0.2
-  Mana: 100
-  MaxMana: 100
+  Mana: 180
+  MaxMana: 180
   Health: 100
   Level: 10
   Team: 2

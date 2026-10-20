@@ -898,7 +898,7 @@ public class Fight : MonoBehaviour
         }
         else
         {
-            //yield return DynamicWindow.DisplayMedicalMoveOnTarget(moveEvent, resultsString);
+            yield return DynamicWindow.DisplayMedicalMoveOnTargets(moveEvent, resultsString);
         }
 
         yield break;

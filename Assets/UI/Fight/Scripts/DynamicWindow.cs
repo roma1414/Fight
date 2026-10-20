@@ -13,7 +13,7 @@ public class DynamicWindow : MonoBehaviour
     [SerializeField] private Fight          Fight;
     [SerializeField] private GameObject     FighterPanel, FightersPanel, DynamicTextPanel, StatementPanel, StatementTextPanel,
                                             StatementBackgroundPanel, TargetPanel, AttackersPrefab, TargetFighterPanel,
-                                            TargetDefenderPrefab;
+                                            TargetDefenderPrefab, MedicalsPrefab;
     [SerializeField] private Image          Fighter, FighterBackground, FightersBackground, StatementBackground, 
                                             StatementFighter, FightersPrefab, AttacksPrefab, TargetBackground, FightersDodge,
                                             DefensesPrefab, FightersDeflect, StatementMotionBackground, TargetDodge, TargetDeflect,
@@ -256,28 +256,32 @@ public class DynamicWindow : MonoBehaviour
         }
 
         List<Fighter> attackers = moveEvent.GetFighters();
-        for (int i = 0; i < attackers.Count; i++)
+        // Medical moves do not have attackers, so we skip this section for medical moves
+        if (moveEvent.GetMoveType() != Enums.MoveType.Medical)
         {
-            Fighter attacker = attackers[i];
-            
-            GameObject spawnedAttackerPanel = Instantiate(
-                AttackersPrefab,
-                AttackersContainer,
-                false
-            );
-
-            SpawnedAttackerPanels.Add(spawnedAttackerPanel);
-
-            Image spawnedAttackerImage = spawnedAttackerPanel.transform.Find("Attackers").GetComponent<Image>();
-            spawnedAttackerImage.sprite = null;
-            Sprite attackerSprite = attacker.GetArt().GetBack();
-            if (attackerSprite != null)
+            for (int i = 0; i < attackers.Count; i++)
             {
-                spawnedAttackerImage.sprite = attackerSprite;
-            }
-            else
-            {
-                Debug.LogError($"Error! Fighter {attacker.GetName()} has no body sprite in ConfigureFightWindowForAttack!");
+                Fighter attacker = attackers[i];
+                
+                GameObject spawnedAttackerPanel = Instantiate(
+                    AttackersPrefab,
+                    AttackersContainer,
+                    false
+                );
+
+                SpawnedAttackerPanels.Add(spawnedAttackerPanel);
+
+                Image spawnedAttackerImage = spawnedAttackerPanel.transform.Find("Attackers").GetComponent<Image>();
+                spawnedAttackerImage.sprite = null;
+                Sprite attackerSprite = attacker.GetArt().GetBack();
+                if (attackerSprite != null)
+                {
+                    spawnedAttackerImage.sprite = attackerSprite;
+                }
+                else
+                {
+                    Debug.LogError($"Error! Fighter {attacker.GetName()} has no body sprite in ConfigureFightWindowForAttack!");
+                }
             }
         }
 
@@ -817,10 +821,39 @@ public class DynamicWindow : MonoBehaviour
 
         yield return new WaitForSeconds(.5f);
 
-        StartDefenses(moveEvent.GetMoves(), animationTimes.GetAttackDelays(), TargetDefensesContainer, TargetDefensesPrefab);
+        StartAttacks(moveEvent.GetMoves(), animationTimes.GetAttackDelays(), TargetDefensesContainer, TargetDefensesPrefab);
         DynamicText.text = resultString;
 
         yield return new WaitUntil(() => (SpawnedAttackImages.Count == 0 && SpawnedDefenseImages.Count == 0));
+        AttackCoroutines.Clear();
+        DefenseCoroutines.Clear();
+
+        yield return new WaitForSeconds(1.25f);
+    }
+
+    public IEnumerator DisplayMedicalMoveOnTargets(MoveEvent moveEvent, string resultString)
+    {
+        HidePanels();
+        AnimationTimes animationTimes = moveEvent.GetAnimationTimes(null);
+        ConfigureFightWindowForAttackAgainstTargets(moveEvent, null);
+        FightersPanel.SetActive(true);
+        DynamicTextPanel.SetActive(true);
+
+        yield return new WaitForSeconds(.5f);
+        
+        // We want to display one animation per target
+        List<Move> moves = new List<Move>();
+        List<float> delays = new List<float>();
+        for (int i = 0; i < moveEvent.GetTargets().Count; i++)
+        {
+            moves.Add(moveEvent.GetMoves()[0]);
+            delays.Add(0f);
+        }
+        //Image spawnedMedicalImage = spawnedMedicalPanel.transform.Find("MedicalMove").GetComponent<Image>();
+        StartMedicals(moves, delays, DefensesContainer, MedicalsPrefab);
+        DynamicText.text = resultString;
+
+        yield return new WaitUntil(() => SpawnedAttackerPanels.Count == 0);
         AttackCoroutines.Clear();
         DefenseCoroutines.Clear();
 
@@ -980,6 +1013,7 @@ public class DynamicWindow : MonoBehaviour
         SpawnedTargetDefenderPanels.Clear();
 
         StopAttacks();
+        StopDefenses();
     }
 
     private void OnDisable()
@@ -1039,6 +1073,31 @@ public class DynamicWindow : MonoBehaviour
         SpawnedDefenseImages.Remove(image);
         //SpawnedTargetDefenseImages.Remove(image);
         Destroy(image.gameObject);
+    }
+
+    private IEnumerator PlayMedical(GameObject panel, AnimationData animation, float delay)
+    {
+        Image image = panel.transform.Find("MedicalMove").GetComponent<Image>();
+        
+        // Hide the image during its delay, but keep its place in the layout.
+        image.enabled = false;
+        yield return WaitForAttack(delay);
+
+        Sprite[] frames = animation.GetFrames();
+        float frameDuration = 1f / animation.GetFramesPerSecond();
+
+        for (int i = 0; i < frames.Length; i++)
+        {
+            image.sprite = frames[i];
+            image.enabled = true;
+            // Trigger visual impact feedback here if appropriate.
+            // if (i == animation.GetImpactFrame()) { ... }
+
+            yield return WaitForAttack(frameDuration);
+        }
+
+        SpawnedAttackerPanels.Remove(panel);
+        Destroy(panel);
     }
 
     public void ResumeAttacks()
@@ -1124,16 +1183,52 @@ public class DynamicWindow : MonoBehaviour
         defensesLayoutGroup.spacing = defensesLayoutGroupSpacing;
     }
 
-    private void StartTalking(Sprite[] frames)
+    public void StartMedicals(List<Move> moves, List<float> delays, RectTransform container, GameObject prefab)
     {
-        StopTalking(frames);
+        StopAttacks();
 
-        if (frames == null || frames.Length == 0)
-            return;
+        for (int i = 0; i < moves.Count; i++)
+        {
+            AnimationData animation = moves[i].GetAnimationData();
 
-        TalkingCoroutine = StartCoroutine(
-            AnimateTalking(frames)
-        );
+            if (animation == null ||
+                animation.GetFrames() == null ||
+                animation.GetFrames().Length == 0 ||
+                animation.GetFramesPerSecond() <= 0f)
+            {
+                continue;
+            }
+                
+            GameObject spawnedMedicalPanel = Instantiate(
+                MedicalsPrefab,
+                DefensesContainer,
+                false
+            );
+
+            SpawnedAttackerPanels.Add(spawnedMedicalPanel);
+
+            Image spawnedMedicalImage = spawnedMedicalPanel.transform.Find("MedicalMove").GetComponent<Image>();
+            spawnedMedicalImage.sprite = null;   
+            spawnedMedicalImage.raycastTarget = false;
+
+            float delay = delays != null && i < delays.Count ? Mathf.Max(0f, delays[i]) : 0f;
+            Coroutine coroutine = StartCoroutine(PlayMedical(spawnedMedicalPanel, animation, delay));
+            AttackCoroutines.Add(coroutine);
+        }
+
+        HorizontalLayoutGroup medicalsLayoutGroup = container.GetComponent<HorizontalLayoutGroup>();
+        float availableWidthMedicals = container.rect.width - medicalsLayoutGroup.padding.left - medicalsLayoutGroup.padding.right;
+        float totalMedicalsPanelWidths = 0f;
+        foreach (GameObject panel in SpawnedAttackerPanels)
+        {
+            RectTransform rectTransform = panel.GetComponent<RectTransform>();            
+            totalMedicalsPanelWidths += rectTransform.rect.width;
+        }
+        float medicalsLayoutGroupSpacing = SpawnedAttackerPanels.Count > 1
+            ? Mathf.Min(0f, (availableWidthMedicals - totalMedicalsPanelWidths) / (SpawnedAttackerPanels.Count - 1))
+            : 0f;
+
+        medicalsLayoutGroup.spacing = medicalsLayoutGroupSpacing;
     }
 
     private void StartMotionStatement(Sprite[] frames)
@@ -1145,6 +1240,18 @@ public class DynamicWindow : MonoBehaviour
 
         MotionCoroutine = StartCoroutine(
             AnimateMotionStatement(frames)
+        );
+    }
+
+    private void StartTalking(Sprite[] frames)
+    {
+        StopTalking(frames);
+
+        if (frames == null || frames.Length == 0)
+            return;
+
+        TalkingCoroutine = StartCoroutine(
+            AnimateTalking(frames)
         );
     }
 
