@@ -52,7 +52,7 @@ public class Move : ScriptableObject
     [SerializeField] protected BonusData            BonusData;
 
     [Header("Summon Move Fields")]
-    [SerializeField] protected Fighter[]  Summons;
+    [SerializeField] protected Fighter[]            Summons;
     
     public bool CheckAbsorbed() { return Absorbed; }
     public bool CheckAbsorbing() { return Absorbing; }

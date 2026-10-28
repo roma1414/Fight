@@ -6,10 +6,9 @@ public class MoveEvent
 {
     protected float                 EffectiveMoveEventCastingSpeed = 0f;
     protected Enums.MoveType        MoveType;
-    protected List<Fighter>         Fighters;
+    protected List<Fighter>         Fighters, Targets;
     protected List<Move>            Moves;
     protected List<float>           RandomAdds;
-    protected List<Fighter>         Targets;
     protected int                   TargetTeam;
     protected Enums.TargetType      TargetType;
 
@@ -162,6 +161,26 @@ public class MoveEvent
             return EffectiveMoveEventCastingSpeed;
         }
         return EffectiveMoveEventCastingSpeed; 
+    }
+
+    // Whether or not the fighter performing a medical move should be added to the list of targets for display purposes.
+    public bool CheckMedicalAddToTargets()
+    {
+        if (MoveType == Enums.MoveType.Medical && !Targets.Contains(Fighters[0]))
+        {
+            return true;
+        }
+        return false;
+    }
+
+    public bool CheckMedicalMoveOnSelf()
+    {
+        if (MoveType == Enums.MoveType.Medical && Targets[0] == Fighters[0] && Targets.Count == 1 && Fighters.Count == 1 &&
+        (TargetType == Enums.TargetType.Self || TargetType == Enums.TargetType.TeamMember || TargetType == Enums.TargetType.TeamMembersWithStatuses || TargetType == Enums.TargetType.Team))
+        {
+            return true;
+        }
+        return false;
     }
 
     //public static float GetMeleeMoveCastingSpeed(Fighter fighter, Move move, float randomAdd) { return (.5f * fighter.GetSpeed() * fighter.GetHealthCo() + .5f * fighter.GetCastingSpeed(move) + randomAdd); }

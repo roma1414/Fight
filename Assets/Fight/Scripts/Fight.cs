@@ -977,7 +977,7 @@ public class Fight : MonoBehaviour
                 //ExecuteCloneMoveEvent(moveEvent);
                 break;
             case Enums.MoveType.Summon:
-                //ExecuteSummonMoveEvent(moveEvent);
+                yield return ExecuteSummonMoveEvent(moveEvent);
                 break;
             default:
                 Debug.LogError("Error! Unexpected MoveType [" + moveType + "] in Fight.ExecuteMoveEvent!");
@@ -1505,14 +1505,47 @@ public class Fight : MonoBehaviour
         fighter.AddSub(substitution); // Will also clear any existing Substitution.
     }
 
-    /*public void ExecuteSummonMoveEvent(MoveEvent moveEvent)
+    public IEnumerator ExecuteSummonMoveEvent(MoveEvent moveEvent)
     {
-        List<Fighter> summoners = moveEvent.GetFighters();
-        List<Fighter> summoned = moveEvent.GetFighters();
-        SummonMove summonMove = moveEvent.GetSummonMoves()[0]; // There should only be one summon move, even if multiple people are performing it simulteneously.
+        Move move = moveEvent.GetMoves()[0]; // There should only be one summon move, even if multiple people are performing it.
+        int team = moveEvent.GetFighters()[0].GetTeam();
+        List<Fighter> summons = new List<Fighter>();
+        foreach (Fighter summoned in move.GetSummons())
+        {
+            Fighter instance = Instantiate(summoned);
+            instance.SetTeam(team);
+            instance.InitFighter();
 
-        // Need to make instances of the summoned fighters.
-    }*/
+            summons.Add(instance);
+            Fighters.Add(instance);
+            switch (team)
+            {
+                case 1:
+                    Team1.Add(instance);
+                    break;
+                case 2: 
+                    Team2.Add(instance);
+                    break;
+                case 3:
+                    Team3.Add(instance);
+                    break;
+            }
+        }
+
+        Summon summon = new Summon();
+        summon.SetMove(move);
+        summon.SetEndingRoundNumber(RoundNumber + move.GetDuration());
+        summon.SetSummoned(summons);
+        summon.SetSummoners(moveEvent.GetFighters());
+        Summons.Add(summon);
+
+        string resultString = "" + Util.ListString(summons) + "!";
+        yield return DynamicWindow.DisplaySummoning(moveEvent, resultString);
+
+
+
+        yield break;
+    }
 
     public AttackBools GetAttackBoolsForOffensiveMoves(List<Move> offensiveMoves)
     {
@@ -3142,11 +3175,19 @@ public class Fight : MonoBehaviour
     public void RemoveSummons(Fighter fighter)
     {
         List<Fighter> theirSummons = new List<Fighter>();
-        foreach (Summon summon in Summons)
+        int i = 0;
+        while (i < Summons.Count)
         {
-            if (summon.GetSummoner() == fighter)
+            Summon summon = Summons[i];
+
+            if (summon.GetSummoners().Contains(fighter))
             {
-                theirSummons.Add(summon.GetSummoned());
+                theirSummons.AddRange(summon.GetSummoned());
+                Summons.RemoveAt(i);
+            }
+            else
+            {
+                ++i;
             }
         }
 
@@ -3315,25 +3356,28 @@ public class Fight : MonoBehaviour
 
     public void UpdateSummons()
     {
-        foreach (Summon summon in Summons)
+        int i = 0;
+        while (i < Summons.Count)
         {
+            Summon summon = Summons[i];
+            
             if (RoundNumber == summon.GetEndingRoundNumber())
             {
-                mWriter.WriteLine(summon.GetSummoned().GetName() + " has disappeared!");
-                int summonerTeam = summon.GetSummoner().GetTeam();
-                switch (summonerTeam)
+                int summonerTeam = summon.GetSummoners()[0].GetTeam();
+
+                foreach (Fighter summoned in summon.GetSummoned())
                 {
-                    case 1:
-                        Team1.Remove(summon.GetSummoned());
-                        break;
-                    case 2:
-                        Team2.Remove(summon.GetSummoned());
-                        break;
-                    case 3:
-                        Team3.Remove(summon.GetSummoned());
-                        break;
+                    mWriter.WriteLine(summoned.GetName() + " has disappeared!");
+                    List<Fighter> teamList = GetTeamList(summonerTeam);
+                    teamList.Remove(summoned);
+                    Fighters.Remove(summoned);
                 }
-                Fighters.Remove(summon.GetSummoned());
+
+                Summons.RemoveAt(i);
+            }
+            else
+            {
+                ++i;
             }
         }
     }

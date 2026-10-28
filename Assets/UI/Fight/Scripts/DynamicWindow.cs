@@ -13,9 +13,9 @@ public class DynamicWindow : MonoBehaviour
     [SerializeField] private Fight          Fight;
     [SerializeField] private GameObject     FighterPanel, FightersPanel, DynamicTextPanel, StatementPanel, StatementTextPanel,
                                             StatementBackgroundPanel, TargetPanel, AttackersPrefab, TargetFighterPanel,
-                                            TargetDefenderPrefab, MedicalsPrefab;
+                                            TargetDefenderPrefab, MedicalsPrefab, FightersPrefab;
     [SerializeField] private Image          Fighter, FighterBackground, FightersBackground, StatementBackground, 
-                                            StatementFighter, FightersPrefab, AttacksPrefab, TargetBackground, FightersDodge,
+                                            StatementFighter, AttacksPrefab, TargetBackground, FightersDodge,
                                             DefensesPrefab, FightersDeflect, StatementMotionBackground, TargetDodge, TargetDeflect,
                                             TargetAttacksPrefab, TargetDefensesPrefab, TeamAttacksPrefab;
     [SerializeField] private TMP_Text       DynamicText, StatementText, StatementFighterName;
@@ -26,9 +26,9 @@ public class DynamicWindow : MonoBehaviour
     [SerializeField] private List<string>   StatementAnimations, FighterAnimations;
     private int                             PreviousStatementAnimation = -1, PreviousFighterAnimation = -1;
     private List<GameObject>                SpawnedAttackerPanels = new List<GameObject>(), SpawnedFightersDefenderPanels = new List<GameObject>(),
-                                            SpawnedTargetDefenderPanels = new List<GameObject>();
-    private List<Image>                     SpawnedAttackImages = new List<Image>(), SpawnedDefenseImages = new List<Image>(),
-                                            SpawnedFighterImages = new List<Image>();/*, SpawnedTargetAttackImages = new List<Image>(),
+                                            SpawnedTargetDefenderPanels = new List<GameObject>(), SpawnedFightersPanels = new List<GameObject>();
+    private List<Image>                     SpawnedAttackImages = new List<Image>(), SpawnedDefenseImages = new List<Image>();
+                                            /*SpawnedFighterImages = new List<Image>(), SpawnedTargetAttackImages = new List<Image>(),
                                             SpawnedTargetDefenseImages = new List<Image>();*/
     private Coroutine                       TalkingCoroutine, MotionCoroutine;
     private List<Coroutine>                 AttackCoroutines = new List<Coroutine>(), DefenseCoroutines = new List<Coroutine>();
@@ -182,6 +182,7 @@ public class DynamicWindow : MonoBehaviour
 
     public void ConfigureFightWindowForAttackAgainstTargets(MoveEvent moveEvent, Hit hit)
     {
+        List<Fighter> attackers = moveEvent.GetFighters();
         List<Fighter> targets = moveEvent.GetTargets();
         int targetTeam = targets[0].GetTeam();
         FightersBackground.sprite = Fight.GetMapArt().GetBackground(targetTeam);
@@ -232,16 +233,33 @@ public class DynamicWindow : MonoBehaviour
         position.x = offset;
         FightersBackground.rectTransform.anchoredPosition = position;
 
-        for (int i = 0; i < targets.Count; i++)
+        // Add the Fighter performing the medical move to the list of targets if it is not already included
+        List<Fighter> displayTargets = new List<Fighter>(targets);
+        bool medicalAddToTargets = moveEvent.CheckMedicalAddToTargets();
+        if (medicalAddToTargets == true)
         {
-            Fighter target = targets[i];
-            
-            Image spawnedTargetImage = Instantiate(
+            displayTargets.Add(attackers[0]);
+        }
+        for (int i = 0; i < displayTargets.Count; i++)
+        {
+            Fighter target = displayTargets[i];
+
+            GameObject spawnedTargetPanel = Instantiate(
                 FightersPrefab,
                 FightersContainer,
                 false
             );
-            SpawnedFighterImages.Add(spawnedTargetImage);
+
+            SpawnedFightersPanels.Add(spawnedTargetPanel);
+
+            Image spawnedTargetImage = spawnedTargetPanel.transform.Find("Fighters").GetComponent<Image>();
+
+            /*Image spawnedTargetImage = Instantiate(
+                FightersPrefab,
+                FightersContainer,
+                false
+            );
+            SpawnedFighterImages.Add(spawnedTargetImage);*/
 
             spawnedTargetImage.sprite = null;
             Sprite targetSprite = target.GetArt().GetBody();
@@ -255,7 +273,6 @@ public class DynamicWindow : MonoBehaviour
             }
         }
 
-        List<Fighter> attackers = moveEvent.GetFighters();
         // Medical moves do not have attackers, so we skip this section for medical moves
         if (moveEvent.GetMoveType() != Enums.MoveType.Medical)
         {
@@ -301,13 +318,14 @@ public class DynamicWindow : MonoBehaviour
 
         HorizontalLayoutGroup targetsLayoutGroup = FightersContainer.GetComponent<HorizontalLayoutGroup>();
         float availableWidthTargets = FightersContainer.rect.width - targetsLayoutGroup.padding.left - targetsLayoutGroup.padding.right;
-        float totalTargetImageWidths = 0f;
-        foreach (Image image in SpawnedFighterImages)
+        float totalTargetPanelWidths = 0f;
+        foreach (GameObject panel in SpawnedFightersPanels)
         {
-            totalTargetImageWidths += image.rectTransform.rect.width;
+            RectTransform rectTransform = panel.GetComponent<RectTransform>();
+            totalTargetPanelWidths += rectTransform.rect.width;
         }
-        float targetLayoutGroupSpacing = SpawnedFighterImages.Count > 1
-            ? Mathf.Min(0f, (availableWidthTargets - totalTargetImageWidths) / (SpawnedFighterImages.Count - 1))
+        float targetLayoutGroupSpacing = SpawnedFightersPanels.Count > 1
+            ? Mathf.Min(0f, (availableWidthTargets - totalTargetPanelWidths) / (SpawnedFightersPanels.Count - 1))
             : 0f;
 
         targetsLayoutGroup.spacing = targetLayoutGroupSpacing;
@@ -388,6 +406,7 @@ public class DynamicWindow : MonoBehaviour
         }
 
         Move move = moveEvent.GetMoves()[index];
+        bool isMedicalMoveOnSelf = moveEvent.CheckMedicalMoveOnSelf();
         string text = fighter.GetName() + " uses " + move.GetName();
 
         if (includeTargets)
@@ -395,7 +414,7 @@ public class DynamicWindow : MonoBehaviour
             List<Fighter> targets = moveEvent.GetTargets();
 
             Enums.TargetType targetType = moveEvent.GetTargetType();
-            if (targetType == Enums.TargetType.Self)
+            if (targetType == Enums.TargetType.Self || isMedicalMoveOnSelf)
                 {
                     text += "!";
                 }
@@ -486,13 +505,23 @@ public class DynamicWindow : MonoBehaviour
         for (int i = 0; i < fighters.Count; i++)
         {
             Fighter fighter = fighters[i];
-            
-            Image spawnedFighterImage = Instantiate(
+
+            GameObject spawnedFighterPanel = Instantiate(
                 FightersPrefab,
                 FightersContainer,
                 false
             );
-            SpawnedFighterImages.Add(spawnedFighterImage);
+
+            SpawnedFightersPanels.Add(spawnedFighterPanel);
+
+            Image spawnedFighterImage = spawnedFighterPanel.transform.Find("Fighters").GetComponent<Image>();
+
+            /*Image spawnedFighterImage = Instantiate(
+                FightersPrefab,
+                FightersContainer,
+                false
+            );
+            SpawnedFighterImages.Add(spawnedFighterImage);*/
 
             spawnedFighterImage.sprite = null;
             Sprite attackerSprite = fighter.GetArt().GetBody();
@@ -509,12 +538,17 @@ public class DynamicWindow : MonoBehaviour
         HorizontalLayoutGroup attackersLayoutGroup = FightersContainer.GetComponent<HorizontalLayoutGroup>();
         float availableWidthAttackers = FightersContainer.rect.width - attackersLayoutGroup.padding.left - attackersLayoutGroup.padding.right;
         float totalAttackerImageWidths = 0f;
-        foreach (Image image in SpawnedFighterImages)
+        /*foreach (Image image in SpawnedFighterImages)
         {
             totalAttackerImageWidths += image.rectTransform.rect.width;
+        }*/
+        foreach (GameObject panel in SpawnedFightersPanels)
+        {
+            RectTransform rectTransform = panel.GetComponent<RectTransform>();
+            totalAttackerImageWidths += rectTransform.rect.width;
         }
-        float attackerLayoutGroupSpacing = SpawnedFighterImages.Count > 1
-            ? Mathf.Min(0f, (availableWidthAttackers - totalAttackerImageWidths) / (SpawnedFighterImages.Count - 1))
+        float attackerLayoutGroupSpacing = SpawnedFightersPanels.Count > 1
+            ? Mathf.Min(0f, (availableWidthAttackers - totalAttackerImageWidths) / (SpawnedFightersPanels.Count - 1))
             : 0f;
 
         attackersLayoutGroup.spacing = attackerLayoutGroupSpacing;
@@ -844,13 +878,18 @@ public class DynamicWindow : MonoBehaviour
         // We want to display one animation per target
         List<Move> moves = new List<Move>();
         List<float> delays = new List<float>();
-        for (int i = 0; i < moveEvent.GetTargets().Count; i++)
+        int numberOfTargets = moveEvent.GetTargets().Count;
+        bool medicalAddToTargets = moveEvent.CheckMedicalAddToTargets();
+        if (medicalAddToTargets == true)
+        {
+            numberOfTargets += 1;
+        }
+        for (int i = 0; i < numberOfTargets; i++)
         {
             moves.Add(moveEvent.GetMoves()[0]);
             delays.Add(0f);
         }
-        //Image spawnedMedicalImage = spawnedMedicalPanel.transform.Find("MedicalMove").GetComponent<Image>();
-        StartMedicals(moves, delays, DefensesContainer, MedicalsPrefab);
+        StartMedicals(moves, delays, DefensesContainer, MedicalsPrefab, medicalAddToTargets);
         DynamicText.text = resultString;
 
         yield return new WaitUntil(() => SpawnedAttackerPanels.Count == 0);
@@ -876,6 +915,37 @@ public class DynamicWindow : MonoBehaviour
         {
             yield return DisplayAttackerMovePreview(moveEvent);
         }
+    }
+
+    public IEnumerator DisplaySummoning(MoveEvent moveEvent, string resultString)
+    {
+        HidePanels();
+        AnimationTimes animationTimes = moveEvent.GetAnimationTimes(null);
+        ConfigureFightWindowForAttackers(moveEvent);
+        FightersPanel.SetActive(true);
+        DynamicTextPanel.SetActive(true);
+        DynamicText.text = resultString;
+
+        yield return new WaitForSeconds(.5f);
+        
+        // We want to display one animation per summon
+        List<Move> moves = new List<Move>();
+        List<float> delays = new List<float>();
+        Fighter[] summonedFighters = moveEvent.GetMoves()[0].GetSummons();
+        for (int i = 0; i < summonedFighters.Length; i++)
+        {
+            moves.Add(moveEvent.GetMoves()[0]);
+            delays.Add(0f);
+        }
+        StartDefenses(moves, delays, DefensesContainer, DefensesPrefab);
+
+        yield return new WaitForSeconds(animationTimes.GetImpactTime());
+
+        yield return new WaitUntil(() => SpawnedDefenseImages.Count == 0);
+        AttackCoroutines.Clear();
+        DefenseCoroutines.Clear();
+
+        yield return new WaitForSeconds(1.25f);
     }
 
     public IEnumerator DisplayStatement(string statement, Fighter fighter, Enums.StatementType statementType, MapArt mapArt)
@@ -976,14 +1046,14 @@ public class DynamicWindow : MonoBehaviour
         DynamicTextPanel.SetActive(false);
         StatementTextPanel.SetActive(false);
 
-        foreach (Image spawnedFighterImage in SpawnedFighterImages)
+        foreach (GameObject spawnedFighterPanel in SpawnedFightersPanels)
         {
-            if (spawnedFighterImage != null)
+            if (spawnedFighterPanel != null)
             {
-                Destroy(spawnedFighterImage.gameObject);
+                Destroy(spawnedFighterPanel.gameObject);
             }
         }
-        SpawnedFighterImages.Clear();
+        SpawnedFightersPanels.Clear();
 
         foreach (GameObject spawnedAttackerPanel in SpawnedAttackerPanels)
         {
@@ -1075,7 +1145,7 @@ public class DynamicWindow : MonoBehaviour
         Destroy(image.gameObject);
     }
 
-    private IEnumerator PlayMedical(GameObject panel, AnimationData animation, float delay)
+    private IEnumerator PlayMedical(GameObject panel, AnimationData animation, float delay, bool hideAnimation = false)
     {
         Image image = panel.transform.Find("MedicalMove").GetComponent<Image>();
         
@@ -1089,7 +1159,8 @@ public class DynamicWindow : MonoBehaviour
         for (int i = 0; i < frames.Length; i++)
         {
             image.sprite = frames[i];
-            image.enabled = true;
+            // Some medical aniamtions may be hidden if the fighter was added to Targets
+            image.enabled = !hideAnimation;
             // Trigger visual impact feedback here if appropriate.
             // if (i == animation.GetImpactFrame()) { ... }
 
@@ -1183,7 +1254,7 @@ public class DynamicWindow : MonoBehaviour
         defensesLayoutGroup.spacing = defensesLayoutGroupSpacing;
     }
 
-    public void StartMedicals(List<Move> moves, List<float> delays, RectTransform container, GameObject prefab)
+    public void StartMedicals(List<Move> moves, List<float> delays, RectTransform container, GameObject prefab, bool addToTargetsForMedical)
     {
         StopAttacks();
 
@@ -1205,14 +1276,24 @@ public class DynamicWindow : MonoBehaviour
                 false
             );
 
+            // We use SpawnedAttackerPanels because it has the right types and there are no attackers for medical moves
             SpawnedAttackerPanels.Add(spawnedMedicalPanel);
 
             Image spawnedMedicalImage = spawnedMedicalPanel.transform.Find("MedicalMove").GetComponent<Image>();
+
+            if (addToTargetsForMedical && i == moves.Count - 1)
+            {
+                spawnedMedicalImage.enabled = false;
+                //continue; // Don't animate the last medical move if that fighter was added to targets
+            }
+
             spawnedMedicalImage.sprite = null;   
             spawnedMedicalImage.raycastTarget = false;
 
             float delay = delays != null && i < delays.Count ? Mathf.Max(0f, delays[i]) : 0f;
-            Coroutine coroutine = StartCoroutine(PlayMedical(spawnedMedicalPanel, animation, delay));
+            bool hideAnimation = addToTargetsForMedical && i == moves.Count - 1;
+
+            Coroutine coroutine = StartCoroutine(PlayMedical(spawnedMedicalPanel, animation, delay, hideAnimation));
             AttackCoroutines.Add(coroutine);
         }
 

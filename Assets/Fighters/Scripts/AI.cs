@@ -266,6 +266,7 @@ public class AI : ScriptableObject
             case Enums.MoveType.Defensive:
             case Enums.MoveType.Avoid:
             case Enums.MoveType.Protect:
+            case Enums.MoveType.Summon:
                 {
                     return true;
                 }

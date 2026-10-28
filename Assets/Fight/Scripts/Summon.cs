@@ -5,15 +5,15 @@ using UnityEngine;
 public class Summon
 {
     protected int           mEndingRoundNumber;
-    protected Fighter       mSummoned, mSummoner;
-    protected Move          mSummonMove;
+    protected List<Fighter> mSummoned, mSummoners;
+    protected Move          mMove;
 
     public int GetEndingRoundNumber() { return mEndingRoundNumber; }
-    public Fighter GetSummoned() { return mSummoned; }
-    public Fighter GetSummoner() { return mSummoner; }
-    public Move GetSummonMove() { return mSummonMove; }
+    public Move GetMove() { return mMove; }
+    public List<Fighter> GetSummoned() { return mSummoned; }
+    public List<Fighter> GetSummoners() { return mSummoners; }
     public void SetEndingRoundNumber(int endingRoundNumber) { mEndingRoundNumber = endingRoundNumber; }
-    public void SetSummoned(Fighter summoned) { mSummoned = summoned; }
-    public void SetSummoner(Fighter summoner) { mSummoner = summoner; }
-    public void SetSummonMove(Move summonMove) { mSummonMove = summonMove; }
+    public void SetMove(Move summonMove) { mMove = summonMove; }
+    public void SetSummoned(List<Fighter> summoned) { mSummoned = summoned; }
+    public void SetSummoners(List<Fighter> summoners) { mSummoners = summoners; }
 }

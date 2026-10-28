@@ -330,12 +330,12 @@ MonoBehaviour:
   TargetFighterPanel: {fileID: 1580960454}
   TargetDefenderPrefab: {fileID: 3798013376370700308, guid: a5e1cc1a97c79439e96b3de9650c2382, type: 3}
   MedicalsPrefab: {fileID: 6989947598756067722, guid: a1a34954e9548498ab480722672d2c98, type: 3}
+  FightersPrefab: {fileID: 4847599331589094186, guid: adcdcfa9bcbf340658441368e352331d, type: 3}
   Fighter: {fileID: 239655135}
   FighterBackground: {fileID: 236652871}
   FightersBackground: {fileID: 1085380415}
   StatementBackground: {fileID: 2117376438}
   StatementFighter: {fileID: 1708588147}
-  FightersPrefab: {fileID: 920485799604959565, guid: d1cb5ee3723234aedba49bc970192be1, type: 3}
   AttacksPrefab: {fileID: 5564402477147803579, guid: a7fe4bae21c4749c1a9deb858efb44be, type: 3}
   TargetBackground: {fileID: 1741015471}
   FightersDodge: {fileID: 628627583}
@@ -1250,6 +1250,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1384330528907906549, guid: 8b9807a644ceb409d9021bb32fcba309, type: 3}
+      propertyPath: ControlType
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3477936110841682139, guid: 8b9807a644ceb409d9021bb32fcba309, type: 3}
       propertyPath: m_Name
       value: FireMage
@@ -4778,10 +4782,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4246504691402231654, guid: 1111c416372bb4b02a672e8ca46dbb49, type: 3}
-      propertyPath: ControlType
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5664951683968972860, guid: 1111c416372bb4b02a672e8ca46dbb49, type: 3}
       propertyPath: m_LocalPosition.x
       value: 997.67236
@@ -5945,17 +5945,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.ToggleGroup
   m_AllowSwitchOff: 0
---- !u!114 &1369685906 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4246504691402231654, guid: 1111c416372bb4b02a672e8ca46dbb49, type: 3}
-  m_PrefabInstance: {fileID: 1089934232}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4feff7ba81aada2428e3ed14f8e11b54, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Fighter
 --- !u!1 &1372907745
 GameObject:
   m_ObjectHideFlags: 0
@@ -6327,6 +6316,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1244770245388760594, guid: fe1bfce988ba04d04ad76f9b731d71e1, type: 3}
+      propertyPath: ControlType
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1456250450688340999, guid: fe1bfce988ba04d04ad76f9b731d71e1, type: 3}
       propertyPath: m_Name
       value: WaterWitch
@@ -8528,17 +8521,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8696b875ec2f94bfca85204a54ec1bc0, type: 3}
---- !u!114 &1979974254 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3090061917713705068, guid: 8696b875ec2f94bfca85204a54ec1bc0, type: 3}
-  m_PrefabInstance: {fileID: 1979974253}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4feff7ba81aada2428e3ed14f8e11b54, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Fighter
 --- !u!1 &2017667604
 GameObject:
   m_ObjectHideFlags: 0
@@ -9161,12 +9143,9 @@ MonoBehaviour:
   NarutoMode: 0
   Teams: 2
   Team1:
-  - {fileID: 1369685906}
   - {fileID: 175420731}
-  - {fileID: 167373288}
-  - {fileID: 167373288}
   Team2:
-  - {fileID: 1979974254}
+  - {fileID: 167373288}
   Team3: []
   MapArt: {fileID: 11400000, guid: d2dea80629c404fd1be252fe0953eacc, type: 2}
   SelectMovePanel: {fileID: 646679249}
