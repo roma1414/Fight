@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c717ec4fe48500a4cb13774b559e8a09, type: 3}
   m_Name: AIFireMage
   m_EditorClassIdentifier: Assembly-CSharp::AI
-  SpellFraction: 0.9
+  SpellFraction: 0.8
   MeleeFraction: 0
   PsychicFraction: 0
   CloneFraction: 0
@@ -20,7 +20,7 @@ MonoBehaviour:
   NinTaiFraction: 0
   ProjectileFraction: 0
   SubFraction: 0
-  SummonFraction: 0.1
+  SummonFraction: 0.2
   CustomAI: 0
   StatementFraction: 0.5
   Dialogue: {fileID: 11400000, guid: 57ffd6e8ea3084074b7bc2671da8b0da, type: 2}

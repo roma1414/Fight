@@ -1,0 +1,76 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &7832033495795296238
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4431560189901666705}
+  - component: {fileID: 884327159696108844}
+  m_Layer: 0
+  m_Name: FireSpirit
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4431560189901666705
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7832033495795296238}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1012.99414, y: 491.60333, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &884327159696108844
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7832033495795296238}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4feff7ba81aada2428e3ed14f8e11b54, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Fighter
+  Name: Fire Spirit
+  Spellcraft: 7
+  Melee: 2
+  Psychic: 3
+  Speed: 3
+  Strength: 4
+  Intelligence: 2
+  Projectile: 1
+  DamageResistance: 0
+  Mana: 180
+  MaxMana: 180
+  Health: 100
+  Level: 5
+  Team: 0
+  ControlType: 1
+  FightingStyle: 3
+  AI: {fileID: 11400000, guid: d45113d61afa346fdaf6a2af122d7d5a, type: 2}
+  ID: 0
+  Art: {fileID: 11400000, guid: 99076003954344b51a5a14042d140a6e, type: 2}
+  Weapon: {fileID: 0}
+  Natures: 0200
+  Traits: 
+  Moves:
+  - {fileID: 11400000, guid: 3a9d010988cade8489beef962a949ca9, type: 2}
+  - {fileID: 11400000, guid: 28c53b5eb0f824e3cb1d959ec13c4b4e, type: 2}
+  - {fileID: 11400000, guid: d0d9c696314964874bed4e6bf719ab8e, type: 2}
+  - {fileID: 11400000, guid: 3b2e4194d981746b7811ed2235b6baf9, type: 2}
+  - {fileID: 11400000, guid: 5c7dcfc142d5a4211a2025e7ebe7e6fe, type: 2}
+  - {fileID: 11400000, guid: 4a9543fa68a7a4a77913fa8a8a13b6e9, type: 2}
+  DodgeColor: {r: 1, g: 0.39607844, b: 0, a: 1}

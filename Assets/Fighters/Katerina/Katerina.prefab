@@ -1,0 +1,73 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &9016119570599244216
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 611664274068945863}
+  - component: {fileID: 2429084419416812759}
+  m_Layer: 0
+  m_Name: Katerina
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &611664274068945863
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9016119570599244216}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1012.99414, y: 491.60333, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2429084419416812759
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9016119570599244216}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4feff7ba81aada2428e3ed14f8e11b54, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Fighter
+  Name: Katerina
+  Spellcraft: 8
+  Melee: 9
+  Psychic: 5
+  Speed: 8
+  Strength: 6
+  Intelligence: 9
+  Projectile: 5
+  DamageResistance: 0.2
+  Mana: 180
+  MaxMana: 180
+  Health: 100
+  Level: 10
+  Team: 0
+  ControlType: 1
+  FightingStyle: 0
+  AI: {fileID: 11400000, guid: 9b6f84bbdf4174e8bbecea77ab9a1e76, type: 2}
+  ID: 0
+  Art: {fileID: 11400000, guid: fc0c14d0886fe4f5d92ec53981b2a9be, type: 2}
+  Weapon: {fileID: 0}
+  Natures: 0d00
+  Traits: 
+  Moves:
+  - {fileID: 11400000, guid: 3b2e4194d981746b7811ed2235b6baf9, type: 2}
+  - {fileID: 11400000, guid: d4524c7d97981474f90d29d5ec441f1e, type: 2}
+  - {fileID: 11400000, guid: d866fa33696e44ff18f6d7035f88c571, type: 2}
+  DodgeColor: {r: 1, g: 0.7137255, b: 0.9137255, a: 1}

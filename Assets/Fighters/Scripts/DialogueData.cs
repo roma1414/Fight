@@ -8,7 +8,7 @@ using UnityEngine;
 public class DialogueData : ScriptableObject
 {
     [SerializeField] protected string[] AttackingStatements, AngryStatements, BlockedStatements, DeflectedStatements,
-                                        HurtStatements, TooFastStatements, VictoryStatements;
+                                        HurtStatements, TooFastStatements, VictoryStatements, SummonedStatements;
     [SerializeField] protected bool LoopDialogue = true;
     protected HashSet<int> SpokenAttackingStatements = new HashSet<int>();
     protected HashSet<int> SpokenAngryStatements = new HashSet<int>();
@@ -16,7 +16,7 @@ public class DialogueData : ScriptableObject
     protected HashSet<int> SpokenDeflectedStatements = new HashSet<int>();
     protected HashSet<int> SpokenHurtStatements = new HashSet<int>();
     protected HashSet<int> SpokenTooFastStatements = new HashSet<int>();
-    protected List<int> SpokenVictoryStatements = new List<int>();
+    protected HashSet<int> SpokenSummonedStatements = new HashSet<int>();
 
     public string GetAttackingStatement()
     {
@@ -108,6 +108,10 @@ public class DialogueData : ScriptableObject
                 statementArray = BlockedStatements;
                 spokenSet = SpokenBlockedStatements;
                 break;
+            case Enums.StatementType.Summoned:
+                statementArray = SummonedStatements;
+                spokenSet = SpokenSummonedStatements;
+                break;
             default:
                 //Debug.LogError($"Error! Unknown StatementType {statementType} in GetStatement!");
                 return null;
@@ -121,7 +125,7 @@ public class DialogueData : ScriptableObject
         List<int> availableIndices = new List<int>();
         for (int i = 0; i < statementArray.Length; i++)
         {
-            if (!SpokenTooFastStatements.Contains(i))
+            if (!spokenSet.Contains(i))
             {
                 availableIndices.Add(i);
             }

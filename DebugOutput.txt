@@ -1,42 +1,42 @@
 Round 1
 
-Fire Mage  vs  Water Witch
+Paladin  vs  Katerina
 
-Fire Mage   Overall: 8.03  Health: 100  Mana: 180  Health Co = 1
+Paladin   Overall: 7.58  Health: 100  Mana: 180  Health Co = 1
 
-Water Witch   Overall: 8.03  Health: 100  Mana: 180  Health Co = 1
+Katerina   Overall: 8.05  Health: 100  Mana: 180  Health Co = 1
 
 ###################################################################
 ###################################################################
 
-Fire Mage uses Summon Fire Spirit!
+Katerina uses Slash against Paladin!
+Paladin deflects it!
+Paladin uses Slash against Katerina!
+It misses Katerina!
 
 
 Round 2
 
-Fire Mage  +  Paladin  vs  Water Witch
+Paladin  vs  Katerina
 
-Fire Mage   Overall: 8.03  Health: 100  Mana: 180  Health Co = 1
 Paladin   Overall: 7.58  Health: 100  Mana: 180  Health Co = 1
 
-Water Witch   Overall: 8.03  Health: 100  Mana: 180  Health Co = 1
+Katerina   Overall: 8.05  Health: 100  Mana: 180  Health Co = 1
 
 ###################################################################
 ###################################################################
 
-Paladin uses Slash against Water Witch!
-Water Witch blocks it with Tsunami Wall!
-Water Witch uses Tsunami Wave against Team 1!
-Fire Mage blocks it with Fire Tempest Wall!
-Paladin blocks it with Holy Shield!
+Katerina uses Slash against Paladin!
+Paladin deflects it!
+Paladin uses Slash against Katerina!
+It misses Katerina!
 
 
 Round 3
 
-Fire Mage  +  Paladin  vs  Water Witch
+Paladin  vs  Katerina
 
-Fire Mage   Overall: 7.805  Health: 100  Mana: 155  Health Co = 1
-Paladin   Overall: 7.448  Health: 100  Mana: 147  Health Co = 1
+Paladin   Overall: 7.58  Health: 100  Mana: 180  Health Co = 1
 
-Water Witch   Overall: 7.238  Health: 100  Mana: 92  Health Co = 1
+Katerina   Overall: 8.05  Health: 100  Mana: 180  Health Co = 1
 

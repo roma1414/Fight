@@ -5,6 +5,7 @@ namespace Enums
         Invalid = -1,
         Attacking,
         TooFast,
-        Blocked
+        Blocked,
+        Summoned
     }
 }

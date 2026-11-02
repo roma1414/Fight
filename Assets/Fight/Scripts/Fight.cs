@@ -1539,10 +1539,12 @@ public class Fight : MonoBehaviour
         summon.SetSummoners(moveEvent.GetFighters());
         Summons.Add(summon);
 
-        string resultString = "" + Util.ListString(summons) + "!";
-        yield return DynamicWindow.DisplaySummoning(moveEvent, resultString);
+        yield return DynamicWindow.DisplaySummoning(moveEvent);
 
-
+        List<string> statementTexts = new List<string>();
+        List<Fighter> statementFighters = new List<Fighter>();
+        GetStatements(statementTexts, statementFighters, Enums.StatementType.Summoned, summons);
+        yield return DynamicWindow.DisplayStatements(statementTexts, statementFighters, Enums.StatementType.Summoned, GetMapArt());
 
         yield break;
     }

@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d5d2916c73314bb89a1ff80a53f5c6a, type: 3}
+  m_Name: FireSmokeAnimationData
+  m_EditorClassIdentifier: Assembly-CSharp::AnimationData
+  Frames:
+  - {fileID: 7599798220553425056, guid: b1260aac9172e466592c6d6d2676c528, type: 3}
+  - {fileID: -2032938050, guid: b1260aac9172e466592c6d6d2676c528, type: 3}
+  - {fileID: 849516020, guid: b1260aac9172e466592c6d6d2676c528, type: 3}
+  - {fileID: 1506938302, guid: b1260aac9172e466592c6d6d2676c528, type: 3}
+  - {fileID: -1875826299, guid: b1260aac9172e466592c6d6d2676c528, type: 3}
+  - {fileID: 1506938302, guid: b1260aac9172e466592c6d6d2676c528, type: 3}
+  - {fileID: -1875826299, guid: b1260aac9172e466592c6d6d2676c528, type: 3}
+  - {fileID: 1506938302, guid: b1260aac9172e466592c6d6d2676c528, type: 3}
+  - {fileID: -1875826299, guid: b1260aac9172e466592c6d6d2676c528, type: 3}
+  - {fileID: 1700497037, guid: b1260aac9172e466592c6d6d2676c528, type: 3}
+  - {fileID: -424009147, guid: b1260aac9172e466592c6d6d2676c528, type: 3}
+  - {fileID: 1017933527, guid: b1260aac9172e466592c6d6d2676c528, type: 3}
+  - {fileID: -158406009, guid: b1260aac9172e466592c6d6d2676c528, type: 3}
+  - {fileID: -224622618, guid: b1260aac9172e466592c6d6d2676c528, type: 3}
+  - {fileID: -1322713510, guid: b1260aac9172e466592c6d6d2676c528, type: 3}
+  FramesPerSecond: 10
+  ImpactFrame: 3

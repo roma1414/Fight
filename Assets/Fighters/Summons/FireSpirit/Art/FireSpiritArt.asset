@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1837d8fddf9d4fb4bbe7620dd4b1ce89, type: 3}
+  m_Name: FireSpiritArt
+  m_EditorClassIdentifier: Assembly-CSharp::FighterArt
+  Body: {fileID: 8908543768406329565, guid: 7f98a1c3fef1c40d7b474f63026f2832, type: 3}
+  Back: {fileID: -2299530567944999322, guid: 8216ed50de710445694b6b912a75321c, type: 3}
+  Deflect: {fileID: -4498227420111119773, guid: 337d1ec316d60482bb85e0a9ffeda67c, type: 3}
+  TalkingAngry: {fileID: 0}
+  TalkingFrameList:
+  - {fileID: 11400000, guid: 25d8b4b221fe0441ebca7326da2077c1, type: 2}
