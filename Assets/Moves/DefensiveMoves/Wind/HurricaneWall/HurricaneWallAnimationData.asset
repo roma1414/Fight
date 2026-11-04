@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d5d2916c73314bb89a1ff80a53f5c6a, type: 3}
+  m_Name: HurricaneWallAnimationData
+  m_EditorClassIdentifier: Assembly-CSharp::AnimationData
+  Frames:
+  - {fileID: 2475915506201181446, guid: 057069795f5a449daad4fcf7ba48e0ca, type: 3}
+  - {fileID: -122310625, guid: 057069795f5a449daad4fcf7ba48e0ca, type: 3}
+  - {fileID: 326122232, guid: 057069795f5a449daad4fcf7ba48e0ca, type: 3}
+  - {fileID: -1614925467, guid: 057069795f5a449daad4fcf7ba48e0ca, type: 3}
+  - {fileID: -760024209, guid: 057069795f5a449daad4fcf7ba48e0ca, type: 3}
+  - {fileID: 435509228, guid: 057069795f5a449daad4fcf7ba48e0ca, type: 3}
+  - {fileID: -375722006, guid: 057069795f5a449daad4fcf7ba48e0ca, type: 3}
+  - {fileID: 435509228, guid: 057069795f5a449daad4fcf7ba48e0ca, type: 3}
+  - {fileID: -760024209, guid: 057069795f5a449daad4fcf7ba48e0ca, type: 3}
+  - {fileID: 435509228, guid: 057069795f5a449daad4fcf7ba48e0ca, type: 3}
+  - {fileID: -375722006, guid: 057069795f5a449daad4fcf7ba48e0ca, type: 3}
+  - {fileID: 1503221740, guid: 057069795f5a449daad4fcf7ba48e0ca, type: 3}
+  - {fileID: 579409841, guid: 057069795f5a449daad4fcf7ba48e0ca, type: 3}
+  - {fileID: -848803308, guid: 057069795f5a449daad4fcf7ba48e0ca, type: 3}
+  - {fileID: -1441385933, guid: 057069795f5a449daad4fcf7ba48e0ca, type: 3}
+  FramesPerSecond: 12
+  ImpactFrame: 4

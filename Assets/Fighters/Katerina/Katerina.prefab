@@ -46,15 +46,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Fighter
   Name: Katerina
   Spellcraft: 8
-  Melee: 9
+  Melee: 10
   Psychic: 5
   Speed: 8
   Strength: 6
   Intelligence: 9
   Projectile: 5
   DamageResistance: 0.2
-  Mana: 180
-  MaxMana: 180
+  Mana: 220
+  MaxMana: 220
   Health: 100
   Level: 10
   Team: 0
@@ -70,4 +70,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 3b2e4194d981746b7811ed2235b6baf9, type: 2}
   - {fileID: 11400000, guid: d4524c7d97981474f90d29d5ec441f1e, type: 2}
   - {fileID: 11400000, guid: d866fa33696e44ff18f6d7035f88c571, type: 2}
+  - {fileID: 11400000, guid: 18e67cda987d94322b2df15f8743b5ea, type: 2}
+  - {fileID: 11400000, guid: 13ebf003cd3d840a18cdff8abf6705d5, type: 2}
+  - {fileID: 11400000, guid: bedf708b1151a4ff2abf84005aff0538, type: 2}
+  - {fileID: 11400000, guid: 6634f194985e94e04b15542bc91338b1, type: 2}
+  - {fileID: 11400000, guid: 06644ea03ef7a461bae7e82fb92ad3c6, type: 2}
   DodgeColor: {r: 1, g: 0.7137255, b: 0.9137255, a: 1}

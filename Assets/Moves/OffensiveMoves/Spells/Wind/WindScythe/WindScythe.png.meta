@@ -1,0 +1,760 @@
+fileFormatVersion: 2
+guid: c8ad488967d25418a968dd0d00cb3878
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -6434421340544502423
+    second: WindScythe_0
+  - first:
+      213: 568524707587111923
+    second: WindScythe_1
+  - first:
+      213: 8045225245697147587
+    second: WindScythe_2
+  - first:
+      213: -6869425705241229175
+    second: WindScythe_3
+  - first:
+      213: -6870475079654700421
+    second: WindScythe_4
+  - first:
+      213: -2825609020776525596
+    second: WindScythe_5
+  - first:
+      213: 3373321824657090130
+    second: WindScythe_6
+  - first:
+      213: 8204204139739214016
+    second: WindScythe_7
+  - first:
+      213: 8705617303601537264
+    second: WindScythe_8
+  - first:
+      213: 4856587372353578918
+    second: WindScythe_9
+  - first:
+      213: -6758217716159133263
+    second: WindScythe_10
+  - first:
+      213: -5896439955753893196
+    second: WindScythe_11
+  - first:
+      213: 1031307161467287384
+    second: WindScythe_12
+  - first:
+      213: -6551703242706402140
+    second: WindScythe_13
+  - first:
+      213: 4679111753321760288
+    second: WindScythe_14
+  - first:
+      213: -1971253097952338704
+    second: WindScythe_15
+  - first:
+      213: 9185969172653361173
+    second: WindScythe_16
+  - first:
+      213: 372838976547621705
+    second: WindScythe_17
+  - first:
+      213: -446050583168984365
+    second: WindScythe_18
+  - first:
+      213: 5446862852783244554
+    second: WindScythe_19
+  - first:
+      213: 6511119334192632567
+    second: WindScythe_20
+  - first:
+      213: -4425780413774189423
+    second: WindScythe_21
+  - first:
+      213: -7921638964851685848
+    second: WindScythe_22
+  - first:
+      213: 4520879144338850398
+    second: WindScythe_23
+  - first:
+      213: -1174091240324528536
+    second: WindScythe_24
+  - first:
+      213: 3505388022980823927
+    second: WindScythe_25
+  - first:
+      213: 6593466639531873888
+    second: WindScythe_26
+  - first:
+      213: -454283214262666236
+    second: WindScythe_27
+  - first:
+      213: 6806084413531706244
+    second: WindScythe_28
+  - first:
+      213: -4228663749692495724
+    second: WindScythe_29
+  - first:
+      213: 2729611570996939760
+    second: WindScythe_30
+  - first:
+      213: -6466736798479806710
+    second: WindScythe_31
+  - first:
+      213: -3085994114734882136
+    second: WindScythe_32
+  - first:
+      213: -7517741413712268203
+    second: WindScythe_33
+  - first:
+      213: -3468368764571555125
+    second: WindScythe_34
+  - first:
+      213: -5040969336564840873
+    second: WindScythe_35
+  - first:
+      213: 8748528649638297034
+    second: WindScythe_36
+  - first:
+      213: 689586415340144458
+    second: WindScythe_37
+  - first:
+      213: 5671965178859201070
+    second: WindScythe_38
+  - first:
+      213: -4661612044826021227
+    second: WindScythe_39
+  - first:
+      213: -6903891028616209082
+    second: WindScythe_40
+  - first:
+      213: -151293498496147158
+    second: WindScythe_41
+  - first:
+      213: 4004380494580711610
+    second: WindScythe_42
+  - first:
+      213: 5384952668497813036
+    second: WindScythe_43
+  - first:
+      213: 3998260272823978497
+    second: WindScythe_44
+  - first:
+      213: 2522732424814154535
+    second: WindScythe_45
+  - first:
+      213: 8620762585769342452
+    second: WindScythe_46
+  - first:
+      213: -6096987239607920758
+    second: WindScythe_47
+  - first:
+      213: -340620809629993004
+    second: WindScythe_48
+  - first:
+      213: 4262710659176424646
+    second: WindScythe_49
+  - first:
+      213: -5731415768264199136
+    second: WindScythe_50
+  - first:
+      213: -156201834806793658
+    second: WindScythe_51
+  - first:
+      213: -4761829618774785200
+    second: WindScythe_52
+  - first:
+      213: 4062630870267307641
+    second: WindScythe_53
+  - first:
+      213: -4010053525369176120
+    second: WindScythe_54
+  - first:
+      213: 3812452895656250044
+    second: WindScythe_55
+  - first:
+      213: 5342035060046721602
+    second: WindScythe_56
+  - first:
+      213: 463471208847212739
+    second: WindScythe_57
+  - first:
+      213: -3842768351746723960
+    second: WindScythe_58
+  - first:
+      213: -9191152214900266036
+    second: WindScythe_59
+  - first:
+      213: -6325198986825841778
+    second: WindScythe_60
+  - first:
+      213: 5615369466526664155
+    second: WindScythe_61
+  - first:
+      213: 8909580653720536180
+    second: WindScythe_62
+  - first:
+      213: -6701432518424281158
+    second: WindScythe_63
+  - first:
+      213: -2222206459595160135
+    second: WindScythe_64
+  - first:
+      213: 4950634468854421386
+    second: WindScythe_65
+  - first:
+      213: -9070125472146825014
+    second: WindScythe_66
+  - first:
+      213: -6453301739249103516
+    second: WindScythe_67
+  - first:
+      213: -7295919643229226174
+    second: WindScythe_68
+  - first:
+      213: -1348833226638347358
+    second: WindScythe_69
+  - first:
+      213: -114116485360130752
+    second: WindScythe_70
+  - first:
+      213: -920874900544722828
+    second: WindScythe_71
+  - first:
+      213: 1823949926746739407
+    second: WindScythe_72
+  - first:
+      213: -281286206758434635
+    second: WindScythe_73
+  - first:
+      213: -7562345333831149767
+    second: WindScythe_74
+  - first:
+      213: -6020545373114885574
+    second: WindScythe_75
+  - first:
+      213: 4299030275863650475
+    second: WindScythe_76
+  - first:
+      213: -7447613781075976204
+    second: WindScythe_77
+  - first:
+      213: -88413526320557571
+    second: WindScythe_78
+  - first:
+      213: -4308037096721296067
+    second: WindScythe_79
+  - first:
+      213: 8797657971499221411
+    second: WindScythe_80
+  - first:
+      213: -8349117261350281369
+    second: WindScythe_81
+  - first:
+      213: -4703998226848324198
+    second: WindScythe_82
+  - first:
+      213: 7172475149731566194
+    second: WindScythe_83
+  - first:
+      213: 4635145470032131810
+    second: WindScythe_84
+  - first:
+      213: -3240291274992776586
+    second: WindScythe_85
+  - first:
+      213: 3820452919212780941
+    second: WindScythe_86
+  - first:
+      213: 6137838061765233630
+    second: WindScythe_87
+  - first:
+      213: -5762984206152107574
+    second: WindScythe_88
+  - first:
+      213: 6626813844067593150
+    second: WindScythe_89
+  - first:
+      213: 5081300390472308728
+    second: WindScythe_90
+  - first:
+      213: -7152494805822872785
+    second: WindScythe_91
+  - first:
+      213: -2748964585326147504
+    second: WindScythe_92
+  - first:
+      213: -6656570917193962375
+    second: WindScythe_93
+  - first:
+      213: 4594437281083511855
+    second: WindScythe_94
+  - first:
+      213: -7883145677727344555
+    second: WindScythe_95
+  - first:
+      213: 5295787461560661154
+    second: WindScythe_96
+  - first:
+      213: 8374465958235769726
+    second: WindScythe_97
+  - first:
+      213: -3132550886799595505
+    second: WindScythe_98
+  - first:
+      213: 4097381457186681138
+    second: WindScythe_99
+  - first:
+      213: -1489155354073633965
+    second: WindScythe_100
+  - first:
+      213: 1223428327289356127
+    second: WindScythe_101
+  - first:
+      213: 5091065321749976875
+    second: WindScythe_102
+  - first:
+      213: -3610102994221083291
+    second: WindScythe_103
+  - first:
+      213: -4896057163380163434
+    second: WindScythe_104
+  - first:
+      213: 4738736128537515592
+    second: WindScythe_105
+  - first:
+      213: -7517462066350884634
+    second: WindScythe_106
+  - first:
+      213: 1276559933667552207
+    second: WindScythe_107
+  - first:
+      213: -7461157649874213228
+    second: WindScythe_108
+  - first:
+      213: 7218484520819523890
+    second: WindScythe_109
+  - first:
+      213: 3882681929994056325
+    second: WindScythe_110
+  - first:
+      213: 5897561913069666747
+    second: WindScythe_111
+  - first:
+      213: -429294806060016031
+    second: WindScythe_112
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: WindScythe_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 362
+        width: 362
+        height: 362
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 965f6adb1e754b6a0800000000000000
+      internalID: -6434421340544502423
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WindScythe_1
+      rect:
+        serializedVersion: 2
+        x: 362
+        y: 362
+        width: 362
+        height: 362
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3fb33c9953ec3e700800000000000000
+      internalID: 568524707587111923
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WindScythe_2
+      rect:
+        serializedVersion: 2
+        x: 724
+        y: 362
+        width: 362
+        height: 362
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3c288cb4cb166af60800000000000000
+      internalID: 8045225245697147587
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WindScythe_3
+      rect:
+        serializedVersion: 2
+        x: 1086
+        y: 362
+        width: 362
+        height: 362
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 988c82487b5eaa0a0800000000000000
+      internalID: -6869425705241229175
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WindScythe_4
+      rect:
+        serializedVersion: 2
+        x: 1448
+        y: 362
+        width: 362
+        height: 362
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b7a020ff05b27a0a0800000000000000
+      internalID: -6870475079654700421
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WindScythe_5
+      rect:
+        serializedVersion: 2
+        x: 1810
+        y: 362
+        width: 362
+        height: 362
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4e0d97af09b69c8d0800000000000000
+      internalID: -2825609020776525596
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WindScythe_6
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 362
+        height: 362
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 25622cfa35270de20800000000000000
+      internalID: 3373321824657090130
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WindScythe_7
+      rect:
+        serializedVersion: 2
+        x: 362
+        y: 0
+        width: 362
+        height: 362
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0c0f1f582303bd170800000000000000
+      internalID: 8204204139739214016
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WindScythe_8
+      rect:
+        serializedVersion: 2
+        x: 724
+        y: 0
+        width: 362
+        height: 362
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0f0e9a330d090d870800000000000000
+      internalID: 8705617303601537264
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WindScythe_9
+      rect:
+        serializedVersion: 2
+        x: 1086
+        y: 0
+        width: 362
+        height: 362
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6a768cddb70166340800000000000000
+      internalID: 4856587372353578918
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WindScythe_10
+      rect:
+        serializedVersion: 2
+        x: 1448
+        y: 0
+        width: 362
+        height: 362
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1b945913bccf532a0800000000000000
+      internalID: -6758217716159133263
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WindScythe_11
+      rect:
+        serializedVersion: 2
+        x: 1810
+        y: 0
+        width: 362
+        height: 362
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4b28ed5d913ab2ea0800000000000000
+      internalID: -5896439955753893196
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 89d58495b023d49659767991932b45a4
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":6.0,"y":2.0},"gridSpriteSize":{"x":362.0,"y":362.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":2,"keepEmptyRects":false,"isAlternate":false}'
+    nameFileIdTable:
+      WindScythe_0: -6434421340544502423
+      WindScythe_1: 568524707587111923
+      WindScythe_10: -6758217716159133263
+      WindScythe_11: -5896439955753893196
+      WindScythe_2: 8045225245697147587
+      WindScythe_3: -6869425705241229175
+      WindScythe_4: -6870475079654700421
+      WindScythe_5: -2825609020776525596
+      WindScythe_6: 3373321824657090130
+      WindScythe_7: 8204204139739214016
+      WindScythe_8: 8705617303601537264
+      WindScythe_9: 4856587372353578918
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

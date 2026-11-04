@@ -1,42 +1,250 @@
 Round 1
 
-Paladin  vs  Katerina
+Katerina  +  Fire Mage  vs  Mystic Assassin  +  Paladin  +  Water Witch
 
+Katerina   Overall: 8.5  Health: 100  Mana: 220  Health Co = 1
+Fire Mage   Overall: 8.389999  Health: 100  Mana: 220  Health Co = 1
+
+Mystic Assassin   Overall: 7.15  Health: 100  Mana: 140  Health Co = 1
 Paladin   Overall: 7.58  Health: 100  Mana: 180  Health Co = 1
-
-Katerina   Overall: 8.05  Health: 100  Mana: 180  Health Co = 1
+Water Witch   Overall: 8.389999  Health: 100  Mana: 220  Health Co = 1
 
 ###################################################################
 ###################################################################
 
-Katerina uses Slash against Paladin!
-Paladin deflects it!
-Paladin uses Slash against Katerina!
+Mystic Assassin uses Throwing Knife against Katerina!
 It misses Katerina!
+Katerina uses Double Slash against Mystic Assassin!
+It hits Mystic Assassin and does 80 damage!
+Fire Mage uses Wild Inferno against Team 2!
+It hits Mystic Assassin and does 68 damage!
+Mystic Assassin is defeated!
+Paladin partially blocks it with Holy Shield and it does 20 damage!
+Water Witch blocks it with Tsunami Wall!
 
 
 Round 2
 
-Paladin  vs  Katerina
+Katerina  +  Fire Mage  vs  Paladin  +  Water Witch
 
-Paladin   Overall: 7.58  Health: 100  Mana: 180  Health Co = 1
+Katerina   Overall: 8.49  Health: 100  Mana: 218  Health Co = 1
+Fire Mage   Overall: 8.03  Health: 100  Mana: 180  Health Co = 1
 
-Katerina   Overall: 8.05  Health: 100  Mana: 180  Health Co = 1
+Paladin   Overall: 7.448  Health: 80  Mana: 147  Health Co = 1
+Water Witch   Overall: 8.092999  Health: 100  Mana: 187  Health Co = 1
 
 ###################################################################
 ###################################################################
 
 Katerina uses Slash against Paladin!
 Paladin deflects it!
-Paladin uses Slash against Katerina!
+Paladin uses Holy Blade against Fire Mage!
+Fire Mage blocks it with Fire Tempest Wall!
+Water Witch uses Tsunami Wave against Team 1!
 It misses Katerina!
+Fire Mage blocks it with Fire Tempest Wall!
 
 
 Round 3
 
-Paladin  vs  Katerina
+Katerina  +  Fire Mage  vs  Paladin  +  Water Witch
 
-Paladin   Overall: 7.58  Health: 100  Mana: 180  Health Co = 1
+Katerina   Overall: 8.485  Health: 100  Mana: 217  Health Co = 1
+Fire Mage   Overall: 7.58  Health: 100  Mana: 130  Health Co = 1
 
-Katerina   Overall: 8.05  Health: 100  Mana: 180  Health Co = 1
+Paladin   Overall: 7.316  Health: 80  Mana: 114  Health Co = 1
+Water Witch   Overall: 7.598  Health: 100  Mana: 132  Health Co = 1
+
+###################################################################
+###################################################################
+
+Katerina uses Wind Bullets against Paladin!
+Paladin blocks it with Holy Shield!
+Paladin uses Holy Blade against Fire Mage!
+Fire Mage blocks it with Fire Tempest Wall!
+Fire Mage uses Fire Storm against Team 2!
+Paladin blocks it with Holy Shield!
+Water Witch blocks it with Wall of Water!
+Water Witch uses Magic Missile against Katerina!
+It misses Katerina!
+
+
+Round 4
+
+Katerina  +  Fire Mage  vs  Paladin  +  Water Witch
+
+Katerina   Overall: 8.44  Health: 100  Mana: 208  Health Co = 1
+Fire Mage   Overall: 6.990733  Health: 100  Mana: 65  Health Co = 0.9466667
+
+Paladin   Overall: 4.7952  Health: 80  Mana: 15  Health Co = 0.68
+Water Witch   Overall: 7.355  Health: 100  Mana: 105  Health Co = 1
+
+###################################################################
+###################################################################
+
+Katerina uses Wind Bullets against Paladin!
+It hits Paladin and does 28 damage!
+Paladin uses Slash against Katerina!
+It misses Katerina!
+Water Witch uses Tsunami Wave against Team 1!
+Katerina partially blocks it with Hurricane Wall and it does 32 damage!
+Fire Mage blocks it with Fire Tempest Wall!
+
+
+Round 5
+
+Katerina  +  Fire Mage  vs  Paladin  +  Water Witch
+
+Katerina   Overall: 8.1394  Health: 68  Mana: 177  Health Co = 0.9626667
+Fire Mage   Overall: 6.755066  Health: 100  Mana: 40  Health Co = 0.8133333
+
+Paladin   Overall: 3.94128  Health: 52  Mana: 14  Health Co = 0.552
+Water Witch   Overall: 6.849333  Health: 100  Mana: 50  Health Co = 0.8666667
+
+###################################################################
+###################################################################
+
+Katerina uses Double Slash against Water Witch!
+Water Witch blocks it with Wall of Water!
+Paladin uses Slash against Katerina!
+It misses Katerina!
+Water Witch uses Water Dragon against Fire Mage!
+Fire Mage blocks it with Fire Tempest Wall!
+
+
+Round 6
+
+Katerina  +  Fire Mage  vs  Paladin  +  Water Witch
+
+Katerina   Overall: 8.1294  Health: 68  Mana: 175  Health Co = 0.9626667
+Fire Mage   Overall: 6.5194  Health: 100  Mana: 15  Health Co = 0.68
+
+Paladin   Overall: 3.901867  Health: 52  Mana: 13  Health Co = 0.5466667
+Water Witch   Overall: 6.396853  Health: 100  Mana: 2  Health Co = 0.6106667
+
+###################################################################
+###################################################################
+
+Paladin uses Slash against Fire Mage!
+It hits Fire Mage and does 24 damage!
+Fire Mage uses Magic Missile against Paladin!
+Paladin blocks it with Shield!
+
+
+Round 7
+
+Katerina  +  Fire Mage  vs  Paladin  +  Water Witch
+
+Katerina   Overall: 8.1294  Health: 68  Mana: 175  Health Co = 0.9626667
+Fire Mage   Overall: 6.43456  Health: 76  Mana: 6  Health Co = 0.632
+
+Paladin   Overall: 3.862453  Health: 52  Mana: 12  Health Co = 0.5413333
+Water Witch   Overall: 6.396853  Health: 100  Mana: 2  Health Co = 0.6106667
+
+###################################################################
+###################################################################
+
+Katerina uses Double Slash against Water Witch!
+It hits Water Witch and does 87 damage!
+Paladin uses Slash against Fire Mage!
+It hits Fire Mage and does 24 damage!
+
+
+Round 8
+
+Katerina  +  Fire Mage  vs  Paladin  +  Water Witch
+
+Katerina   Overall: 8.1194  Health: 68  Mana: 173  Health Co = 0.9626667
+Fire Mage   Overall: 6.424747  Health: 52  Mana: 6  Health Co = 0.5093333
+
+Paladin   Overall: 3.82304  Health: 52  Mana: 11  Health Co = 0.536
+Water Witch   Overall: 6.3704  Health: 13  Mana: 2  Health Co = 0.28
+
+###################################################################
+###################################################################
+
+Paladin uses Slash against Fire Mage!
+It hits Fire Mage and does 24 damage!
+
+
+Round 9
+
+Katerina  +  Fire Mage  vs  Paladin  +  Water Witch
+
+Katerina   Overall: 8.1194  Health: 68  Mana: 173  Health Co = 0.9626667
+Fire Mage   Overall: 6.414506  Health: 28  Mana: 6  Health Co = 0.3813334
+
+Paladin   Overall: 3.783627  Health: 52  Mana: 10  Health Co = 0.5306666
+Water Witch   Overall: 6.3704  Health: 13  Mana: 2  Health Co = 0.28
+
+###################################################################
+###################################################################
+
+Paladin uses Slash against Fire Mage!
+It hits Fire Mage and does 23 damage!
+Katerina uses Wind Scythe against Paladin!
+It hits Paladin and does 46 damage!
+
+
+Round 10
+
+Katerina  +  Fire Mage  vs  Paladin  +  Water Witch
+
+Katerina   Overall: 8.0494  Health: 68  Mana: 159  Health Co = 0.9626667
+Fire Mage   Overall: 6.404693  Health: 5  Mana: 6  Health Co = 0.2586667
+
+Paladin   Overall: 2.1152  Health: 6  Mana: 9  Health Co = 0.28
+Water Witch   Overall: 6.3704  Health: 13  Mana: 2  Health Co = 0.28
+
+###################################################################
+###################################################################
+
+Paladin uses Slash against Fire Mage!
+It hits Fire Mage and does 12 damage!
+Fire Mage is defeated!
+
+
+Round 11
+
+Katerina  vs  Paladin  +  Water Witch
+
+Katerina   Overall: 8.0494  Health: 68  Mana: 159  Health Co = 0.9626667
+
+Paladin   Overall: 2.075787  Health: 6  Mana: 8  Health Co = 0.2746667
+Water Witch   Overall: 6.3704  Health: 13  Mana: 2  Health Co = 0.28
+
+###################################################################
+###################################################################
+
+Paladin uses Slash against Katerina!
+It misses Katerina!
+Katerina uses Wind Scythe against Paladin!
+It hits Paladin and does 45 damage!
+Paladin is defeated!
+
+
+Round 12
+
+Katerina  vs  Water Witch
+
+Katerina   Overall: 7.9794  Health: 68  Mana: 145  Health Co = 0.9626667
+
+Water Witch   Overall: 6.3704  Health: 13  Mana: 2  Health Co = 0.28
+
+###################################################################
+###################################################################
+
+Katerina uses Slash against Water Witch!
+It hits Water Witch and does 35 damage!
+Water Witch is defeated!
+
+###################################################################
+###################################################################
+
+The fight is over!
+Team 1 wins!
+Number of rounds: 12
+Surviving fighters:
+
+Katerina  Health: 68  Mana: 144
 

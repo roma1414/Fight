@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: KaterinaTalkingFrames_1
   m_EditorClassIdentifier: Assembly-CSharp::AnimationFrames
   Frames:
-  - {fileID: 7639968530860719444, guid: 956bc0e109b924c4f975de538a834dbe, type: 3}
-  - {fileID: 4177728135280325766, guid: ffd9846f870364de0a5cc260a066089f, type: 3}
   - {fileID: -4960177462357674140, guid: d842a379dd3404ba8a06daf6abe3e0c7, type: 3}
+  - {fileID: 4177728135280325766, guid: ffd9846f870364de0a5cc260a066089f, type: 3}
+  - {fileID: 7639968530860719444, guid: 956bc0e109b924c4f975de538a834dbe, type: 3}

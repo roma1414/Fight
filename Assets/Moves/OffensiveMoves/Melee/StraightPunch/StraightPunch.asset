@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Move
   Name: Straight Punch
   Level: 2
-  Mana: 0
+  Mana: 1
   RoundsToCast: 0
   UsesPerFight: 0
   CastingSpeed: 10

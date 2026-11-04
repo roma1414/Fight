@@ -2847,7 +2847,8 @@ public class Fight : MonoBehaviour
             case Enums.MoveType.Projectile:
                 movePower = .15f * fighter.GetProjectile() + .85f * move.GetLevel() + randomAdd;
                 break;
-            default:
+            
+            default: // Spells
                 movePower = .15f * fighter.GetSpellcraft() + .85f * move.GetLevel() + randomAdd;
                 break;
         }

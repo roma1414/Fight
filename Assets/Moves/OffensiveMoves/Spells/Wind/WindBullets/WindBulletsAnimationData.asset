@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d5d2916c73314bb89a1ff80a53f5c6a, type: 3}
+  m_Name: WindBulletsAnimationData
+  m_EditorClassIdentifier: Assembly-CSharp::AnimationData
+  Frames:
+  - {fileID: 803606550379082985, guid: 40738891053fa45fba6e468c8363705c, type: 3}
+  - {fileID: 4367561846318862888, guid: 40738891053fa45fba6e468c8363705c, type: 3}
+  - {fileID: -6962110471966067990, guid: 40738891053fa45fba6e468c8363705c, type: 3}
+  - {fileID: -2109208797000307117, guid: 40738891053fa45fba6e468c8363705c, type: 3}
+  - {fileID: 4537594357406454914, guid: 40738891053fa45fba6e468c8363705c, type: 3}
+  - {fileID: -4751957206855207217, guid: 40738891053fa45fba6e468c8363705c, type: 3}
+  - {fileID: 8440353093927226411, guid: 40738891053fa45fba6e468c8363705c, type: 3}
+  - {fileID: -1160362551196299903, guid: 40738891053fa45fba6e468c8363705c, type: 3}
+  - {fileID: -2773927523589700257, guid: 40738891053fa45fba6e468c8363705c, type: 3}
+  - {fileID: -94962959819079144, guid: 40738891053fa45fba6e468c8363705c, type: 3}
+  - {fileID: 7113686253521856825, guid: 40738891053fa45fba6e468c8363705c, type: 3}
+  - {fileID: 4202424274018097305, guid: 40738891053fa45fba6e468c8363705c, type: 3}
+  FramesPerSecond: 12
+  ImpactFrame: 7

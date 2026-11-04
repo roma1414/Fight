@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d5d2916c73314bb89a1ff80a53f5c6a, type: 3}
+  m_Name: WallOfwindAnimationData
+  m_EditorClassIdentifier: Assembly-CSharp::AnimationData
+  Frames:
+  - {fileID: 8593410667358696502, guid: dde96676cb1a64e93831b43b2be98d5c, type: 3}
+  - {fileID: -1234516301, guid: dde96676cb1a64e93831b43b2be98d5c, type: 3}
+  - {fileID: 204111837, guid: dde96676cb1a64e93831b43b2be98d5c, type: 3}
+  - {fileID: 1249355812, guid: dde96676cb1a64e93831b43b2be98d5c, type: 3}
+  - {fileID: 67885029, guid: dde96676cb1a64e93831b43b2be98d5c, type: 3}
+  - {fileID: -813331302, guid: dde96676cb1a64e93831b43b2be98d5c, type: 3}
+  - {fileID: -583401209, guid: dde96676cb1a64e93831b43b2be98d5c, type: 3}
+  - {fileID: -813331302, guid: dde96676cb1a64e93831b43b2be98d5c, type: 3}
+  - {fileID: 1249355812, guid: dde96676cb1a64e93831b43b2be98d5c, type: 3}
+  - {fileID: 67885029, guid: dde96676cb1a64e93831b43b2be98d5c, type: 3}
+  - {fileID: -813331302, guid: dde96676cb1a64e93831b43b2be98d5c, type: 3}
+  - {fileID: -583401209, guid: dde96676cb1a64e93831b43b2be98d5c, type: 3}
+  - {fileID: -583401209, guid: dde96676cb1a64e93831b43b2be98d5c, type: 3}
+  - {fileID: 1241088089, guid: dde96676cb1a64e93831b43b2be98d5c, type: 3}
+  - {fileID: -1392053843, guid: dde96676cb1a64e93831b43b2be98d5c, type: 3}
+  - {fileID: 830164315, guid: dde96676cb1a64e93831b43b2be98d5c, type: 3}
+  - {fileID: 850860016, guid: dde96676cb1a64e93831b43b2be98d5c, type: 3}
+  - {fileID: -854151571, guid: dde96676cb1a64e93831b43b2be98d5c, type: 3}
+  FramesPerSecond: 12
+  ImpactFrame: 4
