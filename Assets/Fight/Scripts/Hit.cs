@@ -4,24 +4,34 @@ using UnityEngine;
 
 public class Hit
 {
-    protected int                   mDamage;
-    protected List<Fighter>         mDefenders = new List<Fighter>();
-    protected List<Move>            mDefensiveMoves = new List<Move>();
-    protected Enums.HitResult       mResult;
-    protected bool                  mWasEasy;
-    protected bool                  mWasProtected;
+    protected int                   Damage;
+    protected List<Fighter>         Defenders = new List<Fighter>();
+    protected List<Move>            DefensiveMoves = new List<Move>();
+    protected Enums.HitResult       Result;
+    protected bool                  WasEasy;
+    protected bool                  WasProtected;
 
-    public void AddDefender(Fighter defender) { mDefenders.Add(defender); }
-    public void AddDefensiveMove(Move defensiveMove) { mDefensiveMoves.Add(defensiveMove); }
-    public bool CheckWasEasy() { return mWasEasy; }
-    public bool CheckWasProtected() { return mWasProtected; }
-    public int GetDamage() { return mDamage; }
-    public List<Move> GetDefensiveMoves() { return mDefensiveMoves; }
+    public void AddDefender(Fighter defender) { Defenders.Add(defender); }
+    public void AddDefensiveMove(Move defensiveMove) { DefensiveMoves.Add(defensiveMove); }
+
+    public bool CheckFlightAvoided()
+    {
+        if (DefensiveMoves.Count == 1 && DefensiveMoves[0].GetNaturesList().Contains(Enums.Nature.Flight))
+        {
+            return true;
+        }
+        return false;
+    }
+
+    public bool CheckWasEasy() { return WasEasy; }
+    public bool CheckWasProtected() { return WasProtected; }
+    public int GetDamage() { return Damage; }
+    public List<Move> GetDefensiveMoves() { return DefensiveMoves; }
 
     public List<Move> GetMoves()
     {
         List<Move> moves = new List<Move>();
-        foreach (Move defensiveMove in mDefensiveMoves)
+        foreach (Move defensiveMove in DefensiveMoves)
         {
             moves.Add(defensiveMove);
         }
@@ -29,12 +39,12 @@ public class Hit
         return moves;
     }
 
-    public List<Fighter> GetDefenders() { return mDefenders; }
-    public Enums.HitResult GetResult() { return mResult; }
-    public void SetDamage(int damage) { mDamage = damage; }
-    public void SetDefenders(List<Fighter> defenders) { mDefenders = defenders; }
-    public void SetDefensiveMoves(List<Move> defensiveMoves) { mDefensiveMoves = defensiveMoves; }
-    public void SetResult(Enums.HitResult result) { mResult = result; }
-    public void SetWasEasy(bool wasEasy) { mWasEasy = wasEasy; }
-    public void SetWasProtected(bool wasProtected) { mWasProtected = wasProtected; }
+    public List<Fighter> GetDefenders() { return Defenders; }
+    public Enums.HitResult GetResult() { return Result; }
+    public void SetDamage(int damage) { Damage = damage; }
+    public void SetDefenders(List<Fighter> defenders) { Defenders = defenders; }
+    public void SetDefensiveMoves(List<Move> defensiveMoves) { DefensiveMoves = defensiveMoves; }
+    public void SetResult(Enums.HitResult result) { Result = result; }
+    public void SetWasEasy(bool wasEasy) { WasEasy = wasEasy; }
+    public void SetWasProtected(bool wasProtected) { WasProtected = wasProtected; }
 }

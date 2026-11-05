@@ -16,7 +16,7 @@ MonoBehaviour:
   Level: 6
   Mana: 15
   RoundsToCast: 0
-  UsesPerFight: 0
+  UsesPerFight: 1
   CastingSpeed: 4
   ID: 0
   Occular: 0

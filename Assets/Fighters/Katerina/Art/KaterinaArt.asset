@@ -18,3 +18,4 @@ MonoBehaviour:
   TalkingAngry: {fileID: 0}
   TalkingFrameList:
   - {fileID: 11400000, guid: 9c6f8d00469b3415ba14ba7ae3a5eb09, type: 2}
+  - {fileID: 11400000, guid: 836c21b3d331f4e7695690135418d4a9, type: 2}

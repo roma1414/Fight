@@ -18,6 +18,7 @@
         Wind,
         Wood,               // Earth + Water            Kekkei Genkai (2)
         Holy,
+        Flight,
         None
     }
 }

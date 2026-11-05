@@ -44,6 +44,7 @@ public class DynamicWindow : MonoBehaviour
     public const float FIGHTERS_X_ZERO_POINT = -128f;
     public const float TARGET_BACKGROUND_MAX_OFFSET = -2050;
     public const float TARGET_X_ZERO_POINT = 0f;
+    public const float FIGHTERS_CONTAINER_DEFAULT_Y = -42f;
 
     private IEnumerator AnimateMotionStatement(Sprite[] frames)
     {
@@ -76,7 +77,7 @@ public class DynamicWindow : MonoBehaviour
         
         TargetFighterPanel.gameObject.SetActive(true);
         RectTransform targetRectTransform = TargetFighterPanel.GetComponent<RectTransform>();
-        targetRectTransform.anchoredPosition = new Vector2(0f, targetRectTransform.anchoredPosition.y);
+        targetRectTransform.anchoredPosition = new Vector2(0f, 0f);//new Vector2(0f, targetRectTransform.anchoredPosition.y);
         Image targetImage = TargetFighterPanel.transform.Find("Target").GetComponent<Image>();
         Sprite targetSprite = target.GetArt().GetBody();
         if (targetSprite != null)
@@ -164,7 +165,6 @@ public class DynamicWindow : MonoBehaviour
             }
         }
         
-
         HorizontalLayoutGroup defendersLayoutGroup = TargetDefendersContainer.GetComponent<HorizontalLayoutGroup>();
         float availableWidthDefenders = TargetDefendersContainer.rect.width - defendersLayoutGroup.padding.left - defendersLayoutGroup.padding.right;
         float totalDefenderPanelWidths = 0f;
@@ -190,7 +190,7 @@ public class DynamicWindow : MonoBehaviour
         FightersBackground.sprite = Fight.GetMapArt().GetBackground(targetTeam);
         
         FightersContainer.gameObject.SetActive(true);
-        FightersContainer.anchoredPosition = new Vector2(0f, FightersContainer.anchoredPosition.y);
+        FightersContainer.anchoredPosition = new Vector2(0f, FIGHTERS_CONTAINER_DEFAULT_Y);//new Vector2(0f, FightersContainer.anchoredPosition.y);
 
         FightersDefendersContainer.gameObject.SetActive(false);
 
@@ -717,7 +717,6 @@ public class DynamicWindow : MonoBehaviour
         summonsLayoutGroup.spacing = summonLayoutGroupSpacing;
 
         ///////////
-
         //DynamicText.text = "";
     }
 
@@ -739,6 +738,7 @@ public class DynamicWindow : MonoBehaviour
         }
 
         Enums.HitResult hitResult = hit.GetResult();
+        bool flightAvoided = hit.CheckFlightAvoided();
         Enums.TargetType targetType = moveEvent.GetTargetType();
         if(targetType == Enums.TargetType.EnemyTeam || targetType == Enums.TargetType.AllEnemies)
         {
@@ -749,10 +749,17 @@ public class DynamicWindow : MonoBehaviour
             StartAttacks(moveEvent.GetMoves(), animationTimes.GetAttackDelays(), AttacksContainer, AttacksPrefab);
         }
         
-        if (hitResult == Enums.HitResult.Blocked || hitResult == Enums.HitResult.PartiallyBlocked)
+        if (flightAvoided == false &&
+            (hitResult == Enums.HitResult.Blocked || hitResult == Enums.HitResult.PartiallyBlocked
+            || hitResult == Enums.HitResult.Avoided || hitResult == Enums.HitResult.PartiallyAvoided))
         {
             StartDefenses(hit.GetDefensiveMoves(), animationTimes.GetDefenseDelays(), DefensesContainer, DefensesPrefab);
         }
+        else if (flightAvoided == true)
+        {
+            FightersAnimator.Play("Fighters_Flight", 0, 0f);
+        }
+
         DynamicText.text = resultString;
         
         if (hitResult == Enums.HitResult.Miss || hitResult == Enums.HitResult.PartialHit)
@@ -821,11 +828,21 @@ public class DynamicWindow : MonoBehaviour
         yield return new WaitForSeconds(.5f);
 
         Enums.HitResult hitResult = hit.GetResult();
+        bool flightAvoided = hit.CheckFlightAvoided();
         StartAttacks(moveEvent.GetMoves(), animationTimes.GetAttackDelays(), TargetAttacksContainer, TargetAttacksPrefab);
-        if (hitResult == Enums.HitResult.Blocked || hitResult == Enums.HitResult.PartiallyBlocked)
+
+        // Play defensive animations unless the target avoided the attack with a flight move, in which case we skip the defensive animations and play the flight animation instead
+        if (flightAvoided == false && 
+            (hitResult == Enums.HitResult.Blocked || hitResult == Enums.HitResult.PartiallyBlocked
+            || hitResult == Enums.HitResult.Avoided || hitResult == Enums.HitResult.PartiallyAvoided))
         {
             StartDefenses(hit.GetDefensiveMoves(), animationTimes.GetDefenseDelays(), TargetDefensesContainer, TargetDefensesPrefab);
         }
+        else if (flightAvoided == true)
+        {
+            TargetAnimator.Play("Target_Flight", 0, 0f);
+        }
+
         DynamicText.text = resultString;
         
         if (hitResult == Enums.HitResult.Miss || hitResult == Enums.HitResult.PartialHit)

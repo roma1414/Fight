@@ -1140,7 +1140,7 @@ public class Fight : MonoBehaviour
                         totalAttackMana += offensiveMoves[index].GetMana();
                     }
                     bool wasEasy = hit.CheckWasEasy();
-                    // TODO: Decide how much mana it should cost to deflect. Currently it takes none, used to take 25% of incoming attack mana.
+                    // TODO: Decide how much mana it should cost to deflect. Currently it takes 25% of incoming attack mana.
                     int manaCostPerDefender = (int)(totalAttackMana * (0.25f) * (1f / defendersCount) + 0.5f);   // + .5 is for rounding.
                     foreach (Fighter defender in defenders)
                     {
@@ -1275,7 +1275,7 @@ public class Fight : MonoBehaviour
             yield return DynamicWindow.DisplayAttackAgainstFightersTarget(moveEvent, target, resultString, hit);
         }
 
-        switch (result)     // Removes UnderPsychic and Trapped statuses before applying attack statuses. The attack landed or partially landed.
+        switch (result) // Removes UnderPsychic and Trapped statuses before applying attack statuses. The attack landed or partially landed.
         {
             case Enums.HitResult.Hit:
             case Enums.HitResult.PartialHit:
