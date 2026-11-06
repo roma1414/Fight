@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Fighter
   Name: Katerina
-  Spellcraft: 8
+  Spellcraft: 9
   Melee: 10
   Psychic: 5
   Speed: 8

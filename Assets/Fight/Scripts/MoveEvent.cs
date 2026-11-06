@@ -106,7 +106,11 @@ public class MoveEvent
                 }
                 else
                 {
-                    Debug.LogError($"Error! {move.GetName()} has no AnimationData in GetAnimationTimes!");
+                    // Flight moves don't have AnimationData, so we don't want to log an error for them.
+                    if (move.GetNaturesList().Contains(Enums.Nature.Flight) == false)
+                    {
+                        Debug.LogError($"Error! {move.GetName()} has no AnimationData in GetAnimationTimes!");
+                    }
                 }
             }
         }

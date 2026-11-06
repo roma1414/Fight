@@ -30,7 +30,7 @@ MonoBehaviour:
   Number: 0
   CloneStrength: 0
   UsesPerRound: 0
-  MaxLevelAvoided: 9
+  MaxLevelAvoided: 8
   WorksAgaintsMelee: 1
   WorksAgainstRanged: 1
   Absorbing: 0

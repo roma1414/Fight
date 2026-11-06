@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: HurricaneWall
   m_EditorClassIdentifier: Assembly-CSharp::Move
   Name: Hurricane Wall
-  Level: 8
+  Level: 9
   Mana: 22
   RoundsToCast: 0
   UsesPerFight: 0

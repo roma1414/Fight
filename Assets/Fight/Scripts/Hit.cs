@@ -27,18 +27,6 @@ public class Hit
     public bool CheckWasProtected() { return WasProtected; }
     public int GetDamage() { return Damage; }
     public List<Move> GetDefensiveMoves() { return DefensiveMoves; }
-
-    public List<Move> GetMoves()
-    {
-        List<Move> moves = new List<Move>();
-        foreach (Move defensiveMove in DefensiveMoves)
-        {
-            moves.Add(defensiveMove);
-        }
-
-        return moves;
-    }
-
     public List<Fighter> GetDefenders() { return Defenders; }
     public Enums.HitResult GetResult() { return Result; }
     public void SetDamage(int damage) { Damage = damage; }

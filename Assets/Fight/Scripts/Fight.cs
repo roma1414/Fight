@@ -1052,7 +1052,7 @@ public class Fight : MonoBehaviour
             case Enums.HitResult.Blocked:
                 {
                     List<Fighter> defenders = hit.GetDefenders(); // Can be more than one defender for blocked results.
-                    List<Move> moves = hit.GetMoves();
+                    List<Move> moves = hit.GetDefensiveMoves();
                     int defendersCount = defenders.Count;
                     resultString += Util.ListString(defenders) + " block";
                     if (defendersCount == 1)
@@ -1073,7 +1073,7 @@ public class Fight : MonoBehaviour
                 {
                     List<Fighter> defenders = hit.GetDefenders();                   // Can be more than one defender for blocked results.
                     int defendersCount = defenders.Count;
-                    List<Move> moves = hit.GetMoves();
+                    List<Move> moves = hit.GetDefensiveMoves();
                     resultString += Util.ListString(defenders) + " partially block";
                     if (defendersCount == 1)
                     {
@@ -1697,6 +1697,7 @@ public class Fight : MonoBehaviour
         Hit defensiveMovesHit = new Hit(); // Returned at end of function.
 
         float minAttackCastingSpeed = float.MaxValue;
+        bool targetCanMove = target.CheckIfCanMove();
 
         int offensiveMovesCount = offensiveMoves.Count;
         for (int index = 0; index < offensiveMovesCount; ++index)
@@ -1799,7 +1800,6 @@ public class Fight : MonoBehaviour
 
         if (protectorBlockAction != null) // A protector can block the attack by themself.
         {
-            //protectorBlockAction.Get
             List<Fighter> listContainingProtector = new List<Fighter>() { protectorBlockAction.GetDefender() };
             List<Move> listContainingDefensiveMove = new List<Move>() { protectorBlockAction.GetDefensiveMove() };
             bool wasEasy = (protectorBlockAction.GetPower() - attackPower) >= EASY_BLOCK_POWER_DIFF;
@@ -1844,7 +1844,6 @@ public class Fight : MonoBehaviour
                 }
             }
 
-            bool targetCanMove = target.CheckIfCanMove();
             DefensiveAction targetBestAction = null;
             bool defendersCanBlockWithTarget = false;
             int targetManaAfterMove = -1;
@@ -1960,6 +1959,220 @@ public class Fight : MonoBehaviour
                     defensiveMovesHit.SetWasProtected(defenders.Count > 1 || defenders.Contains(target) == false);
                 }
             }
+        }
+
+
+        // Avoid moves cannot be combined with other defensive moves, so they are handled separately.
+        Hit avoidMoveHit = new Hit();
+
+        protectorManaAfterMove = -1; // Reset this
+        DefensiveAction protectorAvoidAction = null; // Reset this
+        Dictionary<Fighter, DefensiveAction> protectorBestAvoidActionMap = new Dictionary<Fighter, DefensiveAction>();
+
+        // See if any protectors can avoid the attack individually.
+        for (int index = 0; index < protectorsCount; ++index)
+        {
+            Fighter protector = protectors[index];
+
+            if (protector.CheckIfAlive() == true && protector.CheckIfCanMove() == true) // Don't include protectors who cannot move.
+            {
+                float protectorRandomAdd = protectorRandomAddMap[protector];
+                List<Move> avoidMoves = protector.GetMoves(Enums.MoveType.Avoid);
+
+                foreach (Move avoidMove in avoidMoves)
+                {
+                    bool defenseTouchFail = avoidMove.CheckTouchFail();
+                    bool defendsOccular = avoidMove.CheckOccularSuccess();
+                    bool defenseIsAbsorbing = avoidMove.CheckAbsorbing();
+                    bool defendsMelee = avoidMove.CheckIfWorksAgainstMelee();
+                    bool defendsRanged = avoidMove.CheckIfWorksAgainstRanged();
+
+                    Enums.TargetType defensiveMoveTargetType = avoidMove.GetTargetType();
+
+                    float defensiveMoveCastingSpeed = protector.GetCastingSpeed(avoidMove, protectorRandomAdd);
+
+                    if (defensiveMoveCastingSpeed >= attackCastingSpeed &&
+                        defensiveMoveTargetType != Enums.TargetType.Self &&
+                        defensiveMoveTargetType != Enums.TargetType.TeamMembersWithStatuses &&
+                        protector.GetAI().CheckIfCanPerformMove(this, protector, avoidMove) == true &&
+                        (attackTouchSuccess == false || defenseTouchFail == false) &&
+                        (attackIsOccular == false || defendsOccular == true) &&
+                        (defenseIsAbsorbing == false || attackCanBeAbsorbed == true) &&
+                        (attackIsMelee ? defendsMelee : defendsRanged))
+                    {
+                        float avoidMovePower = avoidMove.GetMaxLevelAvoided();
+                        avoidMovePower = Mathf.Max(avoidMovePower, 0.0f); // Nothing negative.
+
+                        DefensiveAction defensiveAction = new DefensiveAction();
+                        defensiveAction.SetDefender(protector);
+                        defensiveAction.SetDefensiveMove(avoidMove);
+                        defensiveAction.SetPower(avoidMovePower);
+
+                        // If no defensive action is set yet, set it.
+                        if (protectorBestAvoidActionMap.ContainsKey(protector) == false)
+                        {
+                            protectorBestAvoidActionMap[protector] = defensiveAction;
+                        }
+                        else
+                        {
+                            DefensiveAction protectorBestAction = protectorBestAvoidActionMap[protector];
+                            if (avoidMovePower > protectorBestAction.GetPower())
+                            {
+                                protectorBestAvoidActionMap[protector] = defensiveAction;
+                            }
+                        }
+
+                        if (avoidMovePower >= attackPower)
+                        {
+                            int manaAfterMove = protector.GetMana() - avoidMove.GetMana();
+
+                            if (manaAfterMove > protectorManaAfterMove)
+                            {
+                                protectorAvoidAction = defensiveAction;
+                                protectorManaAfterMove = manaAfterMove;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        if (protectorAvoidAction != null) // A protector can avoid the attack by themself.
+        {
+            List<Fighter> listContainingProtector = new List<Fighter>() { protectorBlockAction.GetDefender() };
+            List<Move> listContainingDefensiveMove = new List<Move>() { protectorBlockAction.GetDefensiveMove() };
+            bool wasEasy = (protectorBlockAction.GetPower() - attackPower) >= EASY_BLOCK_POWER_DIFF;
+
+            avoidMoveHit.SetDamage(0);
+            avoidMoveHit.SetDefenders(listContainingProtector);
+            avoidMoveHit.SetDefensiveMoves(listContainingDefensiveMove);
+            avoidMoveHit.SetResult(Enums.HitResult.Avoided);
+            avoidMoveHit.SetWasEasy(wasEasy);
+            avoidMoveHit.SetWasProtected(true);
+        }
+        else // See if the target can avoid the attack.
+        {
+            DefensiveAction targetBestAction = null;
+            int targetManaAfterMove = -1;
+            bool targetCanAvoid = false;
+            
+            if (targetCanMove == true) // Add the target to the defense along with protectors.
+            {
+                foreach (Move avoidMove in target.GetMoves(Enums.MoveType.Avoid))
+                {
+                    bool defenseTouchFail = avoidMove.CheckTouchFail();
+                    bool defendsOccular = avoidMove.CheckOccularSuccess();
+                    bool defenseIsAbsorbing = avoidMove.CheckAbsorbing();
+                    bool defendsMelee = avoidMove.CheckIfWorksAgainstMelee();
+                    bool defendsRanged = avoidMove.CheckIfWorksAgainstRanged();
+
+                    float defensiveMoveCastingSpeed = target.GetCastingSpeed(avoidMove, targetRandomAdd);
+
+                    if (defensiveMoveCastingSpeed >= attackCastingSpeed &&
+                        avoidMove.GetTargetType() != Enums.TargetType.TeamMembersWithStatuses &&
+                        target.GetAI().CheckIfCanPerformMove(this, target, avoidMove) == true &&
+                        (attackTouchSuccess == false || defenseTouchFail == false) &&
+                        (attackIsOccular == false || defendsOccular == true) &&
+                        (defenseIsAbsorbing == false || attackCanBeAbsorbed == true) &&
+                        (attackIsMelee ? defendsMelee : defendsRanged))
+                    {
+                        float avoidMovePower = avoidMove.GetMaxLevelAvoided();
+                        avoidMovePower = Mathf.Max(avoidMovePower, 0.0f); // Nothing negative.
+
+                        DefensiveAction defensiveAction = new DefensiveAction();
+                        defensiveAction.SetDefender(target);
+                        defensiveAction.SetDefensiveMove(avoidMove);
+                        defensiveAction.SetPower(avoidMovePower);
+
+                        int manaAfterMove = target.GetMana() - avoidMove.GetMana();
+
+                        if (avoidMovePower < attackPower) // Cannot currently avoid the attack.
+                        {
+                            float currentTargetBestActionPower = (targetBestAction == null) ? -1.0f : targetBestAction.GetPower();
+
+                            if (targetBestAction == null || avoidMovePower > currentTargetBestActionPower)
+                            {
+                                targetBestAction = defensiveAction;
+                                targetManaAfterMove = manaAfterMove;
+                            }
+                        }
+                        else if (avoidMovePower >= attackPower) // Attack can be fully avoided by the target.
+                        {
+                            if (targetBestAction == null || manaAfterMove > targetManaAfterMove)
+                            {
+                                targetBestAction = defensiveAction;
+                                targetManaAfterMove = manaAfterMove;
+                                targetCanAvoid = true;
+                            }
+                        }
+                    }
+                }
+            }
+
+            if (targetCanAvoid == true) // Target can avoid the attack.
+            {
+                bool wasEasy = (targetBestAction.GetPower() - attackPower) >= EASY_BLOCK_POWER_DIFF;
+
+                List<Fighter> defenders = new List<Fighter>();
+                defenders.Add(target);
+                List<Move> defendersDefensiveMoves = new List<Move>();
+                defendersDefensiveMoves.Add(targetBestAction.GetDefensiveMove());
+
+                avoidMoveHit.SetDamage(0);
+                avoidMoveHit.SetDefenders(defenders);
+                avoidMoveHit.SetDefensiveMoves(defendersDefensiveMoves);
+                avoidMoveHit.SetResult(Enums.HitResult.Avoided);
+                avoidMoveHit.SetWasEasy(wasEasy);
+                avoidMoveHit.SetWasProtected(false);
+            }
+            else // Attack cannot be avoided. There is no damage reduction.
+            {
+                int fullDamage = AttackDamage(target, attackers, offensiveMoves, attackerRandomAdds);
+
+                avoidMoveHit.SetDamage(fullDamage);
+                avoidMoveHit.SetDefenders(new List<Fighter>());
+                avoidMoveHit.SetDefensiveMoves(new List<Move>());
+                avoidMoveHit.SetResult(Enums.HitResult.Hit);
+                avoidMoveHit.SetWasEasy(false);
+                avoidMoveHit.SetWasProtected(false);
+            }
+        }
+
+        // Decide between defensive move hit result or avoid move hit result.
+        if (avoidMoveHit.GetResult() == Enums.HitResult.Avoided && defensiveMovesHit.GetResult() != Enums.HitResult.Blocked)
+        {
+            return avoidMoveHit;
+        }
+        else if (defensiveMovesHit.GetResult() == Enums.HitResult.Blocked && avoidMoveHit.GetResult() != Enums.HitResult.Avoided)
+        {
+            return defensiveMovesHit;
+        }
+        else if (avoidMoveHit.GetResult() == Enums.HitResult.Avoided && defensiveMovesHit.GetResult() == Enums.HitResult.Blocked)
+        {
+            int targetManaUsedAvoid = 0;
+            for (int i = 0; i < avoidMoveHit.GetDefenders().Count; ++i)
+            {
+                if (avoidMoveHit.GetDefenders()[i] == target)
+                {
+                    targetManaUsedAvoid += avoidMoveHit.GetDefensiveMoves()[i].GetMana();
+                }
+            }
+
+            int targetManaUsedBlock = 0;
+            for (int i = 0; i < defensiveMovesHit.GetDefenders().Count; ++i)
+            {
+                if (defensiveMovesHit.GetDefenders()[i] == target)
+                {
+                    targetManaUsedBlock += defensiveMovesHit.GetDefensiveMoves()[i].GetMana();
+                }
+            }
+
+            if (targetManaUsedAvoid < targetManaUsedBlock)
+            {
+                return avoidMoveHit;
+            }
+
+            return defensiveMovesHit;
         }
 
         return defensiveMovesHit;

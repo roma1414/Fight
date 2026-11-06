@@ -9,17 +9,34 @@ Fire Mage   Overall: 8.389999  Health: 100  Mana: 220  Health Co = 1
 ###################################################################
 ###################################################################
 
-Katerina uses Double Slash against Fire Mage!
-Fire Mage blocks it with Wall of Fire!
+Katerina uses Wind Scythe against Fire Mage!
+Fire Mage blocks it with Fire Tempest Wall!
 Fire Mage uses Fire Storm against Team 1!
-It hits Katerina and does 80 damage!
+Katerina avoids it with Flight!
 
 
 Round 2
 
 Katerina  vs  Fire Mage
 
-Katerina   Overall: 6.922  Health: 20  Mana: 218  Health Co = 0.7066667
+Katerina   Overall: 7.78  Health: 100  Mana: 196  Health Co = 1
 
-Fire Mage   Overall: 7.868  Health: 100  Mana: 162  Health Co = 1
+Fire Mage   Overall: 7.805  Health: 100  Mana: 155  Health Co = 1
+
+###################################################################
+###################################################################
+
+Katerina uses Double Slash against Fire Mage!
+It misses Fire Mage!
+Fire Mage uses Wild Inferno against Team 1!
+Katerina avoids it with Flight!
+
+
+Round 3
+
+Katerina  vs  Fire Mage
+
+Katerina   Overall: 7.72  Health: 100  Mana: 184  Health Co = 1
+
+Fire Mage   Overall: 7.445  Health: 100  Mana: 115  Health Co = 1
 
