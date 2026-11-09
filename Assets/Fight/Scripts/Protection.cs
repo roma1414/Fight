@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Protection : MonoBehaviour
+public class Protection
 {
     protected Fighter mProtected, mProtector;
 

@@ -73,7 +73,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_AnchoredPosition.x
-    path: Fighter
+    path: FighterPanel
     classID: 224
     script: {fileID: 0}
     flags: 0
@@ -96,7 +96,7 @@ AnimationClip:
       isSerializeReferenceCurve: 0
       metaData: 0
     - serializedVersion: 2
-      path: 3048602208
+      path: 1235360643
       attribute: 1460864421
       script: {fileID: 0}
       typeID: 224
@@ -183,7 +183,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_AnchoredPosition.x
-    path: Fighter
+    path: FighterPanel
     classID: 224
     script: {fileID: 0}
     flags: 0

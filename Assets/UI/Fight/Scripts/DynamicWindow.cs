@@ -17,19 +17,21 @@ public class DynamicWindow : MonoBehaviour
     [SerializeField] private Image          Fighter, FighterBackground, FightersBackground, StatementBackground, 
                                             StatementFighter, AttacksPrefab, TargetBackground, FightersDodge,
                                             DefensesPrefab, FightersDeflect, StatementMotionBackground, TargetDodge, TargetDeflect,
-                                            TargetAttacksPrefab, TargetDefensesPrefab, TeamAttacksPrefab;
+                                            TargetAttacksPrefab, TargetDefensesPrefab, TeamAttacksPrefab, FightersDefendersMovementPrefab,
+                                            TargetDefendersMovementPrefab;
     [SerializeField] private TMP_Text       DynamicText, StatementText, StatementFighterName;
     [SerializeField] private RectTransform  FightersContainer, AttackersContainer, AttacksContainer, DefensesContainer,
                                             FightersDefendersContainer, TargetDefendersContainer, TargetAttacksContainer,
                                             TargetDefensesContainer, TeamAttacksContainer, SummonersContainer, SummonsContainer,
-                                            SummonAnimationsContainer;
+                                            SummonAnimationsContainer, FightersDefendersMovementContainer, TargetDefendersMovementContainer;
     [SerializeField] private Animator       StatementAnimator, FighterAnimator, FightersAnimator, TargetAnimator;
     [SerializeField] private List<string>   StatementAnimations, FighterAnimations;
     private int                             PreviousStatementAnimation = -1, PreviousFighterAnimation = -1;
     private List<GameObject>                SpawnedAttackerPanels = new List<GameObject>(), SpawnedFightersDefenderPanels = new List<GameObject>(),
                                             SpawnedTargetDefenderPanels = new List<GameObject>(), SpawnedFightersPanels = new List<GameObject>(),
                                             SpawnedSummonPanels = new List<GameObject>();
-    private List<Image>                     SpawnedAttackImages = new List<Image>(), SpawnedDefenseImages = new List<Image>();
+    private List<Image>                     SpawnedAttackImages = new List<Image>(), SpawnedDefenseImages = new List<Image>(),
+                                            SpawnedDefenderMovementImages = new List<Image>();
                                             /*SpawnedFighterImages = new List<Image>(), SpawnedTargetAttackImages = new List<Image>(),
                                             SpawnedTargetDefenseImages = new List<Image>();*/
     private Coroutine                       TalkingCoroutine, MotionCoroutine;
@@ -45,6 +47,7 @@ public class DynamicWindow : MonoBehaviour
     public const float TARGET_BACKGROUND_MAX_OFFSET = -2050;
     public const float TARGET_X_ZERO_POINT = 0f;
     public const float FIGHTERS_CONTAINER_DEFAULT_Y = -42f;
+    public const float FIGHTER_CONTAINER_DEFAULT_Y = -300f;
 
     private IEnumerator AnimateMotionStatement(Sprite[] frames)
     {
@@ -90,6 +93,7 @@ public class DynamicWindow : MonoBehaviour
         }
 
         TargetDefendersContainer.gameObject.SetActive(false);
+        TargetDefendersMovementContainer.gameObject.SetActive(false);
 
         TargetDodge.color = target.GetDodgeColor();
         TargetDodge.gameObject.SetActive(false);
@@ -137,6 +141,7 @@ public class DynamicWindow : MonoBehaviour
         if (hit != null)
         {
             defenders = hit.GetDefenders();
+            int randomMovementScale = UnityEngine.Random.Range(0, 2);
             for (int i = 0; i < defenders.Count; i++)
             {
                 Fighter defender = defenders[i];
@@ -161,6 +166,21 @@ public class DynamicWindow : MonoBehaviour
                     {
                         Debug.LogError($"Error! Fighter {defender.GetName()} has no body sprite in ConfigureFightWindowForAttackAgainstTarget!");
                     }
+
+                    // Instantiate the defender's movement image
+                    Image spawnedDefenderMovementImage = Instantiate(TargetDefendersMovementPrefab, TargetDefendersMovementContainer, false);
+                    SpawnedDefenderMovementImages.Add(spawnedDefenderMovementImage);
+                    spawnedDefenderMovementImage.color = defender.GetDodgeColor();
+                    Vector3 movementScale = spawnedDefenderMovementImage.rectTransform.localScale;
+                    if (randomMovementScale == 0)
+                    {
+                        movementScale.x = -1f;
+                    }
+                    else
+                    {
+                        movementScale.x = 1f;
+                    }
+                    spawnedDefenderMovementImage.rectTransform.localScale = movementScale;
                 }
             }
         }
@@ -193,7 +213,7 @@ public class DynamicWindow : MonoBehaviour
         FightersContainer.anchoredPosition = new Vector2(0f, FIGHTERS_CONTAINER_DEFAULT_Y);//new Vector2(0f, FightersContainer.anchoredPosition.y);
 
         FightersDefendersContainer.gameObject.SetActive(false);
-
+        FightersDefendersMovementContainer.gameObject.SetActive(false);
         SummonersContainer.gameObject.SetActive(false);
         SummonsContainer.gameObject.SetActive(false);
         SummonAnimationsContainer.gameObject.SetActive(false);
@@ -217,13 +237,13 @@ public class DynamicWindow : MonoBehaviour
         Vector3 deflectScale = FightersDeflect.rectTransform.localScale;
         if (UnityEngine.Random.Range(0, 2) == 0)
         {
-            dodgeScale.x = -1f;
+            deflectScale.x = -1f;
         }
         else
         {
-            dodgeScale.x = 1f;
+            deflectScale.x = 1f;
         }
-        FightersDeflect.rectTransform.localScale = dodgeScale;
+        FightersDeflect.rectTransform.localScale = deflectScale;
 
         // Position the background based on the target's team and index within the team.
         List<Fighter> targetTeamList = Fight.GetTeamList(targetTeam);
@@ -333,15 +353,17 @@ public class DynamicWindow : MonoBehaviour
         if (hit != null)
         {
             List<Fighter> defenders = hit.GetDefenders();
+            int randomMovementScale = UnityEngine.Random.Range(0, 2);
             for (int i = 0; i < defenders.Count; i++)
             {
                 Fighter defender = defenders[i];
                 if (defender != targets[0])
                 {
-                    GameObject spawnedDefenderPanel = Instantiate(TargetDefenderPrefab, TargetDefendersContainer, false);
+                    // Instantiate the defender
+                    GameObject spawnedDefenderPanel = Instantiate(FightersPrefab, FightersDefendersContainer, false);
                     SpawnedTargetDefenderPanels.Add(spawnedDefenderPanel);
 
-                    Image spawnedDefenderImage = spawnedDefenderPanel.transform.Find("Defender").GetComponent<Image>();
+                    Image spawnedDefenderImage = spawnedDefenderPanel.transform.Find("Fighters").GetComponent<Image>();
                     spawnedDefenderImage.sprite = null;
                     Sprite defenderSprite = defender.GetArt().GetBody();
                     if (defenderSprite != null)
@@ -352,11 +374,26 @@ public class DynamicWindow : MonoBehaviour
                     {
                         Debug.LogError($"Error! Fighter {defender.GetName()} has no body sprite in ConfigureFightWindowForAttackAgainstTarget!");
                     }
+
+                    // Instantiate the defender's movement image
+                    Image spawnedDefenderMovementImage = Instantiate(FightersDefendersMovementPrefab, FightersDefendersMovementContainer, false);
+                    SpawnedDefenderMovementImages.Add(spawnedDefenderMovementImage);
+                    spawnedDefenderMovementImage.color = defender.GetDodgeColor();
+                    Vector3 movementScale = spawnedDefenderMovementImage.rectTransform.localScale;
+                    if (randomMovementScale == 0)
+                    {
+                        movementScale.x = -1f;
+                    }
+                    else
+                    {
+                        movementScale.x = 1f;
+                    }
+                    spawnedDefenderMovementImage.rectTransform.localScale = movementScale;
                 }
             }
 
-            HorizontalLayoutGroup defendersLayoutGroup = TargetDefendersContainer.GetComponent<HorizontalLayoutGroup>();
-            float availableWidthDefenders = TargetDefendersContainer.rect.width - defendersLayoutGroup.padding.left - defendersLayoutGroup.padding.right;
+            HorizontalLayoutGroup defendersLayoutGroup = FightersDefendersContainer.GetComponent<HorizontalLayoutGroup>();
+            float availableWidthDefenders = FightersDefendersContainer.rect.width - defendersLayoutGroup.padding.left - defendersLayoutGroup.padding.right;
             float totalDefenderPanelWidths = 0f;
             foreach (GameObject panel in SpawnedTargetDefenderPanels)
             {
@@ -368,6 +405,19 @@ public class DynamicWindow : MonoBehaviour
                 : 0f;
 
             defendersLayoutGroup.spacing = defenderLayoutGroupSpacing;
+
+            HorizontalLayoutGroup defendersMovementLayoutGroup = FightersDefendersMovementContainer.GetComponent<HorizontalLayoutGroup>();
+            float availableWidthDefendersMovement = FightersDefendersMovementContainer.rect.width - defendersMovementLayoutGroup.padding.left - defendersMovementLayoutGroup.padding.right;
+            float totalDefenderMovementWidths = 0f;
+            foreach (Image image in SpawnedDefenderMovementImages)
+            {
+                totalDefenderMovementWidths += image.rectTransform.rect.width;
+            }
+            float defenderMovementLayoutGroupSpacing = SpawnedTargetDefenderPanels.Count > 1
+                ? Mathf.Min(0f, (availableWidthDefendersMovement - totalDefenderMovementWidths) / (SpawnedTargetDefenderPanels.Count - 1))
+                : 0f;
+
+            defendersMovementLayoutGroup.spacing = defenderMovementLayoutGroupSpacing;
         }
         
         DynamicText.text = "";
@@ -729,6 +779,19 @@ public class DynamicWindow : MonoBehaviour
         DynamicTextPanel.SetActive(true);
 
         yield return new WaitForSeconds(.25f);
+
+        if (hit.CheckWasProtected() == true)
+        {
+            if (SpawnedDefenderMovementImages[0].rectTransform.localScale.x < 0)
+            {
+                FightersAnimator.Play("Fighters_Defenders_Left", 0, 0f);
+            }
+            else
+            {
+                FightersAnimator.Play("Fighters_Defenders_Right", 0, 0f);
+            }
+            yield return new WaitForSeconds(.3167f);
+        }
         
         Enums.MoveType moveType = moveEvent.GetMoveType();
         if (moveType == Enums.MoveType.Melee || moveType == Enums.MoveType.NinTai)
@@ -826,6 +889,19 @@ public class DynamicWindow : MonoBehaviour
         DynamicTextPanel.SetActive(true);
 
         yield return new WaitForSeconds(.5f);
+
+        if (hit.CheckWasProtected() == true)
+        {
+            if (SpawnedDefenderMovementImages[0].rectTransform.localScale.x < 0)
+            {
+                TargetAnimator.Play("Target_Defenders_Left", 0, 0f);
+            }
+            else
+            {
+                TargetAnimator.Play("Target_Defenders_Right", 0, 0f);
+            }
+            yield return new WaitForSeconds(.3167f);
+        }
 
         Enums.HitResult hitResult = hit.GetResult();
         bool flightAvoided = hit.CheckFlightAvoided();
@@ -1212,6 +1288,15 @@ public class DynamicWindow : MonoBehaviour
             }
         }
         SpawnedSummonPanels.Clear();
+
+        foreach (Image spawnedDefenderMovementImage in SpawnedDefenderMovementImages)
+        {
+            if (spawnedDefenderMovementImage != null)
+            {
+                Destroy(spawnedDefenderMovementImage.gameObject);
+            }
+        }
+        SpawnedDefenderMovementImages.Clear();
 
         StopAttacks();
         StopDefenses();

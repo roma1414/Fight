@@ -5,6 +5,12 @@ TextureImporter:
   - first:
       213: 6129527456094112552
     second: FireMage_Body_0
+  - first:
+      213: -6012708568951335641
+    second: FireMage_Body_1
+  - first:
+      213: -5328717640920592230
+    second: FireMage_Body_2
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -129,12 +135,12 @@ TextureImporter:
       name: FireMage_Body_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 1080
-        height: 1080
+        x: 46
+        y: 770
+        width: 130
+        height: 347
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -147,11 +153,55 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: FireMage_Body_1
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 0
+        width: 1167
+        height: 1254
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 72555b9c9619e8ca0800000000000000
+      internalID: -6012708568951335641
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireMage_Body_2
+      rect:
+        serializedVersion: 2
+        x: 1163
+        y: 176
+        width: 8
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a901290d9879c06b0800000000000000
+      internalID: -5328717640920592230
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 089fb5f32ae2a4a86b9f1dab4030f8f3
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -162,6 +212,8 @@ TextureImporter:
       entries: []
     nameFileIdTable:
       FireMage_Body_0: 6129527456094112552
+      FireMage_Body_1: -6012708568951335641
+      FireMage_Body_2: -5328717640920592230
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

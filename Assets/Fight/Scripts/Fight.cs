@@ -906,11 +906,6 @@ public class Fight : MonoBehaviour
 
     public IEnumerator ExecuteMoveEvent(MoveEvent originalMoveEvent)
     {
-        if (originalMoveEvent.GetMoveType() == Enums.MoveType.Protect)
-        {
-            yield break;
-        }
-        
         MoveEvent moveEvent = GetMoveEventWithActualAttackersAndTargets(originalMoveEvent);
         
         List<string> statementTexts = new List<string>();
