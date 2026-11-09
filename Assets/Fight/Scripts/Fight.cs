@@ -2034,9 +2034,9 @@ public class Fight : MonoBehaviour
 
         if (protectorAvoidAction != null) // A protector can avoid the attack by themself.
         {
-            List<Fighter> listContainingProtector = new List<Fighter>() { protectorBlockAction.GetDefender() };
-            List<Move> listContainingDefensiveMove = new List<Move>() { protectorBlockAction.GetDefensiveMove() };
-            bool wasEasy = (protectorBlockAction.GetPower() - attackPower) >= EASY_BLOCK_POWER_DIFF;
+            List<Fighter> listContainingProtector = new List<Fighter>() { protectorAvoidAction.GetDefender() };
+            List<Move> listContainingDefensiveMove = new List<Move>() { protectorAvoidAction.GetDefensiveMove() };
+            bool wasEasy = (protectorAvoidAction.GetPower() - attackPower) >= EASY_BLOCK_POWER_DIFF;
 
             avoidMoveHit.SetDamage(0);
             avoidMoveHit.SetDefenders(listContainingProtector);
@@ -2162,7 +2162,7 @@ public class Fight : MonoBehaviour
                 }
             }
 
-            if (targetManaUsedAvoid < targetManaUsedBlock)
+            if (targetManaUsedAvoid <= targetManaUsedBlock)
             {
                 return avoidMoveHit;
             }

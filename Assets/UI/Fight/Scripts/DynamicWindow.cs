@@ -93,6 +93,7 @@ public class DynamicWindow : MonoBehaviour
         }
 
         TargetDefendersContainer.gameObject.SetActive(false);
+        TargetDefendersContainer.anchoredPosition = new Vector2(0f, 0f);
         TargetDefendersMovementContainer.gameObject.SetActive(false);
 
         TargetDodge.color = target.GetDodgeColor();
@@ -213,6 +214,7 @@ public class DynamicWindow : MonoBehaviour
         FightersContainer.anchoredPosition = new Vector2(0f, FIGHTERS_CONTAINER_DEFAULT_Y);//new Vector2(0f, FightersContainer.anchoredPosition.y);
 
         FightersDefendersContainer.gameObject.SetActive(false);
+        FightersDefendersContainer.anchoredPosition = new Vector2(0f, FIGHTERS_CONTAINER_DEFAULT_Y);
         FightersDefendersMovementContainer.gameObject.SetActive(false);
         SummonersContainer.gameObject.SetActive(false);
         SummonsContainer.gameObject.SetActive(false);

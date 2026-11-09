@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: TsunamiWave
   m_EditorClassIdentifier: Assembly-CSharp::Move
   Name: Tsunami Wave
-  Level: 8
+  Level: 5
   Mana: 55
   RoundsToCast: 0
   UsesPerFight: 0

@@ -1,32 +1,32 @@
 Round 1
 
-Water Witch  vs  Fire Mage  +  Paladin
+Water Witch  vs  Katerina  +  Paladin
 
 Water Witch   Overall: 8.389999  Health: 100  Mana: 220  Health Co = 1
 
-Fire Mage   Overall: 8.389999  Health: 100  Mana: 220  Health Co = 1
+Katerina   Overall: 8.75  Health: 100  Mana: 220  Health Co = 1
 Paladin   Overall: 7.58  Health: 100  Mana: 180  Health Co = 1
 
 ###################################################################
 ###################################################################
 
 Water Witch uses Tsunami Wave against Team 2!
-Paladin and Fire Mage block it with Holy Shield and Fire Tempest Wall!
-Fire Mage blocks it with Fire Tempest Wall!
+Katerina avoids it with Flight!
+It's avoided with Katerina's Flight!
 
 
 Round 2
 
-Water Witch  vs  Fire Mage  +  Paladin
+Water Witch  vs  Katerina  +  Paladin
 
 Water Witch   Overall: 7.895  Health: 100  Mana: 165  Health Co = 1
 
-Fire Mage   Overall: 7.94  Health: 100  Mana: 170  Health Co = 1
-Paladin   Overall: 7.448  Health: 100  Mana: 147  Health Co = 1
+Katerina   Overall: 8.65  Health: 100  Mana: 200  Health Co = 1
+Paladin   Overall: 7.58  Health: 100  Mana: 180  Health Co = 1
 
 ###################################################################
 ###################################################################
 
 Water Witch uses Tsunami Wave against Team 2!
-Paladin and Fire Mage block it with Holy Shield and Fire Tempest Wall!
-Fire Mage blocks it with Fire Tempest Wall!
+Katerina avoids it with Flight!
+It's avoided with Katerina's Flight!
