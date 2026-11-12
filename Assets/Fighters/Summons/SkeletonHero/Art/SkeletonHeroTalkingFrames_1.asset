@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbf29160547f84b66a0c694f1f8d44c5, type: 3}
+  m_Name: SkeletonHeroTalkingFrames_1
+  m_EditorClassIdentifier: Assembly-CSharp::AnimationFrames
+  Frames:
+  - {fileID: 2744815516190261381, guid: e91c1fb1a29804ebaa57f0fa57b31532, type: 3}
+  - {fileID: -5776270079004375266, guid: 6a6192cd0ea124dffbe32d0b43cdf552, type: 3}
+  - {fileID: 57876687560003305, guid: 83261424172db468099770633e9feb18, type: 3}

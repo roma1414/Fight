@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1837d8fddf9d4fb4bbe7620dd4b1ce89, type: 3}
+  m_Name: NecromancerArt
+  m_EditorClassIdentifier: Assembly-CSharp::FighterArt
+  Body: {fileID: 195874224595381979, guid: d9571d074184e454987ce7c01997cd5e, type: 3}
+  Back: {fileID: -1863927027964261734, guid: 10d59dffccd814cbeaa8d646b60eec4f, type: 3}
+  Deflect: {fileID: 7279837373443513059, guid: 09a90b88255664a75836434fdba179d7, type: 3}
+  TalkingAngry: {fileID: 0}
+  TalkingFrameList:
+  - {fileID: 11400000, guid: 173cb178c08b34657947b4b5db81d450, type: 2}
+  - {fileID: 11400000, guid: f4efccc2b06e8408caaa73715ce69e74, type: 2}

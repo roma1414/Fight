@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1837d8fddf9d4fb4bbe7620dd4b1ce89, type: 3}
+  m_Name: SkeletonArt
+  m_EditorClassIdentifier: Assembly-CSharp::FighterArt
+  Body: {fileID: -6381565297731761393, guid: 3e6b240b8cb454d13b45cdfb90449095, type: 3}
+  Back: {fileID: -664623507461357656, guid: 143bb169dfa284e7fa718b7d51b39006, type: 3}
+  Deflect: {fileID: -4149609572427690108, guid: b10ce314c539c47bfa74e72cf78b4b60, type: 3}
+  TalkingAngry: {fileID: 0}
+  TalkingFrameList:
+  - {fileID: 11400000, guid: 30d64bc1c7dbc4ad5b14afdfa98c7865, type: 2}

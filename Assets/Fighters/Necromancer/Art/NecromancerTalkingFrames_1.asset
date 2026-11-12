@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbf29160547f84b66a0c694f1f8d44c5, type: 3}
+  m_Name: NecromancerTalkingFrames_1
+  m_EditorClassIdentifier: Assembly-CSharp::AnimationFrames
+  Frames:
+  - {fileID: 5591379240771862930, guid: 624384a64f7384191aa990750afa5b23, type: 3}
+  - {fileID: 7837383030023904575, guid: b8cd3fb4eadaa48128be1dc53165c854, type: 3}
+  - {fileID: 6603583383226767264, guid: c1936153decfa452c9faf88ef502505d, type: 3}

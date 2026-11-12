@@ -1,172 +1,63 @@
 Round 1
 
-Water Witch  +  Paladin  vs  Katerina  +  Mystic Assassin  +  Fire Mage
+Necromancer  vs  Katerina
 
-Water Witch   Overall: 8.389999  Health: 100  Mana: 220  Health Co = 1
-Paladin   Overall: 7.58  Health: 100  Mana: 180  Health Co = 1
+Necromancer   Overall: 8.47  Health: 100  Mana: 220  Health Co = 1
 
 Katerina   Overall: 8.75  Health: 100  Mana: 220  Health Co = 1
-Mystic Assassin   Overall: 7.15  Health: 100  Mana: 140  Health Co = 1
-Fire Mage   Overall: 8.389999  Health: 100  Mana: 220  Health Co = 1
 
 ###################################################################
 ###################################################################
 
-Mystic Assassin uses Slash against Water Witch!
-It hits Water Witch and does 26 damage!
-Water Witch uses Water Dragon against Mystic Assassin!
-It misses Mystic Assassin!
-Fire Mage uses Wild Inferno against Team 1!
-Water Witch blocks it with Tsunami Wall!
-Paladin blocks it with Holy Shield!
+Necromancer uses Sumon Skeleton!
 
 
 Round 2
 
-Water Witch  +  Paladin  vs  Katerina  +  Mystic Assassin  +  Fire Mage
+Necromancer  +  Skeleton  vs  Katerina
 
-Water Witch   Overall: 7.822573  Health: 74  Mana: 157  Health Co = 0.9946667
-Paladin   Overall: 7.448  Health: 100  Mana: 147  Health Co = 1
+Necromancer   Overall: 8.47  Health: 100  Mana: 220  Health Co = 1
+Skeleton   Overall: 4.16  Health: 100  Mana: 80  Health Co = 1
 
 Katerina   Overall: 8.75  Health: 100  Mana: 220  Health Co = 1
-Mystic Assassin   Overall: 7.145  Health: 100  Mana: 139  Health Co = 1
-Fire Mage   Overall: 8.03  Health: 100  Mana: 180  Health Co = 1
 
 ###################################################################
 ###################################################################
 
-Mystic Assassin uses Slash against Water Witch!
-It hits Water Witch and does 28 damage!
-Paladin uses Slash against Mystic Assassin!
-It misses Mystic Assassin!
-Water Witch uses Water Dragon against Fire Mage!
+Katerina uses Slash against Skeleton!
+It hits Skeleton and does 33 damage!
+Skeleton uses Straight Punch against Katerina!
+It misses Katerina!
+Necromancer uses Drain Health against Katerina!
 Katerina blocks it with Hurricane Wall!
 
 
 Round 3
 
-Water Witch  +  Paladin  vs  Katerina  +  Mystic Assassin  +  Fire Mage
+Necromancer  +  Skeleton  vs  Katerina
 
-Water Witch   Overall: 7.540627  Health: 46  Mana: 127  Health Co = 0.8453333
-Paladin   Overall: 7.444  Health: 100  Mana: 146  Health Co = 1
+Necromancer   Overall: 8.308  Health: 100  Mana: 202  Health Co = 1
+Skeleton   Overall: 4.000693  Health: 67  Mana: 79  Health Co = 0.9573333
 
-Katerina   Overall: 8.64  Health: 100  Mana: 198  Health Co = 1
-Mystic Assassin   Overall: 7.14  Health: 100  Mana: 138  Health Co = 1
-Fire Mage   Overall: 8.03  Health: 100  Mana: 180  Health Co = 1
+Katerina   Overall: 8.635  Health: 100  Mana: 197  Health Co = 1
 
 ###################################################################
 ###################################################################
 
-Mystic Assassin uses Throwing Knife against Water Witch!
-It misses Water Witch!
-Paladin uses Holy Blade against Katerina!
+Skeleton uses Straight Punch against Katerina!
 It misses Katerina!
-Water Witch uses Tsunami Wave against Team 2!
-Katerina avoids it with Flight!
-It misses Mystic Assassin!
-It's avoided with Katerina's Flight!
+Katerina uses Wind Scythe against Skeleton!
+It hits Skeleton and does 53 damage!
+Necromancer uses Drain Health against Katerina!
+Katerina blocks it with Hurricane Wall!
 
 
 Round 4
 
-Water Witch  +  Paladin  vs  Katerina  +  Mystic Assassin  +  Fire Mage
+Necromancer  +  Skeleton  vs  Katerina
 
-Water Witch   Overall: 7.044346  Health: 46  Mana: 72  Health Co = 0.8293334
-Paladin   Overall: 7.312  Health: 100  Mana: 113  Health Co = 1
+Necromancer   Overall: 8.146  Health: 100  Mana: 184  Health Co = 1
+Skeleton   Overall: 2.967787  Health: 14  Mana: 78  Health Co = 0.6746667
 
-Katerina   Overall: 8.54  Health: 100  Mana: 178  Health Co = 1
-Mystic Assassin   Overall: 7.14  Health: 100  Mana: 138  Health Co = 1
-Fire Mage   Overall: 8.03  Health: 100  Mana: 180  Health Co = 1
-
-###################################################################
-###################################################################
-
-Katerina and Mystic Assassin use Double Slash and Double Slash against Paladin!
-Paladin deflects it!
-Paladin uses Holy Blade against Katerina!
-It misses Katerina!
-Water Witch uses Tsunami Wave against Team 2!
-Katerina avoids it with Flight!
-It misses Mystic Assassin!
-Fire Mage blocks it with Fire Tempest Wall!
-Fire Mage uses Magic Missile against Water Witch!
-It hits Water Witch and does 34 damage!
-
-
-Round 5
-
-Water Witch  +  Paladin  vs  Katerina  +  Mystic Assassin  +  Fire Mage
-
-Water Witch   Overall: 6.511373  Health: 12  Mana: 17  Health Co = 0.3546667
-Paladin   Overall: 7.176  Health: 100  Mana: 79  Health Co = 1
-
-Katerina   Overall: 8.48  Health: 100  Mana: 166  Health Co = 1
-Mystic Assassin   Overall: 7.13  Health: 100  Mana: 136  Health Co = 1
-Fire Mage   Overall: 7.724  Health: 100  Mana: 146  Health Co = 1
-
-###################################################################
-###################################################################
-
-Katerina and Mystic Assassin use Double Slash and Double Slash against Water Witch!
-It hits Water Witch and does 171 damage!
-Water Witch is defeated!
-Paladin uses Holy Orb against Katerina!
-It misses Katerina!
-Fire Mage uses Fire Storm against Team 1!
-Paladin blocks it with Holy Shield!
-
-
-Round 6
-
-Paladin  vs  Katerina  +  Mystic Assassin  +  Fire Mage
-
-Paladin   Overall: 5.307573  Health: 100  Mana: 28  Health Co = 0.7493333
-
-Katerina   Overall: 8.47  Health: 100  Mana: 164  Health Co = 1
-Mystic Assassin   Overall: 7.12  Health: 100  Mana: 134  Health Co = 1
-Fire Mage   Overall: 7.364  Health: 100  Mana: 106  Health Co = 1
-
-###################################################################
-###################################################################
-
-Mystic Assassin uses Throwing Knife against Paladin!
-It misses Paladin!
-Paladin uses Holy Orb against Mystic Assassin!
-It misses Mystic Assassin!
-
-
-Round 7
-
-Paladin  vs  Katerina  +  Mystic Assassin  +  Fire Mage
-
-Paladin   Overall: 4.598134  Health: 100  Mana: 10  Health Co = 0.6533334
-
-Katerina   Overall: 8.47  Health: 100  Mana: 164  Health Co = 1
-Mystic Assassin   Overall: 7.12  Health: 100  Mana: 134  Health Co = 1
-Fire Mage   Overall: 7.364  Health: 100  Mana: 106  Health Co = 1
-
-###################################################################
-###################################################################
-
-Mystic Assassin uses Double Slash against Paladin!
-It hits Paladin and does 52 damage!
-Katerina uses Wind Bullets against Paladin!
-It hits Paladin and does 29 damage!
-Paladin uses Slash against Fire Mage!
-It misses Fire Mage!
-Fire Mage uses Wild Inferno against Team 1!
-It hits Paladin and does 60 damage!
-Paladin is defeated!
-
-###################################################################
-###################################################################
-
-The fight is over!
-Team 2 wins!
-Number of rounds: 7
-Surviving fighters:
-
-Katerina  Health: 100  Mana: 155
-Mystic Assassin  Health: 100  Mana: 132
-Fire Mage  Health: 100  Mana: 66
+Katerina   Overall: 8.455  Health: 100  Mana: 161  Health Co = 1
 

@@ -19,6 +19,8 @@
         Wood,               // Earth + Water            Kekkei Genkai (2)
         Holy,
         Flight,
+        Necromancy,
+        Ressurrection,
         None
     }
 }

@@ -10,28 +10,29 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f22992ffeb079114cabf4a66b094a39c, type: 3}
-  m_Name: ArcaneWall
+  m_Name: SummonSkeleton
   m_EditorClassIdentifier: Assembly-CSharp::Move
-  Name: Arcane Wall
-  Level: 5
-  Mana: 18
+  Name: Sumon Skeleton
+  Level: 4
+  Mana: 8
   RoundsToCast: 0
-  UsesPerFight: 0
-  CastingSpeed: 6
+  UsesPerFight: 2
+  CastingSpeed: 3
   ID: 0
   Occular: 0
   UseMeleSkill: 0
   RequiredTargetStatuses: 
-  TargetType: 4
-  MoveType: 8
-  Natures: 0000
-  MoveAnimations: {fileID: 0}
+  TargetType: 7
+  MoveType: 13
+  Natures: 1100
+  AnimationData: {fileID: 11400000, guid: 98f5253d1f41649e2a33bbdb859945aa, type: 2}
+  PreviewAnimationData: {fileID: 0}
   Number: 0
   CloneStrength: 0
   UsesPerRound: 0
   MaxLevelAvoided: 0
-  WorksAgaintsMelee: 1
-  WorksAgainstRanged: 1
+  WorksAgaintsMelee: 0
+  WorksAgainstRanged: 0
   Absorbing: 0
   OccularSuccess: 0
   TouchFail: 0
@@ -39,11 +40,12 @@ MonoBehaviour:
   ManaRestoreAmount: 0
   HealType: 0
   Damage: 0
-  Duration: 0
+  Duration: 6
   Accuracy: 0
   Absorbed: 0
   TouchSuccess: 0
   DamageType: 0
   StatusTypes: 
   BonusData: {fileID: 0}
-  Summons: []
+  Summons:
+  - {fileID: 8987420360953825968, guid: cd73d84f571a443aaad31702303b2512, type: 3}

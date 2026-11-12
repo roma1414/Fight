@@ -140,10 +140,10 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 1237
+        width: 1254
         height: 1254
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -156,77 +156,11 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
-    - serializedVersion: 2
-      name: FireSpirit_Body_1
-      rect:
-        serializedVersion: 2
-        x: 1157
-        y: 642
-        width: 6
-        height: 9
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 38501dea0342ae150800000000000000
-      internalID: 5902570053132420483
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: FireSpirit_Body_2
-      rect:
-        serializedVersion: 2
-        x: 1162
-        y: 642
-        width: 7
-        height: 11
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 3cf6f781021b6ff10800000000000000
-      internalID: 2303223010854662083
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: FireSpirit_Body_3
-      rect:
-        serializedVersion: 2
-        x: 1168
-        y: 642
-        width: 21
-        height: 17
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: a341e4ff602c68350800000000000000
-      internalID: 6018711287336145978
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
     outline: []
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: bd048624aa765488d921c77d77065d68
     internalID: 0
     vertices: []
     indices: 
@@ -234,12 +168,11 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     spriteCustomMetadata:
-      entries: []
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":1254.0,"y":1254.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":2,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
       FireSpirit_Body_0: 8908543768406329565
-      FireSpirit_Body_1: 5902570053132420483
-      FireSpirit_Body_2: 2303223010854662083
-      FireSpirit_Body_3: 6018711287336145978
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
