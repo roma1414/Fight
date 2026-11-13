@@ -92,6 +92,7 @@ public class SelectMoveWindow : MonoBehaviour
             case Enums.TargetType.EnemiesWithStatuses:
             case Enums.TargetType.TeamMember:
             case Enums.TargetType.TeamMembersWithStatuses:
+            case Enums.TargetType.DeadFighter:
                 moveEvent.AddTarget(SelectedTarget.GetFighterTarget());
                 break;
             case Enums.TargetType.EnemyTeam:
@@ -260,6 +261,11 @@ public class SelectMoveWindow : MonoBehaviour
                         Targets.Add(target);
                         break;
                     }
+                case Enums.TargetType.DeadFighter:
+                    {
+                        FighterTargets = Fight.GetDeadFighters();
+                        break;
+                    }
                 default:
                     Debug.LogError("Error! Unexpected SelectedMove.GetTargetType() in MoveSelectionChanged!");
                     break;
@@ -269,17 +275,23 @@ public class SelectMoveWindow : MonoBehaviour
             {
                 Target targetInfo = new Target();
                 targetInfo.SetName(target.GetName());
-                targetInfo.SetOverall($"{target.GetOverallRating():F1}");
                 targetInfo.SetHealth(target.GetHealth().ToString());
                 targetInfo.SetMana($"{100f * (float)target.GetMana() / (float)target.GetMaxMana():f0}");
                 targetInfo.SetFighterTarget(target);
-                if (target.GetTeam() == SelectedFighter.GetTeam())
+                if (SelectedMove.GetTargetType() == Enums.TargetType.DeadFighter)
+                {
+                    targetInfo.SetTargetType(Enums.TargetType.DeadFighter);
+                    targetInfo.SetOverall($"{target.GetOverallRating(true):F1}");
+                }
+                else if (target.GetTeam() == SelectedFighter.GetTeam())
                 {
                     targetInfo.SetTargetType(Enums.TargetType.TeamMember);
+                    targetInfo.SetOverall($"{target.GetOverallRating():F1}");
                 }
                 else
                 {
                     targetInfo.SetTargetType(Enums.TargetType.Enemy);
+                    targetInfo.SetOverall($"{target.GetOverallRating():F1}");
                 }
                 Targets.Add(targetInfo);
             }

@@ -1,19 +1,5 @@
 Round 1
 
-Necromancer  vs  Katerina
-
-Necromancer   Overall: 8.47  Health: 100  Mana: 220  Health Co = 1
-
-Katerina   Overall: 8.75  Health: 100  Mana: 220  Health Co = 1
-
-###################################################################
-###################################################################
-
-Necromancer uses Sumon Skeleton!
-
-
-Round 2
-
 Necromancer  +  Skeleton  vs  Katerina
 
 Necromancer   Overall: 8.47  Health: 100  Mana: 220  Health Co = 1
@@ -24,40 +10,18 @@ Katerina   Overall: 8.75  Health: 100  Mana: 220  Health Co = 1
 ###################################################################
 ###################################################################
 
-Katerina uses Slash against Skeleton!
-It hits Skeleton and does 33 damage!
 Skeleton uses Straight Punch against Katerina!
 It misses Katerina!
-Necromancer uses Drain Health against Katerina!
-Katerina blocks it with Hurricane Wall!
+Necromancer uses Summon Skeleton Hero!
 
 
-Round 3
+Round 2
 
-Necromancer  +  Skeleton  vs  Katerina
+Necromancer  +  Skeleton  +  Skeleton Hero  vs  Katerina
 
-Necromancer   Overall: 8.308  Health: 100  Mana: 202  Health Co = 1
-Skeleton   Overall: 4.000693  Health: 67  Mana: 79  Health Co = 0.9573333
+Necromancer   Overall: 8.47  Health: 100  Mana: 220  Health Co = 1
+Skeleton   Overall: 4.156  Health: 100  Mana: 79  Health Co = 1
+Skeleton Hero   Overall: 6.04  Health: 100  Mana: 80  Health Co = 1
 
-Katerina   Overall: 8.635  Health: 100  Mana: 197  Health Co = 1
-
-###################################################################
-###################################################################
-
-Skeleton uses Straight Punch against Katerina!
-It misses Katerina!
-Katerina uses Wind Scythe against Skeleton!
-It hits Skeleton and does 53 damage!
-Necromancer uses Drain Health against Katerina!
-Katerina blocks it with Hurricane Wall!
-
-
-Round 4
-
-Necromancer  +  Skeleton  vs  Katerina
-
-Necromancer   Overall: 8.146  Health: 100  Mana: 184  Health Co = 1
-Skeleton   Overall: 2.967787  Health: 14  Mana: 78  Health Co = 0.6746667
-
-Katerina   Overall: 8.455  Health: 100  Mana: 161  Health Co = 1
+Katerina   Overall: 8.75  Health: 100  Mana: 220  Health Co = 1
 

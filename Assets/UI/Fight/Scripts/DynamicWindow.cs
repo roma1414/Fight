@@ -473,7 +473,7 @@ public class DynamicWindow : MonoBehaviour
             {
                 Enums.MoveType moveType = moveEvent.GetMoveType();
 
-                if (moveType == Enums.MoveType.Medical)
+                if (moveType == Enums.MoveType.Medical || targetType == Enums.TargetType.DeadFighter)
                 {
                     text += " on ";
                 }
@@ -486,6 +486,7 @@ public class DynamicWindow : MonoBehaviour
                 {
                     case Enums.TargetType.Enemy:
                     case Enums.TargetType.TeamMember:
+                    case Enums.TargetType.DeadFighter:
                         {
                             Fighter target = targets[0];
                             text += target.GetName() + "!";
@@ -728,8 +729,10 @@ public class DynamicWindow : MonoBehaviour
         summonersLayoutGroup.spacing = summonerLayoutGroupSpacing;
 
         // Instantiate summon panels
-        Fighter[] summons = moveEvent.GetMoves()[0].GetSummons();
-        for (int i = 0; i < summons.Length; i++)
+        Move move = moveEvent.GetMoves()[0];
+        bool isResurrection = move.GetTargetType() == Enums.TargetType.DeadFighter;
+        List<Fighter> summons = isResurrection ? moveEvent.GetTargets() : move.GetSummonsList();
+        for (int i = 0; i < summons.Count; i++)
         {
             Fighter summon = summons[i];
 
@@ -1127,8 +1130,9 @@ public class DynamicWindow : MonoBehaviour
         // We want to display one animation per summon
         List<Move> moves = new List<Move>();
         List<float> delays = new List<float>();
-        Fighter[] summonedFighters = moveEvent.GetMoves()[0].GetSummons();
-        for (int i = 0; i < summonedFighters.Length; i++)
+        bool isResurrection = moveEvent.GetMoves()[0].GetTargetType() == Enums.TargetType.DeadFighter;
+        List<Fighter> summonedFighters = isResurrection ? moveEvent.GetTargets() : moveEvent.GetMoves()[0].GetSummonsList();
+        for (int i = 0; i < summonedFighters.Count; i++)
         {
             moves.Add(moveEvent.GetMoves()[0]);
             delays.Add(0f);

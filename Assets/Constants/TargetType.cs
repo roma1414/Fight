@@ -9,6 +9,7 @@
         TeamMember,
         Team,
         TeamMembersWithStatuses,
-        Self
+        Self,
+        DeadFighter
     }
 }

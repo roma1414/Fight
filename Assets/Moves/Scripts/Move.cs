@@ -108,6 +108,7 @@ public class Move : ScriptableObject
     public List<Enums.StatusType> GetRequiredTargetStatusesList() { return new List<Enums.StatusType>(RequiredTargetStatuses); }
     public Enums.StatusType[] GetStatusTypes() { return StatusTypes; }
     public Fighter[] GetSummons() { return Summons; }
+    public List<Fighter> GetSummonsList() { return new List<Fighter>(Summons); }
     public bool GetUseMeleeSkill() { return UseMeleSkill; }
     public int GetUsesPerFight() { return UsesPerFight; }
     public int GetUsesPerRound() { return UsesPerRound; }

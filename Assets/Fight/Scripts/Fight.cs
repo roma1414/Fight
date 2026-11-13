@@ -298,6 +298,23 @@ public class Fight : MonoBehaviour
                         result = targetTeamList.Count > 0;
                         break;
                     }
+                case Enums.TargetType.DeadFighter:
+                    {
+                        List<Fighter> targets = moveEvent.GetTargets();
+
+                        int index = 0;
+                        int targetsCount = targets.Count;
+                        while (index < targetsCount && result == false)
+                        {
+                            if (targets[index].CheckIfAlive() == false) // Target is dead
+                            {
+                                result = true;
+                            }
+
+                            ++index;
+                        }
+                        break;
+                    }
                 case Enums.TargetType.Self:
                 case Enums.TargetType.AllEnemies:
                     {
@@ -1503,9 +1520,13 @@ public class Fight : MonoBehaviour
     public IEnumerator ExecuteSummonMoveEvent(MoveEvent moveEvent)
     {
         Move move = moveEvent.GetMoves()[0]; // There should only be one summon move, even if multiple people are performing it.
+        Enums.TargetType targetType = move.GetTargetType();
         int team = moveEvent.GetFighters()[0].GetTeam();
         List<Fighter> summons = new List<Fighter>();
-        foreach (Fighter summoned in move.GetSummons())
+
+        // Resurrection moves summon dead fighters (targets) while other summon moves summon new fighters (summons list).
+        List<Fighter> fightersToSummon = targetType == Enums.TargetType.DeadFighter ? moveEvent.GetTargets() : move.GetSummonsList();
+        foreach (Fighter summoned in fightersToSummon)
         {
             Fighter instance = Instantiate(summoned);
             instance.SetTeam(team);
@@ -1524,6 +1545,15 @@ public class Fight : MonoBehaviour
                 case 3:
                     Team3.Add(instance);
                     break;
+            }
+
+            if (targetType == Enums.TargetType.DeadFighter)
+            {
+                // Effectiveness ratio is based on the level of the resurrection move. Level 10 is 100% effective.
+                float effectivenessRatio = move.GetLevel() / 10f;
+                
+                instance.SetHealth((int)(100 * effectivenessRatio + .5)); // .5 is for rounding.
+                instance.SetMana((int)(instance.GetMaxMana() * effectivenessRatio + .5)); // .5 is for rounding.
             }
         }
 
@@ -1574,6 +1604,21 @@ public class Fight : MonoBehaviour
         attackBools.SetOccular(occular);
 
         return attackBools;
+    }
+
+    public List<Fighter> GetDeadFighters()
+    {
+        List<Fighter> deadFighters = new List<Fighter>();
+
+        foreach (Fighter fighter in OriginalFighters)
+        {
+            if (fighter.CheckIfAlive() == false)
+            {
+                deadFighters.Add(fighter);
+            }
+        }
+
+        return deadFighters;
     }
 
     public List<Fighter> GetEnemiesTrickedBySubstitution(Fighter fighter, Move subMove, List<Fighter> enemies)
@@ -2712,9 +2757,15 @@ public class Fight : MonoBehaviour
         moveEvent.SetTargetTeam(originalMoveEvent.GetTargetTeam());
         moveEvent.SetMoveType(originalMoveEvent.GetMoveType());
 
+        bool isResurrection = originalMoveEvent.GetMoves()[0].GetTargetType() == Enums.TargetType.DeadFighter;
+
         foreach (Fighter target in originalMoveEvent.GetTargets())
         {
-            if (target.CheckIfAlive() == true)
+            if (isResurrection == false && target.CheckIfAlive() == true)
+            {
+                moveEvent.AddTarget(target);
+            }
+            else if (isResurrection == true && target.CheckIfAlive() == false)
             {
                 moveEvent.AddTarget(target);
             }
@@ -3260,7 +3311,7 @@ public class Fight : MonoBehaviour
             {
                 Enums.MoveType moveType = moveEvent.GetMoveType();
 
-                if (moveType == Enums.MoveType.Medical)
+                if (moveType == Enums.MoveType.Medical || targetType == Enums.TargetType.DeadFighter)
                 {
                     printString += " on ";
                 }
@@ -3273,6 +3324,7 @@ public class Fight : MonoBehaviour
                 {
                     case Enums.TargetType.Enemy:
                     case Enums.TargetType.TeamMember:
+                    case Enums.TargetType.DeadFighter:
                         {
                             Fighter target = targets[0];
                             printString += target.GetName() + "!";

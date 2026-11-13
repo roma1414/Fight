@@ -33,23 +33,36 @@ public class TargetRowUI : MonoBehaviour
         onSelected = selectionCallback;
         Enums.TargetType targetType = target.GetTargetType();
 
-        if (targetType == Enums.TargetType.Self ||
-            targetType == Enums.TargetType.Enemy ||
-            targetType == Enums.TargetType.TeamMember ||
-            targetType == Enums.TargetType.EnemiesWithStatuses ||
-            targetType == Enums.TargetType.TeamMembersWithStatuses)
+        switch (targetType)
         {
-            NameText.text = target.GetName();
-            OverallText.text = $"Ovr: {target.GetOverall().ToString()}";
-            HealthText.text = $"Health: {target.GetHealth().ToString()}";
-            ManaText.text = $"Energy: {target.GetMana().ToString()}";
-        }
-        else
-        {
-            NameText.text = target.GetName();
-            OverallText.text = "";
-            HealthText.text = "";
-            ManaText.text = "";
+            case Enums.TargetType.Self:
+            case Enums.TargetType.Enemy:
+            case Enums.TargetType.TeamMember:
+            case Enums.TargetType.EnemiesWithStatuses:
+            case Enums.TargetType.TeamMembersWithStatuses:
+                {
+                    NameText.text = target.GetName();
+                    OverallText.text = $"Ovr: {target.GetOverall().ToString()}";
+                    HealthText.text = $"Health: {target.GetHealth().ToString()}";
+                    ManaText.text = $"Energy: {target.GetMana().ToString()}";
+                    break;
+                }
+            case Enums.TargetType.DeadFighter:
+                {
+                    NameText.text = target.GetName();
+                    OverallText.text = $"Ovr: {target.GetOverall().ToString()}";
+                    HealthText.text = $"Health: --";
+                    ManaText.text = $"Energy: --";
+                    break;
+                }
+            default:
+                {
+                    NameText.text = target.GetName();
+                    OverallText.text = "";
+                    HealthText.text = "";
+                    ManaText.text = "";
+                    break;
+                }
         }
 
         SetSelected(false);

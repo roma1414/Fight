@@ -251,7 +251,7 @@ public class Fighter : MonoBehaviour
     public void AddUsedMove(UsedMove usedMove) { UsedMoves.Add(usedMove); }
     public bool CheckCombineAttacks() { return GetIntelligence() >= MIN_INTELLIGENCE_TO_COMBINE_ATTACKS; }
     public bool CheckCustomAI() { return AI.CheckCustomAI() == true; }
-    public bool CheckIfAlive() { return Health > 0; }
+    public bool CheckIfAlive() { return (Health > 0 && Mana > 0); }
 
     public bool CheckIfCanMove() 
     { 
@@ -511,29 +511,30 @@ public class Fighter : MonoBehaviour
     public List<Enums.Nature> GetNatures() { return Natures; }
     public float GetNinTaiDefenseSkill(float randomAdd) { return GetMelee() * GetHealthCo() + randomAdd; }
 
-    public float GetOverallRating()
+    public float GetOverallRating(bool defaultRating = false)
     {
-        float healthCo = GetHealthCo(); // Health coefficient
+        float healthCo = defaultRating ? 1.0f : GetHealthCo(); // Health coefficient
+        float manaRating = defaultRating ? GetManaRating(MaxMana) : GetManaRating(Mana);
         float overall = 0;
 
         switch (GetFightingStyle())
         {
             case Enums.FightingStyle.Balanced:
-                overall = GetSpellcraft() * .35f + GetMelee() * .25f * healthCo + GetPsychic() * .05f + GetSpeed() * .10f * healthCo + GetStrength() * .10f * healthCo + GetManaRating(Mana) * .10f + GetIntelligence() * .05f;
+                overall = GetSpellcraft() * .35f + GetMelee() * .25f * healthCo + GetPsychic() * .05f + GetSpeed() * .10f * healthCo + GetStrength() * .10f * healthCo + manaRating * .10f + GetIntelligence() * .05f;
                 break;
             case Enums.FightingStyle.Melee:
-                overall = GetSpellcraft() * .01f + GetMelee() * .40f * healthCo + GetPsychic() * .01f + GetSpeed() * .24f * healthCo + GetStrength() * .23f * healthCo + GetManaRating(Mana) * .08f + GetIntelligence() * .03f;
+                overall = GetSpellcraft() * .01f + GetMelee() * .40f * healthCo + GetPsychic() * .01f + GetSpeed() * .24f * healthCo + GetStrength() * .23f * healthCo + manaRating * .08f + GetIntelligence() * .03f;
                 break;
             case Enums.FightingStyle.Psychic:
-                overall = GetSpellcraft() * .15f + GetMelee() * .05f * healthCo + GetPsychic() * .65f + GetSpeed() * .05f * healthCo + GetManaRating(Mana) * .05f + GetIntelligence() * .05f;
+                overall = GetSpellcraft() * .15f + GetMelee() * .05f * healthCo + GetPsychic() * .65f + GetSpeed() * .05f * healthCo + manaRating * .05f + GetIntelligence() * .05f;
                 break;
             case Enums.FightingStyle.Medical:
             case Enums.FightingStyle.Spellslinger:
-                overall = GetSpellcraft() * .65f + GetPsychic() * .03f + GetSpeed() * .02f * healthCo + GetStrength() * .02f * healthCo + GetManaRating(Mana) * .18f + GetIntelligence() * .05f;
+                overall = GetSpellcraft() * .65f + GetPsychic() * .03f + GetSpeed() * .02f * healthCo + GetStrength() * .02f * healthCo + manaRating * .18f + GetIntelligence() * .05f;
                 break;
             default:
                 Debug.LogError("Error! Unrecognized FightingStyle in Fighter.GetOverallRating for Fighter: " + GetName() + " with ID: " + GetID());
-                overall = GetSpellcraft() * .35f + GetMelee() * .25f * healthCo + GetPsychic() * .05f + GetSpeed() * .10f * healthCo + GetStrength() * .10f * healthCo + GetManaRating(Mana) * .10f + GetIntelligence() * .05f;
+                overall = GetSpellcraft() * .35f + GetMelee() * .25f * healthCo + GetPsychic() * .05f + GetSpeed() * .10f * healthCo + GetStrength() * .10f * healthCo + manaRating * .10f + GetIntelligence() * .05f;
                 break;
         }
 
@@ -796,6 +797,7 @@ public class Fighter : MonoBehaviour
     public void SetSpeed(float speed) { Speed = speed; }
     public void SetStatuses(List<Status> statuses) { Statuses = statuses; }
     public void SetStrength(float strength) { Strength = strength; }
+    public void SetMana(int mana) { Mana = mana; }
     public void SetMelee(float melee) { Melee = melee; }
     public void SetTeam(int team) { Team = team; }
     public void SetControlType(Enums.ControlType controlType) { ControlType = controlType; }
