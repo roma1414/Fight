@@ -261,12 +261,20 @@ public class AI : ScriptableObject
                 {
                     return CheckIfMedicalOrPowerUpMoveHasViableTarget(fight, fighter, move);
                 }
+            case Enums.MoveType.Summon:
+                {
+                    if (move.GetTargetType() == Enums.TargetType.DeadFighter)
+                    {
+                        return fight.GetDeadFighters().Count > 0;
+                    }
+
+                    return true;
+                }
             case Enums.MoveType.Substitution:
             case Enums.MoveType.Clone:
             case Enums.MoveType.Defensive:
             case Enums.MoveType.Avoid:
             case Enums.MoveType.Protect:
-            case Enums.MoveType.Summon:
                 {
                     return true;
                 }

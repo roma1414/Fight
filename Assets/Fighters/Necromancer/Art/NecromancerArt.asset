@@ -15,6 +15,7 @@ MonoBehaviour:
   Body: {fileID: 195874224595381979, guid: d9571d074184e454987ce7c01997cd5e, type: 3}
   Back: {fileID: -1863927027964261734, guid: 10d59dffccd814cbeaa8d646b60eec4f, type: 3}
   Deflect: {fileID: 7279837373443513059, guid: 09a90b88255664a75836434fdba179d7, type: 3}
+  Defeated: {fileID: -84586969669044672, guid: af839c69f6def4cba8f1c86f642a481e, type: 3}
   TalkingAngry: {fileID: 0}
   TalkingFrameList:
   - {fileID: 11400000, guid: 173cb178c08b34657947b4b5db81d450, type: 2}

@@ -1564,6 +1564,18 @@ public class Fight : MonoBehaviour
         summon.SetSummoners(moveEvent.GetFighters());
         Summons.Add(summon);
 
+        List<Fighter> fighters = moveEvent.GetFighters();
+        List<Move> moves = moveEvent.GetMoves();
+        for (int index = 0; index < moveEvent.GetFighters().Count; ++index)
+        {
+            Fighter fighter = fighters[index];
+            Move summonMove = moves[index];
+
+            fighter.RemoveMana(summonMove.GetMana());
+            fighter.RemoveSubstitution();
+            fighter.AddUsedMove(summonMove, RoundNumber);
+        }
+
         yield return DynamicWindow.DisplaySummoning(moveEvent);
 
         List<string> statementTexts = new List<string>();
@@ -2757,7 +2769,11 @@ public class Fight : MonoBehaviour
         moveEvent.SetTargetTeam(originalMoveEvent.GetTargetTeam());
         moveEvent.SetMoveType(originalMoveEvent.GetMoveType());
 
-        bool isResurrection = originalMoveEvent.GetMoves()[0].GetTargetType() == Enums.TargetType.DeadFighter;
+        bool isResurrection = false;
+        if (originalMoveEvent.GetMoves().Count > 0)
+        {
+            isResurrection = originalMoveEvent.GetMoves()[0].GetTargetType() == Enums.TargetType.DeadFighter;
+        }
 
         foreach (Fighter target in originalMoveEvent.GetTargets())
         {
@@ -2872,11 +2888,11 @@ public class Fight : MonoBehaviour
         switch (team)
         {
             case 1:
-                return new List<Fighter>(Team1);
+                return Team1;
             case 2:
-                return new List<Fighter>(Team2);
+                return Team2;
             case 3:
-                return new List<Fighter>(Team3);
+                return Team3;
         }
 
         Debug.LogError("Error! Unknown team[" + team + "] in Fight.GetTeamList. Returning null.");
@@ -3383,11 +3399,11 @@ public class Fight : MonoBehaviour
                 mWriter.WriteLine(fighter.GetName() + " is defeated!");
                 RemoveFighter(fighter);
             }
-            /*else if (fighter.GetMana() <= 0)
+            else if (fighter.GetMana() <= 0)
             {
                 mWriter.WriteLine(fighter.GetName() + " has collapsed from exhausting all of their mana!");
                 RemoveFighter(fighter);
-            }*/
+            }
             else
             {
                 ++index;
