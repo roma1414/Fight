@@ -18,7 +18,7 @@ public class DynamicWindow : MonoBehaviour
                                             StatementFighter, AttacksPrefab, TargetBackground, FightersDodge,
                                             DefensesPrefab, FightersDeflect, StatementMotionBackground, TargetDodge, TargetDeflect,
                                             TargetAttacksPrefab, TargetDefensesPrefab, TeamAttacksPrefab, FightersDefendersMovementPrefab,
-                                            TargetDefendersMovementPrefab;
+                                            TargetDefendersMovementPrefab, TargetHit, FightersHit;
     [SerializeField] private TMP_Text       DynamicText, StatementText, StatementFighterName;
     [SerializeField] private RectTransform  FightersContainer, AttackersContainer, AttacksContainer, DefensesContainer,
                                             FightersDefendersContainer, TargetDefendersContainer, TargetAttacksContainer,
@@ -27,6 +27,7 @@ public class DynamicWindow : MonoBehaviour
                                             FightersDefeatedContainer;
     [SerializeField] private Animator       StatementAnimator, FighterAnimator, FightersAnimator, TargetAnimator;
     [SerializeField] private List<string>   StatementAnimations, FighterAnimations;
+    [SerializeField] private AnimationData  HitAnimationData;
     private int                             PreviousStatementAnimation = -1, PreviousFighterAnimation = -1;
     private List<GameObject>                SpawnedAttackerPanels = new List<GameObject>(), SpawnedFightersDefenderPanels = new List<GameObject>(),
                                             SpawnedTargetDefenderPanels = new List<GameObject>(), SpawnedFightersPanels = new List<GameObject>(),
@@ -35,7 +36,7 @@ public class DynamicWindow : MonoBehaviour
                                             SpawnedDefenderMovementImages = new List<Image>();
                                             /*SpawnedFighterImages = new List<Image>(), SpawnedTargetAttackImages = new List<Image>(),
                                             SpawnedTargetDefenseImages = new List<Image>();*/
-    private Coroutine                       TalkingCoroutine, MotionCoroutine;
+    private Coroutine                       TalkingCoroutine, MotionCoroutine, HitCoroutine;
     private List<Coroutine>                 AttackCoroutines = new List<Coroutine>(), DefenseCoroutines = new List<Coroutine>();
     private bool                            AttacksPaused;
     public const float FIGHTER_BACKGROUND_MAX_OFFSET = -3950;
@@ -910,7 +911,9 @@ public class DynamicWindow : MonoBehaviour
             else
             {
                 FightersAnimator.Play("Fighters_Defeated", 0, 0f);
-            }            
+            }
+
+            StartHit(FightersHit);        
         }
         if (hitResult == Enums.HitResult.Deflected || hitResult == Enums.HitResult.PartiallyDeflected)
         {
@@ -1014,6 +1017,8 @@ public class DynamicWindow : MonoBehaviour
             {
                 TargetAnimator.Play("Target_Defeated", 0, 0f);
             }
+
+            StartHit(TargetHit);
         }
         if (hitResult == Enums.HitResult.Deflected || hitResult == Enums.HitResult.PartiallyDeflected)
         {
@@ -1440,6 +1445,27 @@ public class DynamicWindow : MonoBehaviour
         Destroy(image.gameObject);
     }
 
+    private IEnumerator PlayHit(Image image)
+    {
+        // Hide the image during its delay, but keep its place in the layout.
+        image.enabled = false;
+
+        Sprite[] frames = HitAnimationData.GetFrames();
+        float frameDuration = 1f / HitAnimationData.GetFramesPerSecond();
+
+        for (int i = 0; i < frames.Length; i++)
+        {
+            image.sprite = frames[i];
+            image.enabled = true;
+            // Trigger visual impact feedback here if appropriate.
+            // if (i == animation.GetImpactFrame()) { ... }
+
+            yield return WaitForAttack(frameDuration);
+        }
+
+        image.enabled = false;
+    }
+
     private IEnumerator PlayMedical(GameObject panel, AnimationData animation, float delay, bool hideAnimation = false)
     {
         Image image = panel.transform.Find("MedicalMove").GetComponent<Image>();
@@ -1547,6 +1573,12 @@ public class DynamicWindow : MonoBehaviour
             : 0f;
 
         defensesLayoutGroup.spacing = defensesLayoutGroupSpacing;
+    }
+
+    private void StartHit(Image image)
+    {
+        StopHit();
+        HitCoroutine = StartCoroutine(PlayHit(image));
     }
 
     public void StartMedicals(List<Move> moves, List<float> delays, RectTransform container, GameObject prefab, bool addToTargetsForMedical)
@@ -1743,6 +1775,17 @@ public class DynamicWindow : MonoBehaviour
                 Destroy(image.gameObject);
         }
         SpawnedDefenseImages.Clear();
+    }
+
+    private void StopHit()
+    {
+        if (HitCoroutine != null)
+        {
+            StopCoroutine(HitCoroutine);
+            HitCoroutine = null;
+            TargetHit.sprite = null;
+            FightersHit.sprite = null;
+        }
     }
 
     private void StopMotionStatement()
