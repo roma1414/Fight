@@ -52,7 +52,7 @@ MonoBehaviour:
   Strength: 6
   Intelligence: 4
   Projectile: 4
-  DamageResistance: 0.67
+  DamageResistance: 0.25
   Mana: 80
   MaxMana: 80
   Health: 100

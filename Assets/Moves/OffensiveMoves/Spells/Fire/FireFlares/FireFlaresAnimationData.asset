@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d5d2916c73314bb89a1ff80a53f5c6a, type: 3}
+  m_Name: FireFlaresAnimationData
+  m_EditorClassIdentifier: Assembly-CSharp::AnimationData
+  Frames:
+  - {fileID: 1435224047816991674, guid: ddd8c95e5fdee402ea72b778229c2376, type: 3}
+  - {fileID: 977816144, guid: ddd8c95e5fdee402ea72b778229c2376, type: 3}
+  - {fileID: -813382292, guid: ddd8c95e5fdee402ea72b778229c2376, type: 3}
+  - {fileID: -1894519894, guid: ddd8c95e5fdee402ea72b778229c2376, type: 3}
+  - {fileID: 1063469736, guid: ddd8c95e5fdee402ea72b778229c2376, type: 3}
+  - {fileID: 1376916563, guid: ddd8c95e5fdee402ea72b778229c2376, type: 3}
+  - {fileID: 1063469736, guid: ddd8c95e5fdee402ea72b778229c2376, type: 3}
+  - {fileID: 1376916563, guid: ddd8c95e5fdee402ea72b778229c2376, type: 3}
+  - {fileID: -1506586587, guid: ddd8c95e5fdee402ea72b778229c2376, type: 3}
+  - {fileID: 822515964, guid: ddd8c95e5fdee402ea72b778229c2376, type: 3}
+  FramesPerSecond: 12
+  ImpactFrame: 4

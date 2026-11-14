@@ -39,4 +39,4 @@ MonoBehaviour:
   - {fileID: 1545673026, guid: 5cd00602e74f54dc38fe529ed8e46706, type: 3}
   - {fileID: 8202134545478551485, guid: 5cd00602e74f54dc38fe529ed8e46706, type: 3}
   FramesPerSecond: 12
-  ImpactFrame: 10
+  ImpactFrame: 14
