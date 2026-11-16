@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2062f618c0946478a98164a1059809fc, type: 3}
+  m_Name: Orc_DialogueData
+  m_EditorClassIdentifier: Assembly-CSharp::DialogueData
+  AttackingStatements:
+  - I'm gonna rip you to shreds!
+  - Here I come!
+  - Who wants to be destroyed?
+  - I will crush you!
+  AngryStatements: []
+  BlockedStatements:
+  - Puny insect!
+  - You are weak!
+  - 'That''s it?! '
+  DeflectedStatements: []
+  HurtStatements: []
+  TooFastStatements: []
+  VictoryStatements:
+  - Victory is glorious!
+  - There's nothing better than standing over a conquered foe!
+  - It was good fight!
+  SummonedStatements:
+  - How dare you resurrect me?!
+  LoopDialogue: 1

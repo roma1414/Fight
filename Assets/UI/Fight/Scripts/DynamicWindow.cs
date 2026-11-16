@@ -24,14 +24,15 @@ public class DynamicWindow : MonoBehaviour
                                             FightersDefendersContainer, TargetDefendersContainer, TargetAttacksContainer,
                                             TargetDefensesContainer, TeamAttacksContainer, SummonersContainer, SummonsContainer,
                                             SummonAnimationsContainer, FightersDefendersMovementContainer, TargetDefendersMovementContainer,
-                                            FightersDefeatedContainer;
+                                            FightersDefeatedContainer, SummonsDefeatedContainer;
     [SerializeField] private Animator       StatementAnimator, FighterAnimator, FightersAnimator, TargetAnimator;
     [SerializeField] private List<string>   StatementAnimations, FighterAnimations;
     [SerializeField] private AnimationData  HitAnimationData;
     private int                             PreviousStatementAnimation = -1, PreviousFighterAnimation = -1;
     private List<GameObject>                SpawnedAttackerPanels = new List<GameObject>(), SpawnedFightersDefenderPanels = new List<GameObject>(),
                                             SpawnedTargetDefenderPanels = new List<GameObject>(), SpawnedFightersPanels = new List<GameObject>(),
-                                            SpawnedSummonPanels = new List<GameObject>(), SpawnedFightersDefeatedPanels = new List<GameObject>();
+                                            SpawnedSummonPanels = new List<GameObject>(), SpawnedFightersDefeatedPanels = new List<GameObject>(),
+                                            SpawnedSummonDefeatedPanels = new List<GameObject>();
     private List<Image>                     SpawnedAttackImages = new List<Image>(), SpawnedDefenseImages = new List<Image>(),
                                             SpawnedDefenderMovementImages = new List<Image>();
                                             /*SpawnedFighterImages = new List<Image>(), SpawnedTargetAttackImages = new List<Image>(),
@@ -233,6 +234,7 @@ public class DynamicWindow : MonoBehaviour
         FightersDefendersMovementContainer.gameObject.SetActive(false);
         SummonersContainer.gameObject.SetActive(false);
         SummonsContainer.gameObject.SetActive(false);
+        SummonsDefeatedContainer.gameObject.SetActive(false);
         SummonAnimationsContainer.gameObject.SetActive(false);
 
         FightersDodge.color = targets[0].GetDodgeColor();
@@ -713,6 +715,9 @@ public class DynamicWindow : MonoBehaviour
     {
         List<Fighter> fighters = moveEvent.GetFighters();
         int team = fighters[0].GetTeam();
+        Move move = moveEvent.GetMoves()[0];
+        bool isResurrection = move.GetTargetType() == Enums.TargetType.DeadFighter;
+
         FightersBackground.sprite = Fight.GetMapArt().GetBackground(team);
 
         FightersDefeatedContainer.gameObject.SetActive(false);
@@ -724,6 +729,14 @@ public class DynamicWindow : MonoBehaviour
         SummonersContainer.gameObject.SetActive(true);
         SummonsContainer.gameObject.SetActive(false);
         SummonAnimationsContainer.gameObject.SetActive(true);
+        if (isResurrection)
+        {
+            SummonsDefeatedContainer.gameObject.SetActive(true);
+        }
+        else
+        {
+            SummonsDefeatedContainer.gameObject.SetActive(false);
+        }
 
         List<Fighter> teamList = Fight.GetTeamList(team);
         int teamSize = teamList.Count;
@@ -780,8 +793,6 @@ public class DynamicWindow : MonoBehaviour
         summonersLayoutGroup.spacing = summonerLayoutGroupSpacing;
 
         // Instantiate summon panels
-        Move move = moveEvent.GetMoves()[0];
-        bool isResurrection = move.GetTargetType() == Enums.TargetType.DeadFighter;
         List<Fighter> summons = isResurrection ? moveEvent.GetTargets() : move.GetSummonsList();
         for (int i = 0; i < summons.Count; i++)
         {
@@ -806,6 +817,26 @@ public class DynamicWindow : MonoBehaviour
             {
                 Debug.LogError($"Error! Fighter {summon.GetName()} has no body sprite in ConfigureFightWindowForSummons!");
             }
+
+            GameObject spawnedSummonDefeatedPanel = Instantiate(
+                FightersPrefab,
+                SummonsDefeatedContainer,
+                false
+            );
+
+            SpawnedSummonDefeatedPanels.Add(spawnedSummonDefeatedPanel);
+
+            Image spawnedSummonDefeatedImage = spawnedSummonDefeatedPanel.transform.Find("Fighters").GetComponent<Image>();
+            spawnedSummonDefeatedImage.sprite = null;
+            Sprite summonDefeatedSprite = summon.GetArt().GetDefeated();
+            if (summonDefeatedSprite != null)
+            {
+                spawnedSummonDefeatedImage.sprite = summonDefeatedSprite;
+            }
+            else
+            {
+                Debug.LogError($"Error! Fighter {summon.GetName()} has no Defeated sprite in ConfigureFightWindowForSummons!");
+            }
         }
 
         HorizontalLayoutGroup summonsLayoutGroup = SummonsContainer.GetComponent<HorizontalLayoutGroup>();
@@ -821,6 +852,20 @@ public class DynamicWindow : MonoBehaviour
             : 0f;
 
         summonsLayoutGroup.spacing = summonLayoutGroupSpacing;
+
+        HorizontalLayoutGroup summonsDefeatedLayoutGroup = SummonsDefeatedContainer.GetComponent<HorizontalLayoutGroup>();
+        float availableWidthSummonsDefeated = SummonsDefeatedContainer.rect.width - summonsDefeatedLayoutGroup.padding.left - summonsDefeatedLayoutGroup.padding.right;
+        float totalSummonDefeatedPanelWidths = 0f;
+        foreach (GameObject panel in SpawnedSummonDefeatedPanels)
+        {
+            RectTransform rectTransform = panel.GetComponent<RectTransform>();
+            totalSummonDefeatedPanelWidths += rectTransform.rect.width;
+        }
+        float summonDefeatedLayoutGroupSpacing = SpawnedSummonDefeatedPanels.Count > 1
+            ? Mathf.Min(0f, (availableWidthSummonsDefeated - totalSummonDefeatedPanelWidths) / (SpawnedSummonDefeatedPanels.Count - 1))
+            : 0f;
+
+        summonsDefeatedLayoutGroup.spacing = summonDefeatedLayoutGroupSpacing;
 
         ///////////
         //DynamicText.text = "";
@@ -1186,38 +1231,6 @@ public class DynamicWindow : MonoBehaviour
         }
     }
 
-    public IEnumerator DisplaySummoning(MoveEvent moveEvent)
-    {
-        HidePanels(true);
-        AnimationTimes animationTimes = moveEvent.GetAnimationTimes(null);
-        ConfigureFightWindowForSummons(moveEvent);
-        FightersPanel.SetActive(true);
-        DynamicTextPanel.SetActive(true);
-
-        yield return new WaitForSeconds(.5f);
-        
-        // We want to display one animation per summon
-        List<Move> moves = new List<Move>();
-        List<float> delays = new List<float>();
-        bool isResurrection = moveEvent.GetMoves()[0].GetTargetType() == Enums.TargetType.DeadFighter;
-        List<Fighter> summonedFighters = isResurrection ? moveEvent.GetTargets() : moveEvent.GetMoves()[0].GetSummonsList();
-        for (int i = 0; i < summonedFighters.Count; i++)
-        {
-            moves.Add(moveEvent.GetMoves()[0]);
-            delays.Add(0f);
-        }
-        StartDefenses(moves, delays, SummonAnimationsContainer, DefensesPrefab);
-
-        yield return new WaitForSeconds(animationTimes.GetImpactTime());
-        SummonsContainer.gameObject.SetActive(true);
-
-        yield return new WaitUntil(() => SpawnedDefenseImages.Count == 0);
-        AttackCoroutines.Clear();
-        DefenseCoroutines.Clear();
-
-        yield return new WaitForSeconds(.75f);
-    }
-
     public IEnumerator DisplayStatement(string statement, Fighter fighter, Enums.StatementType statementType, MapArt mapArt)
     {
         HidePanels();
@@ -1247,6 +1260,42 @@ public class DynamicWindow : MonoBehaviour
         }
 
         yield break;
+    }
+
+    public IEnumerator DisplaySummoning(MoveEvent moveEvent)
+    {
+        HidePanels(true);
+        AnimationTimes animationTimes = moveEvent.GetAnimationTimes(null);
+        ConfigureFightWindowForSummons(moveEvent);
+        FightersPanel.SetActive(true);
+        DynamicTextPanel.SetActive(true);
+
+        yield return new WaitForSeconds(.5f);
+        
+        // We want to display one animation per summon
+        List<Move> moves = new List<Move>();
+        List<float> delays = new List<float>();
+        bool isResurrection = moveEvent.GetMoves()[0].GetTargetType() == Enums.TargetType.DeadFighter;
+        List<Fighter> summonedFighters = isResurrection ? moveEvent.GetTargets() : moveEvent.GetMoves()[0].GetSummonsList();
+        for (int i = 0; i < summonedFighters.Count; i++)
+        {
+            moves.Add(moveEvent.GetMoves()[0]);
+            delays.Add(0f);
+        }
+        StartDefenses(moves, delays, SummonAnimationsContainer, DefensesPrefab);
+
+        yield return new WaitForSeconds(animationTimes.GetImpactTime());
+        if (moveEvent.CheckResurrection() == true)
+        {
+            SummonsDefeatedContainer.gameObject.SetActive(false);
+        }
+        SummonsContainer.gameObject.SetActive(true);
+
+        yield return new WaitUntil(() => SpawnedDefenseImages.Count == 0);
+        AttackCoroutines.Clear();
+        DefenseCoroutines.Clear();
+
+        yield return new WaitForSeconds(.75f);
     }
 
     public string GetFighterAnimation()

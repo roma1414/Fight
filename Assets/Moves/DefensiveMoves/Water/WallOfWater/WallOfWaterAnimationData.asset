@@ -14,18 +14,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::AnimationData
   Frames:
   - {fileID: -6252549269559888032, guid: a68a5236f6acb44b982c061b0754308d, type: 3}
-  - {fileID: -989468896, guid: a68a5236f6acb44b982c061b0754308d, type: 3}
-  - {fileID: -1138805923, guid: a68a5236f6acb44b982c061b0754308d, type: 3}
-  - {fileID: 374363694, guid: a68a5236f6acb44b982c061b0754308d, type: 3}
-  - {fileID: 1386248731, guid: a68a5236f6acb44b982c061b0754308d, type: 3}
-  - {fileID: 514252784, guid: a68a5236f6acb44b982c061b0754308d, type: 3}
-  - {fileID: -12426547, guid: a68a5236f6acb44b982c061b0754308d, type: 3}
-  - {fileID: 514252784, guid: a68a5236f6acb44b982c061b0754308d, type: 3}
-  - {fileID: 1386248731, guid: a68a5236f6acb44b982c061b0754308d, type: 3}
-  - {fileID: 514252784, guid: a68a5236f6acb44b982c061b0754308d, type: 3}
-  - {fileID: -12426547, guid: a68a5236f6acb44b982c061b0754308d, type: 3}
-  - {fileID: 1475676964, guid: a68a5236f6acb44b982c061b0754308d, type: 3}
-  - {fileID: -1585632522, guid: a68a5236f6acb44b982c061b0754308d, type: 3}
-  - {fileID: -1436299421, guid: a68a5236f6acb44b982c061b0754308d, type: 3}
+  - {fileID: 3783410401476979743, guid: a68a5236f6acb44b982c061b0754308d, type: 3}
+  - {fileID: -5633743369196390720, guid: a68a5236f6acb44b982c061b0754308d, type: 3}
+  - {fileID: 7241214838040425868, guid: a68a5236f6acb44b982c061b0754308d, type: 3}
+  - {fileID: -7361106170428911032, guid: a68a5236f6acb44b982c061b0754308d, type: 3}
+  - {fileID: -8029769791500190894, guid: a68a5236f6acb44b982c061b0754308d, type: 3}
+  - {fileID: 2915442051828633082, guid: a68a5236f6acb44b982c061b0754308d, type: 3}
+  - {fileID: -8029769791500190894, guid: a68a5236f6acb44b982c061b0754308d, type: 3}
+  - {fileID: -7361106170428911032, guid: a68a5236f6acb44b982c061b0754308d, type: 3}
+  - {fileID: -8029769791500190894, guid: a68a5236f6acb44b982c061b0754308d, type: 3}
+  - {fileID: 2915442051828633082, guid: a68a5236f6acb44b982c061b0754308d, type: 3}
+  - {fileID: -8034780896859177111, guid: a68a5236f6acb44b982c061b0754308d, type: 3}
+  - {fileID: -474327901370659829, guid: a68a5236f6acb44b982c061b0754308d, type: 3}
+  - {fileID: -1040267347669634113, guid: a68a5236f6acb44b982c061b0754308d, type: 3}
   FramesPerSecond: 12
   ImpactFrame: 4

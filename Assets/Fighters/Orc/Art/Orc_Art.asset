@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1837d8fddf9d4fb4bbe7620dd4b1ce89, type: 3}
+  m_Name: Orc_Art
+  m_EditorClassIdentifier: Assembly-CSharp::FighterArt
+  Body: {fileID: -6797840100523870700, guid: b459b1a4025934f38b21ce7fb8301f17, type: 3}
+  Back: {fileID: -3402456691413461269, guid: 80c0d743cc9a84d83ab91599175a42aa, type: 3}
+  Deflect: {fileID: -3235017663707534840, guid: e5458c715a1b9413887f656c24951532, type: 3}
+  Defeated: {fileID: -1151636168836625410, guid: 1fca67d445cc745bfb62b28d12abadeb, type: 3}
+  TalkingAngry: {fileID: 0}
+  TalkingFrameList:
+  - {fileID: 11400000, guid: d11591dc98091407597b3c7fe9ff95dd, type: 2}
+  - {fileID: 11400000, guid: e292e02db5df444de9dff8e65813ed17, type: 2}

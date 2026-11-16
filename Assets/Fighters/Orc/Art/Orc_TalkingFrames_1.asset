@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbf29160547f84b66a0c694f1f8d44c5, type: 3}
+  m_Name: Orc_TalkingFrames_1
+  m_EditorClassIdentifier: Assembly-CSharp::AnimationFrames
+  Frames:
+  - {fileID: -8007565920583740997, guid: a60cc71337ffe4a1c8cb924c03e4ebd0, type: 3}
+  - {fileID: 3856441008981236895, guid: b2be481d9f985428eb7288467059256a, type: 3}
+  - {fileID: 1077248259701181766, guid: 166962176cf9b4c32a18416e79983ac6, type: 3}

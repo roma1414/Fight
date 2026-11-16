@@ -77,7 +77,7 @@ public class Fight : MonoBehaviour
                 fighter.RemoveHealth(healthBonus);
                 mWriter.WriteLine(fighter.GetName() + " is damaged " + healthBonus + " health!");
                 //mWriter.WriteLine(fighter.GetName() + " is damaged " + Mathf.Abs(attributeBonus.GetAmount()) + " health by " + powerUp.GetPowerUpMove().GetName() + "!");
-                RemoveDefeatedFighters();
+                RemoveDefeatedFighters(true);
             }
         }
     }
@@ -1393,7 +1393,7 @@ public class Fight : MonoBehaviour
         foreach (Fighter target in targets)
         {
             yield return ExecuteOffensiveMoveAgainstTarget(moveEvent, target);
-            RemoveDefeatedFighters();
+            yield return RemoveDefeatedFighters(false);
         }
 
         int fightersCount = fighters.Count;
@@ -3387,28 +3387,40 @@ public class Fight : MonoBehaviour
         return ((x - (numResults / 2.0f)) / numResults) * RANDOM_ADD_RANGE; // randomAdd is within [-RANDOM_ADD_RANGE/2, RANDOM_ADD_RANGE/2] inclusive.
     }
 
-    public void RemoveDefeatedFighters()
+    public IEnumerator RemoveDefeatedFighters(bool showFightersCollapseDefault)
     {
         int index = 0;
         while (index < Fighters.Count)
         {
             Fighter fighter = Fighters[index];
 
-            if (fighter.GetHealth() <= 0)
-            {
-                mWriter.WriteLine(fighter.GetName() + " is defeated!");
-                RemoveFighter(fighter);
-            }
-            else if (fighter.GetMana() <= 0)
-            {
-                mWriter.WriteLine(fighter.GetName() + " has collapsed from exhausting all of their mana!");
-                RemoveFighter(fighter);
-            }
-            else
+            if (fighter.CheckIfAlive() == true)
             {
                 ++index;
             }
+            else
+            {
+                string resultString = "";
+                bool showFighterCollapse = showFightersCollapseDefault;
+                
+                if (fighter.GetHealth() <= 0)
+                {
+                    resultString = fighter.GetName() + " is defeated!";
+                }
+                else if (fighter.GetMana() <= 0)
+                {
+                    
+                    resultString = fighter.GetName() + " has collapsed from exhausting all of their energy!";
+                    showFighterCollapse = true;
+                }
+
+                mWriter.WriteLine(resultString);
+                //yield return DynamicWindow.DisplayDefeatedFighter(fighter, resultString, showFighterCollapse);
+                RemoveFighter(fighter);
+            }
         }
+
+        yield return null;
     }
 
     public void RemovePsychicControlForProtections()
@@ -3489,7 +3501,7 @@ public class Fight : MonoBehaviour
             UpdateSummons();
             UpdateStatuses();
             UpdatePowerUps();
-            RemoveDefeatedFighters();
+            yield return RemoveDefeatedFighters(true);
             Protections.Clear();
 
             mWriter.WriteLine("Round " + RoundNumber + "\n");

@@ -48,6 +48,16 @@ public class MoveEvent
         return true;
     }
 
+    public bool CheckResurrection()
+    {
+        if (Moves.Count > 0)
+        {
+            return Moves[0].GetTargetType() == Enums.TargetType.DeadFighter;
+        }
+
+        return false;
+    }
+
     public AnimationTimes GetAnimationTimes(Hit hit)
     {
         AnimationTimes result = new AnimationTimes();

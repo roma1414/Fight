@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d5d2916c73314bb89a1ff80a53f5c6a, type: 3}
+  m_Name: WildInfernoAnimationData
+  m_EditorClassIdentifier: Assembly-CSharp::AnimationData
+  Frames:
+  - {fileID: 8906565792722359326, guid: c4623eff9ccf449b9a288977e200cab6, type: 3}
+  - {fileID: -816319159, guid: c4623eff9ccf449b9a288977e200cab6, type: 3}
+  - {fileID: 1796858990, guid: c4623eff9ccf449b9a288977e200cab6, type: 3}
+  - {fileID: 998355160, guid: c4623eff9ccf449b9a288977e200cab6, type: 3}
+  - {fileID: -1980108336, guid: c4623eff9ccf449b9a288977e200cab6, type: 3}
+  - {fileID: 998355160, guid: c4623eff9ccf449b9a288977e200cab6, type: 3}
+  - {fileID: -1980108336, guid: c4623eff9ccf449b9a288977e200cab6, type: 3}
+  - {fileID: 1736078988, guid: c4623eff9ccf449b9a288977e200cab6, type: 3}
+  - {fileID: -1159164252, guid: c4623eff9ccf449b9a288977e200cab6, type: 3}
+  - {fileID: -1973015230, guid: c4623eff9ccf449b9a288977e200cab6, type: 3}
+  FramesPerSecond: 12
+  ImpactFrame: 4
