@@ -51,6 +51,7 @@ public class DynamicWindow : MonoBehaviour
     public const float TARGET_X_ZERO_POINT = 0f;
     public const float FIGHTERS_CONTAINER_DEFAULT_Y = -42f;
     public const float FIGHTER_CONTAINER_DEFAULT_Y = -300f;
+    public const float ATTACKERS_CONTAINER_DEFAULT_Y = -100f;
 
     private IEnumerator AnimateMotionStatement(Sprite[] frames)
     {
@@ -236,6 +237,7 @@ public class DynamicWindow : MonoBehaviour
         SummonsContainer.gameObject.SetActive(false);
         SummonsDefeatedContainer.gameObject.SetActive(false);
         SummonAnimationsContainer.gameObject.SetActive(false);
+        AttackersContainer.anchoredPosition = new Vector2(0f, ATTACKERS_CONTAINER_DEFAULT_Y);
 
         FightersDodge.color = targets[0].GetDodgeColor();
         FightersDodge.gameObject.SetActive(false);
@@ -897,7 +899,8 @@ public class DynamicWindow : MonoBehaviour
         Enums.MoveType moveType = moveEvent.GetMoveType();
         if (moveType == Enums.MoveType.Melee || moveType == Enums.MoveType.NinTai)
         {
-            FightersAnimator.Play("Attackers_Melee", 0, 0f);
+            int attackersLayer = FightersAnimator.GetLayerIndex("Attackers");
+            FightersAnimator.Play("Attackers.Attackers_Melee", attackersLayer, 0f);
             yield return new WaitForSeconds(.2f);
         }
 
@@ -1108,7 +1111,8 @@ public class DynamicWindow : MonoBehaviour
         Enums.MoveType moveType = moveEvent.GetMoveType();
         if (moveType == Enums.MoveType.Melee || moveType == Enums.MoveType.NinTai)
         {
-            FightersAnimator.Play("Attackers_Melee", 0, 0f);
+            int attackersLayer = FightersAnimator.GetLayerIndex("Attackers");
+            FightersAnimator.Play("Attackers.Attackers_Melee", attackersLayer, 0f);
             yield return new WaitForSeconds(.2f);
         }
 
