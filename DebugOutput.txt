@@ -1,52 +1,23 @@
 Round 1
 
-Fire Mage  +  Katerina  vs  Necromancer  +  Skeleton
+Fire Mage  vs  Katerina
 
-Fire Mage   Overall: 8.389999  Health: 100  Mana: 220  Health Co = 1
+Fire Mage   Overall: 6.415707  Health: 100  Mana: 4  Health Co = 0.6213334
+
 Katerina   Overall: 8.75  Health: 100  Mana: 220  Health Co = 1
 
-Necromancer   Overall: 8.47  Health: 100  Mana: 220  Health Co = 1
-Skeleton   Overall: 4.16  Health: 100  Mana: 80  Health Co = 1
-
 ###################################################################
 ###################################################################
 
-Katerina uses Double Slash against Skeleton!
-It hits Skeleton and does 89 damage!
-Skeleton uses Straight Punch against Fire Mage!
-It misses Fire Mage!
-Necromancer uses Drain Health against Katerina!
+Fire Mage uses Magic Missile against Katerina!
 It misses Katerina!
-Fire Mage uses Wild Inferno against Team 2!
-It hits Necromancer and does 76 damage!
-It hits Skeleton and does 76 damage!
-Skeleton is defeated!
 
 
+Fire Mage has collapsed from exhausting all of their energy!
 Round 2
 
-Fire Mage  +  Katerina  vs  Necromancer
+  vs  Katerina
 
-Fire Mage   Overall: 8.03  Health: 100  Mana: 180  Health Co = 1
-Katerina   Overall: 8.74  Health: 100  Mana: 218  Health Co = 1
 
-Necromancer   Overall: 8.2808  Health: 24  Mana: 202  Health Co = 0.728
-
-###################################################################
-###################################################################
-
-Fire Mage and Katerina use Fireball and Wind Scythe against Necromancer!
-It hits Necromancer and does 134 damage!
-Necromancer is defeated!
-
-###################################################################
-###################################################################
-
-The fight is over!
-Team 1 wins!
-Number of rounds: 2
-Surviving fighters:
-
-Fire Mage  Health: 100  Mana: 155
-Katerina  Health: 100  Mana: 204
+Katerina   Overall: 8.75  Health: 100  Mana: 220  Health Co = 1
 

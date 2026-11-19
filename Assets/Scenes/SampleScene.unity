@@ -1260,6 +1260,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1384330528907906549, guid: 8b9807a644ceb409d9021bb32fcba309, type: 3}
+      propertyPath: Mana
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1384330528907906549, guid: 8b9807a644ceb409d9021bb32fcba309, type: 3}
       propertyPath: ControlType
       value: 0
       objectReference: {fileID: 0}
@@ -4834,28 +4838,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cd73d84f571a443aaad31702303b2512, type: 3}
---- !u!114 &933464909 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8987420360953825968, guid: cd73d84f571a443aaad31702303b2512, type: 3}
-  m_PrefabInstance: {fileID: 933464908}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4feff7ba81aada2428e3ed14f8e11b54, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Fighter
---- !u!114 &998160478 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4774210660610818441, guid: cc8b702fbc65f4ac39e0f4193355f54b, type: 3}
-  m_PrefabInstance: {fileID: 6504874435088330228}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4feff7ba81aada2428e3ed14f8e11b54, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Fighter
 --- !u!1 &1007914888
 GameObject:
   m_ObjectHideFlags: 0
@@ -10024,10 +10006,8 @@ MonoBehaviour:
   Teams: 2
   Team1:
   - {fileID: 175420731}
-  - {fileID: 1932862659}
   Team2:
-  - {fileID: 998160478}
-  - {fileID: 933464909}
+  - {fileID: 1932862659}
   Team3: []
   MapArt: {fileID: 11400000, guid: d2dea80629c404fd1be252fe0953eacc, type: 2}
   SelectMovePanel: {fileID: 646679249}

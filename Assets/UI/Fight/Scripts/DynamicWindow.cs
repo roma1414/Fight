@@ -1220,15 +1220,16 @@ public class DynamicWindow : MonoBehaviour
 
         string animation = GetTargetAnimation();
         TargetAnimator.Play(animation, 0, 0f);
-        yield return new WaitForSeconds(.5f);
+        yield return new WaitForSeconds(.25f);
 
         if (showFighterCollapse)
         {
-            TargetDefeatedPanel.gameObject.SetActive(true);
-            TargetFighterPanel.gameObject.SetActive(false);
+            int defeatLayer = TargetAnimator.GetLayerIndex("Defeat");
+            TargetAnimator.SetLayerWeight(defeatLayer, 1f);
+            TargetAnimator.Play("Defeat.Target_Defeated", defeatLayer, 0f);
         }
         
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(1.75f);
     }
 
     public IEnumerator DisplayMedicalMoveOnSelf(MoveEvent moveEvent, string resultString)
@@ -1459,6 +1460,8 @@ public class DynamicWindow : MonoBehaviour
 
     public void HidePanels(bool keepDynamicText = false)
     {
+        // Release the collapse animation's visibility override for the next display.
+        TargetAnimator.SetLayerWeight(TargetAnimator.GetLayerIndex("Defeat"), 0f);
         FighterPanel.SetActive(false);
         FightersPanel.SetActive(false);
         StatementPanel.SetActive(false);
