@@ -3415,7 +3415,7 @@ public class Fight : MonoBehaviour
                 }
 
                 mWriter.WriteLine(resultString);
-                //yield return DynamicWindow.DisplayDefeatedFighter(fighter, resultString, showFighterCollapse);
+                yield return DynamicWindow.DisplayDefeatedFighter(fighter, resultString, showFighterCollapse);
                 RemoveFighter(fighter);
             }
         }

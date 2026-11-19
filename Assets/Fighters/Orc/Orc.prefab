@@ -46,7 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Fighter
   Name: Orc
   Spellcraft: 3
-  Melee: 10
+  Melee: 9
   Psychic: 2
   Speed: 6
   Strength: 10

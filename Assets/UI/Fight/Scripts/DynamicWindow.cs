@@ -26,9 +26,9 @@ public class DynamicWindow : MonoBehaviour
                                             SummonAnimationsContainer, FightersDefendersMovementContainer, TargetDefendersMovementContainer,
                                             FightersDefeatedContainer, SummonsDefeatedContainer;
     [SerializeField] private Animator       StatementAnimator, FighterAnimator, FightersAnimator, TargetAnimator;
-    [SerializeField] private List<string>   StatementAnimations, FighterAnimations;
+    [SerializeField] private List<string>   StatementAnimations, FighterAnimations, TargetAnimations;
     [SerializeField] private AnimationData  HitAnimationData;
-    private int                             PreviousStatementAnimation = -1, PreviousFighterAnimation = -1;
+    private int                             PreviousStatementAnimation = -1, PreviousFighterAnimation = -1, PreviousTargetAnimation = -1;
     private List<GameObject>                SpawnedAttackerPanels = new List<GameObject>(), SpawnedFightersDefenderPanels = new List<GameObject>(),
                                             SpawnedTargetDefenderPanels = new List<GameObject>(), SpawnedFightersPanels = new List<GameObject>(),
                                             SpawnedSummonPanels = new List<GameObject>(), SpawnedFightersDefeatedPanels = new List<GameObject>(),
@@ -97,6 +97,8 @@ public class DynamicWindow : MonoBehaviour
         }
 
         TargetDefeatedPanel.gameObject.SetActive(false);
+        RectTransform targetDefeatedRectTransform = TargetDefeatedPanel.GetComponent<RectTransform>();
+        targetDefeatedRectTransform.anchoredPosition = new Vector2(0f, 0f);
         Image targetDefeatedImage = TargetDefeatedPanel.transform.Find("TargetDefeated").GetComponent<Image>();
         Sprite targetDefeatedSprite = target.GetArt().GetDefeated();
         if (targetDefeatedSprite != null)
@@ -651,6 +653,71 @@ public class DynamicWindow : MonoBehaviour
         DynamicText.text = Util.ListString(fighters) + " attack " + Util.ListString(targets) + "!";
     }
 
+    public void ConfigureFightWindowForDefeatedFighter(Fighter target, string resultString, bool showFighterCollapse)
+    {
+        int targetTeam = target.GetTeam();
+        TargetBackground.sprite = Fight.GetMapArt().GetBackground(targetTeam);
+        
+        RectTransform targetRectTransform = TargetFighterPanel.GetComponent<RectTransform>();
+        targetRectTransform.anchoredPosition = new Vector2(0f, 0f);
+        Image targetImage = TargetFighterPanel.transform.Find("Target").GetComponent<Image>();
+        Sprite targetSprite = target.GetArt().GetBody();
+        if (targetSprite != null)
+        {
+            targetImage.sprite = targetSprite;
+        }
+        else
+        {
+            Debug.LogError($"Error! Target fighter {target.GetName()} has no Body sprite!");
+        }
+
+        RectTransform targetDefeatedRectTransform = TargetDefeatedPanel.GetComponent<RectTransform>();
+        targetDefeatedRectTransform.anchoredPosition = new Vector2(0f, 0f);
+        Image targetDefeatedImage = TargetDefeatedPanel.transform.Find("TargetDefeated").GetComponent<Image>();
+        Sprite targetDefeatedSprite = target.GetArt().GetDefeated();
+        if (targetDefeatedSprite != null)
+        {
+            targetDefeatedImage.sprite = targetDefeatedSprite;
+        }
+        else
+        {
+            Debug.LogError($"Error! Target fighter {target.GetName()} has no Defeated sprite!");
+        }
+
+        if (showFighterCollapse)
+        {
+            TargetDefeatedPanel.gameObject.SetActive(false);
+            TargetFighterPanel.gameObject.SetActive(true);
+        }
+        else
+        {
+            TargetDefeatedPanel.gameObject.SetActive(true);
+            TargetFighterPanel.gameObject.SetActive(false);
+        }
+
+        TargetDefendersContainer.gameObject.SetActive(false);
+        TargetDefendersContainer.anchoredPosition = new Vector2(0f, 0f);
+        TargetDefendersMovementContainer.gameObject.SetActive(false);
+        TargetDodge.gameObject.SetActive(false);
+        TargetDeflect.gameObject.SetActive(false);
+        
+        List<Fighter> targetTeamList = Fight.GetTeamList(targetTeam);
+        int targetTeamSize = targetTeamList.Count;
+        float offsetPerFighter = 0f;
+        if (targetTeamSize > 1)
+        {
+            offsetPerFighter = (TARGET_BACKGROUND_MAX_OFFSET - TARGET_X_ZERO_POINT) / (targetTeamSize - 1);
+        }
+        int fighterTeamIndex = targetTeamList.IndexOf(target);
+        float offset = TARGET_X_ZERO_POINT + offsetPerFighter * fighterTeamIndex;
+
+        Vector2 position = TargetBackground.rectTransform.anchoredPosition;
+        position.x = offset;
+        TargetBackground.rectTransform.anchoredPosition = position;
+
+        DynamicText.text = resultString;
+    }
+
     AnimationFrames ConfigureFightWindowForStatement(string statement, Fighter fighter, Enums.StatementType statementType)
     {
         int team = fighter.GetTeam();
@@ -670,25 +737,6 @@ public class DynamicWindow : MonoBehaviour
         Vector2 backgroundPosition = StatementBackground.rectTransform.anchoredPosition;
         backgroundPosition.x = backgroundOffset;
         StatementBackground.rectTransform.anchoredPosition = backgroundPosition;
-
-        /*Vector2 fighterPosition = StatementFighter.rectTransform.anchoredPosition;
-        Vector2 backgroundPanelPosition = StatementBackgroundPanel.GetComponent<RectTransform>().anchoredPosition;
-        switch (animation)
-        {
-            case "Statement_Left":
-                fighterPosition.x = STATEMENT_FIGHTER_MAX_ANIMATION_OFFSET;
-                backgroundPanelPosition.x = STATEMENT_BACKGROUND_PANEL_MAX_ANIMATION_OFFSET;
-                break;
-            case "Statement_Right":
-                fighterPosition.x = -STATEMENT_FIGHTER_MAX_ANIMATION_OFFSET;
-                backgroundPanelPosition.x = -STATEMENT_BACKGROUND_PANEL_MAX_ANIMATION_OFFSET;
-                break;
-            default:
-                Debug.LogError($"Error! Unknown animation {animation} in ConfigureFightWindowForStatement!");
-                break;
-        }
-        StatementFighter.rectTransform.anchoredPosition = fighterPosition;
-        StatementBackgroundPanel.GetComponent<RectTransform>().anchoredPosition = backgroundPanelPosition;*/
 
         StatementMotionBackground.gameObject.SetActive(false);
         if (statementType == Enums.StatementType.TooFast)
@@ -1163,6 +1211,26 @@ public class DynamicWindow : MonoBehaviour
         }
     }
 
+    public IEnumerator DisplayDefeatedFighter(Fighter fighter, string resultString, bool showFighterCollapse)
+    {
+        HidePanels();
+        ConfigureFightWindowForDefeatedFighter(fighter, resultString, showFighterCollapse);
+        TargetPanel.SetActive(true);
+        DynamicTextPanel.SetActive(true);        
+
+        string animation = GetTargetAnimation();
+        TargetAnimator.Play(animation, 0, 0f);
+        yield return new WaitForSeconds(.5f);
+
+        if (showFighterCollapse)
+        {
+            TargetDefeatedPanel.gameObject.SetActive(true);
+            TargetFighterPanel.gameObject.SetActive(false);
+        }
+        
+        yield return new WaitForSeconds(1.5f);
+    }
+
     public IEnumerator DisplayMedicalMoveOnSelf(MoveEvent moveEvent, string resultString)
     {
         HidePanels();
@@ -1358,6 +1426,35 @@ public class DynamicWindow : MonoBehaviour
         }
 
         return StatementAnimations[0];
+    }
+
+    public string GetTargetAnimation()
+    {
+        string animation = "";
+        if (TargetAnimations.Count == 0)
+        {
+            return animation;
+        }
+
+        List<string> possibleAnimations = new List<string>();
+        for (int i = 0; i < TargetAnimations.Count; i++)
+        {
+            if (i != PreviousTargetAnimation)
+            {
+                possibleAnimations.Add(TargetAnimations[i]);
+            }
+        }
+
+        if (possibleAnimations.Count > 0)
+        {
+            int index = UnityEngine.Random.Range(0, possibleAnimations.Count);
+            animation = possibleAnimations[index];
+            PreviousTargetAnimation = TargetAnimations.IndexOf(animation);
+            
+            return animation;
+        }
+
+        return TargetAnimations[0];
     }
 
     public void HidePanels(bool keepDynamicText = false)

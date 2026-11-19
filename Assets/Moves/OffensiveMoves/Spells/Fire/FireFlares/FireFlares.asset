@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: FireFlares
   m_EditorClassIdentifier: Assembly-CSharp::Move
   Name: Fire Flares
-  Level: 9
+  Level: 5
   Mana: 16
   RoundsToCast: 0
   UsesPerFight: 0
