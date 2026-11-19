@@ -3410,7 +3410,7 @@ public class Fight : MonoBehaviour
                 else if (fighter.GetMana() <= 0)
                 {
                     
-                    resultString = fighter.GetName() + " has collapsed from exhausting all of their energy!";
+                    resultString = fighter.GetName() + " has collapsed from exhaustion!";
                     showFighterCollapse = true;
                 }
 

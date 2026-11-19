@@ -1000,16 +1000,12 @@ public class DynamicWindow : MonoBehaviour
         yield return new WaitForSeconds(animationTimes.GetImpactTime());
         if (playHitAnimation)
         {
+            StartHit(FightersHit);
+            
             if (target.CheckIfAlive() == true)
             {
-                FightersAnimator.Play("Fighters_Hit_Immediate", 0, 0f);
+                //FightersAnimator.Play("Fighters_Hit_Immediate", 0, 0f);
             }
-            else
-            {
-                FightersAnimator.Play("Fighters_Defeated", 0, 0f);
-            }
-
-            StartHit(FightersHit);        
         }
         if (hitResult == Enums.HitResult.Deflected || hitResult == Enums.HitResult.PartiallyDeflected)
         {
@@ -1019,6 +1015,12 @@ public class DynamicWindow : MonoBehaviour
             {
                 StopAttacks();
             }
+        }
+
+        yield return new WaitForSeconds(.15f);
+        if (target.CheckIfAlive() == false)
+        {
+            FightersAnimator.Play("Fighters_Defeated", 0, 0f);
         }
 
         yield return new WaitUntil(() => (SpawnedAttackImages.Count == 0 && SpawnedDefenseImages.Count == 0));
@@ -1105,16 +1107,12 @@ public class DynamicWindow : MonoBehaviour
         yield return new WaitForSeconds(animationTimes.GetImpactTime());
         if (playHitAnimation)
         {
+            StartHit(TargetHit);
+
             if (target.CheckIfAlive() == true)
             {
-                TargetAnimator.Play("Target_Hit_Immediate", 0, 0f);
+                //TargetAnimator.Play("Target_Hit_Immediate", 0, 0f);
             }
-            else
-            {
-                TargetAnimator.Play("Target_Defeated", 0, 0f);
-            }
-
-            StartHit(TargetHit);
         }
         if (hitResult == Enums.HitResult.Deflected || hitResult == Enums.HitResult.PartiallyDeflected)
         {
@@ -1124,6 +1122,12 @@ public class DynamicWindow : MonoBehaviour
             {
                 StopAttacks();
             }
+        }
+
+        yield return new WaitForSeconds(.15f);
+        if (target.CheckIfAlive() == false)
+        {
+            TargetAnimator.Play("Target_Defeated", 0, 0f);
         }
 
         yield return new WaitUntil(() => (SpawnedAttackImages.Count == 0 && SpawnedDefenseImages.Count == 0));
@@ -1168,8 +1172,8 @@ public class DynamicWindow : MonoBehaviour
 
         yield return new WaitForSeconds(animationTimes.GetImpactTime());
 
-        //PauseAttacks();
-        //yield return new WaitForSeconds(0f);
+        PauseAttacks();
+        yield return new WaitForSeconds(.05f);
 
         StopAttacks();
         AttackCoroutines.Clear();
@@ -1534,6 +1538,15 @@ public class DynamicWindow : MonoBehaviour
             }
         }
         SpawnedDefenderMovementImages.Clear();
+
+        foreach (GameObject spawnedSummonDefeatedPanel in SpawnedSummonDefeatedPanels)
+        {
+            if (spawnedSummonDefeatedPanel != null)
+            {
+                Destroy(spawnedSummonDefeatedPanel);
+            }
+        }
+        SpawnedSummonDefeatedPanels.Clear();
 
         StopAttacks();
         StopDefenses();
