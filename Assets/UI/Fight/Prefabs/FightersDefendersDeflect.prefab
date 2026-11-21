@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5357712141673889371}
   - component: {fileID: 920485799604959565}
   m_Layer: 5
-  m_Name: FightersDeprecated
+  m_Name: FightersDefendersDeflect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -65,7 +65,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -5529190694909556591, guid: 111f7027793c94ba1aa4979825a327f6, type: 3}
+  m_Sprite: {fileID: -4305185549657033490, guid: 14c4e01fabe1146feb3f58405ef173c6, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1

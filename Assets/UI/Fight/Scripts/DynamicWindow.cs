@@ -18,23 +18,22 @@ public class DynamicWindow : MonoBehaviour
                                             StatementFighter, AttacksPrefab, TargetBackground, FightersDodge,
                                             DefensesPrefab, FightersDeflect, StatementMotionBackground, TargetDodge, TargetDeflect,
                                             TargetAttacksPrefab, TargetDefensesPrefab, TeamAttacksPrefab, FightersDefendersMovementPrefab,
-                                            TargetDefendersMovementPrefab, TargetHit, FightersHit;
+                                            TargetDefendersMovementPrefab, TargetHit, FightersHit, FightersDefendersDeflectPrefab;
     [SerializeField] private TMP_Text       DynamicText, StatementText, StatementFighterName;
     [SerializeField] private RectTransform  FightersContainer, AttackersContainer, AttacksContainer, DefensesContainer,
                                             FightersDefendersContainer, TargetDefendersContainer, TargetAttacksContainer,
                                             TargetDefensesContainer, TeamAttacksContainer, SummonersContainer, SummonsContainer,
                                             SummonAnimationsContainer, FightersDefendersMovementContainer, TargetDefendersMovementContainer,
-                                            FightersDefeatedContainer, SummonsDefeatedContainer;
+                                            FightersDefeatedContainer, SummonsDefeatedContainer, FightersDefendersDeflectContainer;
     [SerializeField] private Animator       StatementAnimator, FighterAnimator, FightersAnimator, TargetAnimator;
     [SerializeField] private List<string>   StatementAnimations, FighterAnimations, TargetAnimations;
     [SerializeField] private AnimationData  HitAnimationData;
     private int                             PreviousStatementAnimation = -1, PreviousFighterAnimation = -1, PreviousTargetAnimation = -1;
-    private List<GameObject>                SpawnedAttackerPanels = new List<GameObject>(), SpawnedFightersDefenderPanels = new List<GameObject>(),
-                                            SpawnedTargetDefenderPanels = new List<GameObject>(), SpawnedFightersPanels = new List<GameObject>(),
-                                            SpawnedSummonPanels = new List<GameObject>(), SpawnedFightersDefeatedPanels = new List<GameObject>(),
-                                            SpawnedSummonDefeatedPanels = new List<GameObject>();
+    private List<GameObject>                SpawnedAttackerPanels = new List<GameObject>(), SpawnedDefenderPanels = new List<GameObject>(),
+                                            SpawnedFightersPanels = new List<GameObject>(), SpawnedSummonPanels = new List<GameObject>(),
+                                            SpawnedFightersDefeatedPanels = new List<GameObject>(), SpawnedSummonDefeatedPanels = new List<GameObject>();
     private List<Image>                     SpawnedAttackImages = new List<Image>(), SpawnedDefenseImages = new List<Image>(),
-                                            SpawnedDefenderMovementImages = new List<Image>();
+                                            SpawnedDefenderMovementImages = new List<Image>(), SpawnedDefenderDeflectImages = new List<Image>();
                                             /*SpawnedFighterImages = new List<Image>(), SpawnedTargetAttackImages = new List<Image>(),
                                             SpawnedTargetDefenseImages = new List<Image>();*/
     private Coroutine                       TalkingCoroutine, MotionCoroutine, HitCoroutine;
@@ -172,7 +171,7 @@ public class DynamicWindow : MonoBehaviour
                         false
                     );
 
-                    SpawnedTargetDefenderPanels.Add(spawnedDefenderPanel);
+                    SpawnedDefenderPanels.Add(spawnedDefenderPanel);
 
                     Image spawnedDefenderImage = spawnedDefenderPanel.transform.Find("Defender").GetComponent<Image>();
                     spawnedDefenderImage.sprite = null;
@@ -207,13 +206,13 @@ public class DynamicWindow : MonoBehaviour
         HorizontalLayoutGroup defendersLayoutGroup = TargetDefendersContainer.GetComponent<HorizontalLayoutGroup>();
         float availableWidthDefenders = TargetDefendersContainer.rect.width - defendersLayoutGroup.padding.left - defendersLayoutGroup.padding.right;
         float totalDefenderPanelWidths = 0f;
-        foreach (GameObject panel in SpawnedTargetDefenderPanels)
+        foreach (GameObject panel in SpawnedDefenderPanels)
         {
             RectTransform rectTransform = panel.GetComponent<RectTransform>();            
             totalDefenderPanelWidths += rectTransform.rect.width;
         }
-        float defenderLayoutGroupSpacing = SpawnedTargetDefenderPanels.Count > 1
-            ? Mathf.Min(0f, (availableWidthDefenders - totalDefenderPanelWidths) / (SpawnedTargetDefenderPanels.Count - 1))
+        float defenderLayoutGroupSpacing = SpawnedDefenderPanels.Count > 1
+            ? Mathf.Min(0f, (availableWidthDefenders - totalDefenderPanelWidths) / (SpawnedDefenderPanels.Count - 1))
             : 0f;
 
         defendersLayoutGroup.spacing = defenderLayoutGroupSpacing;
@@ -235,6 +234,7 @@ public class DynamicWindow : MonoBehaviour
         FightersDefendersContainer.gameObject.SetActive(false);
         FightersDefendersContainer.anchoredPosition = new Vector2(0f, FIGHTERS_CONTAINER_DEFAULT_Y);
         FightersDefendersMovementContainer.gameObject.SetActive(false);
+        FightersDefendersDeflectContainer.gameObject.SetActive(false);
         SummonersContainer.gameObject.SetActive(false);
         SummonsContainer.gameObject.SetActive(false);
         SummonsDefeatedContainer.gameObject.SetActive(false);
@@ -411,6 +411,7 @@ public class DynamicWindow : MonoBehaviour
         {
             List<Fighter> defenders = hit.GetDefenders();
             int randomMovementScale = UnityEngine.Random.Range(0, 2);
+            int randomDeflectScale = UnityEngine.Random.Range(0, 2);
             for (int i = 0; i < defenders.Count; i++)
             {
                 Fighter defender = defenders[i];
@@ -418,7 +419,7 @@ public class DynamicWindow : MonoBehaviour
                 {
                     // Instantiate the defender
                     GameObject spawnedDefenderPanel = Instantiate(FightersPrefab, FightersDefendersContainer, false);
-                    SpawnedTargetDefenderPanels.Add(spawnedDefenderPanel);
+                    SpawnedDefenderPanels.Add(spawnedDefenderPanel);
 
                     Image spawnedDefenderImage = spawnedDefenderPanel.transform.Find("Fighters").GetComponent<Image>();
                     spawnedDefenderImage.sprite = null;
@@ -446,19 +447,34 @@ public class DynamicWindow : MonoBehaviour
                         movementScale.x = 1f;
                     }
                     spawnedDefenderMovementImage.rectTransform.localScale = movementScale;
+
+                    // Instantiate the defender's deflect image
+                    Image spawnedDefenderDeflectImage = Instantiate(FightersDefendersDeflectPrefab, FightersDefendersDeflectContainer, false);
+                    SpawnedDefenderDeflectImages.Add(spawnedDefenderDeflectImage);
+                    spawnedDefenderDeflectImage.sprite = defender.GetArt().GetDeflect();
+                    Vector3 defenderDeflectScale = spawnedDefenderDeflectImage.rectTransform.localScale;
+                    if (randomDeflectScale == 0)
+                    {
+                        defenderDeflectScale.x = -1f;
+                    }
+                    else
+                    {
+                        defenderDeflectScale.x = 1f;
+                    }
+                    spawnedDefenderDeflectImage.rectTransform.localScale = defenderDeflectScale;
                 }
             }
 
             HorizontalLayoutGroup defendersLayoutGroup = FightersDefendersContainer.GetComponent<HorizontalLayoutGroup>();
             float availableWidthDefenders = FightersDefendersContainer.rect.width - defendersLayoutGroup.padding.left - defendersLayoutGroup.padding.right;
             float totalDefenderPanelWidths = 0f;
-            foreach (GameObject panel in SpawnedTargetDefenderPanels)
+            foreach (GameObject panel in SpawnedDefenderPanels)
             {
                 RectTransform rectTransform = panel.GetComponent<RectTransform>();            
                 totalDefenderPanelWidths += rectTransform.rect.width;
             }
-            float defenderLayoutGroupSpacing = SpawnedTargetDefenderPanels.Count > 1
-                ? Mathf.Min(0f, (availableWidthDefenders - totalDefenderPanelWidths) / (SpawnedTargetDefenderPanels.Count - 1))
+            float defenderLayoutGroupSpacing = SpawnedDefenderPanels.Count > 1
+                ? Mathf.Min(0f, (availableWidthDefenders - totalDefenderPanelWidths) / (SpawnedDefenderPanels.Count - 1))
                 : 0f;
 
             defendersLayoutGroup.spacing = defenderLayoutGroupSpacing;
@@ -470,11 +486,24 @@ public class DynamicWindow : MonoBehaviour
             {
                 totalDefenderMovementWidths += image.rectTransform.rect.width;
             }
-            float defenderMovementLayoutGroupSpacing = SpawnedTargetDefenderPanels.Count > 1
-                ? Mathf.Min(0f, (availableWidthDefendersMovement - totalDefenderMovementWidths) / (SpawnedTargetDefenderPanels.Count - 1))
+            float defenderMovementLayoutGroupSpacing = SpawnedDefenderMovementImages.Count > 1
+                ? Mathf.Min(0f, (availableWidthDefendersMovement - totalDefenderMovementWidths) / (SpawnedDefenderMovementImages.Count - 1))
                 : 0f;
 
             defendersMovementLayoutGroup.spacing = defenderMovementLayoutGroupSpacing;
+
+            HorizontalLayoutGroup defendersDeflectLayoutGroup = FightersDefendersDeflectContainer.GetComponent<HorizontalLayoutGroup>();
+            float availableWidthDefendersDeflect = FightersDefendersDeflectContainer.rect.width - defendersDeflectLayoutGroup.padding.left - defendersDeflectLayoutGroup.padding.right;
+            float totalDefenderDeflectWidths = 0f;
+            foreach (Image image in SpawnedDefenderDeflectImages)
+            {
+                totalDefenderDeflectWidths += image.rectTransform.rect.width;
+            }
+            float defenderDeflectLayoutGroupSpacing = SpawnedDefenderDeflectImages.Count > 1
+                ? Mathf.Min(0f, (availableWidthDefendersDeflect - totalDefenderDeflectWidths) / (SpawnedDefenderDeflectImages.Count - 1))
+                : 0f;
+
+            defendersDeflectLayoutGroup.spacing = defenderDeflectLayoutGroupSpacing;
         }
         
         DynamicText.text = "";
@@ -1009,7 +1038,14 @@ public class DynamicWindow : MonoBehaviour
         }
         if (hitResult == Enums.HitResult.Deflected || hitResult == Enums.HitResult.PartiallyDeflected)
         {
-            FightersAnimator.Play("Fighters_Deflect", 0, 0f);
+            if (hit.CheckWasProtected() == true)
+            {
+                FightersAnimator.Play("Fighters_Defenders_Deflect", 0, 0f);
+            }
+            else
+            {
+                FightersAnimator.Play("Fighters_Deflect", 0, 0f);
+            }
 
             if (hitResult == Enums.HitResult.Deflected)
             {
@@ -1503,23 +1539,23 @@ public class DynamicWindow : MonoBehaviour
         }
         SpawnedAttackerPanels.Clear();
 
-        foreach (GameObject spawnedDefenderPanel in SpawnedFightersDefenderPanels)
+        foreach (GameObject spawnedDefenderPanel in SpawnedDefenderPanels)
         {
             if (spawnedDefenderPanel != null)
             {
                 Destroy(spawnedDefenderPanel);
             }
         }
-        SpawnedFightersDefenderPanels.Clear();
+        SpawnedDefenderPanels.Clear();
 
-        foreach (GameObject spawnedDefenderPanel in SpawnedTargetDefenderPanels)
+        foreach (Image spawnedDefenderDeflectImage in SpawnedDefenderDeflectImages)
         {
-            if (spawnedDefenderPanel != null)
+            if (spawnedDefenderDeflectImage != null)
             {
-                Destroy(spawnedDefenderPanel);
+                Destroy(spawnedDefenderDeflectImage.gameObject);
             }
         }
-        SpawnedTargetDefenderPanels.Clear();
+        SpawnedDefenderDeflectImages.Clear();
 
         foreach (GameObject spawnedSummonPanel in SpawnedSummonPanels)
         {
