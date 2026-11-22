@@ -36,6 +36,33 @@ public class MoveEvent
         }
     }
 
+    // Whether or not the fighter performing a medical move should be added to the list of targets for display purposes.
+    public bool CheckAddToDisplayTargets()
+    {
+        if ((MoveType == Enums.MoveType.Medical || MoveType == Enums.MoveType.PowerUp) && !Targets.Contains(Fighters[0]))
+        {
+            return true;
+        }
+        return false;
+    }
+
+    public bool CheckBuffOnSelf()
+    {
+        if (Moves[0].GetMoveType() != Enums.MoveType.PowerUp)
+        {
+            return false;
+        }
+        
+        foreach (Fighter fighter in Fighters)
+        {
+            if (Targets.Contains(fighter) == false)
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
     public bool CheckCombineAttacks()
     {
         foreach (Fighter fighter in Fighters)
@@ -175,16 +202,6 @@ public class MoveEvent
             return EffectiveMoveEventCastingSpeed;
         }
         return EffectiveMoveEventCastingSpeed; 
-    }
-
-    // Whether or not the fighter performing a medical move should be added to the list of targets for display purposes.
-    public bool CheckMedicalAddToTargets()
-    {
-        if (MoveType == Enums.MoveType.Medical && !Targets.Contains(Fighters[0]))
-        {
-            return true;
-        }
-        return false;
     }
 
     public bool CheckMedicalMoveOnSelf()

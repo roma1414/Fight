@@ -1,16 +1,42 @@
 Round 1
 
-Mystic Assassin  vs  Skeleton  +  Orc
+Orc  vs  Katerina
 
-Mystic Assassin   Overall: 7.15  Health: 100  Mana: 140  Health Co = 1
-
-Skeleton   Overall: 4.16  Health: 100  Mana: 80  Health Co = 1
 Orc   Overall: 7.88  Health: 100  Mana: 100  Health Co = 1
 
+Katerina   Overall: 8.75  Health: 100  Mana: 220  Health Co = 1
+
 ###################################################################
 ###################################################################
 
-Mystic Assassin uses Slash against Skeleton!
+Katerina uses Slash against Orc!
 Orc deflects it!
-Skeleton uses Straight Punch against Mystic Assassin!
-It misses Mystic Assassin!
+Orc uses Berserker Rage!
+
+
+
+Round 2
+
+Orc  vs  Katerina
+
+Orc   Overall: 7.9032  Health: 100  Mana: 60  Health Co = 0.92  PowerUps: Berserker Rage
+
+Katerina   Overall: 8.745  Health: 100  Mana: 219  Health Co = 1
+
+###################################################################
+###################################################################
+
+Katerina uses Double Slash against Orc!
+Orc deflects it!
+Orc uses Slash against Katerina!
+It misses Katerina!
+
+
+Round 3
+
+Orc  vs  Katerina
+
+Orc   Overall: 7.807627  Health: 100  Mana: 58  Health Co = 0.9093333  PowerUps: Berserker Rage
+
+Katerina   Overall: 8.735  Health: 100  Mana: 217  Health Co = 1
+

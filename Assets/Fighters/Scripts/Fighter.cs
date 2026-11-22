@@ -259,6 +259,12 @@ public class Fighter : MonoBehaviour
             && CheckStatus(Enums.StatusType.Trapped) == false && CheckStatus(Enums.StatusType.Cooldown) == false; 
     }
 
+    public bool CheckIfCanSpeak() 
+    { 
+        return CheckStatus(Enums.StatusType.PsychicControl) == false && CheckStatus(Enums.StatusType.PsychicParalysis) == false
+            && CheckStatus(Enums.StatusType.Trapped) == false; 
+    }
+
     public bool CheckIfCapableOfMove(Move move)
     {
         if (move.GetMana() > Mana)

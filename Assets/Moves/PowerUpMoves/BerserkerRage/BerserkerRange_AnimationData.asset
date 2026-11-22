@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d5d2916c73314bb89a1ff80a53f5c6a, type: 3}
+  m_Name: BerserkerRange_AnimationData
+  m_EditorClassIdentifier: Assembly-CSharp::AnimationData
+  Frames:
+  - {fileID: 6205704321240983818, guid: fc2c734b6cd5e472eaf47655bb74e48f, type: 3}
+  - {fileID: -770454, guid: fc2c734b6cd5e472eaf47655bb74e48f, type: 3}
+  - {fileID: -1278197313, guid: fc2c734b6cd5e472eaf47655bb74e48f, type: 3}
+  - {fileID: -693405440, guid: fc2c734b6cd5e472eaf47655bb74e48f, type: 3}
+  - {fileID: 1005153572, guid: fc2c734b6cd5e472eaf47655bb74e48f, type: 3}
+  - {fileID: 846339151, guid: fc2c734b6cd5e472eaf47655bb74e48f, type: 3}
+  - {fileID: 1324212056, guid: fc2c734b6cd5e472eaf47655bb74e48f, type: 3}
+  - {fileID: 1848638290, guid: fc2c734b6cd5e472eaf47655bb74e48f, type: 3}
+  - {fileID: -717426337, guid: fc2c734b6cd5e472eaf47655bb74e48f, type: 3}
+  - {fileID: -1303592109, guid: fc2c734b6cd5e472eaf47655bb74e48f, type: 3}
+  - {fileID: -479333421, guid: fc2c734b6cd5e472eaf47655bb74e48f, type: 3}
+  - {fileID: 746185480, guid: fc2c734b6cd5e472eaf47655bb74e48f, type: 3}
+  FramesPerSecond: 12
+  ImpactFrame: 3

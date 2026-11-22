@@ -36,8 +36,10 @@ public class DynamicWindow : MonoBehaviour
                                             SpawnedDefenderMovementImages = new List<Image>(), SpawnedDefenderDeflectImages = new List<Image>();
                                             /*SpawnedFighterImages = new List<Image>(), SpawnedTargetAttackImages = new List<Image>(),
                                             SpawnedTargetDefenseImages = new List<Image>();*/
+    private List<FighterPanelData>          FighterPanels = new List<FighterPanelData>();
     private Coroutine                       TalkingCoroutine, MotionCoroutine, HitCoroutine;
-    private List<Coroutine>                 AttackCoroutines = new List<Coroutine>(), DefenseCoroutines = new List<Coroutine>();
+    private List<Coroutine>                 AttackCoroutines = new List<Coroutine>(), DefenseCoroutines = new List<Coroutine>(),
+                                            FighterPanelCoroutines = new List<Coroutine>();
     private bool                            AttacksPaused;
     public const float FIGHTER_BACKGROUND_MAX_OFFSET = -3950;
     public const float FIGHTER_X_ZERO_POINT = -128f;
@@ -82,6 +84,8 @@ public class DynamicWindow : MonoBehaviour
         TargetBackground.sprite = Fight.GetMapArt().GetBackground(targetTeam);
         
         TargetFighterPanel.gameObject.SetActive(true);
+        FighterPanelData targetFighterPanelData = new FighterPanelData(target, TargetFighterPanel, null);
+        FighterPanels.Add(targetFighterPanelData);
         RectTransform targetRectTransform = TargetFighterPanel.GetComponent<RectTransform>();
         targetRectTransform.anchoredPosition = new Vector2(0f, 0f);//new Vector2(0f, targetRectTransform.anchoredPosition.y);
         Image targetImage = TargetFighterPanel.transform.Find("Target").GetComponent<Image>();
@@ -172,6 +176,8 @@ public class DynamicWindow : MonoBehaviour
                     );
 
                     SpawnedDefenderPanels.Add(spawnedDefenderPanel);
+                    FighterPanelData spawnedDefenderPanelData = new FighterPanelData(defender, spawnedDefenderPanel, SpawnedDefenderPanels);
+                    FighterPanels.Add(targetFighterPanelData);
 
                     Image spawnedDefenderImage = spawnedDefenderPanel.transform.Find("Defender").GetComponent<Image>();
                     spawnedDefenderImage.sprite = null;
@@ -217,7 +223,7 @@ public class DynamicWindow : MonoBehaviour
 
         defendersLayoutGroup.spacing = defenderLayoutGroupSpacing;
 
-        DynamicText.text = "";
+        //DynamicText.text = "";
     }
 
     public void ConfigureFightWindowForAttackAgainstTargets(MoveEvent moveEvent, Hit hit)
@@ -286,7 +292,7 @@ public class DynamicWindow : MonoBehaviour
         // Instantiate the target panels.
         // Add the Fighter performing the medical move to the list of targets if it is not already included
         List<Fighter> displayTargets = new List<Fighter>(targets);
-        if (moveEvent.CheckMedicalAddToTargets())
+        if (moveEvent.CheckAddToDisplayTargets())
         {
             displayTargets.Add(attackers[0]);
         }
@@ -301,6 +307,8 @@ public class DynamicWindow : MonoBehaviour
             );
 
             SpawnedFightersPanels.Add(spawnedTargetPanel);
+            FighterPanelData spawnedFightersPanelData = new FighterPanelData(target, spawnedTargetPanel, SpawnedFightersPanels);
+            FighterPanels.Add(spawnedFightersPanelData);
 
             Image spawnedTargetImage = spawnedTargetPanel.transform.Find("Fighters").GetComponent<Image>();
             spawnedTargetImage.sprite = null;
@@ -349,6 +357,8 @@ public class DynamicWindow : MonoBehaviour
                 );
 
                 SpawnedAttackerPanels.Add(spawnedAttackerPanel);
+                FighterPanelData spawnedAttackerPanelData = new FighterPanelData(attacker, spawnedAttackerPanel, SpawnedAttackerPanels);
+                FighterPanels.Add(spawnedAttackerPanelData);
 
                 Image spawnedAttackerImage = spawnedAttackerPanel.transform.Find("Attackers").GetComponent<Image>();
                 spawnedAttackerImage.sprite = null;
@@ -420,6 +430,8 @@ public class DynamicWindow : MonoBehaviour
                     // Instantiate the defender
                     GameObject spawnedDefenderPanel = Instantiate(FightersPrefab, FightersDefendersContainer, false);
                     SpawnedDefenderPanels.Add(spawnedDefenderPanel);
+                    FighterPanelData spawnedDefenderPanelData = new FighterPanelData(defender, spawnedDefenderPanel, SpawnedDefenderPanels);
+                    FighterPanels.Add(spawnedDefenderPanelData);
 
                     Image spawnedDefenderImage = spawnedDefenderPanel.transform.Find("Fighters").GetComponent<Image>();
                     spawnedDefenderImage.sprite = null;
@@ -650,6 +662,8 @@ public class DynamicWindow : MonoBehaviour
             );
 
             SpawnedFightersPanels.Add(spawnedFighterPanel);
+            FighterPanelData spawnedDefenderPanelData = new FighterPanelData(fighter, spawnedFighterPanel, SpawnedFightersPanels);
+            FighterPanels.Add(spawnedDefenderPanelData);
 
             Image spawnedFighterImage = spawnedFighterPanel.transform.Find("Fighters").GetComponent<Image>();
             spawnedFighterImage.sprite = null;
@@ -723,6 +737,8 @@ public class DynamicWindow : MonoBehaviour
             TargetDefeatedPanel.gameObject.SetActive(true);
             TargetFighterPanel.gameObject.SetActive(false);
         }
+        FighterPanelData targetFighterPanelData = new FighterPanelData(target, TargetFighterPanel, null);
+        FighterPanels.Add(targetFighterPanelData);
 
         TargetDefendersContainer.gameObject.SetActive(false);
         TargetDefendersContainer.anchoredPosition = new Vector2(0f, 0f);
@@ -767,11 +783,7 @@ public class DynamicWindow : MonoBehaviour
         backgroundPosition.x = backgroundOffset;
         StatementBackground.rectTransform.anchoredPosition = backgroundPosition;
 
-        StatementMotionBackground.gameObject.SetActive(false);
-        if (statementType == Enums.StatementType.TooFast)
-        {
-            StatementMotionBackground.gameObject.SetActive(true);
-        }
+        StatementMotionBackground.gameObject.SetActive(statementType == Enums.StatementType.TooFast ? true : false);
 
         StatementFighter.sprite = null;
         AnimationFrames talkingFrames = fighter.GetArt().GetTalkingFrames();
@@ -843,6 +855,8 @@ public class DynamicWindow : MonoBehaviour
             );
 
             SpawnedFightersPanels.Add(spawnedFighterPanel);
+            FighterPanelData spawnedFightersPanelData = new FighterPanelData(fighter, spawnedFighterPanel, SpawnedFightersPanels);
+            FighterPanels.Add(spawnedFightersPanelData);
 
             Image spawnedFighterImage = spawnedFighterPanel.transform.Find("Fighters").GetComponent<Image>();
             spawnedFighterImage.sprite = null;
@@ -884,6 +898,8 @@ public class DynamicWindow : MonoBehaviour
             );
 
             SpawnedSummonPanels.Add(spawnedSummonPanel);
+            FighterPanelData spawnedSummonPanelData = new FighterPanelData(summon, spawnedSummonPanel, SpawnedSummonPanels);
+            FighterPanels.Add(spawnedSummonPanelData);
 
             Image spawnedSummonImage = spawnedSummonPanel.transform.Find("Fighters").GetComponent<Image>();
             spawnedSummonImage.sprite = null;
@@ -957,6 +973,7 @@ public class DynamicWindow : MonoBehaviour
         ConfigureFightWindowForAttackAgainstTargets(moveEvent, hit);
         FightersPanel.SetActive(true);
         DynamicTextPanel.SetActive(true);
+        StartFighterPanelStatuses();
 
         yield return new WaitForSeconds(.25f);
 
@@ -1086,6 +1103,7 @@ public class DynamicWindow : MonoBehaviour
         ConfigureFightWindowForAttackAgainstTarget(moveEvent, hit, target);
         TargetPanel.SetActive(true);
         DynamicTextPanel.SetActive(true);
+        StartFighterPanelStatuses();
 
         yield return new WaitForSeconds(.5f);
 
@@ -1193,6 +1211,7 @@ public class DynamicWindow : MonoBehaviour
         ConfigureFightWindowForAttackAgainstTargets(moveEvent, null);
         FightersPanel.SetActive(true);
         DynamicTextPanel.SetActive(true);
+        StartFighterPanelStatuses();
 
         yield return new WaitForSeconds(.5f);
         
@@ -1226,6 +1245,7 @@ public class DynamicWindow : MonoBehaviour
         DynamicTextPanel.SetActive(true);
         string animation = GetFighterAnimation();
         FighterAnimator.Play(animation, 0, 0f);
+        StartFighterPanelStatuses();
 
         yield return new WaitForSeconds(2f);
     }
@@ -1235,7 +1255,8 @@ public class DynamicWindow : MonoBehaviour
         HidePanels();
         ConfigureFightWindowForAttackers(moveEvent);
         FightersPanel.SetActive(true);
-        DynamicTextPanel.SetActive(true);        
+        DynamicTextPanel.SetActive(true);    
+            
         yield return new WaitForSeconds(1.5f);
 
         for (int i = 0; i < moveEvent.GetFighters().Count; i++)
@@ -1246,9 +1267,39 @@ public class DynamicWindow : MonoBehaviour
             DynamicTextPanel.SetActive(true);
             string animation = GetFighterAnimation();
             FighterAnimator.Play(animation, 0, 0f);
+            StartFighterPanelStatuses();
+            
             yield return new WaitForSeconds(2f);
 
         }
+    }
+
+    public IEnumerator DisplayBuffOnSelf(MoveEvent moveEvent, Fighter fighter, string resultString, bool removePsychic, bool removeTrapped)
+    {
+        HidePanels(true);
+        AnimationTimes animationTimes = moveEvent.GetAnimationTimes(null);
+        ConfigureFightWindowForAttackAgainstTarget(moveEvent, null, fighter);
+        TargetPanel.SetActive(true);
+        DynamicTextPanel.SetActive(true);
+        StartFighterPanelStatuses();
+
+        yield return new WaitForSeconds(.5f);
+
+        StartAttacks(moveEvent.GetMoves(), animationTimes.GetAttackDelays(), TargetDefensesContainer, TargetDefensesPrefab);
+        DynamicText.text = resultString;
+
+        yield return new WaitForSeconds(animationTimes.GetImpactTime());
+        //yield return new WaitUntil(() => (SpawnedAttackImages.Count == 0 && SpawnedDefenseImages.Count == 0));
+
+        //PauseAttacks();
+        StopAttacks();
+        StartFighterPanelBuff(fighter, moveEvent.GetMoves()[0]);
+        yield return new WaitForSeconds(1.5f);
+
+        AttackCoroutines.Clear();
+        DefenseCoroutines.Clear();
+
+        yield break;
     }
 
     public IEnumerator DisplayDefeatedFighter(Fighter fighter, string resultString, bool showFighterCollapse)
@@ -1279,6 +1330,7 @@ public class DynamicWindow : MonoBehaviour
         ConfigureFightWindowForAttackAgainstTarget(moveEvent, null, moveEvent.GetFighters()[0]);
         TargetPanel.SetActive(true);
         DynamicTextPanel.SetActive(true);
+        StartFighterPanelStatuses();
 
         yield return new WaitForSeconds(.5f);
 
@@ -1299,6 +1351,7 @@ public class DynamicWindow : MonoBehaviour
         ConfigureFightWindowForAttackAgainstTargets(moveEvent, null);
         FightersPanel.SetActive(true);
         DynamicTextPanel.SetActive(true);
+        StartFighterPanelStatuses();
 
         yield return new WaitForSeconds(.5f);
         
@@ -1306,7 +1359,7 @@ public class DynamicWindow : MonoBehaviour
         List<Move> moves = new List<Move>();
         List<float> delays = new List<float>();
         int numberOfTargets = moveEvent.GetTargets().Count;
-        bool medicalAddToTargets = moveEvent.CheckMedicalAddToTargets();
+        bool medicalAddToTargets = moveEvent.CheckAddToDisplayTargets();
         if (medicalAddToTargets == true)
         {
             numberOfTargets += 1;
@@ -1358,6 +1411,8 @@ public class DynamicWindow : MonoBehaviour
             AnimationFrames motionFrames = mapArt.GetMotionFrames();
             StartMotionStatement(motionFrames.GetFrames());
         }
+        StartFighterPanelStatuses();
+
         yield return new WaitForSeconds(1.5f);
         StopTalking(talkingFrames.GetFrames());
 
@@ -1382,6 +1437,7 @@ public class DynamicWindow : MonoBehaviour
         ConfigureFightWindowForSummons(moveEvent);
         FightersPanel.SetActive(true);
         DynamicTextPanel.SetActive(true);
+        StartFighterPanelStatuses();
 
         yield return new WaitForSeconds(.5f);
         
@@ -1584,8 +1640,11 @@ public class DynamicWindow : MonoBehaviour
         }
         SpawnedSummonDefeatedPanels.Clear();
 
+        FighterPanels.Clear();
+
         StopAttacks();
         StopDefenses();
+        StopFighterPanelStatuses();
     }
 
     private void OnDisable()
@@ -1694,6 +1753,35 @@ public class DynamicWindow : MonoBehaviour
         Destroy(panel);
     }
 
+    private IEnumerator PlayStatus(Image image, AnimationData animation, int startingIndex)
+    {
+        image.enabled = false;
+
+        Sprite[] frames = animation.GetFrames();
+        float frameDuration = 1f / animation.GetFramesPerSecond();
+
+        int index = startingIndex;
+        while (index < frames.Length)
+        {
+            image.sprite = frames[index];
+            image.enabled = true;
+
+            yield return WaitForAttack(frameDuration);
+
+            if (index == frames.Length - 1)
+            {
+                index = 0;
+            }
+            else
+            {
+                index++;
+            }
+        }
+
+        image.sprite = null;
+        image.enabled = false;
+    }
+
     public void ResumeAttacks()
     {
         AttacksPaused = false;
@@ -1775,6 +1863,60 @@ public class DynamicWindow : MonoBehaviour
             : 0f;
 
         defensesLayoutGroup.spacing = defensesLayoutGroupSpacing;
+    }
+
+    public void StartFighterPanelBuff(Fighter fighter, Move move)
+    {
+        foreach(FighterPanelData fighterPanelData in FighterPanels)
+        {
+            if (fighterPanelData.GetFighter() == fighter)
+            {
+                AnimationData animation = move.GetLoopAnimationData();
+
+                if (animation == null ||
+                    animation.GetFrames() == null ||
+                    animation.GetFrames().Length == 0 ||
+                    animation.GetFramesPerSecond() <= 0f)
+                {
+                    break;
+                }
+
+                Image image = fighterPanelData.GetFighterPanel().transform.Find("Buff").GetComponent<Image>();
+                image.gameObject.SetActive(true);
+
+                Coroutine coroutine = StartCoroutine(PlayStatus(image, animation, 0));
+                FighterPanelCoroutines.Add(coroutine);
+                break;
+            }
+        }
+    }
+
+    public void StartFighterPanelStatuses()
+    {
+        StopFighterPanelStatuses();
+
+        foreach(FighterPanelData fighterPanelData in FighterPanels)
+        {
+            Fighter fighter = fighterPanelData.GetFighter();
+            foreach(PowerUp powerUp in fighterPanelData.GetFighter().GetPowerUps())
+            {
+                AnimationData animation = powerUp.GetPowerUpMove().GetLoopAnimationData();
+
+                if (animation == null ||
+                    animation.GetFrames() == null ||
+                    animation.GetFrames().Length == 0 ||
+                    animation.GetFramesPerSecond() <= 0f)
+                {
+                    continue;
+                }
+
+                Image image = fighterPanelData.GetFighterPanel().transform.Find("Buff").GetComponent<Image>();
+                image.gameObject.SetActive(true);
+
+                Coroutine coroutine = StartCoroutine(PlayStatus(image, animation, 0));
+                FighterPanelCoroutines.Add(coroutine);
+            }
+        }
     }
 
     private void StartHit(Image image)
@@ -1997,6 +2139,16 @@ public class DynamicWindow : MonoBehaviour
             StopCoroutine(MotionCoroutine);
             MotionCoroutine = null;
         }
+    }
+
+    public void StopFighterPanelStatuses()
+    {
+        foreach (Coroutine coroutine in FighterPanelCoroutines)
+        {
+            StopCoroutine(coroutine);
+        }
+
+        FighterPanelCoroutines.Clear();
     }
 
     private void StopTalking(Sprite[] frames)

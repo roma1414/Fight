@@ -974,7 +974,7 @@ public class Fight : MonoBehaviour
                 yield return ExecuteOffensiveMoveEvent(moveEvent);
                 break;
             case Enums.MoveType.PowerUp:
-                ExecutePowerUpMoveEvent(moveEvent);
+                yield return ExecutePowerUpMoveEvent(moveEvent);
                 break;
             case Enums.MoveType.Medical:
                 yield return ExecuteMedicalMoveEvent(moveEvent);
@@ -1410,83 +1410,106 @@ public class Fight : MonoBehaviour
         yield break;
     }
 
-    public void ExecutePowerUpMoveEvent(MoveEvent moveEvent)
+    public IEnumerator ExecutePowerUpMoveEvent(MoveEvent moveEvent)
     {
         Move powerUpMove = moveEvent.GetMoves()[0];   // All fighters in MoveEvent should be performing the same PowerUpMove.
-        int powerUpMoveManaCost = powerUpMove.GetMana();
         int endingRoundNumber = RoundNumber + powerUpMove.GetDuration();
         BonusData bonusData = powerUpMove.GetBonusData();
         List<Fighter> fighters = moveEvent.GetFighters();
         List<float> randomAdds = moveEvent.GetRandomAdds();
 
-        int fightersCount = fighters.Count;
-        for (int index = 0; index < fightersCount; ++index)
+        // Average the move powers from each caster if multiple people are casting it
+        float movePower = 0f;
+        for (int i = 0; i < fighters.Count; i++)
         {
-            Fighter fighter = fighters[index];
+            movePower += MovePower(fighters[i], powerUpMove, randomAdds[i]);
+        }
+        movePower /= fighters.Count;
 
-            if (fighter.GetAI().CheckIfCanPerformMove(this, fighter, powerUpMove) == true)
+        foreach (Fighter target in moveEvent.GetTargets())
+        {
+            target.AddBonusData(bonusData, movePower, Enums.BonusSource.PowerUpMove, null, null, powerUpMove, null, endingRoundNumber);
+            string resultString = "";
+
+            bool removePsychic = false;
+            bool removeTrapped = false;
+
+            // Checking to see if they're attempting to break free from psychic control with a PowerUp move.
+            if (target.CheckStatus(Enums.StatusType.PsychicControl) == true || target.CheckStatus(Enums.StatusType.PsychicParalysis) == true)
             {
-                float movePower = MovePower(fighter, powerUpMove, randomAdds[index]);
+                float psychicMovePower = 0f;
+                List<Status> fighterStatuses = target.GetStatuses();
 
-                fighter.AddBonusData(bonusData, movePower, Enums.BonusSource.PowerUpMove, null, null, powerUpMove, null, endingRoundNumber);
-
-                // Checking to see if they're attempting to break free from psychic control with a PowerUp move.
-                if (fighter.CheckStatus(Enums.StatusType.PsychicControl) == true || fighter.CheckStatus(Enums.StatusType.PsychicParalysis) == true)
+                foreach (Status status in fighterStatuses)
                 {
-                    float psychicMovePower = 0f;
-                    List<Status> fighterStatuses = fighter.GetStatuses();
-
-                    foreach (Status status in fighterStatuses)
+                    if (status.GetStatusType() == Enums.StatusType.PsychicControl || status.GetStatusType() == Enums.StatusType.PsychicParalysis)
                     {
-                        if (status.GetStatusType() == Enums.StatusType.PsychicControl || status.GetStatusType() == Enums.StatusType.PsychicParalysis)
-                        {
-                            psychicMovePower = status.GetPower(); //status.GetMove().GetLevel();
-                            break;
-                        }
-                    }
-
-                    if (movePower >= psychicMovePower)   // Fighter can break free if the move is strong enough.
-                    {
-                        fighter.RemoveStatus(Enums.StatusType.PsychicControl);
-                        fighter.RemoveStatus(Enums.StatusType.PsychicParalysis);
-                        mWriter.WriteLine(fighter.GetName() + " breaks free from psychic control!");
+                        psychicMovePower = status.GetPower(); //status.GetMove().GetLevel();
+                        break;
                     }
                 }
 
-                // Checking to see if they're attempting to break free from a trapped or paralyzed state.
-                if (fighter.CheckStatus(Enums.StatusType.Trapped) == true)
+                if (movePower >= psychicMovePower)   // Fighter can break free if the move is strong enough.
                 {
-                    float trappingMovePower = 0f;
-                    List<Status> fighterStatuses = fighter.GetStatuses();
+                    //fighter.RemoveStatus(Enums.StatusType.PsychicControl);
+                    //fighter.RemoveStatus(Enums.StatusType.PsychicParalysis);
+                    removePsychic = true;
+                    resultString += target.GetName() + " breaks free from psychic control! ";
+                }
+            }
 
-                    foreach (Status status in fighterStatuses)
+            // Checking to see if they're attempting to break free from a trapped or paralyzed state.
+            if (target.CheckStatus(Enums.StatusType.Trapped) == true)
+            {
+                float trappingMovePower = 0f;
+                List<Status> fighterStatuses = target.GetStatuses();
+
+                foreach (Status status in fighterStatuses)
+                {
+                    if (status.GetStatusType() == Enums.StatusType.Trapped)
                     {
-                        if (status.GetStatusType() == Enums.StatusType.Trapped)
-                        {
-                            trappingMovePower = status.GetPower(); //status.GetMove().GetLevel();
-                            break;
-                        }
-                    }
-
-                    float fighterStrength = fighter.GetStrength() * fighter.GetHealthCo();
-
-                    if (fighterStrength >= trappingMovePower)   // Fighter can break free if they are strong enough.
-                    {
-                        fighter.RemoveStatus(Enums.StatusType.Trapped);
-                        mWriter.WriteLine(fighter.GetName() + " is too strong and breaks free!");
+                        trappingMovePower = status.GetPower(); //status.GetMove().GetLevel();
+                        break;
                     }
                 }
 
-                PowerUp powerUp = new PowerUp();
-                powerUp.SetEndingRoundNumber(endingRoundNumber);
-                powerUp.SetFighter(fighter);
-                powerUp.SetPowerUpMove(powerUpMove);
+                float fighterStrength = target.GetStrength() * target.GetHealthCo();
 
-                fighter.AddPowerUp(powerUp);
-                fighter.RemoveMana(powerUpMoveManaCost);
-                fighter.AddUsedMove(powerUpMove, RoundNumber);
+                if (fighterStrength >= trappingMovePower)   // Fighter can break free if they are strong enough.
+                {
+                    target.RemoveStatus(Enums.StatusType.Trapped);
+                    removeTrapped = true;
+                    resultString += target.GetName() + " is too strong and breaks free!";
+                }
+            }
+
+            mWriter.WriteLine(resultString);
+            yield return DynamicWindow.DisplayBuffOnSelf(moveEvent, target, resultString, removePsychic, removeTrapped);
+
+            PowerUp powerUp = new PowerUp();
+            powerUp.SetEndingRoundNumber(endingRoundNumber);
+            powerUp.SetFighter(target);
+            powerUp.SetPowerUpMove(powerUpMove);
+            target.AddPowerUp(powerUp);
+
+            if (removePsychic == true)
+            {
+                target.RemoveStatus(Enums.StatusType.PsychicControl);
+                target.RemoveStatus(Enums.StatusType.PsychicParalysis);
+            }
+            if (removeTrapped == true)
+            {
+                target.RemoveStatus(Enums.StatusType.Trapped);
             }
         }
+
+        foreach(Fighter fighter in fighters)
+        {
+            fighter.RemoveMana(powerUpMove.GetMana());
+            fighter.AddUsedMove(powerUpMove, RoundNumber);
+        }
+
+        yield break;
     }
 
     public void ExecuteProtectMoveEvent(MoveEvent moveEvent)

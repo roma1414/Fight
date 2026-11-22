@@ -334,7 +334,8 @@ public class SelectMoveWindow : MonoBehaviour
                 moveType = Enums.MoveType.Protect;
                 break;
             default:
-                Debug.LogError("Error! Unexpected CurrentlySelectedTab.name in UpdateMovesForTab!");
+                //Debug.LogError("Error! Unexpected CurrentlySelectedTab.name in UpdateMovesForTab!");
+                Debug.LogError($"Unexpected top tab name: '{tabName}'", selected);
                 break;
         }
 

@@ -19,7 +19,7 @@ public class Move : ScriptableObject
     [SerializeField] protected Enums.TargetType     TargetType;
     [SerializeField] protected Enums.MoveType       MoveType;
     [SerializeField] protected Enums.Nature[]       Natures;
-    [SerializeField] protected AnimationData        AnimationData, PreviewAnimationData;
+    [SerializeField] protected AnimationData        AnimationData, PreviewAnimationData, LoopAnimationData;
 
     [Header("CloneMove Fields")]
     [SerializeField] protected int                  Number;
@@ -94,6 +94,7 @@ public class Move : ScriptableObject
     public Enums.HealType GetHealType() { return HealType; }
     public ulong GetID() { return ID; }
     public int GetLevel() { return Level; }
+    public AnimationData GetLoopAnimationData() { return LoopAnimationData; }
     public int GetMana() { return Mana; }
     public int GetManaRestoreAmount() { return ManaRestoreAmount; }
     public int GetMaxLevelAvoided() { return MaxLevelAvoided; }
