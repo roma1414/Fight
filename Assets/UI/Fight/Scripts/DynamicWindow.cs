@@ -13,7 +13,7 @@ public class DynamicWindow : MonoBehaviour
     [SerializeField] private Fight          Fight;
     [SerializeField] private GameObject     FighterPanel, FightersPanel, DynamicTextPanel, StatementPanel, StatementTextPanel,
                                             StatementBackgroundPanel, TargetPanel, AttackersPrefab, TargetFighterPanel,
-                                            TargetDefenderPrefab, MedicalsPrefab, FightersPrefab, TargetDefeatedPanel;
+                                            TargetDefenderPrefab, MedicalsPrefab, FightersPrefab, TargetDefeatedPanel, StatementFighterPanel;
     [SerializeField] private Image          Fighter, FighterBackground, FightersBackground, StatementBackground, 
                                             StatementFighter, AttacksPrefab, TargetBackground, FightersDodge,
                                             DefensesPrefab, FightersDeflect, StatementMotionBackground, TargetDodge, TargetDeflect,
@@ -261,6 +261,8 @@ public class DynamicWindow : MonoBehaviour
         FightersDodge.rectTransform.localScale = dodgeScale;
 
         FightersDeflect.gameObject.SetActive(false);
+        FighterPanelData fightersDeflectPanelData = new FighterPanelData(targets[0], FightersDeflect, SpawnedFightersPanels);
+        FighterPanels.Add(spawnedFightersPanelData);
         Sprite targetDeflectSprite = targets[0].GetArt().GetDeflect();
         FightersDeflect.sprite = targetDeflectSprite;
         Vector3 deflectScale = FightersDeflect.rectTransform.localScale;
@@ -769,6 +771,9 @@ public class DynamicWindow : MonoBehaviour
         StatementBackground.sprite = Fight.GetMapArt().GetBackground(team);
         StatementFighterName.color = Fight.GetTeamColor(team);
 
+        FighterPanelData statementPanelData = new FighterPanelData(fighter, StatementFighterPanel, null);
+        FighterPanels.Add(statementPanelData);
+
         List<Fighter> teamList = Fight.GetTeamList(team);
         int teamSize = teamList.Count;
         float offsetPerFighter = 0f;
@@ -1062,6 +1067,19 @@ public class DynamicWindow : MonoBehaviour
             else
             {
                 FightersAnimator.Play("Fighters_Deflect", 0, 0f);
+
+                
+                /*Image fighterImage = SpawnedFightersPanels[0].transform.Find("Fighters").GetComponent<Image>();
+                fighterImage.sprite = null;
+                Sprite deflectSprite = target.GetArt().GetDeflect();
+                if (deflectSprite != null)
+                {
+                    fighterImage.sprite = deflectSprite;
+                }
+                else
+                {
+                    Debug.LogError($"Error! Fighter {target.GetName()} has no body sprite in ConfigureFightWindowForAttackAgainstTarget!");
+                }*/
             }
 
             if (hitResult == Enums.HitResult.Deflected)
@@ -1640,11 +1658,11 @@ public class DynamicWindow : MonoBehaviour
         }
         SpawnedSummonDefeatedPanels.Clear();
 
+        StopFighterPanelStatuses();
         FighterPanels.Clear();
 
         StopAttacks();
         StopDefenses();
-        StopFighterPanelStatuses();
     }
 
     private void OnDisable()
@@ -2149,6 +2167,18 @@ public class DynamicWindow : MonoBehaviour
         }
 
         FighterPanelCoroutines.Clear();
+
+        foreach (FighterPanelData panelData in FighterPanels)
+        {
+            if (panelData.GetFighterPanel() == null)
+                continue;
+
+            Image buff = panelData.GetFighterPanel()
+                .transform.Find("Buff").GetComponent<Image>();
+
+            buff.sprite = null;
+            buff.enabled = false;
+        }
     }
 
     private void StopTalking(Sprite[] frames)

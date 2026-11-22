@@ -20,7 +20,7 @@ MonoBehaviour:
   Spellcraft: 0
   Melee: 1
   Psychic: 0
-  DamageResistance: 0.5
+  DamageResistance: 0.25
   Moves: []
   Natures: 
   Traits: 
