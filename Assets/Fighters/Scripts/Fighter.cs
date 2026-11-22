@@ -464,7 +464,7 @@ public class Fighter : MonoBehaviour
     public Color GetDodgeColor() { return DodgeColor; }
     public Enums.FightingStyle GetFightingStyle() { return FightingStyle; }
     public int GetHealth() { return Health; }
-    public float GetHealthCo() { return .25f + .375f * Mathf.Min(1.0f, Health / 55.0f) + .375f * Mathf.Min(1.0f, Mana / 55.0f); }
+    public float GetHealthCo() { return .25f + .375f * Mathf.Min(1.0f, Health / 60.0f) + .375f * Mathf.Min(1.0f, Mana / 40.0f); }
     public ulong GetID() { return ID; }
     public float GetIntelligence() { return Intelligence + GetTotalAttributeBonus(Enums.Attribute.Intelligence); }
     public float GetLevel() { return Level; }

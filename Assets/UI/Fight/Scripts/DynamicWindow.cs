@@ -19,7 +19,7 @@ public class DynamicWindow : MonoBehaviour
                                             StatementFighter, AttacksPrefab, TargetBackground, FightersDodge,
                                             DefensesPrefab, FightersDeflect, StatementMotionBackground, TargetDodge, TargetDeflect,
                                             TargetAttacksPrefab, TargetDefensesPrefab, TeamAttacksPrefab, FightersDefendersMovementPrefab,
-                                            TargetDefendersMovementPrefab, TargetHit, FightersHit, FightersDefendersDeflectPrefab;
+                                            TargetDefendersMovementPrefab, TargetHit, FightersHit, FightersDefendersDeflectPrefab, BuffPrefab;
     [SerializeField] private TMP_Text       DynamicText, StatementText, StatementFighterName;
     [SerializeField] private RectTransform  FightersContainer, AttackersContainer, AttacksContainer, DefensesContainer,
                                             FightersDefendersContainer, TargetDefendersContainer, TargetAttacksContainer,
@@ -34,7 +34,8 @@ public class DynamicWindow : MonoBehaviour
                                             SpawnedFightersPanels = new List<GameObject>(), SpawnedSummonPanels = new List<GameObject>(),
                                             SpawnedFightersDefeatedPanels = new List<GameObject>(), SpawnedSummonDefeatedPanels = new List<GameObject>();
     private List<Image>                     SpawnedAttackImages = new List<Image>(), SpawnedDefenseImages = new List<Image>(),
-                                            SpawnedDefenderMovementImages = new List<Image>(), SpawnedDefenderDeflectImages = new List<Image>();
+                                            SpawnedDefenderMovementImages = new List<Image>(), SpawnedDefenderDeflectImages = new List<Image>(),
+                                            SpawnedBuffImages = new List<Image>();
                                             /*SpawnedFighterImages = new List<Image>(), SpawnedTargetAttackImages = new List<Image>(),
                                             SpawnedTargetDefenseImages = new List<Image>();*/
     private List<FighterPanelData>          FighterPanels = new List<FighterPanelData>();
@@ -178,7 +179,7 @@ public class DynamicWindow : MonoBehaviour
 
                     SpawnedDefenderPanels.Add(spawnedDefenderPanel);
                     FighterPanelData spawnedDefenderPanelData = new FighterPanelData(defender, spawnedDefenderPanel, SpawnedDefenderPanels);
-                    FighterPanels.Add(targetFighterPanelData);
+                    FighterPanels.Add(spawnedDefenderPanelData);
 
                     Image spawnedDefenderImage = spawnedDefenderPanel.transform.Find("Defender").GetComponent<Image>();
                     spawnedDefenderImage.sprite = null;
@@ -1578,6 +1579,8 @@ public class DynamicWindow : MonoBehaviour
 
     public void HidePanels(bool keepDynamicText = false)
     {
+        StopFighterPanelStatuses();
+
         // Release the collapse animation's visibility override for the next display.
         TargetAnimator.SetLayerWeight(TargetAnimator.GetLayerIndex("Defeat"), 0f);
         FighterPanel.SetActive(false);
@@ -1662,7 +1665,6 @@ public class DynamicWindow : MonoBehaviour
         }
         SpawnedSummonDefeatedPanels.Clear();
 
-        StopFighterPanelStatuses();
         FighterPanels.Clear();
 
         StopAttacks();
@@ -1671,6 +1673,7 @@ public class DynamicWindow : MonoBehaviour
 
     private void OnDisable()
     {
+        StopFighterPanelStatuses();
         Sprite[] emptySpriteArray = new Sprite[0];
         StopTalking(emptySpriteArray);
     }
@@ -1889,26 +1892,11 @@ public class DynamicWindow : MonoBehaviour
 
     public void StartFighterPanelBuff(Fighter fighter, Move move)
     {
-        foreach(FighterPanelData fighterPanelData in FighterPanels)
+        foreach (FighterPanelData fighterPanelData in FighterPanels)
         {
             if (fighterPanelData.GetFighter() == fighter)
             {
-                AnimationData animation = move.GetLoopAnimationData();
-
-                if (animation == null ||
-                    animation.GetFrames() == null ||
-                    animation.GetFrames().Length == 0 ||
-                    animation.GetFramesPerSecond() <= 0f)
-                {
-                    break;
-                }
-
-                Image image = fighterPanelData.GetFighterPanel().transform.Find("Buff").GetComponent<Image>();
-                image.gameObject.SetActive(true);
-
-                Coroutine coroutine = StartCoroutine(PlayStatus(image, animation, 0));
-                FighterPanelCoroutines.Add(coroutine);
-                break;
+                SpawnFighterPanelBuff(fighterPanelData, move);
             }
         }
     }
@@ -1917,28 +1905,48 @@ public class DynamicWindow : MonoBehaviour
     {
         StopFighterPanelStatuses();
 
-        foreach(FighterPanelData fighterPanelData in FighterPanels)
+        foreach (FighterPanelData fighterPanelData in FighterPanels)
         {
-            Fighter fighter = fighterPanelData.GetFighter();
-            foreach(PowerUp powerUp in fighterPanelData.GetFighter().GetPowerUps())
+            foreach (PowerUp powerUp in fighterPanelData.GetFighter().GetPowerUps())
             {
-                AnimationData animation = powerUp.GetPowerUpMove().GetLoopAnimationData();
-
-                if (animation == null ||
-                    animation.GetFrames() == null ||
-                    animation.GetFrames().Length == 0 ||
-                    animation.GetFramesPerSecond() <= 0f)
-                {
-                    continue;
-                }
-
-                Image image = fighterPanelData.GetFighterPanel().transform.Find("Buff").GetComponent<Image>();
-                image.gameObject.SetActive(true);
-
-                Coroutine coroutine = StartCoroutine(PlayStatus(image, animation, 0));
-                FighterPanelCoroutines.Add(coroutine);
+                SpawnFighterPanelBuff(fighterPanelData, powerUp.GetPowerUpMove());
             }
         }
+    }
+
+    private void SpawnFighterPanelBuff(FighterPanelData fighterPanelData, Move move)
+    {
+        AnimationData animation = move.GetLoopAnimationData();
+        if (animation == null ||
+            animation.GetFrames() == null ||
+            animation.GetFrames().Length == 0 ||
+            animation.GetFramesPerSecond() <= 0f)
+        {
+            return;
+        }
+
+        GameObject panel = fighterPanelData.GetFighterPanel();
+        if (panel == null)
+        {
+            return;
+        }
+
+        RectTransform buffsContainer = panel.transform.Find("BuffsContainer") as RectTransform;
+        if (buffsContainer == null || BuffPrefab == null)
+        {
+            Debug.LogError($"Cannot display PowerUps on {panel.name}: BuffsContainer or BuffPrefab is missing.", panel);
+            return;
+        }
+
+        buffsContainer.gameObject.SetActive(true);
+        Image image = Instantiate(BuffPrefab, buffsContainer, false);
+        // Keep the effect aligned with containers that use a top pivot (statements).
+        image.rectTransform.pivot = buffsContainer.pivot;
+        image.raycastTarget = false;
+        SpawnedBuffImages.Add(image);
+
+        Coroutine coroutine = StartCoroutine(PlayStatus(image, animation, 0));
+        FighterPanelCoroutines.Add(coroutine);
     }
 
     private void StartHit(Image image)
@@ -2172,17 +2180,16 @@ public class DynamicWindow : MonoBehaviour
 
         FighterPanelCoroutines.Clear();
 
-        foreach (FighterPanelData panelData in FighterPanels)
+        foreach (Image image in SpawnedBuffImages)
         {
-            if (panelData.GetFighterPanel() == null)
-                continue;
-
-            Image buff = panelData.GetFighterPanel()
-                .transform.Find("Buff").GetComponent<Image>();
-
-            buff.sprite = null;
-            buff.enabled = false;
+            if (image != null)
+            {
+                image.gameObject.SetActive(false);
+                Destroy(image.gameObject);
+            }
         }
+
+        SpawnedBuffImages.Clear();
     }
 
     private void StopTalking(Sprite[] frames)
