@@ -261,8 +261,8 @@ public class DynamicWindow : MonoBehaviour
         FightersDodge.rectTransform.localScale = dodgeScale;
 
         FightersDeflect.gameObject.SetActive(false);
-        FighterPanelData fightersDeflectPanelData = new FighterPanelData(targets[0], FightersDeflect, SpawnedFightersPanels);
-        FighterPanels.Add(spawnedFightersPanelData);
+        FighterPanelData fightersDeflectPanelData = new FighterPanelData(targets[0], FightersDeflect.gameObject, SpawnedFightersPanels);
+        FighterPanels.Add(fightersDeflectPanelData);
         Sprite targetDeflectSprite = targets[0].GetArt().GetDeflect();
         FightersDeflect.sprite = targetDeflectSprite;
         Vector3 deflectScale = FightersDeflect.rectTransform.localScale;
