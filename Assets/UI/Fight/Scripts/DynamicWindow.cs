@@ -13,8 +13,9 @@ public class DynamicWindow : MonoBehaviour
     [SerializeField] private Fight          Fight;
     [SerializeField] private GameObject     FighterPanel, FightersPanel, DynamicTextPanel, StatementPanel, StatementTextPanel,
                                             StatementBackgroundPanel, TargetPanel, AttackersPrefab, TargetFighterPanel,
-                                            TargetDefenderPrefab, MedicalsPrefab, FightersPrefab, TargetDefeatedPanel, StatementFighterPanel;
-    [SerializeField] private Image          Fighter, FighterBackground, FightersBackground, StatementBackground, 
+                                            TargetDefenderPrefab, MedicalsPrefab, FightersPrefab, TargetDefeatedPanel, StatementFighterPanel,
+                                            FighterFighterPanel;
+    [SerializeField] private Image          FighterBackground, FightersBackground, StatementBackground, 
                                             StatementFighter, AttacksPrefab, TargetBackground, FightersDodge,
                                             DefensesPrefab, FightersDeflect, StatementMotionBackground, TargetDodge, TargetDeflect,
                                             TargetAttacksPrefab, TargetDefensesPrefab, TeamAttacksPrefab, FightersDefendersMovementPrefab,
@@ -543,16 +544,19 @@ public class DynamicWindow : MonoBehaviour
         position.x = offset;
         FighterBackground.rectTransform.anchoredPosition = position;
 
-        Fighter.sprite = null;
+        Image fighterImage = FighterFighterPanel.transform.Find("Fighter").GetComponent<Image>();
+        fighterImage.sprite = null;
         Sprite fighterSprite = fighter.GetArt().GetBody();
         if (fighterSprite != null)
         {
-            Fighter.sprite = fighterSprite;
+            fighterImage.sprite = fighterSprite;
         }
         else
         {
             Debug.LogError($"Error! Fighter {fighter.GetName()} has no body sprite in ConfigureFightWindowForAttacker!");
         }
+        FighterPanelData fighterPanelData = new FighterPanelData(fighter, FighterFighterPanel, null);
+        FighterPanels.Add(fighterPanelData);
 
         Move move = moveEvent.GetMoves()[index];
         bool isMedicalMoveOnSelf = moveEvent.CheckMedicalMoveOnSelf();
