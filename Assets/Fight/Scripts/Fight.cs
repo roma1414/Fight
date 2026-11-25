@@ -700,7 +700,7 @@ public class Fight : MonoBehaviour
                 fighterPrintString += "  PowerUps:";
                 for (int j = 0; j < theirPowerUpMoves.Count; j++)
                 {
-                    fighterPrintString += " " + theirPowerUpMoves[i].GetName();
+                    fighterPrintString += " " + theirPowerUpMoves[j].GetName();
                 }
             }
             mWriter.WriteLine(fighterPrintString);
@@ -1427,6 +1427,12 @@ public class Fight : MonoBehaviour
         }
         movePower /= fighters.Count;
 
+        // Check if it's a PowerUp on self
+        if (moveEvent.CheckBuffOrMedicalOnSelf() == false)
+        {
+            yield return DynamicWindow.DisplayBuffOnTargets(moveEvent, "");
+        }
+
         foreach (Fighter target in moveEvent.GetTargets())
         {
             target.AddBonusData(bonusData, movePower, Enums.BonusSource.PowerUpMove, null, null, powerUpMove, null, endingRoundNumber);
@@ -1485,7 +1491,14 @@ public class Fight : MonoBehaviour
             }
 
             mWriter.WriteLine(resultString);
-            yield return DynamicWindow.DisplayBuffOnSelf(moveEvent, target, resultString, removePsychic, removeTrapped);
+            if (moveEvent.CheckBuffOrMedicalOnSelf() == true)
+            {
+                yield return DynamicWindow.DisplayBuffOnSelf(moveEvent, target, resultString, removePsychic, removeTrapped);
+            }
+            else
+            {
+                //yield return DynamicWindow.DisplayBuffOnTargets(moveEvent, "");
+            }
 
             PowerUp powerUp = new PowerUp();
             powerUp.SetEndingRoundNumber(endingRoundNumber);

@@ -22,7 +22,7 @@ MonoBehaviour:
   Occular: 0
   UseMeleSkill: 0
   RequiredTargetStatuses: 
-  TargetType: 7
+  TargetType: 5
   MoveType: 6
   Natures: 
   AnimationData: {fileID: 11400000, guid: e84729cad6106495b8cf74dcd98db3e8, type: 2}

@@ -347,8 +347,9 @@ public class DynamicWindow : MonoBehaviour
             }
         }
 
-        // Medical moves do not have attackers, so we skip this section for medical moves
-        if (moveEvent.GetMoveType() != Enums.MoveType.Medical)
+        // Medical moves and PowerUps do not have attackers, so we skip this section for them
+        Enums.MoveType moveType = moveEvent.GetMoveType();
+        if (moveType != Enums.MoveType.Medical && moveType != Enums.MoveType.PowerUp)
         {
             for (int i = 0; i < attackers.Count; i++)
             {
@@ -1324,6 +1325,48 @@ public class DynamicWindow : MonoBehaviour
         yield break;
     }
 
+    public IEnumerator DisplayBuffOnTargets(MoveEvent moveEvent, string resultString)
+    {
+        HidePanels();
+        AnimationTimes animationTimes = moveEvent.GetAnimationTimes(null);
+        ConfigureFightWindowForAttackAgainstTargets(moveEvent, null);
+        FightersPanel.SetActive(true);
+        DynamicTextPanel.SetActive(true);
+        StartFighterPanelStatuses();
+
+        yield return new WaitForSeconds(.5f);
+        
+        // We want to display one animation per target
+        List<Move> moves = new List<Move>();
+        List<float> delays = new List<float>();
+        int numberOfTargets = moveEvent.GetTargets().Count;
+        bool addToTargets = moveEvent.CheckAddToDisplayTargets();
+        if (addToTargets == true)
+        {
+            numberOfTargets += 1;
+        }
+        for (int i = 0; i < numberOfTargets; i++)
+        {
+            moves.Add(moveEvent.GetMoves()[0]);
+            delays.Add(0f);
+        }
+        StartMedicals(moves, delays, DefensesContainer, MedicalsPrefab, addToTargets);
+        DynamicText.text = resultString;
+
+        //yield return new WaitUntil(() => SpawnedAttackerPanels.Count == 0);
+        yield return new WaitForSeconds(animationTimes.GetImpactTime());
+        StopMedicals();
+        AttackCoroutines.Clear();
+        DefenseCoroutines.Clear();
+
+        foreach (Fighter target in moveEvent.GetTargets())
+        {
+            StartFighterPanelBuff(target, moveEvent.GetMoves()[0]);
+        }
+
+        yield return new WaitForSeconds(1.5f);
+    }
+
     public IEnumerator DisplayDefeatedFighter(Fighter fighter, string resultString, bool showFighterCollapse)
     {
         HidePanels();
@@ -1954,7 +1997,7 @@ public class DynamicWindow : MonoBehaviour
 
     public void StartMedicals(List<Move> moves, List<float> delays, RectTransform container, GameObject prefab, bool addToTargetsForMedical)
     {
-        StopAttacks();
+        StopMedicals();
 
         for (int i = 0; i < moves.Count; i++)
         {
@@ -2157,6 +2200,22 @@ public class DynamicWindow : MonoBehaviour
             TargetHit.sprite = null;
             FightersHit.sprite = null;
         }
+    }
+
+    public void StopMedicals()
+    {
+        // Medical animations use the shared attack coroutines and attacker panel collection.
+        StopAttacks();
+
+        foreach (GameObject panel in SpawnedAttackerPanels)
+        {
+            if (panel != null)
+            {
+                panel.SetActive(false);
+                Destroy(panel);
+            }
+        }
+        SpawnedAttackerPanels.Clear();
     }
 
     private void StopMotionStatement()

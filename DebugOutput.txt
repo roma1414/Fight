@@ -1,10 +1,26 @@
 Round 1
 
-Orc  +  Water Witch  vs  Katerina  +  Necromancer
+Orc  +  Water Witch  vs  Katerina
 
 Orc   Overall: 7.88  Health: 100  Mana: 100  Health Co = 1
 Water Witch   Overall: 8.389999  Health: 100  Mana: 220  Health Co = 1
 
 Katerina   Overall: 8.75  Health: 100  Mana: 220  Health Co = 1
-Necromancer   Overall: 8.47  Health: 100  Mana: 220  Health Co = 1
+
+###################################################################
+###################################################################
+
+Orc uses Lightning Cloak against all members of team 1!
+
+
+
+
+Round 2
+
+Orc  +  Water Witch  vs  Katerina
+
+Orc   Overall: 8.515  Health: 100  Mana: 90  Health Co = 1  PowerUps: Lightning Cloak
+Water Witch   Overall: 8.445  Health: 100  Mana: 220  Health Co = 1  PowerUps: Lightning Cloak
+
+Katerina   Overall: 8.75  Health: 100  Mana: 220  Health Co = 1
 

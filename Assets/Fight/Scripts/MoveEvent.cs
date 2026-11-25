@@ -46,21 +46,14 @@ public class MoveEvent
         return false;
     }
 
-    public bool CheckBuffOnSelf()
+    public bool CheckBuffOrMedicalOnSelf()
     {
-        if (Moves[0].GetMoveType() != Enums.MoveType.PowerUp)
+        if (Fighters.Count == 1 && Targets.Count == 1 && Fighters[0] == Targets[0] && 
+            (Moves[0].GetMoveType() == Enums.MoveType.PowerUp || Moves[0].GetMoveType() == Enums.MoveType.Medical))
         {
-            return false;
+            return true;
         }
-        
-        foreach (Fighter fighter in Fighters)
-        {
-            if (Targets.Contains(fighter) == false)
-            {
-                return false;
-            }
-        }
-        return true;
+        return false;
     }
 
     public bool CheckCombineAttacks()
