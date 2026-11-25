@@ -18,6 +18,7 @@ public class SelectMoveWindow : MonoBehaviour
     [SerializeField] private RectTransform  TargetsContent;
     [SerializeField] private TargetRowUI    TargetRowPrefab;
     [SerializeField] private Image          SelectMoveBackground, Portrait;
+    [SerializeField] private FightersInfoPanel FightersInfoPanel;
     private bool                            SortDescending = true;
     private bool                            Advance = false;
     private List<Move>                      Moves = new List<Move>();
@@ -43,6 +44,8 @@ public class SelectMoveWindow : MonoBehaviour
         HealthText.text = $"Health: {SelectedFighter.GetHealth()}";
         ManaText.text = $"Energy: {100f * ((float)SelectedFighter.GetMana() / (float)SelectedFighter.GetMaxMana()):F0}";
         OverallText.text = $"{SelectedFighter.GetOverallRating():F1}";
+
+        FightersInfoPanel.Configure(Fight, SelectedFighter, NameText.font);
 
         Portrait.sprite = SelectedFighter.GetArt().GetBody();
 

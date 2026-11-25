@@ -812,7 +812,7 @@ public class DynamicWindow : MonoBehaviour
         return talkingFrames;
     }
 
-    public void ConfigureFightWindowForSummons(MoveEvent moveEvent)
+    public void ConfigureFightWindowForSummons(MoveEvent moveEvent, List<Fighter> summonedFighters)
     {
         List<Fighter> fighters = moveEvent.GetFighters();
         int team = fighters[0].GetTeam();
@@ -896,10 +896,9 @@ public class DynamicWindow : MonoBehaviour
         summonersLayoutGroup.spacing = summonerLayoutGroupSpacing;
 
         // Instantiate summon panels
-        List<Fighter> summons = isResurrection ? moveEvent.GetTargets() : move.GetSummonsList();
-        for (int i = 0; i < summons.Count; i++)
+        for (int i = 0; i < summonedFighters.Count; i++)
         {
-            Fighter summon = summons[i];
+            Fighter summon = summonedFighters[i];
 
             GameObject spawnedSummonPanel = Instantiate(
                 FightersPrefab,
@@ -1453,11 +1452,11 @@ public class DynamicWindow : MonoBehaviour
         yield break;
     }
 
-    public IEnumerator DisplaySummoning(MoveEvent moveEvent)
+    public IEnumerator DisplaySummoning(MoveEvent moveEvent, List<Fighter> summonedFighters)
     {
         HidePanels(true);
         AnimationTimes animationTimes = moveEvent.GetAnimationTimes(null);
-        ConfigureFightWindowForSummons(moveEvent);
+        ConfigureFightWindowForSummons(moveEvent, summonedFighters);
         FightersPanel.SetActive(true);
         DynamicTextPanel.SetActive(true);
         StartFighterPanelStatuses();
@@ -1467,8 +1466,6 @@ public class DynamicWindow : MonoBehaviour
         // We want to display one animation per summon
         List<Move> moves = new List<Move>();
         List<float> delays = new List<float>();
-        bool isResurrection = moveEvent.GetMoves()[0].GetTargetType() == Enums.TargetType.DeadFighter;
-        List<Fighter> summonedFighters = isResurrection ? moveEvent.GetTargets() : moveEvent.GetMoves()[0].GetSummonsList();
         for (int i = 0; i < summonedFighters.Count; i++)
         {
             moves.Add(moveEvent.GetMoves()[0]);

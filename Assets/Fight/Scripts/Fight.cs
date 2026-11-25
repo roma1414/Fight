@@ -24,6 +24,7 @@ public class Fight : MonoBehaviour
         new Color(0.15f, 0.15f, 0.15f, 1f);
     protected List<Clone>                       Clones;
     protected List<Fighter>                     Fighters, OriginalFighters, OriginalTeam1, OriginalTeam2, OriginalTeam3;
+    private readonly List<Fighter>             DefeatedFighters = new List<Fighter>();
     protected List<Protection>                  Protections;
     protected int                               RoundNumber;
     protected List<Summon>                      Summons;
@@ -1599,7 +1600,8 @@ public class Fight : MonoBehaviour
             fighter.AddUsedMove(summonMove, RoundNumber);
         }
 
-        yield return DynamicWindow.DisplaySummoning(moveEvent);
+        // Display the initialized instances, not the summon prefabs or original resurrection targets.
+        yield return DynamicWindow.DisplaySummoning(moveEvent, summons);
 
         List<string> statementTexts = new List<string>();
         List<Fighter> statementFighters = new List<Fighter>();
@@ -2850,6 +2852,24 @@ public class Fight : MonoBehaviour
 
     public List<Fighter> GetFighters() { return Fighters; }
 
+    // Unlike Fighters, this roster retains defeated fighters, including summons.
+    // Summons that expire or disappear while alive are no longer in the fight.
+    public List<Fighter> GetAllFighters()
+    {
+        List<Fighter>[] rosters =
+        {
+            OriginalFighters, OriginalTeam1, OriginalTeam2, OriginalTeam3,
+            DefeatedFighters, Fighters, Team1, Team2, Team3
+        };
+
+        return rosters.Where(roster => roster != null)
+            .SelectMany(roster => roster)
+            .Where(fighter => fighter != null)
+            .Distinct()
+            .OrderBy(fighter => fighter.GetTeam())
+            .ToList();
+    }
+
     public List<Fighter> GetProtectors(Fighter fighter)
     {
         List<Fighter> protectors = new List<Fighter>();
@@ -2932,6 +2952,7 @@ public class Fight : MonoBehaviour
             AutoFlush = true
         };
         RoundNumber = 1;
+        DefeatedFighters.Clear();
         Fighters = new List<Fighter>();
         Clones = new List<Clone>();
         Protections = new List<Protection>();
@@ -3466,8 +3487,17 @@ public class Fight : MonoBehaviour
         }
     }
 
+    private void RetainDefeatedFighter(Fighter fighter)
+    {
+        if (fighter.CheckIfAlive() == false && DefeatedFighters.Contains(fighter) == false)
+        {
+            DefeatedFighters.Add(fighter);
+        }
+    }
+
     public void RemoveFighter(Fighter fighter)
     {
+        RetainDefeatedFighter(fighter);
         RemoveSummons(fighter);
 
         switch (fighter.GetTeam())
@@ -3510,6 +3540,7 @@ public class Fight : MonoBehaviour
         foreach (Fighter summoned in theirSummons)
         {
             mWriter.WriteLine(summoned.GetName() + " disappears!");
+            RetainDefeatedFighter(summoned);
             teamList.Remove(summoned);
             Fighters.Remove(summoned);
         }
@@ -3682,6 +3713,7 @@ public class Fight : MonoBehaviour
                 foreach (Fighter summoned in summon.GetSummoned())
                 {
                     mWriter.WriteLine(summoned.GetName() + " has disappeared!");
+                    RetainDefeatedFighter(summoned);
                     List<Fighter> teamList = GetTeamList(summonerTeam);
                     teamList.Remove(summoned);
                     Fighters.Remove(summoned);

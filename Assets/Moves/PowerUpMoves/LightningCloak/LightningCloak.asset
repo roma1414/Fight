@@ -41,7 +41,7 @@ MonoBehaviour:
   ManaRestoreAmount: 0
   HealType: 0
   Damage: 0
-  Duration: 0
+  Duration: 7
   Accuracy: 0
   Absorbed: 0
   TouchSuccess: 0
