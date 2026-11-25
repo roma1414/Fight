@@ -30,7 +30,7 @@ Paladin   Overall: 7.58  Health: 100  Mana: 180  Health Co = 1
 
 Orc uses Lightning Cloak!
 
-Paladin uses Holy Blade against Orc!
+Paladin uses Holy Orb against Orc!
 It misses Orc!
 Katerina uses Wind Bullets against Orc!
 It misses Orc!
@@ -40,133 +40,8 @@ Round 3
 
 Orc  vs  Katerina  +  Paladin
 
-Orc   Overall: 9.1244  Health: 100  Mana: 49  Health Co = 0.9925  PowerUps: Berserker Rage Berserker Rage
+Orc   Overall: 9.191  Health: 100  Mana: 49  Health Co = 1  PowerUps: Berserker Rage Berserker Rage
 
 Katerina   Overall: 8.695  Health: 100  Mana: 209  Health Co = 1
-Paladin   Overall: 7.448  Health: 100  Mana: 147  Health Co = 1
-
-###################################################################
-###################################################################
-
-Orc uses Slash against Paladin!
-It hits Paladin and does 31 damage!
-Katerina and Paladin use Double Slash and Holy Blade against Orc!
-It misses Orc!
-
-
-Round 4
-
-Orc  vs  Katerina  +  Paladin
-
-Orc   Overall: 9.053801  Health: 100  Mana: 48  Health Co = 0.985  PowerUps: Berserker Rage Berserker Rage
-
-Katerina   Overall: 8.685  Health: 100  Mana: 207  Health Co = 1
-Paladin   Overall: 7.316  Health: 69  Mana: 114  Health Co = 1
-
-###################################################################
-###################################################################
-
-Orc uses Slash against Paladin!
-It hits Paladin and does 29 damage!
-Paladin uses Holy Orb against Orc!
-It misses Orc!
-Katerina uses Wind Scythe against Orc!
-It misses Orc!
-
-
-Round 5
-
-Orc  vs  Katerina  +  Paladin
-
-Orc   Overall: 8.9832  Health: 100  Mana: 47  Health Co = 0.9775  PowerUps: Berserker Rage Berserker Rage
-
-Katerina   Overall: 8.615  Health: 100  Mana: 193  Health Co = 1
-Paladin   Overall: 6.746  Health: 40  Mana: 96  Health Co = 0.925
-
-###################################################################
-###################################################################
-
-Orc uses Slash against Paladin!
-It hits Paladin and does 33 damage!
-Katerina and Paladin use Slash and Holy Orb against Orc!
-It misses Orc!
-
-
-Round 6
-
-Orc  vs  Katerina  +  Paladin
-
-Orc   Overall: 8.912601  Health: 100  Mana: 46  Health Co = 0.97  PowerUps: Berserker Rage Berserker Rage
-
-Katerina   Overall: 8.61  Health: 100  Mana: 192  Health Co = 1
-Paladin   Overall: 5.0306  Health: 7  Mana: 78  Health Co = 0.6775
-
-###################################################################
-###################################################################
-
-Orc uses Slash against Paladin!
-It hits Paladin and does 30 damage!
-Paladin is defeated!
-Katerina uses Wind Scythe against Orc!
-It misses Orc!
-
-
-Round 7
-
-Orc  vs  Katerina
-
-Orc   Overall: 8.842  Health: 100  Mana: 45  Health Co = 0.9625  PowerUps: Berserker Rage Berserker Rage
-
-Katerina   Overall: 8.54  Health: 100  Mana: 178  Health Co = 1
-
-###################################################################
-###################################################################
-
-Orc uses Slash against Katerina!
-It hits Katerina and does 33 damage!
-Katerina uses Double Slash against Orc!
-It misses Orc!
-
-
-Round 8
-
-Orc  vs  Katerina
-
-Orc   Overall: 8.771399  Health: 100  Mana: 44  Health Co = 0.955  PowerUps: Berserker Rage Berserker Rage
-
-Katerina   Overall: 8.53  Health: 67  Mana: 176  Health Co = 1
-
-###################################################################
-###################################################################
-
-Orc uses Slash against Katerina!
-It hits Katerina and does 35 damage!
-Katerina uses Double Slash against Orc!
-It misses Orc!
-
-
-Round 9
-
-Orc  vs  Katerina
-
-Orc   Overall: 8.7008  Health: 100  Mana: 43  Health Co = 0.9475  PowerUps: Berserker Rage Berserker Rage
-
-Katerina   Overall: 8.007  Health: 32  Mana: 174  Health Co = 0.865
-
-###################################################################
-###################################################################
-
-Orc uses Slash against Katerina!
-It hits Katerina and does 35 damage!
-Katerina is defeated!
-
-###################################################################
-###################################################################
-
-The fight is over!
-Team 1 wins!
-Number of rounds: 9
-Surviving fighters:
-
-Orc  Health: 100  Mana: 42
+Paladin   Overall: 7.508  Health: 100  Mana: 162  Health Co = 1
 
